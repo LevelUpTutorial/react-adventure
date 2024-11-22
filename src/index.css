@@ -1,13 +1,8 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    /* Designed by https://de.freepik.com/kostenloses-ki-bild/majestaetische-bergkette-ruhige-wiese-blauer-himmel-gruenes-gras-erzeugt-durch-kuenstliche-intelligenz_76318061.htm#fromView=search&page=2&position=52&uuid=4aee76a8-58c7-4600-9809-2622d6499d39 */
+    background-image: url("/images/background-default.jpg");
+    width: 100%;
+    height: 100%;
+    background-size: cover; /* Ensure the image covers the viewport */
+    background-repeat: no-repeat; /* Prevent tiling */
 }
