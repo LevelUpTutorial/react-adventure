@@ -1,5 +1,5 @@
 import { useState } from "react";
-import GameState from "./GameState";
+import GameState from "./GameState.js";
 
 function Game(props) {
   // Initialize game state in React state
@@ -26,7 +26,14 @@ function Game(props) {
         <>
           <div className="p-2 border border-secondary-subtle">
             <p>Location: {gameState.location}</p>
-            <p>Gender: {gameState.gender}</p>
+            <div className="battle-container">
+              <img
+                src={`${gameState.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL}`}
+                alt='hero'
+                className='hero-image img-fluid rounded'
+                style={{ width: '100px', height: '150px' }}
+              />
+            </div>
           </div>
           <div className="p-2 border border-secondary-subtle">
             <p>Interaction Frame</p>
@@ -45,7 +52,14 @@ function Game(props) {
         <>
           <div className="p-2 border border-secondary-subtle">
             <p>Location: {gameState.location}</p>
-            <p>Gender: {gameState.gender}</p>
+            <div className="battle-container">
+              <img
+                src={`${gameState.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL}`}
+                alt='hero'
+                className='hero-image img-fluid rounded'
+                style={{width: '100px', height: '150px'}}
+              />
+            </div>
           </div>
           <div className="p-2 border border-secondary-subtle">
             <p>Interaction Frame</p>

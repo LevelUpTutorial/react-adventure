@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import './App.css';
 import Game from './Game.jsx';
-import heroMaleNeutral from './assets/images/hero_male_neutral.jpg';
-import heroFemaleNeutral from './assets/images/hero_female_neutral.jpg';
+import GameState from './GameState.js';
 
 function App() {
   const [showGame, setShowGame] = useState(false); // State to toggle Game component
-  const [heroName, setHeroName] = useState('Unnamed Hero'); // State to store the hero name
-  const [gender, setGender] = useState('male'); // State to store selected gender, default is 'male'
+  const [heroName, setHeroName] = useState(GameState.DEFAULT_NAME); // State to store the hero name
+  const [gender, setGender] = useState(GameState.DEFAULT_GENDER); // State to store selected gender, default is 'male'
 
   return (
     <div className="mx-auto p-2" style={{ width: '100%', maxWidth: '800px' }}>
@@ -27,24 +26,24 @@ function App() {
             <p className="fw-bold">Choose your Hero:</p>
             <div className="d-flex justify-content-start align-items-center gap-3">
               <div
-                className={`border ${gender === 'male' ? 'border-primary' : 'border-secondary'} rounded`}
-                onClick={() => setGender('male')}
+                className={`border ${gender === GameState.GENDER_MALE ? 'border-primary' : 'border-secondary'} rounded`}
+                onClick={() => setGender(GameState.GENDER_MALE)}
                 style={{ cursor: 'pointer' }}
               >
                 <img
-                  src={heroMaleNeutral}
+                  src={GameState.IMG_HERO_MALE_NEUTRAL}
                   alt="Male Hero"
                   className="img-fluid rounded"
                   style={{ width: '100px', height: '150px' }}
                 />
               </div>
               <div
-                className={`border ${gender === 'female' ? 'border-primary' : 'border-secondary'} rounded`}
-                onClick={() => setGender('female')}
+                className={`border ${gender === GameState.GENDER_FEMALE ? 'border-primary' : 'border-secondary'} rounded`}
+                onClick={() => setGender(GameState.GENDER_FEMALE)}
                 style={{ cursor: 'pointer' }}
               >
                 <img
-                  src={heroFemaleNeutral}
+                  src={GameState.IMG_HERO_FEMALE_NEUTRAL}
                   alt="Female Hero"
                   className="img-fluid rounded"
                   style={{ width: '100px', height: '150px' }}
@@ -63,7 +62,7 @@ function App() {
         </div>
       )}
 
-      {showGame && <Game heroName={heroName || 'Unnamed Hero'} gender={gender} />} {/* Pass heroName and gender to Game */}
+      {showGame && <Game heroName={heroName} gender={gender} />} {/* Pass heroName and gender to Game */}
     </div>
   );
 }
