@@ -62,7 +62,7 @@ function App() {
         </div>
       )}
 
-      {showGame && <Game heroName={heroName} gender={gender} />} {/* Pass heroName and gender to Game */}
+      {showGame && <Game heroName={heroName} gender={gender} isGameRunning={showGame}/>} {/* Pass heroName and gender to Game */}
     </div>
   );
 }
