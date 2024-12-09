@@ -113,6 +113,8 @@ function handleGameState(gameState) {
   let active_enemy = { ...gameState.active_enemy };
   console.log(`handleGameState: Hero -> ${hero}`);
   console.log(`handleGameState: Enemy -> ${active_enemy.name}`);
+  console.log(`handleGameState: Enemy Atk Sp -> ${active_enemy.attack_speed}`);
+  console.log(`handleGameState: Enemy Atk Cd -> ${active_enemy.attack_cooldown}`);
   console.log(`handleGameState: isInCombat -> ${hero.isInCombat}`);
 
   // handle Combat
@@ -148,14 +150,35 @@ function handleGameState(gameState) {
   // handle Adventure outside of Combat
   if (location === GameState.LOCATION_ADVENTURE) {
     // handle roll new encounter
-    console.log('No active encounter - spawning goblin');
-    hero.isInCombat = true;
-    hero.attack_cooldown = hero.attack_speed;
-    hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_COMBAT : GameState.IMG_HERO_FEMALE_COMBAT);
-    active_enemy = { ...GameState.ENEMY_GOBLIN_GREEN };
+    if (gameState.next_encounters.length === 0) {
+      console.log('No active encounter - rolling new encounter');
+      console.log('Accessing random_encounters:', gameState.random_encounters);
+      let rnd_encounter = getRandomItem(gameState.random_encounters);
+      if (!rnd_encounter) {
+        console.error('Failed to roll a new encounter');
+        // Eventuell hier das Spiel andersweitig fortsetzen oder Fehler abfangen
+        // return;
+      }
+      console.log(`New Encounter: ${rnd_encounter.enemy.name}`);
+      gameState.next_encounters.push(rnd_encounter);
+    }
+
+    const encounter = gameState.next_encounters.shift();
+    if (encounter.category === 'combat') {
+      hero.isInCombat = true;
+      hero.attack_cooldown = hero.attack_speed;
+      hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_COMBAT : GameState.IMG_HERO_FEMALE_COMBAT);
+      active_enemy = {...encounter.enemy};
+    } else {
+      // handle current non-combat encounter
+      hero.isInCombat = false;
+      hero.attack_cooldown = hero.attack_speed;
+      hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
+
+      // TODO
+    }
+
     return {...gameState, hero, active_enemy};
-    // handle current non-combat encounter
-    // TODO
   }
 
   if (location === GameState.LOCATION_CITY) {
@@ -182,6 +205,38 @@ function handleResetHeroInTown(gameState) {
 
   // return new gameState
   return {...gameState, hero, active_enemy, location};
+}
+
+/**
+ * Function to select a random item based on weights
+ * @param {Array} entries - Array of objects with `item` and `weight` properties
+ * @returns {any} - Selected item
+ */
+function getRandomItem(entries) {
+  // Überprüfen, ob die Liste leer ist
+  if (!entries || entries.length === 0) {
+    console.error('Error: No entries available in the list.');
+    return null;
+  }
+
+  // Calculate the total weight
+  const totalWeight = entries.reduce((sum, entry) => sum + entry.weight, 0);
+
+  // Generate a random number between 0 and totalWeight
+  const random = Math.random() * totalWeight;
+
+  // Iterate through entries to find the selected item
+  let cumulativeWeight = 0;
+  for (const entry of entries) {
+    cumulativeWeight += entry.weight;
+    if (random < cumulativeWeight) {
+      return entry;
+    }
+  }
+
+  // Fallback (should not happen if weights are correctly provided)
+  console.error('Error: Random selection failed. This should not happen.');
+  return null;
 }
 
 /*
