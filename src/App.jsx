@@ -2,6 +2,8 @@ import { useState } from 'react';
 import './App.css';
 import Game from './Game.jsx';
 import GameState from './GameState.js';
+import PropTypes from 'prop-types';
+
 
 function App() {
   const [showGame, setShowGame] = useState(false); // State to toggle Game component
@@ -65,6 +67,12 @@ function App() {
       {showGame && <Game heroName={heroName} gender={gender} isGameRunning={showGame}/>} {/* Pass heroName and gender to Game */}
     </div>
   );
+}
+
+App.propTypes = {
+  heroName: PropTypes.string.isRequired,
+  gender: PropTypes.string.isRequired,
+  isGameRunning: PropTypes.bool.isRequired
 }
 
 export default App;

@@ -1,14 +1,15 @@
 import {useEffect, useRef, useState} from "react";
 import GameState from "./GameState.js";
+import PropTypes from "prop-types";
 
 const TICKS_PER_SECOND = 2;
 const TICK_DURATION_ADVENTURE = Math.round(1000 / TICKS_PER_SECOND);
 const TICK_DURATION_CITY = 1000;
 
-function Game(props) {
+function Game({ heroName, gender, isGameRunning }) {
   // Initialize game state in React state
   const [gameState, setGameState] = useState(
-    new GameState(props.heroName, props.gender, GameState.DEFAULT_LOCATION)
+    new GameState(heroName, gender, GameState.DEFAULT_LOCATION)
   );
 
   const updateGameState = () => {
@@ -21,19 +22,21 @@ function Game(props) {
       : TICK_DURATION_ADVENTURE;
 
   // Use the game loop hook
-  useGameLoop(updateGameState, props.isGameRunning, currentTickDuration);
+  useGameLoop(updateGameState, isGameRunning, currentTickDuration);
 
   const handleLocationChange = (newLocation) => {
-    setGameState((prevState) => ({
-      ...prevState,
-      location: newLocation,
-    }));
+    setGameState((prevState) => {
+      const state = {...prevState, location: newLocation};
+      if (newLocation === GameState.LOCATION_CITY) {
+        return handleResetHeroInTown(state);
+      }
+      return state;
+    });
   };
 
   return (
     <div className="d-flex flex-column mb-3 border border-white">
       <div className="p-2 border border-secondary-subtle">
-        <p>Navigation Frame</p>
         <p>Welcome: {gameState.hero.name}</p>
       </div>
 
@@ -43,7 +46,6 @@ function Game(props) {
             <p>Location: {gameState.location}</p>
             <div className="battle-container">
               <img
-                //src={`${gameState.hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL}`}
                 src={`${gameState.hero.image}`}
                 alt='hero'
                 className='hero-image img-fluid rounded'
@@ -68,11 +70,12 @@ function Game(props) {
         <>
           <div className="p-2 border border-secondary-subtle">
             <p>Location: {gameState.location}</p>
-            <p>Enemy: {gameState.active_enemy === null ? 'none' : gameState.active_enemy.name}</p>
-            <p>Enemy HP: {gameState.active_enemy === null ? 'none' : gameState.active_enemy.health}</p>
+            <p>Hero - HP: {gameState.hero.health}, Attack: {gameState.hero.attack}, Attack Cooldown: {gameState.hero.attack_cooldown}</p>
+            {gameState.active_enemy !== null && (
+              <p>{gameState.active_enemy.name}: HP: {gameState.active_enemy.health}, Attack: {gameState.active_enemy.attack}, Attack Cooldown: {gameState.active_enemy.attack_cooldown}</p>
+            )}
             <div className="battle-container">
               <img
-                //src={`${gameState.hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL}`}
                 src={`${gameState.hero.image}`}
                 alt='hero'
                 className='hero-image img-fluid rounded'
@@ -89,7 +92,6 @@ function Game(props) {
             </div>
           </div>
           <div className="p-2 border border-secondary-subtle">
-            <p>Interaction Frame</p>
             <button
               type="button"
               onClick={() => handleLocationChange(GameState.LOCATION_CITY)}
@@ -124,11 +126,23 @@ function handleGameState(gameState) {
     }
 
     hero.isInCombat = active_enemy.health > 0;
-    if (!hero.isInCombat) {
+    if (hero.isInCombat) {
+      // Enemy still alive, Counter attack
+      if (active_enemy.attack_cooldown <= 0) {
+        hero.health -= active_enemy.attack;
+        active_enemy.attack_cooldown = active_enemy.attack_speed;
+      } else {
+        active_enemy.attack_cooldown -= TICK_DURATION_ADVENTURE;
+      }
+    } else {
+      // Enemy died
+      hero.attack_cooldown = hero.attack_speed;
       hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
     }
 
-    return {...gameState, hero, active_enemy};
+    console.log(`handleGameState: Hero HP -> ${hero.health}`);
+    const stateAfterDmgCalc = {...gameState, hero, active_enemy};
+    return (hero.health > 0 ? stateAfterDmgCalc : handleResetHeroInTown(stateAfterDmgCalc));
   }
 
   // handle Adventure outside of Combat
@@ -136,7 +150,7 @@ function handleGameState(gameState) {
     // handle roll new encounter
     console.log('No active encounter - spawning goblin');
     hero.isInCombat = true;
-    hero.attack_cooldown = 0;
+    hero.attack_cooldown = hero.attack_speed;
     hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_COMBAT : GameState.IMG_HERO_FEMALE_COMBAT);
     active_enemy = { ...GameState.ENEMY_GOBLIN_GREEN };
     return {...gameState, hero, active_enemy};
@@ -145,17 +159,29 @@ function handleGameState(gameState) {
   }
 
   if (location === GameState.LOCATION_CITY) {
-    hero.isInCombat = false;
-    hero.attack_cooldown = 0;
-    hero.health = 100*hero.level;
-    hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
-    active_enemy = null;
-    return {...gameState, hero, active_enemy};
+    return handleResetHeroInTown({...gameState, hero, active_enemy});
   }
 
   // return gameState unchanged
   console.log('return gameState unchanged')
   return gameState;
+}
+
+/*
+  handle reset Hero in Town
+ */
+function handleResetHeroInTown(gameState) {
+  let location = GameState.LOCATION_CITY;
+  const hero = { ...gameState.hero };
+
+  hero.isInCombat = false;
+  hero.attack_cooldown = hero.attack_speed;
+  hero.health = 100*hero.level;
+  hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
+  let active_enemy = null;
+
+  // return new gameState
+  return {...gameState, hero, active_enemy, location};
 }
 
 /*
@@ -184,6 +210,7 @@ function useGameLoop(callback, isGameRunning, tickDuration) {
   https://indepthjavascript.dev/how-to-create-a-simple-game-loop-in-react-javascripttypescript-in-under-10-lines-of-code
   https://overreacted.io/making-setinterval-declarative-with-react-hooks/
  */
+// eslint-disable-next-line no-unused-vars
 function GameLoop(prevState) {
   const location = prevState.location;
 
@@ -215,5 +242,11 @@ function useInterval(callback, delay) {
     }
   }, [delay]);
 }
+
+Game.propTypes = {
+  heroName: PropTypes.string.isRequired,
+  gender: PropTypes.string.isRequired,
+  isGameRunning: PropTypes.bool.isRequired
+};
 
 export default Game;

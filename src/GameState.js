@@ -3,6 +3,7 @@ import heroMaleNeutral from './assets/images/hero_male_neutral.jpg';
 import heroFemaleCombat from './assets/images/hero_female_combat.png';
 import heroMaleCombat from './assets/images/hero_male_combat.png';
 import goblinGreen from './assets/images/enemy_goblin_green.jpg';
+import PropTypes from "prop-types";
 
 class GameState {
   /* Constants */
@@ -28,8 +29,9 @@ class GameState {
     name: 'Goblin Green',
     level: 1,
     health: 10,
-    attack_cooldown: 0,
+    attack: 5,
     attackSpeed: 2000,
+    attack_cooldown: 2000,
     image: goblinGreen
   }
 
@@ -43,12 +45,18 @@ class GameState {
       level: 1,
       health: 100,
       attack: 5,
-      attack_cooldown: 0,
       attack_speed: 1500, // in Milliseconds because of Interval Ticks
+      attack_cooldown: 1500,
       image: (gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL)
     }
     this.location = location;
   }
 }
+
+GameState.propTypes = {
+  heroName: PropTypes.string.isRequired,
+  gender: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired
+};
 
 export default GameState;
