@@ -1,11 +1,14 @@
+/* Hero */
 import heroFemaleNeutral from './assets/images/hero_female_neutral.jpg';
 import heroMaleNeutral from './assets/images/hero_male_neutral.jpg';
 import heroFemaleCombat from './assets/images/hero_female_combat.png';
 import heroMaleCombat from './assets/images/hero_male_combat.png';
+/* Enemys */
 import goblinGreen from './assets/images/enemy_goblin_green.jpg';
 import goblinBlue from './assets/images/enemy_goblin_blue.jpg';
 import goblinRed from './assets/images/enemy_goblin_red.jpg';
 import goblinPurple from './assets/images/enemy_goblin_purple.jpg';
+/* sonstiges */
 import PropTypes from "prop-types";
 
 class GameState {
@@ -65,17 +68,181 @@ class GameState {
     image: goblinPurple
   }
 
+  static STORY_DIALOG_ACT1_1 = {
+    title: 'Introduction to the Ruins',
+    content: [
+      "The once peaceful Hearthfield is now a shadow of its former self. Cultists have ravaged the village, searching for something hidden deep within the ruins.",
+      "You stand at the entrance of the forgotten ruins. The wind whispers of lost secrets, and the air carries a sense of unease."
+    ],
+    background: '',
+    completed: false,
+
+    onClose: function (gameState) { // Use a regular function to access 'this'
+      // Find the entry with ID 'STORY_ACT1_1' and set its weight to 0
+      const encounter = gameState.random_encounters.find(enc => enc.id === 'STORY_ACT1_1');
+      if (encounter) {
+        encounter.weight = 0; // Set the weight to 0
+        encounter.completed = true;
+      }
+
+      // Add STORY_DIALOG_ACT1_2 to random_encounters
+      gameState.random_encounters.push({
+        category: 'story',
+        id: 'STORY_ACT1_2',
+        dialog: GameState.STORY_DIALOG_ACT1_2,
+        weight: 100
+      });
+    }
+  }
+
+  static STORY_DIALOG_ACT1_2 = {
+    title: 'First Clue about the Eclipse',
+    content: [
+      "A strange symbol etched into the ruin’s stone hints at a larger force at play. The cult speaks of the Eclipse Beyond, a force that could unravel reality.",
+      "You examine the symbol closely. Its design is unlike anything you've seen, the two intersecting lines almost seem to... shimmer as if alive."
+    ],
+    background: '',
+    completed: false,
+
+    onClose: function (gameState) {
+      const encounter = gameState.random_encounters.find(enc => enc.id === 'STORY_ACT1_2');
+      if (encounter) {
+        encounter.weight = 0; // Set the weight to 0
+        encounter.completed = true;
+      }
+      gameState.random_encounters.push({
+        category: 'story',
+        id: 'STORY_ACT1_3',
+        dialog: GameState.STORY_DIALOG_ACT1_3,
+        weight: 100
+      });
+    },
+  }
+
+  static STORY_DIALOG_ACT1_3 = {
+    title: 'Cultist Confrontation',
+    content: [
+      "The cultists are relentless, but you manage to take one captive. In his dying breath, he mutters about 'the twin star.'",
+      "The cultist glares at you. 'The twin star... you don't understand, it's already begun...' His words fade into the wind."
+    ],
+    background: '',
+    completed: false,
+
+    onClose: function (gameState) {
+      const encounter = gameState.random_encounters.find(enc => enc.id === 'STORY_ACT1_3');
+      if (encounter) {
+        encounter.weight = 0; // Set the weight to 0
+        encounter.completed = true;
+      }
+      gameState.random_encounters.push({
+        category: 'story',
+        id: 'STORY_ACT1_4',
+        dialog: GameState.STORY_DIALOG_ACT1_4,
+        weight: 100
+      });
+    },
+  }
+
+  static STORY_DIALOG_ACT1_4 = {
+    title: 'The Village’s Betrayal',
+    content: [
+      "The mayor of Hearthfield has been aiding the cult. His betrayal runs deeper than anyone knew, and now the village is doomed.",
+      "The mayor's eyes flicker with regret. 'I never wanted this... but they promised salvation. I had no choice.'"
+    ],
+    background: '',
+    completed: false,
+
+    onClose: function (gameState) {
+      const encounter = gameState.random_encounters.find(enc => enc.id === 'STORY_ACT1_4');
+      if (encounter) {
+        encounter.weight = 0; // Set the weight to 0
+        encounter.completed = true;
+      }
+      gameState.random_encounters.push({
+        category: 'story',
+        id: 'STORY_ACT1_5',
+        dialog: GameState.STORY_DIALOG_ACT1_5,
+        weight: 100
+      });
+    }
+  }
+
+  static STORY_DIALOG_ACT1_5 = {
+    title: 'Discovery of the Shrine',
+    content: [
+      "Hidden in the woods, an ancient shrine lies abandoned. Its carvings speak of two bound souls destined to determine the fate of the world.",
+      "As you kneel before the shrine, a sense of foreboding fills your chest. The carvings seem to pulse with an eerie energy."
+    ],
+    background: '',
+    completed: false,
+
+    onClose: function (gameState) {
+      const encounter = gameState.random_encounters.find(enc => enc.id === 'STORY_ACT1_5');
+      if (encounter) {
+        encounter.weight = 0; // Set the weight to 0
+        encounter.completed = true;
+      }
+      gameState.random_encounters.push({
+        category: 'story',
+        id: 'STORY_ACT1_6',
+        dialog: GameState.STORY_DIALOG_ACT1_6,
+        weight: 100
+      });
+    }
+  }
+
+  static STORY_DIALOG_ACT1_6 = {
+    title: 'A Dangerous Path Ahead',
+    content: [
+      "The path ahead leads deeper into the cult’s influence. The ruins are just the beginning of something far darker, and the Eclipse is drawing near.",
+      "With resolve in your heart, you step forward. There is no turning back now, the fate of Hearthfield and the world hangs in the balance."
+    ],
+    background: '',
+    completed: false,
+
+    onClose: function (gameState) {
+      const encounter = gameState.random_encounters.find(enc => enc.id === 'STORY_ACT1_6');
+      if (encounter) {
+        encounter.weight = 0; // Set the weight to 0
+        encounter.completed = true;
+      }
+      // advance to act 2 TODO
+    }
+  }
+
+  static STORY_DIALOG_ACT1_SECRET = {
+    title: 'Hidden shrine in the woods',
+    content: [
+      "A cryptic prophecy carved into stone speaks of two stars, a choice to bind or break, and a power beyond comprehension.",
+      "The carvings glow faintly. 'Two bound by fate shall determine the end... or the beginning.' The meaning is unclear, but the weight of it lingers."
+    ],
+    background: '',
+    completed: false,
+
+    onClose: function (gameState) { // Use a regular function to access 'this'
+      // Find the entry with ID 'STORY_ACT1_1' and set its weight to 0
+      const encounter = gameState.random_encounters.find(enc => enc.id === 'STORY_ACT1_SECRET');
+      if (encounter) {
+        encounter.weight = 0; // Set the weight to 0
+        encounter.completed = true;
+      }
+    }
+  }
+
   next_encounters = [];
   random_encounters = [
-    { category: 'combat', enemy: GameState.ENEMY_GOBLIN_GREEN, weight: 25 },
-    { category: 'combat', enemy: GameState.ENEMY_GOBLIN_RED, weight: 25 },
-    { category: 'combat', enemy: GameState.ENEMY_GOBLIN_BLUE, weight: 25 },
-    { category: 'combat', enemy: GameState.ENEMY_GOBLIN_PURPLE, weight: 25 }
+    { category: 'combat', id: 'GOBLIN_GREEN', enemy: GameState.ENEMY_GOBLIN_GREEN, weight: 25 },
+    { category: 'combat', id: 'GOBLIN_RED', enemy: GameState.ENEMY_GOBLIN_RED, weight: 1 },
+    { category: 'combat', id: 'GOBLIN_BLUE', enemy: GameState.ENEMY_GOBLIN_BLUE, weight: 1 },
+    { category: 'combat', id: 'GOBLIN_PURPLE', enemy: GameState.ENEMY_GOBLIN_PURPLE, weight: 1 },
+    { category: 'story', id: 'STORY_ACT1_1', dialog: GameState.STORY_DIALOG_ACT1_1, weight: 100, completed: false },
+    { category: 'story', id: 'STORY_ACT1_SECRET', dialog: GameState.STORY_DIALOG_ACT1_SECRET, weight: 100, completed: false}
   ];
 
   constructor(heroName, gender, location) {
     this.hero = {
       isInCombat: false,
+      isInDialog: false,
       name: heroName,
       gender: gender,
       level: 1,

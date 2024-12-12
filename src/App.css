@@ -1,0 +1,22 @@
+/*  Add smooth fade-in and fade-out animations for Dialogs */
+.story-dialog-enter {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.story-dialog-enter-active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.story-dialog-exit {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.story-dialog-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+}

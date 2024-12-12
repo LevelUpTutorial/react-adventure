@@ -1,5 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import GameState from "./GameState.js";
+import StoryDialog from "./components/StoryDialog.jsx"
+
 import PropTypes from "prop-types";
 
 const TICKS_PER_SECOND = 2;
@@ -11,9 +13,11 @@ function Game({ heroName, gender, isGameRunning }) {
   const [gameState, setGameState] = useState(
     new GameState(heroName, gender, GameState.DEFAULT_LOCATION)
   );
+  const [storyEvent, setStoryEvent] = useState(null); // Holds the active story event object ({ title, text, background }).
+  const [isStoryDialogOpen, setStoryDialogOpen] = useState(false); // Controls dialog visibility
 
   const updateGameState = () => {
-    setGameState((prevState) => handleGameState(prevState));
+    setGameState((prevState) => handleGameState(prevState, setStoryEvent, setStoryDialogOpen));
   };
 
   const currentTickDuration =
@@ -102,20 +106,35 @@ function Game({ heroName, gender, isGameRunning }) {
           </div>
         </>
       )}
+
+      {isStoryDialogOpen && storyEvent && (
+        <StoryDialog
+          title={storyEvent.title}
+          content={storyEvent.content}
+          background={storyEvent.background}
+          onClose={() => {
+            setGameState(handleResetHeroControl(gameState));
+            storyEvent.onClose(gameState);
+            setStoryDialogOpen(false); // Close the dialog
+            setStoryEvent(null); // Clear the current story event
+          }}
+        />
+      )};
     </div>
   );
 }
 
 /* Main Function to handle all In-game Event Logic */
-function handleGameState(gameState) {
+function handleGameState(gameState, setStoryEvent, setStoryDialogOpen) {
   const location = gameState.location;
-  const hero = { ...gameState.hero };
+  let hero = { ...gameState.hero };
   let active_enemy = { ...gameState.active_enemy };
   console.log(`handleGameState: Hero -> ${hero}`);
   console.log(`handleGameState: Enemy -> ${active_enemy.name}`);
   console.log(`handleGameState: Enemy Atk Sp -> ${active_enemy.attack_speed}`);
   console.log(`handleGameState: Enemy Atk Cd -> ${active_enemy.attack_cooldown}`);
   console.log(`handleGameState: isInCombat -> ${hero.isInCombat}`);
+  console.log(`handleGameState: isInDialog -> ${hero.isInDialog}`);
 
   // handle Combat
   if (hero.isInCombat) {
@@ -148,7 +167,7 @@ function handleGameState(gameState) {
   }
 
   // handle Adventure outside of Combat
-  if (location === GameState.LOCATION_ADVENTURE) {
+  if (!hero.isInDialog && location === GameState.LOCATION_ADVENTURE) {
     // handle roll new encounter
     if (gameState.next_encounters.length === 0) {
       console.log('No active encounter - rolling new encounter');
@@ -159,23 +178,28 @@ function handleGameState(gameState) {
         // Eventuell hier das Spiel andersweitig fortsetzen oder Fehler abfangen
         // return;
       }
-      console.log(`New Encounter: ${rnd_encounter.enemy.name}`);
+      console.log(`New Encounter: ${rnd_encounter.id}`);
       gameState.next_encounters.push(rnd_encounter);
     }
 
     const encounter = gameState.next_encounters.shift();
     if (encounter.category === 'combat') {
+      gameState = handleResetHeroControl(gameState);
+      hero = gameState.hero;
       hero.isInCombat = true;
-      hero.attack_cooldown = hero.attack_speed;
       hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_COMBAT : GameState.IMG_HERO_FEMALE_COMBAT);
       active_enemy = {...encounter.enemy};
-    } else {
-      // handle current non-combat encounter
-      hero.isInCombat = false;
-      hero.attack_cooldown = hero.attack_speed;
+    } else if (encounter.category === 'story') {
+      gameState = handleResetHeroControl(gameState);
+      hero = gameState.hero;
+      hero.isInDialog = true;
       hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
 
-      // TODO
+      setStoryEvent(encounter.dialog); // Set the story event
+      setStoryDialogOpen(true); // Open the dialog
+
+    } else {
+      console.log(`ERROR: Unknown encounter type category ${encounter.category}`);
     }
 
     return {...gameState, hero, active_enemy};
@@ -191,20 +215,31 @@ function handleGameState(gameState) {
 }
 
 /*
+  handle reset Hero control variables
+ */
+function handleResetHeroControl(gameState) {
+  const hero = { ...gameState.hero };
+  hero.isInCombat = false;
+  hero.isInDialog = false;
+  hero.attack_cooldown = hero.attack_speed;
+  let active_enemy = null;
+
+  return {...gameState, hero, active_enemy};
+}
+
+/*
   handle reset Hero in Town
  */
 function handleResetHeroInTown(gameState) {
-  let location = GameState.LOCATION_CITY;
+  gameState = handleResetHeroControl(gameState);
   const hero = { ...gameState.hero };
 
-  hero.isInCombat = false;
-  hero.attack_cooldown = hero.attack_speed;
-  hero.health = 100*hero.level;
+  let location = GameState.LOCATION_CITY;
+  hero.health = 100*hero.level; // Heal
   hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
-  let active_enemy = null;
 
   // return new gameState
-  return {...gameState, hero, active_enemy, location};
+  return {...gameState, hero, location};
 }
 
 /**
