@@ -4,7 +4,7 @@ import StoryDialog from "./components/StoryDialog.jsx"
 
 import PropTypes from "prop-types";
 
-const TICKS_PER_SECOND = 2;
+const TICKS_PER_SECOND = 10;
 const TICK_DURATION_ADVENTURE = Math.round(1000 / TICKS_PER_SECOND);
 const TICK_DURATION_CITY = 1000;
 
@@ -21,7 +21,7 @@ function Game({ heroName, gender, isGameRunning }) {
   };
 
   const currentTickDuration =
-    gameState.location === GameState.LOCATION_CITY
+    gameState.location.name === GameState.LOCATION_CITY.name || gameState.hero.isInDialog
       ? TICK_DURATION_CITY
       : TICK_DURATION_ADVENTURE;
 
@@ -31,9 +31,11 @@ function Game({ heroName, gender, isGameRunning }) {
   const handleLocationChange = (newLocation) => {
     setGameState((prevState) => {
       const state = {...prevState, location: newLocation};
-      if (newLocation === GameState.LOCATION_CITY) {
+      if (newLocation.name === GameState.LOCATION_CITY.name) {
         return handleResetHeroInTown(state);
       }
+      // TODO switch encounter table (safe old and load new)
+      setBodyBackground(newLocation);
       return state;
     });
   };
@@ -44,10 +46,10 @@ function Game({ heroName, gender, isGameRunning }) {
         <p>Welcome: {gameState.hero.name}</p>
       </div>
 
-      {gameState.location === GameState.LOCATION_CITY && (
+      {gameState.location.name === GameState.LOCATION_CITY.name && (
         <>
           <div className="p-2 border border-secondary-subtle">
-            <p>Location: {gameState.location}</p>
+            <p>Location: {gameState.location.name}</p>
             <div className="battle-container">
               <img
                 src={`${gameState.hero.image}`}
@@ -58,22 +60,49 @@ function Game({ heroName, gender, isGameRunning }) {
             </div>
           </div>
           <div className="p-2 border border-secondary-subtle">
-            <p>Interaction Frame</p>
             <button
               type="button"
-              onClick={() => handleLocationChange(GameState.LOCATION_ADVENTURE)}
+              onClick={() => handleLocationChange(GameState.LOCATION_ADVENTURE_ACT1)}
               className="btn btn-primary"
             >
-              Start Adventuring
+              {GameState.LOCATION_ADVENTURE_ACT1.name}
+            </button>
+            <button
+              type="button"
+              onClick={() => handleLocationChange(GameState.LOCATION_ADVENTURE_ACT2)}
+              className="btn btn-primary"
+            >
+              {GameState.LOCATION_ADVENTURE_ACT2.name}
+            </button>
+            <button
+              type="button"
+              onClick={() => handleLocationChange(GameState.LOCATION_ADVENTURE_ACT3)}
+              className="btn btn-primary"
+            >
+              {GameState.LOCATION_ADVENTURE_ACT3.name}
+            </button>
+            <button
+              type="button"
+              onClick={() => handleLocationChange(GameState.LOCATION_ADVENTURE_ACT4)}
+              className="btn btn-primary"
+            >
+              {GameState.LOCATION_ADVENTURE_ACT4.name}
+            </button>
+            <button
+              type="button"
+              onClick={() => handleLocationChange(GameState.LOCATION_ADVENTURE_ACT5)}
+              className="btn btn-primary"
+            >
+              {GameState.LOCATION_ADVENTURE_ACT5.name}
             </button>
           </div>
         </>
       )}
 
-      {gameState.location === GameState.LOCATION_ADVENTURE && (
+      {gameState.location.name !== GameState.LOCATION_CITY.name && (
         <>
           <div className="p-2 border border-secondary-subtle">
-            <p>Location: {gameState.location}</p>
+            <p>Location: {gameState.location.name}</p>
             <p>Hero - HP: {gameState.hero.health}, Attack: {gameState.hero.attack}, Attack Cooldown: {gameState.hero.attack_cooldown}</p>
             {gameState.active_enemy !== null && (
               <p>{gameState.active_enemy.name}: HP: {gameState.active_enemy.health}, Attack: {gameState.active_enemy.attack}, Attack Cooldown: {gameState.active_enemy.attack_cooldown}</p>
@@ -101,7 +130,7 @@ function Game({ heroName, gender, isGameRunning }) {
               onClick={() => handleLocationChange(GameState.LOCATION_CITY)}
               className="btn btn-primary"
             >
-            Go to City
+              {GameState.LOCATION_CITY.name}
             </button>
           </div>
         </>
@@ -122,6 +151,20 @@ function Game({ heroName, gender, isGameRunning }) {
       )};
     </div>
   );
+}
+
+/* Set HTML <body> background based on location.background
+  "background-image: url("@/assets/images/background-default.jpg");"
+*/
+function setBodyBackground(location) {
+  console.log(`setBodyBackground: ${location.name}`);
+  console.log(`setBodyBackground: ${location.background}`);
+
+  const body = document.querySelector('body');
+  body.style.backgroundImage = `url(${location.background})`;
+  body.style.backgroundSize = "cover";
+  body.style.backgroundPosition = "center";
+  body.style.backgroundRepeat = "no-repeat";
 }
 
 /* Main Function to handle all In-game Event Logic */
@@ -167,7 +210,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen) {
   }
 
   // handle Adventure outside of Combat
-  if (!hero.isInDialog && location === GameState.LOCATION_ADVENTURE) {
+  if (!hero.isInDialog && location.name !== GameState.LOCATION_CITY.name) {
     // handle roll new encounter
     if (gameState.next_encounters.length === 0) {
       console.log('No active encounter - rolling new encounter');
@@ -205,7 +248,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen) {
     return {...gameState, hero, active_enemy};
   }
 
-  if (location === GameState.LOCATION_CITY) {
+  if (location.name === GameState.LOCATION_CITY.name) {
     return handleResetHeroInTown({...gameState, hero, active_enemy});
   }
 
@@ -307,7 +350,7 @@ function GameLoop(prevState) {
   useInterval(() => {
     // Your custom logic here !!!
     handleGameState(prevState);
-  }, location === GameState.LOCATION_CITY ? TICK_DURATION_CITY : TICK_DURATION_ADVENTURE);
+  }, location.name === GameState.LOCATION_CITY.name ? TICK_DURATION_CITY : TICK_DURATION_ADVENTURE);
 }
 
 /*

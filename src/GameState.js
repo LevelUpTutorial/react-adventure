@@ -8,6 +8,16 @@ import goblinGreen from './assets/images/enemy_goblin_green.jpg';
 import goblinBlue from './assets/images/enemy_goblin_blue.jpg';
 import goblinRed from './assets/images/enemy_goblin_red.jpg';
 import goblinPurple from './assets/images/enemy_goblin_purple.jpg';
+/* LOCATIONS */
+import backgroundCity from './assets/images/background-default.jpg';
+import backgroundAct1 from './assets/images/background-act1.jpg';
+import backgroundAct2 from './assets/images/background-act2.jpg';
+import backgroundAct3 from './assets/images/background-act3.jpg';
+import backgroundAct4 from './assets/images/background-act4.jpg';
+import backgroundAct5 from './assets/images/background-act5.jpg';
+/*import backgroundAct6 from './assets/images/background-act6.jpg';
+import backgroundAct7 from './assets/images/background-act7.jpg';
+import backgroundAct8 from './assets/images/background-act8.jpg';*/
 /* sonstiges */
 import PropTypes from "prop-types";
 
@@ -20,8 +30,15 @@ class GameState {
   static DEFAULT_GENDER = GameState.GENDER_MALE;
 
   /* Location Constants */
-  static LOCATION_CITY = 'City';
-  static LOCATION_ADVENTURE = 'Adventure';
+  static LOCATION_CITY = {name: 'City', background: backgroundCity};
+  static LOCATION_ADVENTURE_ACT1 = {name: 'Act 1: Hearthfield Plains', background: backgroundAct1};
+  static LOCATION_ADVENTURE_ACT2 = {name: 'Act 2: The Crimson Dunes', background: backgroundAct2};
+  static LOCATION_ADVENTURE_ACT3 = {name: 'Act 3: Frostspire Peaks', background: backgroundAct3};
+  static LOCATION_ADVENTURE_ACT4 = {name: 'Act 4: The Whispering Forest', background: backgroundAct4};
+  static LOCATION_ADVENTURE_ACT5 = {name: 'Act 5: The Marshes of Ebonreach', background: backgroundAct5};
+  /*static LOCATION_ADVENTURE_ACT6 = {name: 'Act 6: The Radiant Spire', background: backgroundAct6};
+  static LOCATION_ADVENTURE_ACT7 = {name: 'Act 7: The Shattered Steppe', background: backgroundAct7};
+  static LOCATION_ADVENTURE_ACT8 = {name: 'Act 8: The Eclipse Gate', background: backgroundAct8};*/
   static DEFAULT_LOCATION = GameState.LOCATION_CITY;
 
   /* Asset Constants */
@@ -211,10 +228,8 @@ class GameState {
     }
   }
 
-  next_encounters = [];
-
   static STORY_DIALOG_DEFAULT_WEIGHT = 25;
-  random_encounters = [
+  static ACT1_ENCOUNTERS = [
     { category: 'combat', id: 'GOBLIN_GREEN', enemy: GameState.ENEMY_GOBLIN_GREEN, weight: 25 },
     { category: 'combat', id: 'GOBLIN_RED', enemy: GameState.ENEMY_GOBLIN_RED, weight: 25 },
     { category: 'combat', id: 'GOBLIN_BLUE', enemy: GameState.ENEMY_GOBLIN_BLUE, weight: 25 },
@@ -222,6 +237,13 @@ class GameState {
     { category: 'story', id: 'STORY_ACT1_1', dialog: GameState.STORY_DIALOG_ACT1_1, weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT, completed: false },
     { category: 'story', id: 'STORY_ACT1_SECRET', dialog: GameState.STORY_DIALOG_ACT1_SECRET, weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT, completed: false}
   ];
+  static ACT2_ENCOUNTERS = [
+    { category: 'combat', id: 'GOBLIN_BLUE', enemy: GameState.ENEMY_GOBLIN_BLUE, weight: 25 },
+    { category: 'combat', id: 'GOBLIN_PURPLE', enemy: GameState.ENEMY_GOBLIN_PURPLE, weight: 25 }
+  ];
+
+  next_encounters = [];
+  random_encounters = GameState.ACT1_ENCOUNTERS;
 
   constructor(heroName, gender, location) {
     this.hero = {
@@ -243,7 +265,7 @@ class GameState {
 GameState.propTypes = {
   heroName: PropTypes.string.isRequired,
   gender: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired
+  location: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default GameState;
