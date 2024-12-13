@@ -68,6 +68,17 @@ class GameState {
     image: goblinPurple
   }
 
+  /*
+    Complete Story event and set weight to 0
+  */
+  static markStoryAsCompleted(gameState, encounter_id) {
+    const encounter = gameState.random_encounters.find(enc => enc.id === encounter_id);
+    if (encounter) {
+      encounter.weight = 0; // Set the weight to 0
+      encounter.completed = true;
+    }
+  }
+
   static STORY_DIALOG_ACT1_1 = {
     title: 'Introduction to the Ruins',
     content: [
@@ -79,18 +90,14 @@ class GameState {
 
     onClose: function (gameState) { // Use a regular function to access 'this'
       // Find the entry with ID 'STORY_ACT1_1' and set its weight to 0
-      const encounter = gameState.random_encounters.find(enc => enc.id === 'STORY_ACT1_1');
-      if (encounter) {
-        encounter.weight = 0; // Set the weight to 0
-        encounter.completed = true;
-      }
+      GameState.markStoryAsCompleted(gameState, 'STORY_ACT1_1');
 
       // Add STORY_DIALOG_ACT1_2 to random_encounters
       gameState.random_encounters.push({
         category: 'story',
         id: 'STORY_ACT1_2',
         dialog: GameState.STORY_DIALOG_ACT1_2,
-        weight: 100
+        weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT
       });
     }
   }
@@ -105,16 +112,12 @@ class GameState {
     completed: false,
 
     onClose: function (gameState) {
-      const encounter = gameState.random_encounters.find(enc => enc.id === 'STORY_ACT1_2');
-      if (encounter) {
-        encounter.weight = 0; // Set the weight to 0
-        encounter.completed = true;
-      }
+      GameState.markStoryAsCompleted(gameState, 'STORY_ACT1_2');
       gameState.random_encounters.push({
         category: 'story',
         id: 'STORY_ACT1_3',
         dialog: GameState.STORY_DIALOG_ACT1_3,
-        weight: 100
+        weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT
       });
     },
   }
@@ -129,16 +132,12 @@ class GameState {
     completed: false,
 
     onClose: function (gameState) {
-      const encounter = gameState.random_encounters.find(enc => enc.id === 'STORY_ACT1_3');
-      if (encounter) {
-        encounter.weight = 0; // Set the weight to 0
-        encounter.completed = true;
-      }
+      GameState.markStoryAsCompleted(gameState, 'STORY_ACT1_3');
       gameState.random_encounters.push({
         category: 'story',
         id: 'STORY_ACT1_4',
         dialog: GameState.STORY_DIALOG_ACT1_4,
-        weight: 100
+        weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT
       });
     },
   }
@@ -153,16 +152,12 @@ class GameState {
     completed: false,
 
     onClose: function (gameState) {
-      const encounter = gameState.random_encounters.find(enc => enc.id === 'STORY_ACT1_4');
-      if (encounter) {
-        encounter.weight = 0; // Set the weight to 0
-        encounter.completed = true;
-      }
+      GameState.markStoryAsCompleted(gameState, 'STORY_ACT1_4');
       gameState.random_encounters.push({
         category: 'story',
         id: 'STORY_ACT1_5',
         dialog: GameState.STORY_DIALOG_ACT1_5,
-        weight: 100
+        weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT
       });
     }
   }
@@ -177,16 +172,12 @@ class GameState {
     completed: false,
 
     onClose: function (gameState) {
-      const encounter = gameState.random_encounters.find(enc => enc.id === 'STORY_ACT1_5');
-      if (encounter) {
-        encounter.weight = 0; // Set the weight to 0
-        encounter.completed = true;
-      }
+      GameState.markStoryAsCompleted(gameState, 'STORY_ACT1_5');
       gameState.random_encounters.push({
         category: 'story',
         id: 'STORY_ACT1_6',
         dialog: GameState.STORY_DIALOG_ACT1_6,
-        weight: 100
+        weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT
       });
     }
   }
@@ -201,11 +192,7 @@ class GameState {
     completed: false,
 
     onClose: function (gameState) {
-      const encounter = gameState.random_encounters.find(enc => enc.id === 'STORY_ACT1_6');
-      if (encounter) {
-        encounter.weight = 0; // Set the weight to 0
-        encounter.completed = true;
-      }
+      GameState.markStoryAsCompleted(gameState, 'STORY_ACT1_6');
       // advance to act 2 TODO
     }
   }
@@ -220,23 +207,20 @@ class GameState {
     completed: false,
 
     onClose: function (gameState) { // Use a regular function to access 'this'
-      // Find the entry with ID 'STORY_ACT1_1' and set its weight to 0
-      const encounter = gameState.random_encounters.find(enc => enc.id === 'STORY_ACT1_SECRET');
-      if (encounter) {
-        encounter.weight = 0; // Set the weight to 0
-        encounter.completed = true;
-      }
+      GameState.markStoryAsCompleted(gameState, 'STORY_ACT1_SECRET');
     }
   }
 
   next_encounters = [];
+
+  static STORY_DIALOG_DEFAULT_WEIGHT = 25;
   random_encounters = [
     { category: 'combat', id: 'GOBLIN_GREEN', enemy: GameState.ENEMY_GOBLIN_GREEN, weight: 25 },
-    { category: 'combat', id: 'GOBLIN_RED', enemy: GameState.ENEMY_GOBLIN_RED, weight: 1 },
-    { category: 'combat', id: 'GOBLIN_BLUE', enemy: GameState.ENEMY_GOBLIN_BLUE, weight: 1 },
-    { category: 'combat', id: 'GOBLIN_PURPLE', enemy: GameState.ENEMY_GOBLIN_PURPLE, weight: 1 },
-    { category: 'story', id: 'STORY_ACT1_1', dialog: GameState.STORY_DIALOG_ACT1_1, weight: 100, completed: false },
-    { category: 'story', id: 'STORY_ACT1_SECRET', dialog: GameState.STORY_DIALOG_ACT1_SECRET, weight: 100, completed: false}
+    { category: 'combat', id: 'GOBLIN_RED', enemy: GameState.ENEMY_GOBLIN_RED, weight: 25 },
+    { category: 'combat', id: 'GOBLIN_BLUE', enemy: GameState.ENEMY_GOBLIN_BLUE, weight: 25 },
+    { category: 'combat', id: 'GOBLIN_PURPLE', enemy: GameState.ENEMY_GOBLIN_PURPLE, weight: 25 },
+    { category: 'story', id: 'STORY_ACT1_1', dialog: GameState.STORY_DIALOG_ACT1_1, weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT, completed: false },
+    { category: 'story', id: 'STORY_ACT1_SECRET', dialog: GameState.STORY_DIALOG_ACT1_SECRET, weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT, completed: false}
   ];
 
   constructor(heroName, gender, location) {
