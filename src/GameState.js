@@ -15,9 +15,9 @@ import backgroundAct2 from './assets/images/background-act2.jpg';
 import backgroundAct3 from './assets/images/background-act3.jpg';
 import backgroundAct4 from './assets/images/background-act4.jpg';
 import backgroundAct5 from './assets/images/background-act5.jpg';
-/*import backgroundAct6 from './assets/images/background-act6.jpg';
-import backgroundAct7 from './assets/images/background-act7.jpg';
-import backgroundAct8 from './assets/images/background-act8.jpg';*/
+import backgroundAct6 from './assets/images/background-act6.webp';
+import backgroundAct7 from './assets/images/background-act7.webp';
+import backgroundAct8 from './assets/images/background-act8.webp';
 /* sonstiges */
 import PropTypes from "prop-types";
 
@@ -36,9 +36,9 @@ class GameState {
   static LOCATION_ADVENTURE_ACT3 = {name: 'Act 3: Frostspire Peaks', background: backgroundAct3};
   static LOCATION_ADVENTURE_ACT4 = {name: 'Act 4: The Whispering Forest', background: backgroundAct4};
   static LOCATION_ADVENTURE_ACT5 = {name: 'Act 5: The Marshes of Ebonreach', background: backgroundAct5};
-  /*static LOCATION_ADVENTURE_ACT6 = {name: 'Act 6: The Radiant Spire', background: backgroundAct6};
+  static LOCATION_ADVENTURE_ACT6 = {name: 'Act 6: The Radiant Spire', background: backgroundAct6};
   static LOCATION_ADVENTURE_ACT7 = {name: 'Act 7: The Shattered Steppe', background: backgroundAct7};
-  static LOCATION_ADVENTURE_ACT8 = {name: 'Act 8: The Eclipse Gate', background: backgroundAct8};*/
+  static LOCATION_ADVENTURE_ACT8 = {name: 'Act 8: The Eclipse Gate', background: backgroundAct8};
   static DEFAULT_LOCATION = GameState.LOCATION_CITY;
 
   /* Asset Constants */

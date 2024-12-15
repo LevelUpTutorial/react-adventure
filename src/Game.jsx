@@ -95,6 +95,27 @@ function Game({ heroName, gender, isGameRunning }) {
             >
               {GameState.LOCATION_ADVENTURE_ACT5.name}
             </button>
+            <button
+              type="button"
+              onClick={() => handleLocationChange(GameState.LOCATION_ADVENTURE_ACT6)}
+              className="btn btn-primary"
+            >
+              {GameState.LOCATION_ADVENTURE_ACT6.name}
+            </button>
+            <button
+              type="button"
+              onClick={() => handleLocationChange(GameState.LOCATION_ADVENTURE_ACT7)}
+              className="btn btn-primary"
+            >
+              {GameState.LOCATION_ADVENTURE_ACT7.name}
+            </button>
+            <button
+              type="button"
+              onClick={() => handleLocationChange(GameState.LOCATION_ADVENTURE_ACT8)}
+              className="btn btn-primary"
+            >
+              {GameState.LOCATION_ADVENTURE_ACT8.name}
+            </button>
           </div>
         </>
       )}
