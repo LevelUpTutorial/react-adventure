@@ -236,7 +236,8 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen) {
     if (gameState.next_encounters.length === 0) {
       console.log('No active encounter - rolling new encounter');
       console.log('Accessing random_encounters:', gameState.random_encounters);
-      let rnd_encounter = getRandomItem(gameState.random_encounters);
+      const entries = GameState.findEncounterList(gameState, location.name);
+      let rnd_encounter = getRandomItem(entries);
       if (!rnd_encounter) {
         console.error('Failed to roll a new encounter');
         // Eventuell hier das Spiel andersweitig fortsetzen oder Fehler abfangen
@@ -317,7 +318,7 @@ function getRandomItem(entries) {
     console.error('Error: No entries available in the list.');
     return null;
   }
-
+  console.log(`getRandomItem: ${entries}`)
   // Calculate the total weight
   const totalWeight = entries.reduce((sum, entry) => sum + entry.weight, 0);
 

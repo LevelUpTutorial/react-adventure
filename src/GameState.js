@@ -8,6 +8,7 @@ import goblinGreen from './assets/images/enemy_goblin_green.jpg';
 import goblinBlue from './assets/images/enemy_goblin_blue.jpg';
 import goblinRed from './assets/images/enemy_goblin_red.jpg';
 import goblinPurple from './assets/images/enemy_goblin_purple.jpg';
+import enemyPlaceholder from './assets/images/enemy_placeholder_card.webp'; 
 /* LOCATIONS */
 import backgroundCity from './assets/images/background-default.jpg';
 import backgroundAct1 from './assets/images/background-act1.jpg';
@@ -30,15 +31,24 @@ class GameState {
   static DEFAULT_GENDER = GameState.GENDER_MALE;
 
   /* Location Constants */
-  static LOCATION_CITY = {name: 'City', background: backgroundCity};
-  static LOCATION_ADVENTURE_ACT1 = {name: 'Act 1: Hearthfield Plains', background: backgroundAct1};
-  static LOCATION_ADVENTURE_ACT2 = {name: 'Act 2: The Crimson Dunes', background: backgroundAct2};
-  static LOCATION_ADVENTURE_ACT3 = {name: 'Act 3: Frostspire Peaks', background: backgroundAct3};
-  static LOCATION_ADVENTURE_ACT4 = {name: 'Act 4: The Whispering Forest', background: backgroundAct4};
-  static LOCATION_ADVENTURE_ACT5 = {name: 'Act 5: The Marshes of Ebonreach', background: backgroundAct5};
-  static LOCATION_ADVENTURE_ACT6 = {name: 'Act 6: The Radiant Spire', background: backgroundAct6};
-  static LOCATION_ADVENTURE_ACT7 = {name: 'Act 7: The Shattered Steppe', background: backgroundAct7};
-  static LOCATION_ADVENTURE_ACT8 = {name: 'Act 8: The Eclipse Gate', background: backgroundAct8};
+  static CITY_NAME = 'City';
+  static ACT1_LOC1_NAME = 'Act 1: Hearthfield Plains'; 
+  static ACT2_LOC1_NAME = 'Act 2: The Crimson Dunes';
+  static ACT3_LOC1_NAME = 'Act 3: Frostspire Peaks';
+  static ACT4_LOC1_NAME = 'Act 4: The Whispering Forest';
+  static ACT5_LOC1_NAME = 'Act 5: The Marshes of Ebonreach';
+  static ACT6_LOC1_NAME = 'Act 6: The Radiant Spire';
+  static ACT7_LOC1_NAME = 'Act 7: The Shattered Steppe';
+  static ACT8_LOC1_NAME = 'Act 8: The Eclipse Gate';
+  static LOCATION_CITY = {name: GameState.CITY_NAME, background: backgroundCity};
+  static LOCATION_ADVENTURE_ACT1 = {name: GameState.ACT1_LOC1_NAME, background: backgroundAct1};
+  static LOCATION_ADVENTURE_ACT2 = {name: GameState.ACT2_LOC1_NAME, background: backgroundAct2};
+  static LOCATION_ADVENTURE_ACT3 = {name: GameState.ACT3_LOC1_NAME, background: backgroundAct3};
+  static LOCATION_ADVENTURE_ACT4 = {name: GameState.ACT4_LOC1_NAME, background: backgroundAct4};
+  static LOCATION_ADVENTURE_ACT5 = {name: GameState.ACT5_LOC1_NAME, background: backgroundAct5};
+  static LOCATION_ADVENTURE_ACT6 = {name: GameState.ACT6_LOC1_NAME, background: backgroundAct6};
+  static LOCATION_ADVENTURE_ACT7 = {name: GameState.ACT7_LOC1_NAME, background: backgroundAct7};
+  static LOCATION_ADVENTURE_ACT8 = {name: GameState.ACT8_LOC1_NAME, background: backgroundAct8};
   static DEFAULT_LOCATION = GameState.LOCATION_CITY;
 
   /* Asset Constants */
@@ -84,12 +94,34 @@ class GameState {
     attack_cooldown: 1500,
     image: goblinPurple
   }
+  static ENEMY_PLACEHOLDER  = {
+    name: 'Random Enemy',
+    level: 1,
+    health: 50,
+    attack: 20,
+    attack_speed: 1500,
+    attack_cooldown: 1500,
+    image: enemyPlaceholder
+  }
+
+/*
+  
+*/
+static findEncounterList(gameState, location_id) {
+  const entry = gameState.random_encounters.find(enc => enc.location === location_id);
+  console.log(`findEncounterList: ${entry}`);
+  const rnd_encounters = entry.encounters;
+  console.log(`findEncounterList: ${rnd_encounters}`);
+  return rnd_encounters;
+}
 
   /*
     Complete Story event and set weight to 0
   */
-  static markStoryAsCompleted(gameState, encounter_id) {
-    const encounter = gameState.random_encounters.find(enc => enc.id === encounter_id);
+  static markStoryAsCompleted(gameState, location_id, encounter_id) {
+    const encounter_list = GameState.findEncounterList(gameState, location_id);
+    
+    const encounter = encounter_list.find(enc => enc.id === encounter_id);
     if (encounter) {
       encounter.weight = 0; // Set the weight to 0
       encounter.completed = true;
@@ -107,10 +139,12 @@ class GameState {
 
     onClose: function (gameState) { // Use a regular function to access 'this'
       // Find the entry with ID 'STORY_ACT1_1' and set its weight to 0
-      GameState.markStoryAsCompleted(gameState, 'STORY_ACT1_1');
+      const location_id = GameState.ACT1_LOC1_NAME;
+      GameState.markStoryAsCompleted(gameState, location_id, 'STORY_ACT1_1');
 
       // Add STORY_DIALOG_ACT1_2 to random_encounters
-      gameState.random_encounters.push({
+      const encounter_list = GameState.findEncounterList(gameState, location_id);
+      encounter_list.push({
         category: 'story',
         id: 'STORY_ACT1_2',
         dialog: GameState.STORY_DIALOG_ACT1_2,
@@ -129,8 +163,10 @@ class GameState {
     completed: false,
 
     onClose: function (gameState) {
-      GameState.markStoryAsCompleted(gameState, 'STORY_ACT1_2');
-      gameState.random_encounters.push({
+      const location_id = GameState.ACT1_LOC1_NAME;
+      GameState.markStoryAsCompleted(gameState, location_id, 'STORY_ACT1_2');
+      const encounter_list = GameState.findEncounterList(gameState, location_id);
+      encounter_list.push({
         category: 'story',
         id: 'STORY_ACT1_3',
         dialog: GameState.STORY_DIALOG_ACT1_3,
@@ -149,8 +185,10 @@ class GameState {
     completed: false,
 
     onClose: function (gameState) {
-      GameState.markStoryAsCompleted(gameState, 'STORY_ACT1_3');
-      gameState.random_encounters.push({
+      const location_id = GameState.ACT1_LOC1_NAME;
+      GameState.markStoryAsCompleted(gameState, location_id, 'STORY_ACT1_3');
+      const encounter_list = GameState.findEncounterList(gameState, location_id);
+      encounter_list.push({
         category: 'story',
         id: 'STORY_ACT1_4',
         dialog: GameState.STORY_DIALOG_ACT1_4,
@@ -169,8 +207,10 @@ class GameState {
     completed: false,
 
     onClose: function (gameState) {
-      GameState.markStoryAsCompleted(gameState, 'STORY_ACT1_4');
-      gameState.random_encounters.push({
+      const location_id = GameState.ACT1_LOC1_NAME;
+      GameState.markStoryAsCompleted(gameState, location_id, 'STORY_ACT1_4');
+      const encounter_list = GameState.findEncounterList(gameState, location_id);
+      encounter_list.push({
         category: 'story',
         id: 'STORY_ACT1_5',
         dialog: GameState.STORY_DIALOG_ACT1_5,
@@ -189,8 +229,10 @@ class GameState {
     completed: false,
 
     onClose: function (gameState) {
-      GameState.markStoryAsCompleted(gameState, 'STORY_ACT1_5');
-      gameState.random_encounters.push({
+      const location_id = GameState.ACT1_LOC1_NAME;
+      GameState.markStoryAsCompleted(gameState, location_id, 'STORY_ACT1_5');
+      const encounter_list = GameState.findEncounterList(gameState, location_id);
+      encounter_list.push({
         category: 'story',
         id: 'STORY_ACT1_6',
         dialog: GameState.STORY_DIALOG_ACT1_6,
@@ -209,7 +251,8 @@ class GameState {
     completed: false,
 
     onClose: function (gameState) {
-      GameState.markStoryAsCompleted(gameState, 'STORY_ACT1_6');
+      const location_id = GameState.ACT1_LOC1_NAME;
+      GameState.markStoryAsCompleted(gameState, location_id, 'STORY_ACT1_6');
       // advance to act 2 TODO
     }
   }
@@ -224,16 +267,17 @@ class GameState {
     completed: false,
 
     onClose: function (gameState) { // Use a regular function to access 'this'
-      GameState.markStoryAsCompleted(gameState, 'STORY_ACT1_SECRET');
+      const location_id = GameState.ACT1_LOC1_NAME;
+      GameState.markStoryAsCompleted(gameState, location_id, 'STORY_ACT1_SECRET');
     }
   }
 
   static STORY_DIALOG_DEFAULT_WEIGHT = 25;
   static ACT1_ENCOUNTERS = [
     { category: 'combat', id: 'GOBLIN_GREEN', enemy: GameState.ENEMY_GOBLIN_GREEN, weight: 25 },
-    { category: 'combat', id: 'GOBLIN_RED', enemy: GameState.ENEMY_GOBLIN_RED, weight: 25 },
-    { category: 'combat', id: 'GOBLIN_BLUE', enemy: GameState.ENEMY_GOBLIN_BLUE, weight: 25 },
-    { category: 'combat', id: 'GOBLIN_PURPLE', enemy: GameState.ENEMY_GOBLIN_PURPLE, weight: 25 },
+    { category: 'combat', id: 'GOBLIN_RED', enemy: GameState.ENEMY_GOBLIN_RED, weight: 1 },
+    { category: 'combat', id: 'GOBLIN_BLUE', enemy: GameState.ENEMY_GOBLIN_BLUE, weight: 1 },
+    { category: 'combat', id: 'GOBLIN_PURPLE', enemy: GameState.ENEMY_GOBLIN_PURPLE, weight: 1 },
     { category: 'story', id: 'STORY_ACT1_1', dialog: GameState.STORY_DIALOG_ACT1_1, weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT, completed: false },
     { category: 'story', id: 'STORY_ACT1_SECRET', dialog: GameState.STORY_DIALOG_ACT1_SECRET, weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT, completed: false}
   ];
@@ -241,9 +285,36 @@ class GameState {
     { category: 'combat', id: 'GOBLIN_BLUE', enemy: GameState.ENEMY_GOBLIN_BLUE, weight: 25 },
     { category: 'combat', id: 'GOBLIN_PURPLE', enemy: GameState.ENEMY_GOBLIN_PURPLE, weight: 25 }
   ];
+  static ACT3_ENCOUNTERS = [
+    { category: 'combat', id: 'ENEMY_PLACEHOLDER', enemy: GameState.ENEMY_PLACEHOLDER, weight: 25 }
+  ];
+  static ACT4_ENCOUNTERS = [
+    { category: 'combat', id: 'ENEMY_PLACEHOLDER', enemy: GameState.ENEMY_PLACEHOLDER, weight: 25 }
+  ];
+  static ACT5_ENCOUNTERS = [
+    { category: 'combat', id: 'ENEMY_PLACEHOLDER', enemy: GameState.ENEMY_PLACEHOLDER, weight: 25 }
+  ];
+  static ACT6_ENCOUNTERS = [
+    { category: 'combat', id: 'ENEMY_PLACEHOLDER', enemy: GameState.ENEMY_PLACEHOLDER, weight: 25 }
+  ];
+  static ACT7_ENCOUNTERS = [
+    { category: 'combat', id: 'ENEMY_PLACEHOLDER', enemy: GameState.ENEMY_PLACEHOLDER, weight: 25 }
+  ];
+  static ACT8_ENCOUNTERS = [
+    { category: 'combat', id: 'ENEMY_PLACEHOLDER', enemy: GameState.ENEMY_PLACEHOLDER, weight: 25 }
+  ];
 
   next_encounters = [];
-  random_encounters = GameState.ACT1_ENCOUNTERS;
+  random_encounters = [
+    {location: GameState.ACT1_LOC1_NAME, encounters: GameState.ACT1_ENCOUNTERS},
+    {location: GameState.ACT2_LOC1_NAME, encounters: GameState.ACT2_ENCOUNTERS},
+    {location: GameState.ACT3_LOC1_NAME, encounters: GameState.ACT3_ENCOUNTERS},
+    {location: GameState.ACT4_LOC1_NAME, encounters: GameState.ACT4_ENCOUNTERS},
+    {location: GameState.ACT5_LOC1_NAME, encounters: GameState.ACT5_ENCOUNTERS},
+    {location: GameState.ACT6_LOC1_NAME, encounters: GameState.ACT6_ENCOUNTERS},
+    {location: GameState.ACT7_LOC1_NAME, encounters: GameState.ACT7_ENCOUNTERS},
+    {location: GameState.ACT8_LOC1_NAME, encounters: GameState.ACT8_ENCOUNTERS},
+  ];
 
   constructor(heroName, gender, location) {
     this.hero = {
