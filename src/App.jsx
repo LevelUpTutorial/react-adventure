@@ -11,24 +11,31 @@ function App() {
   const [gender, setGender] = useState(GameState.DEFAULT_GENDER); // State to store selected gender, default is 'male'
 
   return (
-    <div className="mx-auto p-2" style={{ width: '100%', maxWidth: '800px' }}>
-      <header className="text-center mb-4">A React Adventure</header>
-
-      {!showGame && ( // Show input and hero selection if Game is not displayed
+    <div className="mx-auto p-4 shadow rounded" style={{ width: '100%', maxWidth: '800px', backgroundColor: 'rgba(255, 255, 255, 0.25)' }}>
+      {/* Title Header */}
+      <header className="text-center mb-4">
+        <h1 className="display-5 fw-bold text-primary">A React Adventure</h1>
+      </header>
+  
+      {!showGame && ( /* Show input and hero selection if Game is not displayed */
         <div>
-          <input
-            type="text"
-            placeholder="Enter your hero's name"
-            value={heroName}
-            onChange={(e) => setHeroName(e.target.value)} // Update heroName state
-            className="form-control mb-3"
-          />
-
-          <div className="mb-3">
-            <p className="fw-bold">Choose your Hero:</p>
-            <div className="d-flex justify-content-start align-items-center gap-3">
+          {/* Hero Name Input */}
+          <div className="mb-4">
+            <input
+              type="text"
+              placeholder="Enter your hero's name"
+              value={heroName}
+              onChange={(e) => setHeroName(e.target.value)}
+              className="form-control form-control-lg border-primary rounded"
+            />
+          </div>
+  
+          {/* Hero Selection */}
+          <div className="mb-4">
+            <p className="fw-bold text-primary">Choose your Hero:</p>
+            <div className="d-flex justify-content-center align-items-center gap-4">
               <div
-                className={`border ${gender === GameState.GENDER_MALE ? 'border-primary' : 'border-secondary'} rounded`}
+                className={`p-2 border ${gender === GameState.GENDER_MALE ? 'border-primary' : 'border-secondary'} rounded shadow-sm`}
                 onClick={() => setGender(GameState.GENDER_MALE)}
                 style={{ cursor: 'pointer' }}
               >
@@ -40,7 +47,7 @@ function App() {
                 />
               </div>
               <div
-                className={`border ${gender === GameState.GENDER_FEMALE ? 'border-primary' : 'border-secondary'} rounded`}
+                className={`p-2 border ${gender === GameState.GENDER_FEMALE ? 'border-primary' : 'border-secondary'} rounded shadow-sm`}
                 onClick={() => setGender(GameState.GENDER_FEMALE)}
                 style={{ cursor: 'pointer' }}
               >
@@ -53,18 +60,21 @@ function App() {
               </div>
             </div>
           </div>
-
-          <button
-            type="button"
-            onClick={() => setShowGame(true)} // Show Game and pass heroName and gender
-            className="btn btn-primary"
-          >
-            Start new Adventure
-          </button>
+  
+          {/* Start Adventure Button */}
+          <div className="text-center">
+            <button
+              type="button"
+              onClick={() => setShowGame(true)} /* Show Game and pass heroName and gender */
+              className="btn btn-primary btn-lg px-5 shadow-sm"
+            >
+              Start New Adventure
+            </button>
+          </div>
         </div>
       )}
-
-      {showGame && <Game heroName={heroName} gender={gender} isGameRunning={showGame}/>} {/* Pass heroName and gender to Game */}
+  
+      {showGame && <Game heroName={heroName} gender={gender} isGameRunning={showGame} />} {/* Pass heroName and gender to Game */}
     </div>
   );
 }
