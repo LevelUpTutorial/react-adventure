@@ -41,126 +41,95 @@ function Game({ heroName, gender, isGameRunning }) {
   };
 
   return (
-    <div className="d-flex flex-column mb-3 border border-white">
-      <div className="p-2 border border-secondary-subtle">
-        <p>Welcome: {gameState.hero.name}</p>
+    <div className="d-flex flex-column mb-3 border border-2 rounded shadow bg-light">
+      {/* Header Section */}
+      <div className="p-3 border-bottom border-secondary-subtle bg-primary text-white">
+        <p className="mb-0 fw-bold">Welcome, {gameState.hero.name}</p>
       </div>
-      
+  
+      {/* City Location */}
       {gameState.location.name === GameState.LOCATION_CITY.name && (
         <>
-          <div className="p-2 border border-secondary-subtle">
-            <p>Location: {gameState.location.name}</p>
-            <div className="battle-container">
+          <div className="p-3 border-bottom border-secondary-subtle">
+            <p className="fw-bold text-secondary">Location, {gameState.location.name}</p>
+            <div className="battle-container text-center">
               <img
-                src={`${gameState.hero.image}`}
-                alt='hero'
-                className='hero-image img-fluid rounded'
-                style={{ width: '100px', height: '150px' }}
+                src={gameState.hero.image}
+                alt="hero"
+                className="hero-image img-fluid rounded shadow-sm"
+                style={{ width: "100px", height: "150px" }}
               />
             </div>
           </div>
-          <div className="p-2 border border-secondary-subtle">
-            <button
-              type="button"
-              onClick={() => handleLocationChange(GameState.LOCATION_ADVENTURE_ACT1)}
-              className="btn btn-primary"
-            >
-              {GameState.LOCATION_ADVENTURE_ACT1.name}
-            </button>
-            <button
-              type="button"
-              onClick={() => handleLocationChange(GameState.LOCATION_ADVENTURE_ACT2)}
-              className="btn btn-primary"
-            >
-              {GameState.LOCATION_ADVENTURE_ACT2.name}
-            </button>
-            <button
-              type="button"
-              onClick={() => handleLocationChange(GameState.LOCATION_ADVENTURE_ACT3)}
-              className="btn btn-primary"
-            >
-              {GameState.LOCATION_ADVENTURE_ACT3.name}
-            </button>
-            <button
-              type="button"
-              onClick={() => handleLocationChange(GameState.LOCATION_ADVENTURE_ACT4)}
-              className="btn btn-primary"
-            >
-              {GameState.LOCATION_ADVENTURE_ACT4.name}
-            </button>
-            <button
-              type="button"
-              onClick={() => handleLocationChange(GameState.LOCATION_ADVENTURE_ACT5)}
-              className="btn btn-primary"
-            >
-              {GameState.LOCATION_ADVENTURE_ACT5.name}
-            </button>
-            <button
-              type="button"
-              onClick={() => handleLocationChange(GameState.LOCATION_ADVENTURE_ACT6)}
-              className="btn btn-primary"
-            >
-              {GameState.LOCATION_ADVENTURE_ACT6.name}
-            </button>
-            <button
-              type="button"
-              onClick={() => handleLocationChange(GameState.LOCATION_ADVENTURE_ACT7)}
-              className="btn btn-primary"
-            >
-              {GameState.LOCATION_ADVENTURE_ACT7.name}
-            </button>
-            <button
-              type="button"
-              onClick={() => handleLocationChange(GameState.LOCATION_ADVENTURE_ACT8)}
-              className="btn btn-primary"
-            >
-              {GameState.LOCATION_ADVENTURE_ACT8.name}
-            </button>
+  
+          {/* Navigation Buttons */}
+          <div className="p-3 d-flex flex-wrap gap-2 border-bottom border-secondary-subtle">
+            {[...Array(8).keys()].map((act) => (
+              <button
+                key={act}
+                type="button"
+                onClick={() => handleLocationChange(GameState[`LOCATION_ADVENTURE_ACT${act + 1}`])}
+                className="btn btn-outline-primary px-4"
+              >
+                {GameState[`LOCATION_ADVENTURE_ACT${act + 1}`].name}
+              </button>
+            ))}
           </div>
         </>
       )}
-      
+  
+      {/* Adventure Location */}
       {gameState.location.name !== GameState.LOCATION_CITY.name && (
         <>
-          <div className="p-2 border border-secondary-subtle">
-            <p>Location: {gameState.location.name}</p>    
-            <div className="battle-container d-flex justify-content-around">
-              <div className="battle-container-hero">
-                <p>Hero - HP: {gameState.hero.health}, Attack: {gameState.hero.attack}, Attack Cooldown: {gameState.hero.attack_cooldown}</p>
+          <div className="p-3 border-bottom border-secondary-subtle">
+            <p className="fw-bold text-secondary">Location, {gameState.location.name}</p>
+            <div className="battle-container d-flex justify-content-around align-items-center">
+              {/* Hero Section */}
+              <div className="battle-container-hero text-center">
+                <p className="fw-semibold text-success">
+                  Hero - HP: {gameState.hero.health}, Attack: {gameState.hero.attack}, Cooldown: {gameState.hero.attack_cooldown}
+                </p>
                 <img
-                  src={`${gameState.hero.image}`}
-                  alt='hero'
-                  className='hero-image img-fluid rounded'
-                  style={{width: '100px', height: '150px'}}
+                  src={gameState.hero.image}
+                  alt="hero"
+                  className="hero-image img-fluid rounded shadow-sm"
+                  style={{ width: "100px", height: "150px" }}
                 />
               </div>
-              <div className="battle-container-enemy">
-                {gameState.active_enemy !== null && (
-                  <p>{gameState.active_enemy.name}: HP: {gameState.active_enemy.health}, Attack: {gameState.active_enemy.attack}, Attack Cooldown: {gameState.active_enemy.attack_cooldown}</p>
+  
+              {/* Enemy Section */}
+              <div className="battle-container-enemy text-center">
+                {gameState.active_enemy && (
+                  <p className="fw-semibold text-danger">
+                    {gameState.active_enemy.name} - HP: {gameState.active_enemy.health}, Attack: {gameState.active_enemy.attack}, Cooldown: {gameState.active_enemy.attack_cooldown}
+                  </p>
                 )}
                 {gameState.hero.isInCombat && (
                   <img
-                    src={`${gameState.active_enemy.image}`}
-                    alt='enemy'
-                    className='enemy-image img-fluid rounded'
-                    style={{width: '100px', height: '150px'}}
+                    src={gameState.active_enemy.image}
+                    alt="enemy"
+                    className="enemy-image img-fluid rounded shadow-sm"
+                    style={{ width: "100px", height: "150px" }}
                   />
                 )}
               </div>
             </div>
           </div>
-          <div className="p-2 border border-secondary-subtle">
+  
+          {/* Back to City Button */}
+          <div className="p-3 text-center">
             <button
               type="button"
               onClick={() => handleLocationChange(GameState.LOCATION_CITY)}
-              className="btn btn-primary"
+              className="btn btn-outline-danger px-4"
             >
-              {GameState.LOCATION_CITY.name}
+              Return to {GameState.LOCATION_CITY.name}
             </button>
           </div>
         </>
       )}
-
+  
+      {/* Story Dialog */}
       {isStoryDialogOpen && storyEvent && (
         <StoryDialog
           title={storyEvent.title}
@@ -169,11 +138,11 @@ function Game({ heroName, gender, isGameRunning }) {
           onClose={() => {
             setGameState(handleResetHeroControl(gameState));
             storyEvent.onClose(gameState);
-            setStoryDialogOpen(false); // Close the dialog
-            setStoryEvent(null); // Clear the current story event
+            setStoryDialogOpen(false);
+            setStoryEvent(null);
           }}
         />
-      )};
+      )}
     </div>
   );
 }
