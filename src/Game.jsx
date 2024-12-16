@@ -45,7 +45,7 @@ function Game({ heroName, gender, isGameRunning }) {
       <div className="p-2 border border-secondary-subtle">
         <p>Welcome: {gameState.hero.name}</p>
       </div>
-
+      
       {gameState.location.name === GameState.LOCATION_CITY.name && (
         <>
           <div className="p-2 border border-secondary-subtle">
@@ -119,30 +119,34 @@ function Game({ heroName, gender, isGameRunning }) {
           </div>
         </>
       )}
-
+      
       {gameState.location.name !== GameState.LOCATION_CITY.name && (
         <>
           <div className="p-2 border border-secondary-subtle">
-            <p>Location: {gameState.location.name}</p>
-            <p>Hero - HP: {gameState.hero.health}, Attack: {gameState.hero.attack}, Attack Cooldown: {gameState.hero.attack_cooldown}</p>
-            {gameState.active_enemy !== null && (
-              <p>{gameState.active_enemy.name}: HP: {gameState.active_enemy.health}, Attack: {gameState.active_enemy.attack}, Attack Cooldown: {gameState.active_enemy.attack_cooldown}</p>
-            )}
-            <div className="battle-container">
-              <img
-                src={`${gameState.hero.image}`}
-                alt='hero'
-                className='hero-image img-fluid rounded'
-                style={{width: '100px', height: '150px'}}
-              />
-              {gameState.hero.isInCombat && (
+            <p>Location: {gameState.location.name}</p>    
+            <div className="battle-container d-flex justify-content-around">
+              <div className="battle-container-hero">
+                <p>Hero - HP: {gameState.hero.health}, Attack: {gameState.hero.attack}, Attack Cooldown: {gameState.hero.attack_cooldown}</p>
                 <img
-                  src={`${gameState.active_enemy.image}`}
-                  alt='enemy'
-                  className='enemy-image img-fluid rounded'
+                  src={`${gameState.hero.image}`}
+                  alt='hero'
+                  className='hero-image img-fluid rounded'
                   style={{width: '100px', height: '150px'}}
                 />
-              )}
+              </div>
+              <div className="battle-container-enemy">
+                {gameState.active_enemy !== null && (
+                  <p>{gameState.active_enemy.name}: HP: {gameState.active_enemy.health}, Attack: {gameState.active_enemy.attack}, Attack Cooldown: {gameState.active_enemy.attack_cooldown}</p>
+                )}
+                {gameState.hero.isInCombat && (
+                  <img
+                    src={`${gameState.active_enemy.image}`}
+                    alt='enemy'
+                    className='enemy-image img-fluid rounded'
+                    style={{width: '100px', height: '150px'}}
+                  />
+                )}
+              </div>
             </div>
           </div>
           <div className="p-2 border border-secondary-subtle">
