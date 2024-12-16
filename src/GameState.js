@@ -4,18 +4,23 @@ import heroMaleNeutral from './assets/images/hero_male_neutral.jpg';
 import heroFemaleCombat from './assets/images/hero_female_combat.png';
 import heroMaleCombat from './assets/images/hero_male_combat.png';
 /* Enemys */
-import goblinGreen from './assets/images/enemy_goblin_green.jpg';
+import goblinGreen from './assets/images/enemy_goblin_green.webp';
 import goblinBlue from './assets/images/enemy_goblin_blue.jpg';
 import goblinRed from './assets/images/enemy_goblin_red.jpg';
 import goblinPurple from './assets/images/enemy_goblin_purple.jpg';
 import enemyPlaceholder from './assets/images/enemy_placeholder_card.webp'; 
+import enemyBanditCaptain from './assets/images/enemy_bandit_captian.webp';
+import enemyDarkAcolyte from './assets/images/enemy_dark_acolyte.webp';
+import enemyWildWolf from './assets/images/enemy_wild_wolf.webp';
+import enemyPlagueCrow from './assets/images/enemy_plague_crow.webp';
 /* LOCATIONS */
 import backgroundCity from './assets/images/background-default.jpg';
-import backgroundAct1 from './assets/images/background-act1.jpg';
-import backgroundAct2 from './assets/images/background-act2.jpg';
-import backgroundAct3 from './assets/images/background-act3.jpg';
-import backgroundAct4 from './assets/images/background-act4.jpg';
-import backgroundAct5 from './assets/images/background-act5.jpg';
+import backgroundAct1ws from './assets/images/background-act1-ws.webp';
+import backgroundAct2ws from './assets/images/background-act2-ws.webp';
+import backgroundAct3ws from './assets/images/background-act3-ws.webp';
+import backgroundAct3sq from './assets/images/background-act3-sq.webp';
+import backgroundAct4sq from './assets/images/background-act4-sq.webp';
+import backgroundAct5sq from './assets/images/background-act5-sq.webp';
 import backgroundAct6 from './assets/images/background-act6.webp';
 import backgroundAct7 from './assets/images/background-act7.webp';
 import backgroundAct8 from './assets/images/background-act8.webp';
@@ -41,11 +46,11 @@ class GameState {
   static ACT7_LOC1_NAME = 'Act 7: The Shattered Steppe';
   static ACT8_LOC1_NAME = 'Act 8: The Eclipse Gate';
   static LOCATION_CITY = {name: GameState.CITY_NAME, background: backgroundCity};
-  static LOCATION_ADVENTURE_ACT1 = {name: GameState.ACT1_LOC1_NAME, background: backgroundAct1};
-  static LOCATION_ADVENTURE_ACT2 = {name: GameState.ACT2_LOC1_NAME, background: backgroundAct2};
-  static LOCATION_ADVENTURE_ACT3 = {name: GameState.ACT3_LOC1_NAME, background: backgroundAct3};
-  static LOCATION_ADVENTURE_ACT4 = {name: GameState.ACT4_LOC1_NAME, background: backgroundAct4};
-  static LOCATION_ADVENTURE_ACT5 = {name: GameState.ACT5_LOC1_NAME, background: backgroundAct5};
+  static LOCATION_ADVENTURE_ACT1 = {name: GameState.ACT1_LOC1_NAME, background: backgroundAct1ws};
+  static LOCATION_ADVENTURE_ACT2 = {name: GameState.ACT2_LOC1_NAME, background: backgroundAct2ws};
+  static LOCATION_ADVENTURE_ACT3 = {name: GameState.ACT3_LOC1_NAME, background: backgroundAct3ws};
+  static LOCATION_ADVENTURE_ACT4 = {name: GameState.ACT4_LOC1_NAME, background: backgroundAct4sq};
+  static LOCATION_ADVENTURE_ACT5 = {name: GameState.ACT5_LOC1_NAME, background: backgroundAct5sq};
   static LOCATION_ADVENTURE_ACT6 = {name: GameState.ACT6_LOC1_NAME, background: backgroundAct6};
   static LOCATION_ADVENTURE_ACT7 = {name: GameState.ACT7_LOC1_NAME, background: backgroundAct7};
   static LOCATION_ADVENTURE_ACT8 = {name: GameState.ACT8_LOC1_NAME, background: backgroundAct8};
@@ -93,6 +98,42 @@ class GameState {
     attack_speed: 1500,
     attack_cooldown: 1500,
     image: goblinPurple
+  }
+  static ENEMY_PLAGUE_CROW  = {
+    name: 'Plague Crow',
+    level: 1,
+    health: 10,
+    attack: 5,
+    attack_speed: 500,
+    attack_cooldown: 500,
+    image: enemyPlagueCrow
+  }
+  static ENEMY_WILD_WOLF  = {
+    name: 'Wild Wolf',
+    level: 2,
+    health: 20,
+    attack: 10,
+    attack_speed: 750,
+    attack_cooldown: 750,
+    image: enemyWildWolf
+  }
+  static ENEMY_BANDIT_CAPTAIN  = {
+    name: 'Bandit Captain',
+    level: 3,
+    health: 30,
+    attack: 10,
+    attack_speed: 1000,
+    attack_cooldown: 1000,
+    image: enemyBanditCaptain
+  }
+  static ENEMY_DARK_ACOLYTE  = {
+    name: 'Dark Acolyte',
+    level: 5,
+    health: 50,
+    attack: 20,
+    attack_speed: 1200,
+    attack_cooldown: 1200,
+    image: enemyDarkAcolyte
   }
   static ENEMY_PLACEHOLDER  = {
     name: 'Random Enemy',
@@ -275,18 +316,23 @@ static findEncounterList(gameState, location_id) {
   static STORY_DIALOG_DEFAULT_WEIGHT = 25;
   static ACT1_ENCOUNTERS = [
     { category: 'combat', id: 'GOBLIN_GREEN', enemy: GameState.ENEMY_GOBLIN_GREEN, weight: 25 },
-    { category: 'combat', id: 'GOBLIN_RED', enemy: GameState.ENEMY_GOBLIN_RED, weight: 1 },
-    { category: 'combat', id: 'GOBLIN_BLUE', enemy: GameState.ENEMY_GOBLIN_BLUE, weight: 1 },
-    { category: 'combat', id: 'GOBLIN_PURPLE', enemy: GameState.ENEMY_GOBLIN_PURPLE, weight: 1 },
+    { category: 'combat', id: 'PLAGUE_CROW', enemy: GameState.ENEMY_PLAGUE_CROW, weight: 25 },
+    { category: 'combat', id: 'WILD_WOLF', enemy: GameState.ENEMY_WILD_WOLF, weight: 25 },
+    { category: 'combat', id: 'Bandit Captain', enemy: GameState.ENEMY_WILD_WOLF, weight: 5 },
+    { category: 'combat', id: 'DARK_ACOLYTE', enemy: GameState.ENEMY_DARK_ACOLYTE, weight: 5 },
     { category: 'story', id: 'STORY_ACT1_1', dialog: GameState.STORY_DIALOG_ACT1_1, weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT, completed: false },
     { category: 'story', id: 'STORY_ACT1_SECRET', dialog: GameState.STORY_DIALOG_ACT1_SECRET, weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT, completed: false}
   ];
   static ACT2_ENCOUNTERS = [
-    { category: 'combat', id: 'GOBLIN_BLUE', enemy: GameState.ENEMY_GOBLIN_BLUE, weight: 25 },
-    { category: 'combat', id: 'GOBLIN_PURPLE', enemy: GameState.ENEMY_GOBLIN_PURPLE, weight: 25 }
+    { category: 'combat', id: 'PLAGUE_CROW', enemy: GameState.ENEMY_PLAGUE_CROW, weight: 30 },
+    { category: 'combat', id: 'GOBLIN_RED', enemy: GameState.ENEMY_GOBLIN_RED, weight: 30 },
+    { category: 'combat', id: 'GOBLIN_BLUE', enemy: GameState.ENEMY_GOBLIN_BLUE, weight: 5 },
+    { category: 'combat', id: 'GOBLIN_PURPLE', enemy: GameState.ENEMY_GOBLIN_PURPLE, weight: 5 },
+    { category: 'combat', id: 'DARK_ACOLYTE', enemy: GameState.ENEMY_DARK_ACOLYTE, weight: 20 },
   ];
   static ACT3_ENCOUNTERS = [
-    { category: 'combat', id: 'ENEMY_PLACEHOLDER', enemy: GameState.ENEMY_PLACEHOLDER, weight: 25 }
+    { category: 'combat', id: 'DARK_ACOLYTE', enemy: GameState.ENEMY_DARK_ACOLYTE, weight: 25 },
+    { category: 'combat', id: 'ENEMY_PLACEHOLDER', enemy: GameState.ENEMY_PLACEHOLDER, weight: 5 }
   ];
   static ACT4_ENCOUNTERS = [
     { category: 'combat', id: 'ENEMY_PLACEHOLDER', enemy: GameState.ENEMY_PLACEHOLDER, weight: 25 }
