@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import GameState from "./GameState.js";
 import StoryDialog from "./components/StoryDialog.jsx"
-import playSound from "./GameUtils.js";
+import {playSound, SND_SWORT_HIT} from "./GameUtils.js";
 
 import PropTypes from "prop-types";
 
@@ -180,6 +180,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen) {
     if (hero.attack_cooldown <= 0) {
       active_enemy.health -= hero.attack;
       hero.attack_cooldown = hero.attack_speed;
+      playSound(SND_SWORT_HIT);
     } else {
       hero.attack_cooldown -= TICK_DURATION_ADVENTURE;
     }

@@ -1,3 +1,7 @@
+import swortHit from './assets/sounds/sword-hit-armor.wav';
+
+export const SND_SWORT_HIT = swordHit;
+
 export function playSound(filePath) {
     // Create a new Audio object
     const sound = new Audio(filePath);
