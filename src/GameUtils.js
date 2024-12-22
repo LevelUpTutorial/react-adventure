@@ -1,4 +1,4 @@
-import swordHit from './assets/sounds/sword-hit-armor.wav';
+import swordHit from './assets/sounds/sword-hit.ogg';
 
 export const SND_SWORD_HIT = swordHit;
 
