@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import GameState from "./GameState.js";
 import StoryDialog from "./components/StoryDialog.jsx"
+import playSound from "./GameUtils.js";
 
 import PropTypes from "prop-types";
 
