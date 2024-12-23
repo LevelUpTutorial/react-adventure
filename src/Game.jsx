@@ -90,7 +90,7 @@ function Game({ heroName, gender, isGameRunning }) {
               {/* Hero Section */}
               <div className="battle-container-hero text-center">
                 <p className="fw-semibold text-success">
-                  Hero - HP: {gameState.hero.health}, Attack: {gameState.hero.attack}, Attack Speed: {gameState.hero.attack_speed}
+                  Hero - HP: {gameState.hero.health}, Attack: {gameState.hero.attack}
                 </p>
                 
                 <div 
@@ -100,7 +100,7 @@ function Game({ heroName, gender, isGameRunning }) {
     aria-valuenow={attackProgress} 
     aria-valuemin="0" 
     aria-valuemax="100"
-  >
+  >{`${gameState.hero.attack_cooldown.toFixed(1)}s`}
   </div>
                 <img
                   src={gameState.hero.image}
@@ -127,7 +127,7 @@ function Game({ heroName, gender, isGameRunning }) {
     aria-valuenow={eAttackProgress} 
     aria-valuemin="0" 
     aria-valuemax="100"
-  >
+  >{`${gameState.active_enemy.attack_cooldown.toFixed(1)}s`}
   </div>
     </>
   );
