@@ -118,7 +118,7 @@ function Game({ heroName, gender, isGameRunning }) {
   return (
     <>
       <p className="fw-semibold text-danger">
-        {gameState.active_enemy.name} - HP: {gameState.active_enemy.health}, Attack: {gameState.active_enemy.attack}, Attack Speed: {gameState.active_enemy.attack_speed}
+        {gameState.active_enemy.name} - HP: {gameState.active_enemy.health}, Attack: {gameState.active_enemy.attack}
       </p>
       <div 
     className="progress-bar bg-danger" 
