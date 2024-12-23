@@ -16,7 +16,8 @@ function Game({ heroName, gender, isGameRunning }) {
   );
   const [storyEvent, setStoryEvent] = useState(null); // Holds the active story event object ({ title, text, background }).
   const [isStoryDialogOpen, setStoryDialogOpen] = useState(false); // Controls dialog visibility
-
+  const [isCounterAttackActive, setCounterAttackActive] = useState(false);
+  
   const updateGameState = () => {
     setGameState((prevState) => handleGameState(prevState, setStoryEvent, setStoryDialogOpen));
   };
@@ -38,6 +39,25 @@ function Game({ heroName, gender, isGameRunning }) {
       // TODO switch encounter table (safe old and load new)
       setBodyBackground(newLocation);
       return state;
+    });
+  };
+
+  const handleCounterAttack = () => {
+    if (!isCounterAttackActive) return;
+
+    setGameState((prevState) => {
+      const hero = { ...prevState.hero };
+      const active_enemy = { ...prevState.active_enemy };
+
+      // Perform the counter attack
+      active_enemy.health -= hero.attack;
+      // Reset Hero Atk CD for skilled counter timing 
+      hero.attack_cooldown = hero.attack_speed; 
+
+      // Reset the button state
+      setCounterAttackActive(false);
+
+      return { ...prevState, hero, active_enemy };
     });
   };
 
@@ -94,14 +114,14 @@ function Game({ heroName, gender, isGameRunning }) {
                 </p>
                 
                 <div 
-    className="progress-bar bg-success" 
-    role="progressbar" 
-    style={{ width: `${attackProgress}%` }} 
-    aria-valuenow={attackProgress} 
-    aria-valuemin="0" 
-    aria-valuemax="100"
-  >{`${(gameState.hero.attack_cooldown / 1000).toFixed(1)}s`}
-  </div>
+                  className="progress-bar bg-success" 
+                  role="progressbar" 
+                  style={{ width: `${attackProgress}%` }} 
+                  aria-valuenow={attackProgress} 
+                  aria-valuemin="0" 
+                  aria-valuemax="100"
+                >{`${(gameState.hero.attack_cooldown / 1000).toFixed(1)}s`}
+                </div>
                 <img
                   src={gameState.hero.image}
                   alt="hero"
@@ -115,23 +135,23 @@ function Game({ heroName, gender, isGameRunning }) {
                 {gameState.active_enemy && (() => {
                   const eAttackProgress = (gameState.active_enemy.attack_cooldown / gameState.active_enemy.attack_speed) * 100;
 
-  return (
-    <>
-      <p className="fw-semibold text-danger">
-        {gameState.active_enemy.name} - HP: {gameState.active_enemy.health}, Attack: {gameState.active_enemy.attack}
-      </p>
-      <div 
-    className="progress-bar bg-danger" 
-    role="progressbar" 
-    style={{ width: `${eAttackProgress}%` }} 
-    aria-valuenow={eAttackProgress} 
-    aria-valuemin="0" 
-    aria-valuemax="100"
-  >{`${(gameState.active_enemy.attack_cooldown / 1000).toFixed(1)}s`}
-  </div>
-    </>
-  );
-})()}
+                  return (
+                    <>
+                      <p className="fw-semibold text-danger">
+                        {gameState.active_enemy.name} - HP: {gameState.active_enemy.health}, Attack: {gameState.active_enemy.attack}
+                      </p>
+                      <div 
+                        className="progress-bar bg-danger" 
+                        role="progressbar" 
+                        style={{ width: `${eAttackProgress}%` }} 
+                        aria-valuenow={eAttackProgress} 
+                        aria-valuemin="0" 
+                        aria-valuemax="100"
+                      >{`${(gameState.active_enemy.attack_cooldown / 1000).toFixed(1)}s`}
+                      </div>
+                    </>
+                  );
+                })()}
                 {gameState.hero.isInCombat && (
                   <img
                     src={gameState.active_enemy.image}
@@ -146,6 +166,13 @@ function Game({ heroName, gender, isGameRunning }) {
   
           {/* Back to City Button */}
           <div className="p-3 text-center">
+            <button
+              type="button"
+              onClick={() => handleCounterAttack()}
+              className="btn btn-outline-primary px-4"
+              disabled={!isCounterAttackActive}
+            >Counter Attack
+            </button>
             <button
               type="button"
               onClick={() => handleLocationChange(GameState.LOCATION_CITY)}
@@ -214,9 +241,17 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen) {
 
     hero.isInCombat = active_enemy.health > 0;
     if (hero.isInCombat) {
-      // Enemy still alive, Counter attack
+      // Enemy still alive, handle its attack
       if (active_enemy.attack_cooldown <= 0) {
-        hero.health -= active_enemy.attack;
+        // Roll for evade
+        const evadeRoll = Math.random() * 100;
+        if (evadeRoll < hero.evade_chance) {
+          console.log('Attack evaded!');
+          setCounterAttackActive(true); // Enable Counter Attack button
+        } else {
+          hero.health -= active_enemy.attack; // No evade, apply damage
+          setCounterAttackActive(false); // Disable Counter Attack button
+        }
         active_enemy.attack_cooldown = active_enemy.attack_speed;
       } else {
         active_enemy.attack_cooldown -= TICK_DURATION_ADVENTURE;
@@ -225,6 +260,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen) {
       // Enemy died
       hero.attack_cooldown = hero.attack_speed;
       hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
+      setCounterAttackActive(false); // Disable button on victory
     }
 
     console.log(`handleGameState: Hero HP -> ${hero.health}`);
