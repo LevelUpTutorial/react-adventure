@@ -107,17 +107,22 @@ function Game({ heroName, gender, isGameRunning }) {
   
               {/* Enemy Section */}
               <div className="battle-container-enemy text-center">
-                {gameState.active_enemy && (
-                  <p className="fw-semibold text-danger">
-                    {gameState.active_enemy.name} - HP: {gameState.active_enemy.health}, Attack: {gameState.active_enemy.attack}
-                  </p>
+                {gameState.active_enemy && (() => {
                   const eAttackProgress = (gameState.active_enemy.attack_cooldown / gameState.active_enemy.attack_speed) * 100;
-                  <ProgressBar 
-                    now={eAttackProgress} 
-                      label={`${eAttackProgress.toFixed(0)}%`} 
-                      variant="danger"
-                      />
-                )}
+
+  return (
+    <>
+      <p className="fw-semibold text-danger">
+        {gameState.active_enemy.name} - HP: {gameState.active_enemy.health}, Attack: {gameState.active_enemy.attack}
+      </p>
+      <ProgressBar 
+        now={eAttackProgress} 
+        label={`${eAttackProgress.toFixed(0)}%`} 
+        variant="danger"
+      />
+    </>
+  );
+})()}
                 {gameState.hero.isInCombat && (
                   <img
                     src={gameState.active_enemy.image}
