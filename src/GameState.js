@@ -373,6 +373,7 @@ static findEncounterList(gameState, location_id) {
       attack: 5,
       attack_speed: 1500, // in Milliseconds because of Interval Ticks
       attack_cooldown: 1500,
+      evade_chance: 30, 
       image: (gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL)
     }
     this.location = location;
