@@ -41,6 +41,8 @@ function Game({ heroName, gender, isGameRunning }) {
     });
   };
 
+  const attackProgress = (gameState.hero.attack_cooldown / gameState.hero.attack_speed) * 100;
+
   return (
     <div className="d-flex flex-column mb-3 border border-2 rounded shadow bg-light">
       {/* Header Section */}
@@ -90,7 +92,7 @@ function Game({ heroName, gender, isGameRunning }) {
                 <p className="fw-semibold text-success">
                   Hero - HP: {gameState.hero.health}, Attack: {gameState.hero.attack}
                 </p>
-                const attackProgress = (gameState.hero.attack_cooldown / gameState.hero.attack_speed) * 100;
+                
                 <div 
     className="progress-bar bg-success" 
     role="progressbar" 
