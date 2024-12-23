@@ -100,7 +100,7 @@ function Game({ heroName, gender, isGameRunning }) {
     aria-valuenow={attackProgress} 
     aria-valuemin="0" 
     aria-valuemax="100"
-  >{`${gameState.hero.attack_cooldown.toFixed(1)}s`}
+  >{`${(gameState.hero.attack_cooldown / 1000).toFixed(1)}s`}
   </div>
                 <img
                   src={gameState.hero.image}
@@ -127,7 +127,7 @@ function Game({ heroName, gender, isGameRunning }) {
     aria-valuenow={eAttackProgress} 
     aria-valuemin="0" 
     aria-valuemax="100"
-  >{`${gameState.active_enemy.attack_cooldown.toFixed(1)}s`}
+  >{`${(gameState.active_enemy.attack_cooldown / 1000).toFixed(1)}s`}
   </div>
     </>
   );
