@@ -2,7 +2,6 @@ import {useEffect, useRef, useState} from "react";
 import GameState from "./GameState.js";
 import StoryDialog from "./components/StoryDialog.jsx"
 import {playSound, SND_SWORD_HIT} from "./GameUtils.js";
-import { ProgressBar } from "react-bootstrap";
 
 import PropTypes from "prop-types";
 
@@ -92,11 +91,16 @@ function Game({ heroName, gender, isGameRunning }) {
                   Hero - HP: {gameState.hero.health}, Attack: {gameState.hero.attack}
                 </p>
                 const attackProgress = (gameState.hero.attack_cooldown / gameState.hero.attack_speed) * 100;
-                <ProgressBar 
-                  now={attackProgress} 
-                  label={`${attackProgress.toFixed(0)}%`} 
-                  variant="success"
-                />
+                <div 
+    className="progress-bar bg-success" 
+    role="progressbar" 
+    style={{ width: `${attackProgress}%` }} 
+    aria-valuenow={attackProgress} 
+    aria-valuemin="0" 
+    aria-valuemax="100"
+  >
+    {`${attackProgress.toFixed(0)}%`}
+  </div>
                 <img
                   src={gameState.hero.image}
                   alt="hero"
@@ -115,11 +119,16 @@ function Game({ heroName, gender, isGameRunning }) {
       <p className="fw-semibold text-danger">
         {gameState.active_enemy.name} - HP: {gameState.active_enemy.health}, Attack: {gameState.active_enemy.attack}
       </p>
-      <ProgressBar 
-        now={eAttackProgress} 
-        label={`${eAttackProgress.toFixed(0)}%`} 
-        variant="danger"
-      />
+      <div 
+    className="progress-bar bg-danger" 
+    role="progressbar" 
+    style={{ width: `${eAttackProgress}%` }} 
+    aria-valuenow={eAttackProgress} 
+    aria-valuemin="0" 
+    aria-valuemax="100"
+  >
+    {`${eAttackProgress.toFixed(0)}%`}
+  </div>
     </>
   );
 })()}
