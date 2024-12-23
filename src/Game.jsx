@@ -2,6 +2,7 @@ import {useEffect, useRef, useState} from "react";
 import GameState from "./GameState.js";
 import StoryDialog from "./components/StoryDialog.jsx"
 import {playSound, SND_SWORD_HIT} from "./GameUtils.js";
+import { ProgressBar } from "react-bootstrap";
 
 import PropTypes from "prop-types";
 
@@ -88,8 +89,14 @@ function Game({ heroName, gender, isGameRunning }) {
               {/* Hero Section */}
               <div className="battle-container-hero text-center">
                 <p className="fw-semibold text-success">
-                  Hero - HP: {gameState.hero.health}, Attack: {gameState.hero.attack}, Cooldown: {gameState.hero.attack_cooldown}
+                  Hero - HP: {gameState.hero.health}, Attack: {gameState.hero.attack}
                 </p>
+                const attackProgress = (gameState.hero.attack_cooldown / gameState.hero.attack_speed) * 100;
+                <ProgressBar 
+                  now={attackProgress} 
+                  label={`${attackProgress.toFixed(0)}%`} 
+                  variant="success"
+                />
                 <img
                   src={gameState.hero.image}
                   alt="hero"
@@ -102,8 +109,14 @@ function Game({ heroName, gender, isGameRunning }) {
               <div className="battle-container-enemy text-center">
                 {gameState.active_enemy && (
                   <p className="fw-semibold text-danger">
-                    {gameState.active_enemy.name} - HP: {gameState.active_enemy.health}, Attack: {gameState.active_enemy.attack}, Cooldown: {gameState.active_enemy.attack_cooldown}
+                    {gameState.active_enemy.name} - HP: {gameState.active_enemy.health}, Attack: {gameState.active_enemy.attack}
                   </p>
+                  const eAttackProgress = gameState.active_enemy.attack_cooldown / gameState.active_enemy.attack_speed) * 100;
+                  <ProgressBar 
+                    now={eAttackProgress} 
+                      label={`${eAttackProgress.toFixed(0)}%`} 
+                      variant="danger"
+                      />
                 )}
                 {gameState.hero.isInCombat && (
                   <img
