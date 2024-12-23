@@ -90,7 +90,7 @@ function Game({ heroName, gender, isGameRunning }) {
               {/* Hero Section */}
               <div className="battle-container-hero text-center">
                 <p className="fw-semibold text-success">
-                  Hero - HP: {gameState.hero.health}, Attack: {gameState.hero.attack}
+                  Hero - HP: {gameState.hero.health}, Attack: {gameState.hero.attack}, Attack Speed: {gameState.hero.attack_speed}
                 </p>
                 
                 <div 
@@ -101,7 +101,6 @@ function Game({ heroName, gender, isGameRunning }) {
     aria-valuemin="0" 
     aria-valuemax="100"
   >
-    {`${attackProgress.toFixed(0)}%`}
   </div>
                 <img
                   src={gameState.hero.image}
@@ -119,7 +118,7 @@ function Game({ heroName, gender, isGameRunning }) {
   return (
     <>
       <p className="fw-semibold text-danger">
-        {gameState.active_enemy.name} - HP: {gameState.active_enemy.health}, Attack: {gameState.active_enemy.attack}
+        {gameState.active_enemy.name} - HP: {gameState.active_enemy.health}, Attack: {gameState.active_enemy.attack}, Attack Speed: {gameState.active_enemy.attack_speed}
       </p>
       <div 
     className="progress-bar bg-danger" 
@@ -129,7 +128,6 @@ function Game({ heroName, gender, isGameRunning }) {
     aria-valuemin="0" 
     aria-valuemax="100"
   >
-    {`${eAttackProgress.toFixed(0)}%`}
   </div>
     </>
   );
