@@ -19,7 +19,7 @@ function Game({ heroName, gender, isGameRunning }) {
   const [isCounterAttackActive, setCounterAttackActive] = useState(false);
   
   const updateGameState = () => {
-    setGameState((prevState) => handleGameState(prevState, setStoryEvent, setStoryDialogOpen));
+    setGameState((prevState) => handleGameState(prevState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive));
   };
 
   const currentTickDuration =
@@ -217,7 +217,7 @@ function setBodyBackground(location) {
 }
 
 /* Main Function to handle all In-game Event Logic */
-function handleGameState(gameState, setStoryEvent, setStoryDialogOpen) {
+function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive) {
   const location = gameState.location;
   let hero = { ...gameState.hero };
   let active_enemy = { ...gameState.active_enemy };
