@@ -64,7 +64,7 @@ function Game({ heroName, gender, isGameRunning }) {
   const attackProgress = (gameState.hero.attack_cooldown / gameState.hero.attack_speed) * 100;
 
   return (
-    <div className="d-flex flex-column mb-3 border border-2 rounded shadow" style={{ backgroundColor: "rgba(255, 255, 255, 0.55)" }}>
+    <div className="d-flex flex-column mb-3 border border-2 rounded shadow" style={{ backgroundColor: "rgba(255, 255, 255, 0.70)" }}>
       {/* Header Section */}
       <div className="p-3 border-bottom border-secondary-subtle bg-primary text-white">
         <p className="mb-0 fw-bold">Welcome, {gameState.hero.name}</p>
