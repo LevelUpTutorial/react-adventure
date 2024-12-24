@@ -64,7 +64,7 @@ function Game({ heroName, gender, isGameRunning }) {
   const attackProgress = (gameState.hero.attack_cooldown / gameState.hero.attack_speed) * 100;
 
   return (
-    <div className="d-flex flex-column mb-3 border border-2 rounded shadow bg-light">
+    <div className="d-flex flex-column mb-3 border border-2 rounded shadow bg-light" style={{ backgroundColor: 'rgba(255, 255, 255, 0.55)' }}>
       {/* Header Section */}
       <div className="p-3 border-bottom border-secondary-subtle bg-primary text-white">
         <p className="mb-0 fw-bold">Welcome, {gameState.hero.name}</p>
@@ -92,7 +92,7 @@ function Game({ heroName, gender, isGameRunning }) {
                 key={act}
                 type="button"
                 onClick={() => handleLocationChange(GameState[`LOCATION_ADVENTURE_ACT${act + 1}`])}
-                className="btn btn-outline-primary px-4"
+                className="btn btn-primary px-4"
               >
                 {GameState[`LOCATION_ADVENTURE_ACT${act + 1}`].name}
               </button>
@@ -169,14 +169,15 @@ function Game({ heroName, gender, isGameRunning }) {
             <button
               type="button"
               onClick={() => handleCounterAttack()}
-              className="btn btn-outline-primary px-4"
+              className={() => return `btn ${isCounterAttackActive ? "btn-success" : "btn-outline-secondary"}
+ px-4`}
               disabled={!isCounterAttackActive}
-            >Counter Attack
+            >{isCounterAttackActive ? "Counter Attack" : "wait for evade"}
             </button>
             <button
               type="button"
               onClick={() => handleLocationChange(GameState.LOCATION_CITY)}
-              className="btn btn-outline-danger px-4"
+              className="btn btn-primary px-4"
             >
               Return to {GameState.LOCATION_CITY.name}
             </button>
