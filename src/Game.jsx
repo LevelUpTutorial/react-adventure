@@ -169,10 +169,10 @@ function Game({ heroName, gender, isGameRunning }) {
             <button
               type="button"
               onClick={() => handleCounterAttack()}
-              className={() => return `btn ${isCounterAttackActive ? "btn-success" : "btn-outline-secondary"}
- px-4`}
+              className={`btn ${isCounterAttackActive ? "btn-success" : "btn-outline-secondary"} px-4`}
               disabled={!isCounterAttackActive}
-            >{isCounterAttackActive ? "Counter Attack" : "wait for evade"}
+            >
+              {isCounterAttackActive ? "Counter Attack" : "wait for evade"}
             </button>
             <button
               type="button"
