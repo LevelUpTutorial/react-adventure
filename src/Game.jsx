@@ -322,7 +322,7 @@ function performHeroAttack(gameState) {
 
   const dmg = combatCalculation(hero, active_enemy); 
 
-  if (dmg >== 0) {
+  if (dmg >= 0) {
     active_enemy.health -= dmg;
     playSound(SND_SWORD_HIT);
   }
