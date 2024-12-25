@@ -328,7 +328,7 @@ function performHeroAttack(gameState) {
   }
   
   hero.attack_cooldown = hero.attack_speed;
-  return (...gameState, hero, active_enemy); 
+  return {...gameState, hero, active_enemy}; 
 }
 
 /*
