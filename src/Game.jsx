@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import GameState from "./GameState.js";
 import StoryDialog from "./components/StoryDialog.jsx"
-import {playSound, SND_SWORD_HIT} from "./GameUtils.js";
+import {combatCalculation, playSound, SND_SWORD_HIT} from "./GameUtils.js";
 
 import PropTypes from "prop-types";
 
@@ -46,13 +46,12 @@ function Game({ heroName, gender, isGameRunning }) {
     if (!isCounterAttackActive) return;
 
     setGameState((prevState) => {
-      const hero = { ...prevState.hero };
-      const active_enemy = { ...prevState.active_enemy };
+      let hero = { ...prevState.hero };
+      let active_enemy = { ...prevState.active_enemy };
 
-      // Perform the counter attack
-      active_enemy.health -= hero.attack;
-      // Reset Hero Atk CD for skilled counter timing 
-      hero.attack_cooldown = hero.attack_speed; 
+      prevState = performHeroAttack(gameState); 
+      hero = prevState.hero; 
+      active_enemy = prevState.active_enemy;
 
       // Reset the button state
       setCounterAttackActive(false);
@@ -233,9 +232,9 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
   if (hero.isInCombat) {
     console.log('hero is in combat');
     if (hero.attack_cooldown <= 0) {
-      active_enemy.health -= hero.attack;
-      hero.attack_cooldown = hero.attack_speed;
-      playSound(SND_SWORD_HIT);
+      gameState = performHeroAttack(gameState); 
+      hero = gameState.hero; 
+      active_enemy = gameState.active_enemy;
     } else {
       hero.attack_cooldown -= TICK_DURATION_ADVENTURE;
     }
@@ -301,7 +300,6 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
 
       setStoryEvent(encounter.dialog); // Set the story event
       setStoryDialogOpen(true); // Open the dialog
-
     } else {
       console.log(`ERROR: Unknown encounter type category ${encounter.category}`);
     }
@@ -316,6 +314,21 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
   // return gameState unchanged
   console.log('return gameState unchanged')
   return gameState;
+}
+
+function performHeroAttack(gameState) {
+  const hero = gameState.hero;
+  const active_enemy = gameState.active_enemy;
+
+  const dmg = combatCalculation(hero, active_enemy); 
+
+  if (dmg >== 0) {
+    active_enemy.health -= dmg;
+    playSound(SND_SWORD_HIT);
+  }
+  
+  hero.attack_cooldown = hero.attack_speed;
+  return (...gameState, hero, active_enemy); 
 }
 
 /*
