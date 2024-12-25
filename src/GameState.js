@@ -70,6 +70,9 @@ class GameState {
     attack: 5,
     attack_speed: 2000,
     attack_cooldown: 2000,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
     image: goblinGreen
   }
   static ENEMY_GOBLIN_BLUE  = {
@@ -79,6 +82,9 @@ class GameState {
     attack: 15,
     attack_speed: 2500,
     attack_cooldown: 2500,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
     image: goblinBlue
   }
   static ENEMY_GOBLIN_RED  = {
@@ -88,6 +94,9 @@ class GameState {
     attack: 5,
     attack_speed: 500,
     attack_cooldown: 500,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
     image: goblinRed
   }
   static ENEMY_GOBLIN_PURPLE  = {
@@ -97,6 +106,9 @@ class GameState {
     attack: 20,
     attack_speed: 1500,
     attack_cooldown: 1500,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
     image: goblinPurple
   }
   static ENEMY_PLAGUE_CROW  = {
@@ -106,6 +118,9 @@ class GameState {
     attack: 5,
     attack_speed: 500,
     attack_cooldown: 500,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
     image: enemyPlagueCrow
   }
   static ENEMY_WILD_WOLF  = {
@@ -115,6 +130,9 @@ class GameState {
     attack: 10,
     attack_speed: 750,
     attack_cooldown: 750,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
     image: enemyWildWolf
   }
   static ENEMY_BANDIT_CAPTAIN  = {
@@ -124,6 +142,9 @@ class GameState {
     attack: 10,
     attack_speed: 1000,
     attack_cooldown: 1000,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
     image: enemyBanditCaptain
   }
   static ENEMY_DARK_ACOLYTE  = {
@@ -133,6 +154,9 @@ class GameState {
     attack: 20,
     attack_speed: 1200,
     attack_cooldown: 1200,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
     image: enemyDarkAcolyte
   }
   static ENEMY_PLACEHOLDER  = {
@@ -142,6 +166,9 @@ class GameState {
     attack: 20,
     attack_speed: 1500,
     attack_cooldown: 1500,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
     image: enemyPlaceholder
   }
 
@@ -368,12 +395,15 @@ static findEncounterList(gameState, location_id) {
       isInDialog: false,
       name: heroName,
       gender: gender,
-      level: 1,
+      level: 1, 
+      xp: 0, 
       health: 100,
       attack: 5,
       attack_speed: 1500, // in Milliseconds because of Interval Ticks
       attack_cooldown: 1500,
       evade_chance: 30, 
+      crit_chance: 15, 
+      crit_damage: 100, 
       image: (gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL)
     }
     this.location = location;
