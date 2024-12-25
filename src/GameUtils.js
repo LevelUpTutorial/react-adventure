@@ -15,3 +15,28 @@ export function playSound(filePath) {
             console.error("Error playing sound:", error);
         });
 }
+
+export function combatCalculation(attacker, defender) {
+    // Roll a random number between 0 and 100
+    const roll = () => Math.random() * 100;
+
+    // Check defender's evade chance
+    const evadeChance = defender.evade_chance ?? null;
+    if (evadeChance === null) {
+        console.warn("Defender evade chance is missing or null. Proceeding as if evade failed.");
+    } else if (roll() < evadeChance) {
+        return -1; // Attack evaded
+    }
+
+    // Roll for critical hit
+    const critChance = attacker.crit_chance ?? null;
+    if (critChance === null) {
+        console.warn("Attacker critical chance is missing or null. Proceeding as if attack is not critical.");
+    } else if (roll() < critChance) {
+        // Critical hit: calculate damage with crit multiplier (crit_damage in %)
+        return attacker.attack + (attacker.attack * (attacker.crit_damage || 0) / 100);
+    }
+
+    // Normal attack
+    return attacker.attack;
+}
