@@ -278,7 +278,23 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
         active_enemy.attack_cooldown -= TICK_DURATION_ADVENTURE;
       }
     } else {
-      // Enemy died
+      // Enemy died 
+      if (hero.xp + active_enemy.xp_reward > hero.xp_to_levelup) {
+        // handle level up 
+        hero.level += 1; 
+        hero.xp = hero.xp + active_enemy.xp_reward - hero.xp_to_levelup; 
+        hero.xp_to_levelup = GameUtils.calculateXpToLevelUp(hero.level); 
+        // simple stat scaling 
+        hero.health += 50; 
+        hero.attack += 5; 
+        hero.attack_speed -= 20; 
+        hero.evade_chance += 1; 
+        hero.crit_chance += 2; 
+        hero.crit_damage += 10; 
+      } else { 
+        hero.xp += active_enemy.xp_reward;
+      }
+      // Hero reset 
       gameState = handleResetHeroControl(gameState); 
       hero = gameState.hero; 
       hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
