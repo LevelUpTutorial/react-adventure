@@ -279,7 +279,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       hero = gameState.hero;
       hero.isInCombat = true;
       hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_COMBAT : GameState.IMG_HERO_FEMALE_COMBAT);
-      active_enemy = {...encounter.enemy};
+      active_enemy = {...encounter.enemy, last_combat_event: ""};
     } else if (encounter.category === 'story') {
       gameState = handleResetHeroControl(gameState);
       hero = gameState.hero;
