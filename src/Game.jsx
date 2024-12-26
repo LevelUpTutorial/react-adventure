@@ -59,18 +59,23 @@ function Game({ heroName, gender, isGameRunning }) {
   const attackProgress = (gameState.hero.attack_cooldown / gameState.hero.attack_speed) * 100;
 
   const renderCombatEvent = (text) => {
-    let style;
+  const renderCombatEvent = (text) => {
+  if (!text) return null; // Don't render anything if text is empty
 
-    if (text.startsWith("crit")) {
-      style = { border: "1px solid orange", color: "orange", padding: "5px" };
-    } else if (text.startsWith("dealt")) {
-      style = { border: "1px solid black", color: "black", padding: "5px" };
-    } else {
-      style = { border: "1px solid white", color: "white", padding: "5px" };
-    }
+  let style;
 
-    return <p style={style}>{text}</p>;
-  };
+  if (text.startsWith("crit")) {
+    style = { border: "1px solid orange", color: "orange", padding: "5px" }; // critical hits
+  } else if (text.startsWith("dealt")) {
+    style = { border: "1px solid black", color: "black", padding: "5px" }; // normal damage
+  } else if (text.startsWith("missed")) {
+    style = { border: "1px solid gray", color: "gray", padding: "5px" }; // missed attacks
+  } else {
+    style = { border: "1px solid black", color: "black", padding: "5px" }; // default
+  }
+
+  return <p style={style}>{text}</p>;
+};
   
   return (
     <div className="d-flex flex-column mb-3 border border-2 rounded shadow" style={{ backgroundColor: "rgba(255, 255, 255, 0.70)" }}>
