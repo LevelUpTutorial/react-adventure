@@ -132,7 +132,7 @@ function Game({ heroName, gender, isGameRunning }) {
                 <div 
                   className="progress-bar bg-success" 
                   role="progressbar" 
-                  style={{ width: `${attackProgress}%`, height: '10px' }} 
+                  style={{ width: `${attackProgress}%`, height: '20px' }} 
                   aria-valuenow={attackProgress} 
                   aria-valuemin="0" 
                   aria-valuemax="100"
@@ -160,7 +160,7 @@ function Game({ heroName, gender, isGameRunning }) {
                       <div 
                         className="progress-bar bg-danger" 
                         role="progressbar" 
-                        style={{ width: `${eAttackProgress}%`, height: "10px" }} 
+                        style={{ width: `${eAttackProgress}%`, height: "20px" }} 
                         aria-valuenow={eAttackProgress} 
                         aria-valuemin="0" 
                         aria-valuemax="100"
@@ -185,7 +185,7 @@ function Game({ heroName, gender, isGameRunning }) {
             <div 
               className="progress-bar bg-info" 
               role="progressbar" 
-              style={{ width: '100%', height: '5px' }} 
+              style={{ width: '100%', height: '20px' }} 
               aria-valuenow={gameState.hero.xp} 
               aria-valuemin="0" 
               aria-valuemax="100"
