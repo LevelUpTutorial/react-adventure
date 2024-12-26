@@ -217,9 +217,11 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
   const location = gameState.location;
   let {hero, active_enemy} = gameState;
   console.log(`handleGameState: Hero -> ${hero}`);
-  console.log(`handleGameState: Enemy -> ${active_enemy.name}`);
-  console.log(`handleGameState: Enemy Atk Sp -> ${active_enemy.attack_speed}`);
-  console.log(`handleGameState: Enemy Atk Cd -> ${active_enemy.attack_cooldown}`);
+  if (active_enemy) {
+    console.log(`handleGameState: Enemy -> ${active_enemy.name}`);
+    console.log(`handleGameState: Enemy Atk Sp -> ${active_enemy.attack_speed}`);
+    console.log(`handleGameState: Enemy Atk Cd -> ${active_enemy.attack_cooldown}`);
+  }
   console.log(`handleGameState: isInCombat -> ${hero.isInCombat}`);
   console.log(`handleGameState: isInDialog -> ${hero.isInDialog}`);
 
