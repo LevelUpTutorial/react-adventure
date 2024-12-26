@@ -398,8 +398,8 @@ static findEncounterList(gameState, location_id) {
     {location: GameState.ACT8_LOC1_NAME, encounters: GameState.ACT8_ENCOUNTERS},
   ];
 
-  static XP_TO_LEVEL2 = 300; 
-  static XP_SCALING = 1.3; 
+  static XP_TO_LEVEL2 = 100; 
+  static XP_SCALING = 1.2; 
   
   constructor(heroName, gender, location) {
     this.hero = {
