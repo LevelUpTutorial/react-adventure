@@ -243,16 +243,9 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
     if (hero.isInCombat) {
       // Enemy still alive, handle its attack
       if (active_enemy.attack_cooldown <= 0) {
-        // Roll for evade
-        const evadeRoll = Math.random() * 100;
-        if (evadeRoll < hero.evade_chance) {
-          console.log('Attack evaded!');
-          setCounterAttackActive(true); // Enable Counter Attack button
-        } else {
-          hero.health -= active_enemy.attack; // No evade, apply damage
-          setCounterAttackActive(false); // Disable Counter Attack button
-        }
-        active_enemy.attack_cooldown = active_enemy.attack_speed;
+        gameState = performEnemyAttack(gameState, setCounterAttackActive);
+        hero = gameState.hero; 
+        active_enemy = gameState.active_enemy;
       } else {
         active_enemy.attack_cooldown -= TICK_DURATION_ADVENTURE;
       }
@@ -331,6 +324,24 @@ function performHeroAttack(gameState) {
   return {...gameState, hero, active_enemy}; 
 }
 
+function performEnemyAttack(gameState, setCounterAttackActive) {
+  const hero = gameState.hero;
+  const active_enemy = gameState.active_enemy;
+
+  const dmg = combatCalculation(active_enemy, hero); 
+  // evade ?
+  if (dmg < 0) {
+    console.log('Attack evaded!');
+    setCounterAttackActive(true); // Enable Counter Attack button
+  } else {
+    hero.health -= active_enemy.attack; // No evade, apply damage
+    setCounterAttackActive(false); // Disable Counter Attack button
+  }
+  active_enemy.attack_cooldown = active_enemy.attack_speed;
+
+  return {...gameState, hero, active_enemy};
+}
+  
 /*
   handle reset Hero control variables
  */
