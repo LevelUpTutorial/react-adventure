@@ -404,6 +404,7 @@ static findEncounterList(gameState, location_id) {
       evade_chance: 30, 
       crit_chance: 15, 
       crit_damage: 100, 
+      last_combat_event: "", 
       image: (gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL)
     }
     this.location = location;
