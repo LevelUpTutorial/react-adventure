@@ -285,7 +285,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
         hero.xp = hero.xp + active_enemy.xp_reward - hero.xp_to_levelup; 
         hero.xp_to_levelup = GameUtils.calculateXpToLevelUp(hero.level); 
         // simple stat scaling 
-        hero.health += 50; 
+        hero.health_full += 50; 
         hero.attack += 5; 
         hero.attack_speed -= 20; 
         hero.evade_chance += 1; 
@@ -422,7 +422,7 @@ function handleResetHeroInTown(gameState) {
   const hero = { ...gameState.hero };
 
   let location = GameState.LOCATION_CITY;
-  hero.health = 100*hero.level; // Heal
+  hero.health = hero.health_full; // Heal
   hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
 
   // return new gameState
