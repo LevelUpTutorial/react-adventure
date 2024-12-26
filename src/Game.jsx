@@ -46,12 +46,8 @@ function Game({ heroName, gender, isGameRunning }) {
     if (!isCounterAttackActive) return;
 
     setGameState((prevState) => {
-      let hero = { ...prevState.hero };
-      let active_enemy = { ...prevState.active_enemy };
-
-      prevState = performHeroAttack(gameState); 
-      hero = prevState.hero; 
-      active_enemy = prevState.active_enemy;
+      prevState = performHeroAttack(prevState); 
+      const {hero, active_enemy} = prevState; 
 
       // Reset the button state
       setCounterAttackActive(false);
@@ -219,8 +215,7 @@ function setBodyBackground(location) {
 /* Main Function to handle all In-game Event Logic */
 function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive) {
   const location = gameState.location;
-  let hero = { ...gameState.hero };
-  let active_enemy = { ...gameState.active_enemy };
+  let {hero, active_enemy} = gameState;
   console.log(`handleGameState: Hero -> ${hero}`);
   console.log(`handleGameState: Enemy -> ${active_enemy.name}`);
   console.log(`handleGameState: Enemy Atk Sp -> ${active_enemy.attack_speed}`);
