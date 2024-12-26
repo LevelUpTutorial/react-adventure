@@ -398,6 +398,9 @@ static findEncounterList(gameState, location_id) {
     {location: GameState.ACT8_LOC1_NAME, encounters: GameState.ACT8_ENCOUNTERS},
   ];
 
+  static XP_TO_LEVEL2 = 300; 
+  static XP_SCALING = 1.3; 
+  
   constructor(heroName, gender, location) {
     this.hero = {
       isInCombat: false,
@@ -406,6 +409,7 @@ static findEncounterList(gameState, location_id) {
       gender: gender,
       level: 1, 
       xp: 0, 
+      xp_to_levelup: GameState.XP_TO_LEVEL2, 
       health: 100,
       attack: 5,
       attack_speed: 1500, // in Milliseconds because of Interval Ticks
