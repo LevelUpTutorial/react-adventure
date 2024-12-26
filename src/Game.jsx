@@ -228,8 +228,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
     console.log('hero is in combat');
     if (hero.attack_cooldown <= 0) {
       gameState = performHeroAttack(gameState); 
-      hero = gameState.hero; 
-      active_enemy = gameState.active_enemy;
+      ({ hero, active_enemy } = gameState);
     } else {
       hero.attack_cooldown -= TICK_DURATION_ADVENTURE;
     }
@@ -239,8 +238,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       // Enemy still alive, handle its attack
       if (active_enemy.attack_cooldown <= 0) {
         gameState = performEnemyAttack(gameState, setCounterAttackActive);
-        hero = gameState.hero; 
-        active_enemy = gameState.active_enemy;
+        ({ hero, active_enemy } = gameState);
       } else {
         active_enemy.attack_cooldown -= TICK_DURATION_ADVENTURE;
       }
