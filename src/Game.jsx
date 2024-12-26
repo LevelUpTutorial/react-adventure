@@ -268,7 +268,8 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       }
     } else {
       // Enemy died
-      hero.attack_cooldown = hero.attack_speed;
+      gameState = handleResetHeroControl(gameState); 
+      hero = gameState.hero; 
       hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
       setCounterAttackActive(false); // Disable button on victory
     }
@@ -380,6 +381,7 @@ function handleResetHeroControl(gameState) {
   hero.isInCombat = false;
   hero.isInDialog = false;
   hero.attack_cooldown = hero.attack_speed;
+  hero.last_combat_event = ""; 
   let active_enemy = null;
 
   return {...gameState, hero, active_enemy};
