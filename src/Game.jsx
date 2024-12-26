@@ -59,18 +59,21 @@ function Game({ heroName, gender, isGameRunning }) {
   const attackProgress = (gameState.hero.attack_cooldown / gameState.hero.attack_speed) * 100;
 
   const renderCombatEvent = (text) => {
-    if (!text) return null; // Don't render anything if text is empty
-
     let style;
 
-    if (text.startsWith("crit")) {
+    if (text?.startsWith("crit")) {
       style = { border: "1px solid orange", color: "orange", padding: "5px" }; // critical hits
-    } else if (text.startsWith("dealt")) {
+    } else if (text?.startsWith("dealt")) {
       style = { border: "1px solid black", color: "black", padding: "5px" }; // normal damage
-    } else if (text.startsWith("missed")) {
+    } else if (text?.startsWith("missed")) {
       style = { border: "1px solid gray", color: "gray", padding: "5px" }; // missed attacks
     } else {
       style = { border: "1px solid black", color: "black", padding: "5px" }; // default
+    }
+
+    if (!text) {
+      // Render an invisible placeholder
+      return <p style={{ visibility: "hidden", ...style }}>Placeholder</p>;
     }
 
     return <p style={style}>{text}</p>;
