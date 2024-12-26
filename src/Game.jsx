@@ -279,7 +279,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       }
     } else {
       // Enemy died 
-      if (hero.xp + active_enemy.xp_reward > hero.xp_to_levelup) {
+      if (hero.xp + active_enemy.xp_reward >= hero.xp_to_levelup) {
         // handle level up 
         hero.level += 1; 
         hero.xp = hero.xp + active_enemy.xp_reward - hero.xp_to_levelup; 
@@ -295,7 +295,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
         hero.xp += active_enemy.xp_reward;
       }
       // Hero reset 
-      gameState = handleResetHeroControl(gameState); 
+      gameState = handleResetHeroControl({...gameState, hero, active_enemy}); 
       hero = gameState.hero; 
       hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
       setCounterAttackActive(false); // Disable button on victory
