@@ -40,3 +40,9 @@ export function combatCalculation(attacker, defender) {
     // Normal attack
     return Math.floor(attacker.attack);
 }
+
+export function calculateXpToLevelUp(current_level) {
+  const base_xp = GameState.XP_TO_LEVEL2; 
+  const xp_scaling = GameState.XP_SCALING; 
+  return Math.ceil(base_xp * (Math.pow(current_level, xp_scaling)); 
+}
