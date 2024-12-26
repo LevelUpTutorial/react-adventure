@@ -58,6 +58,17 @@ function Game({ heroName, gender, isGameRunning }) {
 
   const attackProgress = (gameState.hero.attack_cooldown / gameState.hero.attack_speed) * 100;
 
+  const renderCombatEvent = (text) => {
+    const isCritical = text.startsWith("crit");
+    const style = {
+      border: `1px solid ${isCritical ? "yellow" : "white"}`,
+      color: isCritical ? "yellow" : "white",
+      padding: "5px",
+    };
+
+    return <p style={style}>{text}</p>;
+  };
+  
   return (
     <div className="d-flex flex-column mb-3 border border-2 rounded shadow" style={{ backgroundColor: "rgba(255, 255, 255, 0.70)" }}>
       {/* Header Section */}
@@ -107,7 +118,7 @@ function Game({ heroName, gender, isGameRunning }) {
                 <p className="fw-semibold text-success">
                   Hero - HP: {gameState.hero.health}, Attack: {gameState.hero.attack}
                 </p>
-                {gameState.hero.last_combat_event}
+                {renderCombatEvent(gameState.hero.last_combat_event)}
                 <div 
                   className="progress-bar bg-success" 
                   role="progressbar" 
@@ -135,7 +146,7 @@ function Game({ heroName, gender, isGameRunning }) {
                       <p className="fw-semibold text-danger">
                         {gameState.active_enemy.name} - HP: {gameState.active_enemy.health}, Attack: {gameState.active_enemy.attack}
                       </p>
-                      {gameState.active_enemy.last_combat_event}
+                      {renderCombatEvent(gameState.active_enemy.last_combat_event)}
                       <div 
                         className="progress-bar bg-danger" 
                         role="progressbar" 
