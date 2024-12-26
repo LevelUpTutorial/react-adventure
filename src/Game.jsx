@@ -190,7 +190,7 @@ function Game({ heroName, gender, isGameRunning }) {
               aria-valuemin="0" 
               aria-valuemax="100"
             >
-              {`${gameState.hero.xp} / exp`}
+              {`${gameState.hero.xp} / ${gameState.hero.xp_to_levelup} exp`}
             </div>
             {/* Back to Counter Button */}
             <button
