@@ -411,6 +411,7 @@ static findEncounterList(gameState, location_id) {
       xp: 0, 
       xp_to_levelup: GameState.XP_TO_LEVEL2, 
       health: 100,
+      health_full: 100, 
       attack: 5,
       attack_speed: 1500, // in Milliseconds because of Interval Ticks
       attack_cooldown: 1500,
