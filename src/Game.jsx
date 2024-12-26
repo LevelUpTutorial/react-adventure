@@ -126,13 +126,13 @@ function Game({ heroName, gender, isGameRunning }) {
               {/* Hero Section */}
               <div className="battle-container-hero text-center">
                 <p className="fw-semibold text-success">
-                  Hero - HP: {gameState.hero.health}
+                  Hero ({gameState.hero.level}) - HP: {gameState.hero.health}
                 </p>
                 {renderCombatEvent(gameState.hero.last_combat_event)}
                 <div 
                   className="progress-bar bg-success" 
                   role="progressbar" 
-                  style={{ width: `${attackProgress}%` }} 
+                  style={{ width: `${attackProgress}%`, height: '10px' }} 
                   aria-valuenow={attackProgress} 
                   aria-valuemin="0" 
                   aria-valuemax="100"
@@ -154,13 +154,13 @@ function Game({ heroName, gender, isGameRunning }) {
                   return (
                     <>
                       <p className="fw-semibold text-danger">
-                        {gameState.active_enemy.name} - HP: {gameState.active_enemy.health}
+                        {gameState.active_enemy.name} ({gameState.active_enemy.level}) - HP: {gameState.active_enemy.health}
                       </p>
                       {renderCombatEvent(gameState.active_enemy.last_combat_event)}
                       <div 
                         className="progress-bar bg-danger" 
                         role="progressbar" 
-                        style={{ width: `${eAttackProgress}%` }} 
+                        style={{ width: `${eAttackProgress}%`, height: "10px" }} 
                         aria-valuenow={eAttackProgress} 
                         aria-valuemin="0" 
                         aria-valuemax="100"
@@ -180,9 +180,19 @@ function Game({ heroName, gender, isGameRunning }) {
               </div>
             </div>
           </div>
-  
-          {/* Back to City Button */}
           <div className="p-3 text-center">
+            {/* XP Progress Bar */}
+            <div 
+              className="progress-bar bg-info" 
+              role="progressbar" 
+              style={{ width: '100%', height: '5px' }} 
+              aria-valuenow={gameState.hero.xp} 
+              aria-valuemin="0" 
+              aria-valuemax="100"
+            >
+              {`${gameState.hero.xp} / exp`}
+            </div>
+            {/* Back to Counter Button */}
             <button
               type="button"
               onClick={() => handleCounterAttack()}
@@ -191,6 +201,7 @@ function Game({ heroName, gender, isGameRunning }) {
             >
               {isCounterAttackActive ? "Counter Attack" : "wait for evade"}
             </button>
+            {/* Back to City Button */}
             <button
               type="button"
               onClick={() => handleLocationChange(GameState.LOCATION_CITY)}
