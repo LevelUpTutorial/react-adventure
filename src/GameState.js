@@ -67,6 +67,7 @@ class GameState {
     name: 'Goblin Green',
     level: 1,
     health: 10,
+    xp_reward: 9, 
     attack: 5,
     attack_speed: 2000,
     attack_cooldown: 2000,
@@ -77,8 +78,9 @@ class GameState {
   }
   static ENEMY_GOBLIN_BLUE  = {
     name: 'Goblin Blue',
-    level: 1,
+    level: 3,
     health: 30,
+    xp_reward: 24,
     attack: 15,
     attack_speed: 2500,
     attack_cooldown: 2500,
@@ -89,8 +91,9 @@ class GameState {
   }
   static ENEMY_GOBLIN_RED  = {
     name: 'Goblin Red',
-    level: 1,
+    level: 2,
     health: 20,
+    xp_reward: 14, 
     attack: 5,
     attack_speed: 500,
     attack_cooldown: 500,
@@ -101,8 +104,9 @@ class GameState {
   }
   static ENEMY_GOBLIN_PURPLE  = {
     name: 'Goblin Purple',
-    level: 1,
+    level: 4,
     health: 40,
+    xp_reward: 35, 
     attack: 20,
     attack_speed: 1500,
     attack_cooldown: 1500,
@@ -115,6 +119,7 @@ class GameState {
     name: 'Plague Crow',
     level: 1,
     health: 10,
+    xp_reward: 9, 
     attack: 5,
     attack_speed: 500,
     attack_cooldown: 500,
@@ -127,6 +132,7 @@ class GameState {
     name: 'Wild Wolf',
     level: 2,
     health: 20,
+    xp_reward: 14, 
     attack: 10,
     attack_speed: 750,
     attack_cooldown: 750,
@@ -139,6 +145,7 @@ class GameState {
     name: 'Bandit Captain',
     level: 3,
     health: 30,
+    xp_reward: 24, 
     attack: 10,
     attack_speed: 1000,
     attack_cooldown: 1000,
@@ -150,6 +157,7 @@ class GameState {
   static ENEMY_DARK_ACOLYTE  = {
     name: 'Dark Acolyte',
     level: 5,
+    xp_reward: 54, 
     health: 50,
     attack: 20,
     attack_speed: 1200,
@@ -161,8 +169,9 @@ class GameState {
   }
   static ENEMY_PLACEHOLDER  = {
     name: 'Random Enemy',
-    level: 1,
+    level: 5,
     health: 50,
+    xp_reward: 56, 
     attack: 20,
     attack_speed: 1500,
     attack_cooldown: 1500,
