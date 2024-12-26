@@ -126,7 +126,7 @@ function Game({ heroName, gender, isGameRunning }) {
               {/* Hero Section */}
               <div className="battle-container-hero text-center">
                 <p className="fw-semibold text-success">
-                  Hero - HP: {gameState.hero.health}, Attack: {gameState.hero.attack}
+                  Hero - HP: {gameState.hero.health}
                 </p>
                 {renderCombatEvent(gameState.hero.last_combat_event)}
                 <div 
@@ -154,7 +154,7 @@ function Game({ heroName, gender, isGameRunning }) {
                   return (
                     <>
                       <p className="fw-semibold text-danger">
-                        {gameState.active_enemy.name} - HP: {gameState.active_enemy.health}, Attack: {gameState.active_enemy.attack}
+                        {gameState.active_enemy.name} - HP: {gameState.active_enemy.health}
                       </p>
                       {renderCombatEvent(gameState.active_enemy.last_combat_event)}
                       <div 
