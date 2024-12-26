@@ -34,9 +34,9 @@ export function combatCalculation(attacker, defender) {
         console.warn("Attacker critical chance is missing or null. Proceeding as if attack is not critical.");
     } else if (roll() < critChance) {
         // Critical hit: calculate damage with crit multiplier (crit_damage in %)
-        return attacker.attack + (attacker.attack * (attacker.crit_damage || 0) / 100);
+        return Math.floor(attacker.attack + (attacker.attack * (attacker.crit_damage || 0) / 100));
     }
 
     // Normal attack
-    return attacker.attack;
+    return Math.floor(attacker.attack);
 }
