@@ -107,7 +107,7 @@ function Game({ heroName, gender, isGameRunning }) {
                 <p className="fw-semibold text-success">
                   Hero - HP: {gameState.hero.health}, Attack: {gameState.hero.attack}
                 </p>
-                
+                {gameState.hero.last_combat_event}
                 <div 
                   className="progress-bar bg-success" 
                   role="progressbar" 
@@ -135,6 +135,7 @@ function Game({ heroName, gender, isGameRunning }) {
                       <p className="fw-semibold text-danger">
                         {gameState.active_enemy.name} - HP: {gameState.active_enemy.health}, Attack: {gameState.active_enemy.attack}
                       </p>
+                      {gameState.active_enemy.last_combat_event}
                       <div 
                         className="progress-bar bg-danger" 
                         role="progressbar" 
@@ -311,10 +312,17 @@ function performHeroAttack(gameState) {
   const dmg = combatCalculation(hero, active_enemy); 
 
   if (dmg >= 0) {
+    if (dmg > hero.attack) {
+      hero.last_combat_event = `<p>crit ${dmg}</p>`;
+    } else {
+      hero.last_combat_event = `<p>dealt ${dmg}</p>`; 
+    }
     active_enemy.health -= dmg;
     playSound(SND_SWORD_HIT);
+  } else {
+    hero.last_combat_event = `<p>missed</p>`;
   }
-  
+    
   hero.attack_cooldown = hero.attack_speed;
   return {...gameState, hero, active_enemy}; 
 }
@@ -327,9 +335,15 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
   // evade ?
   if (dmg < 0) {
     console.log('Attack evaded!');
+    active_enemy.last_combat_event = `<p>missed</p>`;
     setCounterAttackActive(true); // Enable Counter Attack button
   } else {
-    hero.health -= active_enemy.attack; // No evade, apply damage
+    if (dmg > active_enemy.attack) {
+      active_enemy.last_combat_event = `<p>crit ${dmg}</p>`;
+    } else {
+      active_enemy.last_combat_event = `<p>dealt ${dmg}</p>`; 
+    }
+    hero.health -= dmg; // No evade, apply damage
     setCounterAttackActive(false); // Disable Counter Attack button
   }
   active_enemy.attack_cooldown = active_enemy.attack_speed;
