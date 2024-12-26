@@ -59,12 +59,15 @@ function Game({ heroName, gender, isGameRunning }) {
   const attackProgress = (gameState.hero.attack_cooldown / gameState.hero.attack_speed) * 100;
 
   const renderCombatEvent = (text) => {
-    const isCritical = text.startsWith("crit");
-    const style = {
-      border: `1px solid ${isCritical ? "yellow" : "white"}`,
-      color: isCritical ? "yellow" : "white",
-      padding: "5px",
-    };
+    let style;
+
+    if (text.startsWith("crit")) {
+      style = { border: "1px solid orange", color: "orange", padding: "5px" };
+    } else if (text.startsWith("dealt")) {
+      style = { border: "1px solid black", color: "black", padding: "5px" };
+    } else {
+      style = { border: "1px solid white", color: "white", padding: "5px" };
+    }
 
     return <p style={style}>{text}</p>;
   };
@@ -324,14 +327,14 @@ function performHeroAttack(gameState) {
 
   if (dmg >= 0) {
     if (dmg > hero.attack) {
-      hero.last_combat_event = `<p>crit ${dmg}</p>`;
+      hero.last_combat_event = `crit ${dmg}`;
     } else {
-      hero.last_combat_event = `<p>dealt ${dmg}</p>`; 
+      hero.last_combat_event = `dealt ${dmg}`; 
     }
     active_enemy.health -= dmg;
     playSound(SND_SWORD_HIT);
   } else {
-    hero.last_combat_event = `<p>missed</p>`;
+    hero.last_combat_event = `missed`;
   }
     
   hero.attack_cooldown = hero.attack_speed;
@@ -346,13 +349,13 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
   // evade ?
   if (dmg < 0) {
     console.log('Attack evaded!');
-    active_enemy.last_combat_event = `<p>missed</p>`;
+    active_enemy.last_combat_event = `missed`;
     setCounterAttackActive(true); // Enable Counter Attack button
   } else {
     if (dmg > active_enemy.attack) {
-      active_enemy.last_combat_event = `<p>crit ${dmg}</p>`;
+      active_enemy.last_combat_event = `crit ${dmg}`;
     } else {
-      active_enemy.last_combat_event = `<p>dealt ${dmg}</p>`; 
+      active_enemy.last_combat_event = `dealt ${dmg}`; 
     }
     hero.health -= dmg; // No evade, apply damage
     setCounterAttackActive(false); // Disable Counter Attack button
