@@ -108,7 +108,7 @@ function Game({ heroName, gender, isGameRunning }) {
               <p>Cooldown: {gameState.hero.attack_cooldown / 1000}s</p>
               <p>Evade Chance: {gameState.hero.evade_chance}%</p>
               <p>Crit Chance: {gameState.hero.crit_chance}%</p>
-              <p>Crit Chance: {gameState.hero.crit_damage}%</p>
+              <p>Crit Damage: {gameState.hero.crit_damage}%</p>
               <p>isInCombat: {gameState.hero.isInCombat}</p>
               <p>isInDialog: {gameState.hero.isInDialog}</p>
               <p>Last Combat Event: {gameState.hero.last_combat_event}</p>
@@ -300,11 +300,23 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
         hero.xp_to_levelup = GameUtils.calculateXpToLevelUp(hero.level); 
         // simple stat scaling 
         hero.health_full += 50; 
+        hero.health += 50; 
         hero.attack += 5; 
         hero.attack_speed -= 20; 
         hero.evade_chance += 1; 
         hero.crit_chance += 2; 
         hero.crit_damage += 10; 
+        console.log(`hero level ${hero.level}`);
+        console.log(`hero xp ${hero.xp}`);
+        console.log(`hero xp tp level up ${hero.xp_to_levelup}`);
+        console.log(`hero hp full${hero.health_full}`);
+        console.log(`hero hp ${hero.health}`);
+        console.log(`hero atk ${hero.attack}`);
+        console.log(`hero atk spv${hero.attack_speed}`);
+        console.log(`hero evade chance ${hero.evade_chance}`);
+        console.log(`hero cc ${hero.crit_chance}`);
+        console.log(`hero cd ${hero.crit_damage}`);
+        gameState.hero = hero; 
       } else { 
         hero.xp += active_enemy.xp_reward;
       }
