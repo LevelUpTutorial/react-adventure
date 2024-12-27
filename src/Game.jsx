@@ -42,7 +42,7 @@ function Game({ heroName, gender, isGameRunning }) {
         return handleResetHeroInTown(state);
       }
       setBodyBackground(newLocation);
-      return state;
+      return { ...state, location: newLocation };
     });
   };
 
@@ -56,7 +56,7 @@ function Game({ heroName, gender, isGameRunning }) {
       // Reset the button state
       setCounterAttackActive(false);
 
-      return state;
+      return { ...state, hero, active_enemy };
     });
   };
 
@@ -347,7 +347,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       console.log(`ERROR: Unknown encounter type category ${encounter.category}`);
     }
 
-    return gameState;
+    return { ...gameState, hero };
   }
 
   if (location.name === GameState.LOCATION_CITY.name) {
@@ -412,7 +412,7 @@ function handleResetHeroControl(gameState) {
   hero.last_combat_event = ""; 
   gameState.active_enemy = null;
 
-  return gameState;
+  return { ...gameState, hero };
 }
 
 /*
@@ -427,7 +427,7 @@ function handleResetHeroInTown(gameState) {
   hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
 
   // return new gameState
-  return gameState; 
+  return { ...gameState, hero }; 
 }
 
 /**
