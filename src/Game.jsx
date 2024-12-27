@@ -333,7 +333,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       hero.isInCombat = true;
       hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_COMBAT : GameState.IMG_HERO_FEMALE_COMBAT);
       // create active enemy as copy from template 
-      active_enemy = {...encounter.enemy, last_combat_event: ""};
+      gameState.active_enemy = {...encounter.enemy, last_combat_event: ""};
     } else if (encounter.category === 'story') {
       gameState = handleResetHeroControl(gameState);
       hero = gameState.hero;
