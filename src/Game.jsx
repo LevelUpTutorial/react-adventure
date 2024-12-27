@@ -36,13 +36,11 @@ function Game({ heroName, gender, isGameRunning }) {
         return prevState;
       }
       
-      const state = prevState; 
-      state.location = newLocation; 
       if (newLocation.name === GameState.LOCATION_CITY.name) {
-        return handleResetHeroInTown(state);
+        return handleResetHeroInTown(prevState);
       }
       setBodyBackground(newLocation);
-      return { ...state, location: newLocation };
+      return { ...prevState, location: newLocation };
     });
   };
 
@@ -51,12 +49,11 @@ function Game({ heroName, gender, isGameRunning }) {
 
     setGameState((prevState) => {
       const state = performHeroAttack(prevState); 
-      const {hero, active_enemy} = state; 
-
+      
       // Reset the button state
       setCounterAttackActive(false);
 
-      return { ...state, hero, active_enemy };
+      return { ...state };
     });
   };
 
