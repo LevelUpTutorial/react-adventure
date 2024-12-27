@@ -281,7 +281,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
     } else {
       hero.attack_cooldown -= TICK_DURATION_ADVENTURE;
     }
-
+    console.log(`${active_enemy.name} HP: ${active_enemy.health}`); 
     hero.isInCombat = active_enemy.health > 0;
     if (hero.isInCombat) {
       // Enemy still alive, handle its attack
@@ -297,7 +297,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       console.log(`Enemy XP Reward: ${active_enemy.xp_reward}`);
       console.log(`XP to Level Up: ${hero.xp_to_levelup}`);
       console.log(`Current Level: ${hero.level}`);
-      if (hero.xp + active_enemy.xp_reward >= hero.xp_to_levelup) {
+      if ((hero.xp + active_enemy.xp_reward) >= hero.xp_to_levelup) {
         console.log(`hero level up`); 
         // handle level up 
         hero.level += 1; 
