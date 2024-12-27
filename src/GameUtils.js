@@ -1,5 +1,5 @@
 import swordHit from './assets/sounds/sword-hit.ogg';
-import { XP_TO_LEVEL2, XP_SCALING} from './GameState.js' 
+import { XP_TO_LEVEL2, XP_SCALING} from './GameState.js';  
 export const SND_SWORD_HIT = swordHit;
 
 export function playSound(filePath) {
