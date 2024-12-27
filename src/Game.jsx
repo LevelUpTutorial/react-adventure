@@ -295,7 +295,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
         hero.xp += active_enemy.xp_reward;
       }
       // Hero reset 
-      gameState = handleResetHeroControl({...gameState, hero, active_enemy}); 
+      gameState = handleResetHeroControl(gameState); 
       hero = gameState.hero; 
       hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
       setCounterAttackActive(false); // Disable button on victory
@@ -404,7 +404,7 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
   handle reset Hero control variables
  */
 function handleResetHeroControl(gameState) {
-  const hero = { ...gameState.hero };
+  const hero = gameState.hero;
   hero.isInCombat = false;
   hero.isInDialog = false;
   hero.attack_cooldown = hero.attack_speed;
@@ -419,9 +419,9 @@ function handleResetHeroControl(gameState) {
  */
 function handleResetHeroInTown(gameState) {
   gameState = handleResetHeroControl(gameState);
-  const hero = { ...gameState.hero };
+  const hero = gameState.hero;
 
-  let location = GameState.LOCATION_CITY;
+  const location = GameState.LOCATION_CITY;
   hero.health = hero.health_full; // Heal
   hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
 
