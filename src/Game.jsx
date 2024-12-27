@@ -32,11 +32,15 @@ function Game({ heroName, gender, isGameRunning }) {
 
   const handleLocationChange = (newLocation) => {
     setGameState((prevState) => {
-      const state = {...prevState, location: newLocation};
+      if (prevState.location.name === newLocation.name) {
+        return prevState;
+      }
+      
+      const state = prevState; 
+      state.location = newLocation; 
       if (newLocation.name === GameState.LOCATION_CITY.name) {
         return handleResetHeroInTown(state);
       }
-      // TODO switch encounter table (safe old and load new)
       setBodyBackground(newLocation);
       return state;
     });
@@ -46,13 +50,13 @@ function Game({ heroName, gender, isGameRunning }) {
     if (!isCounterAttackActive) return;
 
     setGameState((prevState) => {
-      prevState = performHeroAttack(prevState); 
-      const {hero, active_enemy} = prevState; 
+      const state = performHeroAttack(prevState); 
+      const {hero, active_enemy} = state; 
 
       // Reset the button state
       setCounterAttackActive(false);
 
-      return { ...prevState, hero, active_enemy };
+      return state;
     });
   };
 
@@ -302,8 +306,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
     }
 
     console.log(`handleGameState: Hero HP -> ${hero.health}`);
-    const stateAfterDmgCalc = {...gameState, hero, active_enemy};
-    return (hero.health > 0 ? stateAfterDmgCalc : handleResetHeroInTown(stateAfterDmgCalc));
+    return (hero.health > 0 ? gameState : handleResetHeroInTown(gameState));
   }
 
   // handle Adventure outside of Combat
@@ -329,6 +332,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       hero = gameState.hero;
       hero.isInCombat = true;
       hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_COMBAT : GameState.IMG_HERO_FEMALE_COMBAT);
+      // create active enemy as copy from template 
       active_enemy = {...encounter.enemy, last_combat_event: ""};
     } else if (encounter.category === 'story') {
       gameState = handleResetHeroControl(gameState);
@@ -342,11 +346,11 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       console.log(`ERROR: Unknown encounter type category ${encounter.category}`);
     }
 
-    return {...gameState, hero, active_enemy};
+    return gameState;
   }
 
   if (location.name === GameState.LOCATION_CITY.name) {
-    return handleResetHeroInTown({...gameState, hero, active_enemy});
+    return handleResetHeroInTown(gameState);
   }
 
   // return gameState unchanged
@@ -355,9 +359,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
 }
 
 function performHeroAttack(gameState) {
-  const hero = gameState.hero;
-  const active_enemy = gameState.active_enemy;
-
+  const {hero, active_enemy} = gameState;
   const dmg = combatCalculation(hero, active_enemy); 
 
   if (dmg >= 0) {
@@ -373,13 +375,11 @@ function performHeroAttack(gameState) {
   }
     
   hero.attack_cooldown = hero.attack_speed;
-  return {...gameState, hero, active_enemy}; 
+  return gameState; 
 }
 
 function performEnemyAttack(gameState, setCounterAttackActive) {
-  const hero = gameState.hero;
-  const active_enemy = gameState.active_enemy;
-
+  const {hero, active_enemy} = gameState;
   const dmg = combatCalculation(active_enemy, hero); 
   // evade ?
   if (dmg < 0) {
@@ -397,7 +397,7 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
   }
   active_enemy.attack_cooldown = active_enemy.attack_speed;
 
-  return {...gameState, hero, active_enemy};
+  return gameState;
 }
   
 /*
@@ -409,9 +409,9 @@ function handleResetHeroControl(gameState) {
   hero.isInDialog = false;
   hero.attack_cooldown = hero.attack_speed;
   hero.last_combat_event = ""; 
-  let active_enemy = null;
+  gameState.active_enemy = null;
 
-  return {...gameState, hero, active_enemy};
+  return gameState;
 }
 
 /*
@@ -420,13 +420,13 @@ function handleResetHeroControl(gameState) {
 function handleResetHeroInTown(gameState) {
   gameState = handleResetHeroControl(gameState);
   const hero = gameState.hero;
-
-  const location = GameState.LOCATION_CITY;
+  
+  gameState.location = GameState.LOCATION_CITY;
   hero.health = hero.health_full; // Heal
   hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
 
   // return new gameState
-  return {...gameState, hero, location};
+  return gameState; 
 }
 
 /**
