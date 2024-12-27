@@ -99,6 +99,19 @@ function Game({ heroName, gender, isGameRunning }) {
                 className="hero-image img-fluid rounded shadow-sm"
                 style={{ width: "100px", height: "150px" }}
               />
+              <p>Level: {gameState.hero.level}</p>
+              <p>EXP: {gameState.hero.xp}</p>
+              <p>level up: {gameState.hero.xp_to_levelup}</p>
+              <p>Health: {gameState.hero.health}</p>
+              <p>Attack: {gameState.hero.attack}</p>
+              <p>Attack Speed: {gameState.hero.attack_speed / 1000}s</p>
+              <p>Cooldown: {gameState.hero.attack_cooldown / 1000}s</p>
+              <p>Evade Chance: {gameState.hero.evade_chance}%</p>
+              <p>Crit Chance: {gameState.hero.crit_chance}%</p>
+              <p>Crit Chance: {gameState.hero.crit_damage}%</p>
+              <p>isInCombat: {gameState.hero.isInCombat}</p>
+              <p>isInDialog: {gameState.hero.isInDialog}</p>
+              <p>Last Combat Event: {gameState.hero.last_combat_event}</p>
             </div>
           </div>
   
