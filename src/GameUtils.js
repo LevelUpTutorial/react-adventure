@@ -42,5 +42,5 @@ export function combatCalculation(attacker, defender) {
 }
 
 export function calculateXpToLevelUp(current_level) {
-  return Math.ceil(XP_TO_LEVEL2 * Math.pow(current_level, XP_SCALING); 
+  return Math.ceil(XP_TO_LEVEL2 * Math.pow(current_level, XP_SCALING)); 
 }
