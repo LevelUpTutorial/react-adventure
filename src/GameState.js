@@ -410,7 +410,7 @@ static findEncounterList(gameState, location_id) {
 
   static XP_TO_LEVEL2 = 25; 
   static XP_SCALING = 1.2; 
-  
+    
   constructor(heroName, gender, location) {
     this.hero = {
       isInCombat: false,

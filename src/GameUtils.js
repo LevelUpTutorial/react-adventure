@@ -44,3 +44,39 @@ export function combatCalculation(attacker, defender) {
 export function calculateXpToLevelUp(current_level) {
   return Math.ceil(GameState.XP_TO_LEVEL2 * Math.pow(current_level, GameState.XP_SCALING)); 
 }
+
+/*
+    Utilities for Hero Level Up 
+*/ 
+export const UPGRADE_PER_LEVELUP = 3; 
+const OPTIONS_PER_LEVELUP = 3; 
+const UPGRADE_OPTIONS = [
+    { name: "Damage +5", effect: (hero) => hero.attack += 5, probability: 2 },
+    { name: "Max Health +50", effect: (hero) => { 
+        hero.health_full += 50; 
+        hero.health = hero.health_full; 
+    }, probability: 2 },
+    { name: "Crit Chance +2", effect: (hero) => hero.crit_chance += 2, probability: 2 },
+    { name: "Crit Damage +10", effect: (hero) => hero.crit_damage += 10, probability: 2 },
+    { name: "Evade Chance +2", effect: (hero) => hero.evade_chance += 2, probability: 2 },
+    { name: "Attack Speed -20ms", effect: (hero) => hero.attack_speed -= 20, probability: 2 },
+];
+function rollUpgrades(options, numToChoose = OPTIONS_PER_LEVELUP) {
+    const weighted = options.flatMap((option) => 
+        Array(Math.floor(option.probability * 100)).fill(option)
+    );
+
+    const selected = [];
+    while (selected.length < numToChoose && weighted.length > 0) {
+        const index = Math.floor(Math.random() * weighted.length);
+        selected.push(weighted[index]);
+        weighted.splice(index, 1); // Remove to prevent duplicates
+    }
+    return selected;
+}
+
+export function onLevelUp(setUpgradeOptions, setUpgradePopupVisible) {
+    const upgrades = rollUpgrades(UPGRADE_OPTIONS, OPTIONS_PER_LEVELUP); 
+    setUpgradeOptions(upgrades); 
+    setUpgradePopupVisible(true); 
+}

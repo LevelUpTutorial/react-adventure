@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import GameState from "./GameState.js";
 import StoryDialog from "./components/StoryDialog.jsx"
-import {combatCalculation, playSound, SND_SWORD_HIT, calculateXpToLevelUp} from "./GameUtils.js";
+import {combatCalculation, playSound, SND_SWORD_HIT, calculateXpToLevelUp, onLevelUp, UPGRADE_PER_LEVELUP} from "./GameUtils.js";
 
 import PropTypes from "prop-types";
 
@@ -14,12 +14,18 @@ function Game({ heroName, gender, isGameRunning }) {
   const [gameState, setGameState] = useState(
     new GameState(heroName, gender, GameState.DEFAULT_LOCATION)
   );
+  
   const [storyEvent, setStoryEvent] = useState(null); // Holds the active story event object ({ title, text, background }).
   const [isStoryDialogOpen, setStoryDialogOpen] = useState(false); // Controls dialog visibility
+  
   const [isCounterAttackActive, setCounterAttackActive] = useState(false);
   
+  const [upgradeOptions, setUpgradeOptions] = useState([]);
+  const [isUpgradePopupVisible, setUpgradePopupVisible] = useState(false);
+  const [numChooseUpgrades, setNumChooseUpgrades] = useState(0); 
+  
   const updateGameState = () => {
-    setGameState((prevState) => handleGameState(prevState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive));
+    setGameState((prevState) => handleGameState(prevState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades));
   };
 
   const currentTickDuration =
@@ -79,6 +85,35 @@ function Game({ heroName, gender, isGameRunning }) {
 
     return <p style={style}>{text}</p>;
   };
+
+  const handleUpgradeChoice = (chosenUpgrade) => {
+    chosenUpgrade.effect(gameState.hero); // Apply the effect
+    setUpgradeOptions([]); // reset options 
+    setUpgradePopupVisible(false); // Close popup
+    setNumChooseUpgrades(numChooseUpgrades - 1); 
+  }; 
+
+  const UpgradePopup = ({ upgrades, onChoose }) => {
+    return (
+      <div className="popup">
+          <h2>Level Up!</h2>
+          <p>Choose one upgrade:</p>
+          <div className="cards">
+              {upgrades.map((upgrade, index) => (
+                  <button key={index} onClick={() => onChoose(upgrade)}>
+                      <h3>{upgrade.name}</h3>
+                  </button>
+              ))}
+          </div>
+      </div>
+    );
+  }; 
+
+  useEffect(() => {
+    if (numChooseUpgrades > 0) {
+      onLevelUp(setUpgradeOptions, setUpgradePopupVisible); // Continue level-up if rolling multiple times
+    }
+  }, [numChooseUpgrades]);
   
   return (
     <div className="d-flex flex-column mb-3 border border-2 rounded shadow" style={{ backgroundColor: "rgba(255, 255, 255, 0.70)" }}>
@@ -241,6 +276,14 @@ function Game({ heroName, gender, isGameRunning }) {
           }}
         />
       )}
+
+      {/* Level Up Popup */}
+      {isUpgradePopupVisible && (
+          <UpgradePopup
+              upgrades={upgradeOptions}
+              onChoose={handleUpgradeChoice}
+          />
+      )}
     </div>
   );
 }
@@ -269,7 +312,7 @@ function setBodyBackground(location) {
 }
 
 /* Main Function to handle all In-game Event Logic */
-function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive) {
+function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades) {
   const location = gameState.location;
   let {hero, active_enemy} = gameState;
   console.log(`handleGameState: Hero -> ${hero}`);
@@ -312,24 +355,19 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
         hero.level += 1; 
         hero.xp = hero.xp + active_enemy.xp_reward - hero.xp_to_levelup; 
         hero.xp_to_levelup = calculateXpToLevelUp(hero.level); 
+        // trigger level up popup
+        setNumChooseUpgrades(UPGRADE_PER_LEVELUP);
         // simple stat scaling 
-        hero.health_full += 50; 
-        hero.health += hero.health_full; 
-        hero.attack += 5; 
-        hero.attack_speed -= 20; 
-        hero.evade_chance += 1; 
-        hero.crit_chance += 2; 
-        hero.crit_damage += 10; 
+        //hero.health_full += 50; 
+        //hero.health += hero.health_full; 
+        //hero.attack += 5; 
+        //hero.attack_speed -= 20; 
+        //hero.evade_chance += 1; 
+        //hero.crit_chance += 2; 
+        //hero.crit_damage += 10; 
         console.log(`hero level ${hero.level}`);
         console.log(`hero xp ${hero.xp}`);
         console.log(`hero xp tp level up ${hero.xp_to_levelup}`);
-        console.log(`hero hp full${hero.health_full}`);
-        console.log(`hero hp ${hero.health}`);
-        console.log(`hero atk ${hero.attack}`);
-        console.log(`hero atk spv${hero.attack_speed}`);
-        console.log(`hero evade chance ${hero.evade_chance}`);
-        console.log(`hero cc ${hero.crit_chance}`);
-        console.log(`hero cd ${hero.crit_damage}`);
         gameState.hero = hero; 
       } else { 
         hero.xp += active_enemy.xp_reward;
