@@ -1,5 +1,5 @@
 import swordHit from './assets/sounds/sword-hit.ogg';
-import { XP_TO_LEVEL2, XP_SCALING} from './GameState.js';  
+import GameState from './GameState.js';  
 export const SND_SWORD_HIT = swordHit;
 
 export function playSound(filePath) {
@@ -42,5 +42,5 @@ export function combatCalculation(attacker, defender) {
 }
 
 export function calculateXpToLevelUp(current_level) {
-  return Math.ceil(XP_TO_LEVEL2 * Math.pow(current_level, XP_SCALING)); 
+  return Math.ceil(GameState.XP_TO_LEVEL2 * Math.pow(current_level, GameState.XP_SCALING)); 
 }
