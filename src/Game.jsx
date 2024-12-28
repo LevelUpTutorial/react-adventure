@@ -249,8 +249,8 @@ function Game({ heroName, gender, isGameRunning }) {
   "background-image: url("@/assets/images/background-default.jpg");"
 */
 function setBodyBackground(location) {
-  console.log(`setBodyBackground: ${location.name}`);
-  console.log(`setBodyBackground: ${location.background}`);
+  // console.log(`setBodyBackground: ${location.name}`);
+  // console.log(`setBodyBackground: ${location.background}`);
 
   const body = document.querySelector('body');
   body.style.backgroundImage = `url(${location.background})`;
@@ -266,15 +266,15 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
   console.log(`handleGameState: Hero -> ${hero}`);
   if (active_enemy) {
     console.log(`handleGameState: Enemy -> ${active_enemy.name}`);
-    console.log(`handleGameState: Enemy Atk Sp -> ${active_enemy.attack_speed}`);
-    console.log(`handleGameState: Enemy Atk Cd -> ${active_enemy.attack_cooldown}`);
+    // console.log(`handleGameState: Enemy Atk Sp -> ${active_enemy.attack_speed}`);
+    // console.log(`handleGameState: Enemy Atk Cd -> ${active_enemy.attack_cooldown}`);
   }
   console.log(`handleGameState: isInCombat -> ${hero.isInCombat}`);
   console.log(`handleGameState: isInDialog -> ${hero.isInDialog}`);
 
   // handle Combat
   if (hero.isInCombat) {
-    console.log('hero is in combat');
+    // console.log('hero is in combat');
     if (hero.attack_cooldown <= 0) {
       gameState = performHeroAttack(gameState); 
       ({ hero, active_enemy } = gameState);
@@ -293,10 +293,10 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       }
     } else {
       // Enemy died 
-      console.log(`Hero XP: ${hero.xp}`);
-      console.log(`Enemy XP Reward: ${active_enemy.xp_reward}`);
-      console.log(`XP to Level Up: ${hero.xp_to_levelup}`);
-      console.log(`Current Level: ${hero.level}`);
+      // console.log(`Hero XP: ${hero.xp}`);
+      // console.log(`Enemy XP Reward: ${active_enemy.xp_reward}`);
+      // console.log(`XP to Level Up: ${hero.xp_to_levelup}`);
+      // console.log(`Current Level: ${hero.level}`);
       if (hero.xp + active_enemy.xp_reward >= hero.xp_to_levelup) {
         console.log(`hero level up`); 
         // handle level up 
@@ -305,7 +305,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
         hero.xp_to_levelup = calculateXpToLevelUp(hero.level); 
         // simple stat scaling 
         hero.health_full += 50; 
-        hero.health += 50; 
+        hero.health += hero.health_full; 
         hero.attack += 5; 
         hero.attack_speed -= 20; 
         hero.evade_chance += 1; 
@@ -333,7 +333,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       setCounterAttackActive(false); // Disable button on victory
     }
 
-    console.log(`handleGameState: Hero HP -> ${hero.health}`);
+    // console.log(`handleGameState: Hero HP -> ${hero.health}`);
     gameState = { ...gameState, hero, active_enemy}; 
     return (hero.health > 0 ? gameState : handleResetHeroInTown(gameState));
   }
@@ -372,7 +372,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       setStoryEvent(encounter.dialog); // Set the story event
       setStoryDialogOpen(true); // Open the dialog
     } else {
-      console.log(`ERROR: Unknown encounter type category ${encounter.category}`);
+      console.error(`ERROR: Unknown encounter type category ${encounter.category}`);
     }
 
     return { ...gameState, hero };
@@ -383,7 +383,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
   }
 
   // return gameState unchanged
-  console.log('return gameState unchanged')
+  // console.log('return gameState unchanged')
   return gameState;
 }
 
@@ -412,7 +412,7 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
   const dmg = combatCalculation(active_enemy, hero); 
   // evade ?
   if (dmg < 0) {
-    console.log('Attack evaded!');
+    // console.log('Attack evaded!');
     active_enemy.last_combat_event = `missed`;
     setCounterAttackActive(true); // Enable Counter Attack button
   } else {
@@ -469,7 +469,7 @@ function getRandomItem(entries) {
     console.error('Error: No entries available in the list.');
     return null;
   }
-  console.log(`getRandomItem: ${entries}`)
+  // console.log(`getRandomItem: ${entries}`)
   // Calculate the total weight
   const totalWeight = entries.reduce((sum, entry) => sum + entry.weight, 0);
 
