@@ -123,6 +123,8 @@ function Game({ heroName, gender, isGameRunning }) {
 
   useEffect(() => {
     if (numChooseUpgrades > 0) {
+      gameState.hero.isInDialog = true; 
+      setGameState(...gameState); 
       onLevelUp(setUpgradeOptions, setUpgradePopupVisible); // Continue level-up if rolling multiple times
     } else {
       gameState.hero.isInDialog = false; 
