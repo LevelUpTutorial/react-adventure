@@ -14,16 +14,26 @@ import enemyDarkAcolyte from './assets/images/enemy_dark_acolyte.webp';
 import enemyWildWolf from './assets/images/enemy_wild_wolf.webp';
 import enemyPlagueCrow from './assets/images/enemy_plague_crow.webp';
 /* LOCATIONS */
-import backgroundCity from './assets/images/background-default.jpg';
+// TODO change city background ws and po when available 
+import backgroundCityws from './assets/images/background-default.jpg';
+import backgroundCitypo from './assets/images/background-default.jpg';
 import backgroundAct1ws from './assets/images/background-act1-ws.webp';
+import backgroundAct1po from './assets/images/background-act1-po.webp';
 import backgroundAct2ws from './assets/images/background-act2-ws.webp';
+import backgroundAct2po from './assets/images/background-act2-po.webp';
 import backgroundAct3ws from './assets/images/background-act3-ws.webp';
-import backgroundAct3sq from './assets/images/background-act3-sq.webp';
-import backgroundAct4sq from './assets/images/background-act4-sq.webp';
-import backgroundAct5sq from './assets/images/background-act5-sq.webp';
-import backgroundAct6 from './assets/images/background-act6.webp';
-import backgroundAct7 from './assets/images/background-act7.webp';
-import backgroundAct8 from './assets/images/background-act8.webp';
+import backgroundAct3po from './assets/images/background-act3-po.webp';
+import backgroundAct4ws from './assets/images/background-act4-ws.webp';
+import backgroundAct4po from './assets/images/background-act4-po.webp';
+import backgroundAct5ws from './assets/images/background-act5-ws.webp';
+// TODO change sq for portrait format act 5 when available 
+import backgroundAct5po from './assets/images/background-act5-sq.webp';
+import backgroundAct6ws from './assets/images/background-act6-ws.webp';
+import backgroundAct6po from './assets/images/background-act6-po.webp';
+import backgroundAct7ws from './assets/images/background-act7-ws.webp';
+import backgroundAct7po from './assets/images/background-act7-po.webp';
+import backgroundAct8ws from './assets/images/background-act8-ws.webp';
+import backgroundAct8po from './assets/images/background-act8-po.webp';
 /* sonstiges */
 import PropTypes from "prop-types";
 
@@ -45,15 +55,15 @@ class GameState {
   static ACT6_LOC1_NAME = 'Act 6: The Radiant Spire';
   static ACT7_LOC1_NAME = 'Act 7: The Shattered Steppe';
   static ACT8_LOC1_NAME = 'Act 8: The Eclipse Gate';
-  static LOCATION_CITY = {name: GameState.CITY_NAME, background: backgroundCity};
-  static LOCATION_ADVENTURE_ACT1 = {name: GameState.ACT1_LOC1_NAME, background: backgroundAct1ws};
-  static LOCATION_ADVENTURE_ACT2 = {name: GameState.ACT2_LOC1_NAME, background: backgroundAct2ws};
-  static LOCATION_ADVENTURE_ACT3 = {name: GameState.ACT3_LOC1_NAME, background: backgroundAct3ws};
-  static LOCATION_ADVENTURE_ACT4 = {name: GameState.ACT4_LOC1_NAME, background: backgroundAct4sq};
-  static LOCATION_ADVENTURE_ACT5 = {name: GameState.ACT5_LOC1_NAME, background: backgroundAct5sq};
-  static LOCATION_ADVENTURE_ACT6 = {name: GameState.ACT6_LOC1_NAME, background: backgroundAct6};
-  static LOCATION_ADVENTURE_ACT7 = {name: GameState.ACT7_LOC1_NAME, background: backgroundAct7};
-  static LOCATION_ADVENTURE_ACT8 = {name: GameState.ACT8_LOC1_NAME, background: backgroundAct8};
+  static LOCATION_CITY = {name: GameState.CITY_NAME, bg_widescreen: backgroundCityws, bg_portrait: backgroundCitypo};
+  static LOCATION_ADVENTURE_ACT1 = {name: GameState.ACT1_LOC1_NAME, bg_widescreen: backgroundAct1ws, bg_portrait: backgroundAct1po};
+  static LOCATION_ADVENTURE_ACT2 = {name: GameState.ACT2_LOC1_NAME, bg_widescreen: backgroundAct2ws, bg_portrait: backgroundAct2po};
+  static LOCATION_ADVENTURE_ACT3 = {name: GameState.ACT3_LOC1_NAME, bg_widescreen: backgroundAct3ws, bg_portrait: backgroundAct3po};
+  static LOCATION_ADVENTURE_ACT4 = {name: GameState.ACT4_LOC1_NAME, bg_widescreen: backgroundAct4ws, bg_portrait: backgroundAct4po};
+  static LOCATION_ADVENTURE_ACT5 = {name: GameState.ACT5_LOC1_NAME, bg_widescreen: backgroundAct5ws, bg_portrait: backgroundAct5po};
+  static LOCATION_ADVENTURE_ACT6 = {name: GameState.ACT6_LOC1_NAME, bg_widescreen: backgroundAct6ws, bg_portrait: backgroundAct6po};
+  static LOCATION_ADVENTURE_ACT7 = {name: GameState.ACT7_LOC1_NAME, bg_widescreen: backgroundAct7ws, bg_portrait: backgroundAct7po};
+  static LOCATION_ADVENTURE_ACT8 = {name: GameState.ACT8_LOC1_NAME, bg_widescreen: backgroundAct8ws, bg_portrait: backgroundAct8po};
   static DEFAULT_LOCATION = GameState.LOCATION_CITY;
 
   /* Asset Constants */

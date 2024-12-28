@@ -1,5 +1,6 @@
 body {
     /* Designed by https://de.freepik.com/kostenloses-ki-bild/majestaetische-bergkette-ruhige-wiese-blauer-himmel-gruenes-gras-erzeugt-durch-kuenstliche-intelligenz_76318061.htm#fromView=search&page=2&position=52&uuid=4aee76a8-58c7-4600-9809-2622d6499d39 */
+    /* TODO set Start Game background po and ws when available */
     background-image: url("@/assets/images/background-default.jpg");
     width: 100%;
     height: 100%;

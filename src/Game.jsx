@@ -249,11 +249,20 @@ function Game({ heroName, gender, isGameRunning }) {
   "background-image: url("@/assets/images/background-default.jpg");"
 */
 function setBodyBackground(location) {
+  console.log(`setBodyBackground: ${location.name}`);
+
+  // Determine whether the device is widescreen or portrait
+  const isWidescreen = window.innerWidth / window.innerHeight > 1;
+
+  // Select the appropriate background based on orientation
+  const background = isWidescreen ? location.bg_widescreen : location.bg_portrait;
+
+  console.log(`Using background: ${background}`);
   // console.log(`setBodyBackground: ${location.name}`);
   // console.log(`setBodyBackground: ${location.background}`);
 
   const body = document.querySelector('body');
-  body.style.backgroundImage = `url(${location.background})`;
+  body.style.backgroundImage = `url(${background})`;
   body.style.backgroundSize = "cover";
   body.style.backgroundPosition = "center";
   body.style.backgroundRepeat = "no-repeat";
