@@ -95,23 +95,38 @@ function Game({ heroName, gender, isGameRunning }) {
 
   const UpgradePopup = ({ upgrades, onChoose }) => {
     return (
-      <div className="popup">
-          <h2>Level Up!</h2>
-          <p>Choose one upgrade:</p>
-          <div className="cards">
-              {upgrades.map((upgrade, index) => (
-                  <button key={index} onClick={() => onChoose(upgrade)}>
-                      <h3>{upgrade.name}</h3>
-                  </button>
-              ))}
-          </div>
-      </div>
+        <div className="modal show d-flex align-items-center justify-content-center" style={{ display: 'block' }}>
+            <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title">Level Up!</h5>
+                    </div>
+                    <div className="modal-body">
+                        <p>Choose one upgrade:</p>
+                        <div className="d-flex flex-column gap-2">
+                            {upgrades.map((upgrade, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => onChoose(upgrade)}
+                                    className="btn btn-primary btn-lg"
+                                >
+                                    {upgrade.name}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
-  }; 
+}; 
 
   useEffect(() => {
     if (numChooseUpgrades > 0) {
       onLevelUp(setUpgradeOptions, setUpgradePopupVisible); // Continue level-up if rolling multiple times
+    } else {
+      gameState.hero.isInDialog = false; 
+      setGameState(...gameState); 
     }
   }, [numChooseUpgrades]);
   
@@ -323,7 +338,10 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
   }
   console.log(`handleGameState: isInCombat -> ${hero.isInCombat}`);
   console.log(`handleGameState: isInDialog -> ${hero.isInDialog}`);
-
+  if (hero.isInDialog) {
+    return gameState; 
+  } 
+  
   // handle Combat
   if (hero.isInCombat) {
     // console.log('hero is in combat');
