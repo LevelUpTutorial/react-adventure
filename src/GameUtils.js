@@ -61,18 +61,25 @@ const UPGRADE_OPTIONS = [
     { name: "Evade Chance +2", effect: (hero) => hero.evade_chance += 2, probability: 2 },
     { name: "Attack Speed -20ms", effect: (hero) => hero.attack_speed -= 20, probability: 2 },
 ];
+
 function rollUpgrades(options, numToChoose = OPTIONS_PER_LEVELUP) {
-    const weighted = options.flatMap((option) => 
+    const weighted = options.flatMap((option) =>
         Array(Math.floor(option.probability * 100)).fill(option)
     );
 
-    const selected = [];
-    while (selected.length < numToChoose && weighted.length > 0) {
+    const selected = new Set();
+    while (selected.size < numToChoose && weighted.length > 0) {
         const index = Math.floor(Math.random() * weighted.length);
-        selected.push(weighted[index]);
-        weighted.splice(index, 1); // Remove to prevent duplicates
+        const chosenOption = weighted[index];
+        
+        if (!selected.has(chosenOption)) {
+            selected.add(chosenOption);
+        }
+
+        weighted.splice(index, 1); // Remove the selected element from the pool
     }
-    return selected;
+
+    return Array.from(selected);
 }
 
 export function onLevelUp(setUpgradeOptions, setUpgradePopupVisible) {
