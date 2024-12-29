@@ -90,8 +90,9 @@ export function onLevelUp(setUpgradeOptions, setUpgradePopupVisible) {
 
 /* 
   confetti firework effect 
+  author: https://www.kirilv.com/canvas-confetti/
 */ 
-const count = 200;
+const count = 2000;
 const defaults = {
     origin: { y: 0.7 }
 };
