@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import GameState from "./GameState.js";
 import StoryDialog from "./components/StoryDialog.jsx"
-import {combatCalculation, playSound, SND_SWORD_HIT, calculateXpToLevelUp, onLevelUp, UPGRADE_PER_LEVELUP} from "./GameUtils.js";
+import {combatCalculation, playSound, SND_SWORD_HIT, calculateXpToLevelUp, onLevelUp, UPGRADE_PER_LEVELUP, playConfettiFirework} from "./GameUtils.js";
 
 import PropTypes from "prop-types";
 
@@ -371,6 +371,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
         hero.xp_to_levelup = calculateXpToLevelUp(hero.level); 
         // trigger level up popup
         setNumChooseUpgrades(UPGRADE_PER_LEVELUP);
+        playConfettiFirework(); 
         // simple stat scaling 
         //hero.health_full += 50; 
         //hero.health += hero.health_full; 
