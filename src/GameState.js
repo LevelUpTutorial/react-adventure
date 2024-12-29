@@ -3,7 +3,7 @@ import heroFemaleNeutral from './assets/images/hero_female_neutral.jpg';
 import heroMaleNeutral from './assets/images/hero_male_neutral.jpg';
 import heroFemaleCombat from './assets/images/hero_female_combat.png';
 import heroMaleCombat from './assets/images/hero_male_combat.png';
-/* Enemys */
+/* Enemys Act 1 */
 import goblinGreen from './assets/images/enemy_goblin_green.webp';
 import goblinBlue from './assets/images/enemy_goblin_blue.jpg';
 import goblinRed from './assets/images/enemy_goblin_red.jpg';
@@ -13,6 +13,13 @@ import enemyBanditCaptain from './assets/images/enemy_bandit_captian.webp';
 import enemyDarkAcolyte from './assets/images/enemy_dark_acolyte.webp';
 import enemyWildWolf from './assets/images/enemy_wild_wolf.webp';
 import enemyPlagueCrow from './assets/images/enemy_plague_crow.webp';
+/* Enemies Act 2 */ 
+/* Enemies Act 3 */
+/* Enemies Act 4 */
+/* Enemies Act 5 */
+/* Enemies Act 6 */ 
+/* Enemies Act 7 */ 
+/* Enemies Act 8 */ 
 /* LOCATIONS */
 // TODO change city background ws and po when available 
 import backgroundCityws from './assets/images/background-act1-ws.webp';
