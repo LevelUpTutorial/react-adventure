@@ -15,8 +15,8 @@ import enemyWildWolf from './assets/images/enemy_wild_wolf.webp';
 import enemyPlagueCrow from './assets/images/enemy_plague_crow.webp';
 /* LOCATIONS */
 // TODO change city background ws and po when available 
-import backgroundCityws from './assets/images/background-default.jpg';
-import backgroundCitypo from './assets/images/background-default.jpg';
+import backgroundCityws from './assets/images/background-act1-ws.webp';
+import backgroundCitypo from './assets/images/background-act1-po.webp';
 import backgroundAct1ws from './assets/images/background-act1-ws.webp';
 import backgroundAct1po from './assets/images/background-act1-po.webp';
 import backgroundAct2ws from './assets/images/background-act2-ws.webp';
@@ -27,7 +27,7 @@ import backgroundAct4ws from './assets/images/background-act4-ws.webp';
 import backgroundAct4po from './assets/images/background-act4-po.webp';
 import backgroundAct5ws from './assets/images/background-act5-ws.webp';
 // TODO change sq for portrait format act 5 when available 
-import backgroundAct5po from './assets/images/background-act5-sq.webp';
+import backgroundAct5po from './assets/images/background-act5-po.webp';
 import backgroundAct6ws from './assets/images/background-act6-ws.webp';
 import backgroundAct6po from './assets/images/background-act6-po.webp';
 import backgroundAct7ws from './assets/images/background-act7-ws.webp';
