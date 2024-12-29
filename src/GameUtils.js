@@ -104,7 +104,7 @@ function fire(particleRatio, opts) {
     });
 }
 
-export playConfettiFirework() {
+export function playConfettiFirework() {
   fire(0.25, {
     spread: 26,
     startVelocity: 55,
