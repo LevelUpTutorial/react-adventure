@@ -41,11 +41,12 @@ function Game({ heroName, gender, isGameRunning }) {
       if (prevState.location.name === newLocation.name) {
         return prevState;
       }
+      setBodyBackground(newLocation);
       
       if (newLocation.name === GameState.LOCATION_CITY.name) {
         return handleResetHeroInTown(prevState);
       }
-      setBodyBackground(newLocation);
+      
       return { ...prevState, location: newLocation };
     });
   };
