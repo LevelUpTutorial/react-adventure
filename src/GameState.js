@@ -20,7 +20,7 @@ import enemyWildBoar from './assets/images/act1/enemy_wild_boar.webp';
 import enemyPlagueCrow from './assets/images/act1/enemy_plague_crow.webp';
 import enemyGoblinScout from './assets/images/act1/enemy_goblin_scout.webp';
 import enemyWildWolf from './assets/images/act1/enemy_wild_wolf.webp';
-import enemyMischievousFaerie from './assets/images/act1/src/assets/images/act1/enemy_mischievous_faerie_sprite.webp'; 
+import enemyMischievousFaerie from './assets/images/act1/enemy_mischievous_faerie_sprite.webp'; 
 import enemyCorruptedForestGuardian from './assets/images/act1/enemy_corrupted_forest_guardian.webp';
 import enemyBanditCaptain from './assets/images/act1/enemy_bandit_captian.webp';
 import enemyDarkAcolyte from './assets/images/act1/enemy_dark_acolyte.webp';
