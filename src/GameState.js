@@ -611,7 +611,7 @@ static findEncounterList(gameState, location_id) {
   static ACT2_ENCOUNTERS = [
     { category: 'combat', id: 'SANDSHARD STALKER', enemy: GameState.ENEMY_SANDSHARD_STALKER, weight: 50 },
     { category: 'combat', id: 'GLASSFANG VULTURE', enemy: GameState.ENEMY_GLASSFANG_VULTURE, weight: 50 },
-    { category: 'combat', id: 'FRAGMENTED SENTINEL', enemy: GGameState.ENEMY_FRAGMETED_SENTINEL, weight: 40 },
+    { category: 'combat', id: 'FRAGMENTED SENTINEL', enemy: GameState.ENEMY_FRAGMETED_SENTINEL, weight: 40 },
     { category: 'combat', id: 'CINDERHOUND', enemy: GameState.ENEMY_CINDERHOUND, weight: 40 },
     { category: 'combat', id: 'DUNE WRAITH', enemy: GameState.ENEMY_DUNE_WRAITH, weight: 20 },
     { category: 'combat', id: 'ECLIPSED REVENANT', enemy: GameState.ENEMY_ECLIPSED_REVENANT, weight: 15 },
