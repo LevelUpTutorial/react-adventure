@@ -27,7 +27,7 @@ import enemyDarkAcolyte from './assets/images/act1/enemy_dark_acolyte.webp';
 /* Enemies Act 2 */ 
 import enemySandshardStalker from './assets/images/act2/enemy_sandshard_stalker.webp';
 import enemyGlassfangVulture from './assets/images/act2/enemy_glassfang_vulture.webp';
-import enemyFragmentedSentinel from '.assets/images/act2/enemy_fragmented_sentinel.webp'; 
+import enemyFragmentedSentinel from './assets/images/act2/enemy_fragmented_sentinel.webp'; 
 import enemyCinderhound from './assets/images/act2/enemy_cinderhound.webp';
 import enemyDuneWraith from './assets/images/act2/enemy_dune_wraith.webp';
 import enemyEclipseRevenant from './assets/images/act2/enemy_eclipse_revenant.webp';
