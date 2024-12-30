@@ -1,46 +1,71 @@
 /* Hero */
-import heroFemaleNeutral from './assets/images/hero_female_neutral.jpg';
-import heroMaleNeutral from './assets/images/hero_male_neutral.jpg';
-import heroFemaleCombat from './assets/images/hero_female_combat.png';
-import heroMaleCombat from './assets/images/hero_male_combat.png';
-/* Enemys Act 1 */
-import goblinGreen from './assets/images/enemy_goblin_green.webp';
-import goblinBlue from './assets/images/enemy_goblin_blue.jpg';
-import goblinRed from './assets/images/enemy_goblin_red.jpg';
-import goblinPurple from './assets/images/enemy_goblin_purple.jpg';
+/* Hero Gear Tier 0 */ 
+import heroFemaleNeutral from './assets/images/hero/hero_female_neutral.jpg';
+import heroMaleNeutral from './assets/images/hero/hero_male_neutral.jpg';
+import heroFemaleCombat from './assets/images/hero/hero_female_combat.png';
+import heroMaleCombat from './assets/images/hero/hero_male_combat.png';
+/* Hero Gear Tier 1 */
+import heroFemaleCombatT1Fire from './assets/images/hero/hero_female_combat_fire_t1.webp';
+import heroFemaleComabtT1Ice from './assets/images/hero/hero_female_combat_ice_t1.webp';
+import heroFemaleCombatT1Lightning from './assets/images/hero/hero_female_combat_lightning_t1.webp';
+import heroMaleCombatT1Fire from './assets/images/hero/hero/hero_male_combat_fire_t1.webp';
+import heroMaleCombatT1Ice from './assets/images/hero/hero/hero_male_combat_ice_t1.webp';
+import heroMaleCombatT1Lightning from './assets/images/hero/hero_male_combat_lightning_t1.webp'; 
+/* Hero Gear Tier 2 */
+/* Hero Gear Tier 3 */
+/* Placeholder */
 import enemyPlaceholder from './assets/images/enemy_placeholder_card.webp'; 
-import enemyBanditCaptain from './assets/images/enemy_bandit_captian.webp';
-import enemyDarkAcolyte from './assets/images/enemy_dark_acolyte.webp';
-import enemyWildWolf from './assets/images/enemy_wild_wolf.webp';
-import enemyPlagueCrow from './assets/images/enemy_plague_crow.webp';
+/* Enemys Act 1 */
+import enemyWildBoar from './assets/images/act1/enemy_wild_boar.webp';
+import enemyPlagueCrow from './assets/images/act1/enemy_plague_crow.webp';
+import enemyGoblinScout from './assets/images/act1/enemy_goblin_scout.webp';
+import enemyWildWolf from './assets/images/act1/enemy_wild_wolf.webp';
+import enemyMischievousFaerie from './assets/images/act1/enemy_mischievous_faerie.webp';
+import enemyCorruptedForestGuardian from './assets/images/act1/enemy_corrupted_forest_guardian.webp';
+import enemyBanditCaptain from './assets/images/act1/enemy_bandit_captian.webp';
+import enemyDarkAcolyte from './assets/images/act1/enemy_dark_acolyte.webp';
 /* Enemies Act 2 */ 
+import enemySandshardStalker from './assets/images/act2/enemy_sandshard_stalker.webp';
+import enemyGlassfangVulture from './assets/images/act2/enemy_glassfang_vulture.webp';
+import enemyFragmentedSandguardian from './assets/images/act2/enemy_fragmented_sandguardian.webp';
+import enemyCinderhound from './assets/images/act2/enemy_cinderhound.webp';
+import enemyDuneWraith from './assets/images/act2/enemy_dune_wraith.webp';
+import enemyEclipseRevenant from './assets/images/act2/enemy_eclipse_revenant.webp';
+import enemyDarkAcolyte2 from './assets/images/act2/enemy_dark_acolyte.webp';
 /* Enemies Act 3 */
+import enemySnowWarg from './assets/images/act3/enemy_snow_warg.webp';
+import enemyIceboundConstruct from './assets/images/act3/enemy_icebound_construct.webp';
+import enemyShroudboundHerald from './assets/images/act3/enemy_shroudbound_herald.webp';
+import enemyDarkAcolyte3 from './assets/images/act3/enemy_dark_acolyte.webp';
+import enemyFrostElemental from './assets/images/act3/enemy_frost_elemental.webp';
+import enemyAvalancheBehemoth from './assets/images/act3/enemy_avalanche_behemoth.webp';
+import enemyEclipsedFrostguard from './assets/images/act3/enemy_eclipsed_frostguard.webp';
 /* Enemies Act 4 */
+import enemyDarkAcolyte4 from './assets/images/act4/enemy_dark_acolyte.webp';
 /* Enemies Act 5 */
 /* Enemies Act 6 */ 
 /* Enemies Act 7 */ 
 /* Enemies Act 8 */ 
 /* LOCATIONS */
 // TODO change city background ws and po when available 
-import backgroundCityws from './assets/images/background-act1-ws.webp';
-import backgroundCitypo from './assets/images/background-act1-po.webp';
-import backgroundAct1ws from './assets/images/background-act1-ws.webp';
-import backgroundAct1po from './assets/images/background-act1-po.webp';
-import backgroundAct2ws from './assets/images/background-act2-ws.webp';
-import backgroundAct2po from './assets/images/background-act2-po.webp';
-import backgroundAct3ws from './assets/images/background-act3-ws.webp';
-import backgroundAct3po from './assets/images/background-act3-po.webp';
-import backgroundAct4ws from './assets/images/background-act4-ws.webp';
-import backgroundAct4po from './assets/images/background-act4-po.webp';
-import backgroundAct5ws from './assets/images/background-act5-ws.webp';
-// TODO change sq for portrait format act 5 when available 
-import backgroundAct5po from './assets/images/background-act5-po.webp';
-import backgroundAct6ws from './assets/images/background-act6-ws.webp';
-import backgroundAct6po from './assets/images/background-act6-po.webp';
-import backgroundAct7ws from './assets/images/background-act7-ws.webp';
-import backgroundAct7po from './assets/images/background-act7-po.webp';
-import backgroundAct8ws from './assets/images/background-act8-ws.webp';
-import backgroundAct8po from './assets/images/background-act8-po.webp';
+import backgroundCityws from './assets/images/backgrounds/background-act1-ws.webp';
+import backgroundCitypo from './assets/images/backgrounds/background-act1-po.webp';
+import backgroundAct1ws from './assets/images/backgrounds/background-act1-ws.webp';
+import backgroundAct1po from './assets/images/backgrounds/background-act1-po.webp';
+import backgroundAct2ws from './assets/images/backgrounds/background-act2-ws.webp';
+import backgroundAct2po from './assets/images/backgrounds/background-act2-po.webp';
+import backgroundAct3ws from './assets/images/backgrounds/background-act3-ws.webp';
+import backgroundAct3po from './assets/images/backgrounds/background-act3-po.webp';
+import backgroundAct4ws from './assets/images/backgrounds/background-act4-ws.webp';
+import backgroundAct4po from './assets/images/backgrounds/background-act4-po.webp';
+import backgroundAct5ws from './assets/images/backgrounds/background-act5-ws.webp'; 
+import backgroundAct5po from './assets/images/backgrounds/background-act5-po.webp';
+import backgroundAct6ws from './assets/images/backgrounds/background-act6-ws.webp';
+import backgroundAct6po from './assets/images/backgrounds/background-act6-po.webp';
+import backgroundAct7ws from './assets/images/backgrounds/background-act7-ws.webp';
+import backgroundAct7po from './assets/images/backgrounds/background-act7-po.webp';
+import backgroundAct8ws from './assets/images/backgrounds/background-act8-ws.webp';
+import backgroundAct8po from './assets/images/backgrounds/background-act8-po.webp';
 /* sonstiges */
 import PropTypes from "prop-types";
 
@@ -80,8 +105,9 @@ class GameState {
   static IMG_HERO_MALE_COMBAT = heroMaleCombat;
 
   active_enemy = null;
-  static ENEMY_GOBLIN_GREEN  = {
-    name: 'Goblin Green',
+  /* Enemy Templates Act1 */ 
+  static ENEMY_WILD_BOAR = {
+    name: 'Wild Boar',
     level: 1,
     health: 10,
     xp_reward: 9, 
@@ -91,53 +117,14 @@ class GameState {
     evade_chance: 10, 
     crit_chance: 15, 
     crit_damage: 50,
-    image: goblinGreen
+    image: enemyWildBoar
   }
-  static ENEMY_GOBLIN_BLUE  = {
-    name: 'Goblin Blue',
-    level: 3,
-    health: 30,
-    xp_reward: 24,
-    attack: 15,
-    attack_speed: 2500,
-    attack_cooldown: 2500,
-    evade_chance: 10, 
-    crit_chance: 15, 
-    crit_damage: 50,
-    image: goblinBlue
-  }
-  static ENEMY_GOBLIN_RED  = {
-    name: 'Goblin Red',
-    level: 2,
-    health: 20,
-    xp_reward: 14, 
-    attack: 5,
-    attack_speed: 500,
-    attack_cooldown: 500,
-    evade_chance: 10, 
-    crit_chance: 15, 
-    crit_damage: 50,
-    image: goblinRed
-  }
-  static ENEMY_GOBLIN_PURPLE  = {
-    name: 'Goblin Purple',
-    level: 4,
-    health: 40,
-    xp_reward: 35, 
-    attack: 20,
-    attack_speed: 1500,
-    attack_cooldown: 1500,
-    evade_chance: 10, 
-    crit_chance: 15, 
-    crit_damage: 50,
-    image: goblinPurple
-  }
-  static ENEMY_PLAGUE_CROW  = {
+  static ENEMY_PLAGUE_CROW = {
     name: 'Plague Crow',
-    level: 1,
-    health: 10,
-    xp_reward: 9, 
-    attack: 5,
+    level: 2,
+    health: 15,
+    xp_reward: 13, 
+    attack: 3,
     attack_speed: 500,
     attack_cooldown: 500,
     evade_chance: 10, 
@@ -145,25 +132,64 @@ class GameState {
     crit_damage: 50,
     image: enemyPlagueCrow
   }
-  static ENEMY_WILD_WOLF  = {
+  static ENEMY_GOBLIN_SCOUT = {
+    name: 'Goblin Scout',
+    level: 4,
+    health: 15,
+    xp_reward: 17, 
+    attack: 7,
+    attack_speed: 1500,
+    attack_cooldown: 1500,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyGoblinScout
+  }
+  static ENEMY_WILD_WOLF = {
     name: 'Wild Wolf',
-    level: 2,
+    level: 4,
     health: 20,
-    xp_reward: 14, 
-    attack: 10,
-    attack_speed: 750,
-    attack_cooldown: 750,
+    xp_reward: 21, 
+    attack: 7,
+    attack_speed: 700,
+    attack_cooldown: 700,
     evade_chance: 10, 
     crit_chance: 15, 
     crit_damage: 50,
     image: enemyWildWolf
   }
-  static ENEMY_BANDIT_CAPTAIN  = {
+  static ENEMY_MISCHIEVOUS_FAERIE = {
+    name: 'Mischievous Faerie',
+    level: 5,
+    health: 25,
+    xp_reward: 29, 
+    attack: 6,
+    attack_speed: 500,
+    attack_cooldown: 500,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyMischievousFaerie
+  }
+  static ENEMY_CORRUPTED_FOREST_GUARDIAN = {
+    name: 'Corrupted Forest Guardian',
+    level: 7,
+    health: 40,
+    xp_reward: 45, 
+    attack: 50,
+    attack_speed: 3000,
+    attack_cooldown: 3000,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyCorruptedForestGuardian
+  }
+  static ENEMY_BANDIT_CAPTAIN = {
     name: 'Bandit Captain',
-    level: 3,
-    health: 30,
-    xp_reward: 24, 
-    attack: 10,
+    level: 9,
+    health: 55,
+    xp_reward: 63, 
+    attack: 30,
     attack_speed: 1000,
     attack_cooldown: 1000,
     evade_chance: 10, 
@@ -171,12 +197,12 @@ class GameState {
     crit_damage: 50,
     image: enemyBanditCaptain
   }
-  static ENEMY_DARK_ACOLYTE  = {
+  static ENEMY_DARK_ACOLYTE = {
     name: 'Dark Acolyte',
-    level: 5,
-    xp_reward: 54, 
-    health: 50,
-    attack: 20,
+    level: 10,
+    xp_reward: 73, 
+    health: 150,
+    attack: 50,
     attack_speed: 1200,
     attack_cooldown: 1200,
     evade_chance: 10, 
@@ -184,16 +210,219 @@ class GameState {
     crit_damage: 50,
     image: enemyDarkAcolyte
   }
-  static ENEMY_PLACEHOLDER  = {
-    name: 'Random Enemy',
-    level: 5,
-    health: 50,
-    xp_reward: 56, 
-    attack: 20,
+  /* Enemy Templates Act2 */
+  static ENEMY_SANDSHARD_STALKER = {
+    name: 'Sandshard Stalker',
+    level: 10,
+    xp_reward: 75, 
+    health: 90,
+    attack: 30,
+    attack_speed: 600,
+    attack_cooldown: 600,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemySandshardStalker
+  }
+  static ENEMY_GLASSFANG_VULTURE = {
+    name: 'Glassfang Vulture',
+    level: 12,
+    xp_reward: 90, 
+    health: 160,
+    attack: 80,
     attack_speed: 1500,
     attack_cooldown: 1500,
     evade_chance: 10, 
     crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyGlassfangVulture
+  }
+  static ENEMY_FRAGMENTED_SANDGUARDIAN = {
+    name: 'Fragmented Sandguardian',
+    level: 14,
+    xp_reward: 130, 
+    health: 250,
+    attack: 150,
+    attack_speed: 3000,
+    attack_cooldown: 3000,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyFragmentedSandguardian
+  }
+  static ENEMY_CINDERHOUND = {
+    name: 'Cinderhound',
+    level: 15,
+    xp_reward: 150, 
+    health: 180,
+    attack: 90,
+    attack_speed: 900,
+    attack_cooldown: 900,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyCinderhound
+  }
+  static ENEMY_DUNE_WRAITH = {
+    name: 'Dune Wraith',
+    level: 17,
+    xp_reward: 180, 
+    health: 220,
+    attack: 110,
+    attack_speed: 1700,
+    attack_cooldown: 1700,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyDuneWraith
+  }
+  static ENEMY_ECLIPSED_REVENANT = {
+    name: 'Eclipsed Revenant',
+    level: 18,
+    xp_reward: 190, 
+    health: 230,
+    attack: 120,
+    attack_speed: 1500,
+    attack_cooldown: 1500,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyEclipseRevenant
+  }
+  static ENEMY_DARK_ACOLYTE2 = {
+    name: 'Dark Acolyte',
+    level: 20,
+    xp_reward: 250, 
+    health: 350,
+    attack: 160,
+    attack_speed: 1700,
+    attack_cooldown: 1700,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyDarkAcolyte2
+  }
+  /* Enemy Templates Act3 */
+  static ENEMY_SNOW_WARG = {
+    name: 'Snow Warg',
+    level: 18,
+    xp_reward: 210, 
+    health: 250,
+    attack: 130,
+    attack_speed: 900,
+    attack_cooldown: 900,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemySnowWarg
+  }
+  static ENEMY_ICEBOUND_CONSTRUCT = {
+    name: 'Icebound Construct',
+    level: 20,
+    xp_reward: 270, 
+    health: 400,
+    attack: 160,
+    attack_speed: 2500,
+    attack_cooldown: 2500,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyIceboundConstruct
+  }
+  static ENEMY_SHROUDBOUND_HERALD = {
+    name: 'Shroudbound Herald',
+    level: 20,
+    xp_reward: 290, 
+    health: 350,
+    attack: 150,
+    attack_speed: 1100,
+    attack_cooldown: 1100,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyShroudboundHerald
+  }
+  static ENEMY_DARK_ACOLYTE3 = {
+    name: 'Dark Acolyte',
+    level: 21,
+    xp_reward: 310, 
+    health: 390,
+    attack: 180,
+    attack_speed: 1000,
+    attack_cooldown: 1000,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyDarkAcolyte3
+  }
+  static ENEMY_FROST_ELEMENTAL = {
+    name: 'Frost Elemental',
+    level: 23,
+    xp_reward: 330, 
+    health: 450,
+    attack: 200,
+    attack_speed: 1200,
+    attack_cooldown: 1200,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyFrostElemental
+  }
+  static ENEMY_AVALANCHE_BEHEMOTH = {
+    name: 'Avalanche Behemoth',
+    level: 23,
+    xp_reward: 350, 
+    health: 500,
+    attack: 250,
+    attack_speed: 2500,
+    attack_cooldown: 2500,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyAvalancheBehemoth
+  }
+  static ENEMY_ECLIPSED_FROSTGUARD = {
+    name: 'Eclipsed Frostguard',
+    level: 25,
+    xp_reward: 370, 
+    health: 550,
+    attack: 300,
+    attack_speed: 2000,
+    attack_cooldown: 2000,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyEclipsedFrostguard
+  }
+    /* Enemy Templates Act4 */
+  static ENEMY_DARK_ACOLYTE4 = {
+    name: 'Dark Acolyte',
+    level: 35,
+    xp_reward: 740, 
+    health: 1000,
+    attack: 600,
+    attack_speed: 1600,
+    attack_cooldown: 1600,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyDarkAcolyte4
+  }
+  /* Enemy Templates Act5 */
+  /* Enemy Templates Act6 */
+  /* Enemy Templates Act7 */
+  /* Enemy Templates Act8 */
+  /* Enemy Templates Placeholder */
+  static ENEMY_PLACEHOLDER  = {
+    name: 'Random Enemy',
+    level: 50,
+    health: 5000,
+    xp_reward: 5000, 
+    attack: 2000,
+    attack_speed: 5000,
+    attack_cooldown: 5000,
+    evade_chance: 40, 
+    crit_chance: 30, 
     crit_damage: 50,
     image: enemyPlaceholder
   }
@@ -368,27 +597,37 @@ static findEncounterList(gameState, location_id) {
 
   static STORY_DIALOG_DEFAULT_WEIGHT = 25;
   static ACT1_ENCOUNTERS = [
-    { category: 'combat', id: 'GOBLIN_GREEN', enemy: GameState.ENEMY_GOBLIN_GREEN, weight: 25 },
-    { category: 'combat', id: 'PLAGUE_CROW', enemy: GameState.ENEMY_PLAGUE_CROW, weight: 25 },
-    { category: 'combat', id: 'WILD_WOLF', enemy: GameState.ENEMY_WILD_WOLF, weight: 25 },
-    { category: 'combat', id: 'Bandit Captain', enemy: GameState.ENEMY_WILD_WOLF, weight: 5 },
+    { category: 'combat', id: 'WILD_BOAR', enemy: GameState.ENEMY_WILD_BOAR, weight: 50 },
+    { category: 'combat', id: 'PLAGUE_CROW', enemy: GameState.ENEMY_PLAGUE_CROW, weight: 50 },
+    { category: 'combat', id: 'GOBLIN_SCOUT', enemy: GameState.ENEMY_GOBLIN_SCOUT, weight: 50 },
+    { category: 'combat', id: 'WILD_WOLF', enemy: GameState.ENEMY_WILD_WOLF, weight: 40 },
+    { category: 'combat', id: 'MISCHIEVOUS_FAERIE', enemy: GameState.ENEMY_MISCHIEVOUS_FAERIE, weight: 40 },
+    { category: 'combat', id: 'CORRUPTED_FOREST_GUARDIAN', enemy: GameState.ENEMY_CORRUPTED_FOREST_GUARDIAN, weight: 20 },
+    { category: 'combat', id: 'BANDIT CAPTIAN', enemy: GameState.ENEMY_BANDIT_CAPTAIN, weight: 10 },
     { category: 'combat', id: 'DARK_ACOLYTE', enemy: GameState.ENEMY_DARK_ACOLYTE, weight: 5 },
     { category: 'story', id: 'STORY_ACT1_1', dialog: GameState.STORY_DIALOG_ACT1_1, weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT, completed: false },
     { category: 'story', id: 'STORY_ACT1_SECRET', dialog: GameState.STORY_DIALOG_ACT1_SECRET, weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT, completed: false}
   ];
   static ACT2_ENCOUNTERS = [
-    { category: 'combat', id: 'PLAGUE_CROW', enemy: GameState.ENEMY_PLAGUE_CROW, weight: 30 },
-    { category: 'combat', id: 'GOBLIN_RED', enemy: GameState.ENEMY_GOBLIN_RED, weight: 30 },
-    { category: 'combat', id: 'GOBLIN_BLUE', enemy: GameState.ENEMY_GOBLIN_BLUE, weight: 5 },
-    { category: 'combat', id: 'GOBLIN_PURPLE', enemy: GameState.ENEMY_GOBLIN_PURPLE, weight: 5 },
-    { category: 'combat', id: 'DARK_ACOLYTE', enemy: GameState.ENEMY_DARK_ACOLYTE, weight: 20 },
+    { category: 'combat', id: 'SANDSHARD STALKER', enemy: GameState.ENEMY_SANDSHARD_STALKER, weight: 50 },
+    { category: 'combat', id: 'GLASSFANG VULTURE', enemy: GameState.ENEMY_GLASSFANG_VULTURE, weight: 50 },
+    { category: 'combat', id: 'FRAGMENTED SANDGUARDIAN', enemy: GameState.ENEMY_FRAGMENTED_SANDGUARDIAN, weight: 40 },
+    { category: 'combat', id: 'CINDERHOUND', enemy: GameState.ENEMY_CINDERHOUND, weight: 40 },
+    { category: 'combat', id: 'DUNE WRAITH', enemy: GameState.ENEMY_DUNE_WRAITH, weight: 20 },
+    { category: 'combat', id: 'ECLIPSED REVENANT', enemy: GameState.ENEMY_ECLIPSED_REVENANT, weight: 15 },
+    { category: 'combat', id: 'DARK ACOLYTE 2', enemy: GameState.ENEMY_DARK_ACOLYTE2, weight: 5 },
   ];
   static ACT3_ENCOUNTERS = [
-    { category: 'combat', id: 'DARK_ACOLYTE', enemy: GameState.ENEMY_DARK_ACOLYTE, weight: 25 },
-    { category: 'combat', id: 'ENEMY_PLACEHOLDER', enemy: GameState.ENEMY_PLACEHOLDER, weight: 5 }
+    { category: 'combat', id: 'SNOW WARG', enemy: GameState.ENEMY_SNOW_WARG, weight: 50 },
+    { category: 'combat', id: 'ICEBOUND CONSTRUC', enemy: GameState.ENEMY_ICEBOUND_CONSTRUCT, weight: 45 },
+    { category: 'combat', id: 'SHROUDBOUND HERALD', enemy: GameState.ENEMY_SHROUDBOUND_HERALD, weight: 45 },
+    { category: 'combat', id: 'DARK ACOLYTE 3', enemy: GameState.ENEMY_DARK_ACOLYTE3, weight: 45 },
+    { category: 'combat', id: 'FROST ELEMENTAL', enemy: GameState.ENEMY_FROST_ELEMENTAL, weight: 30 },
+    { category: 'combat', id: 'AVALANCHE BEHEMOUTH', enemy: GameState.ENEMY_AVALANCHE_BEHEMOTH, weight: 30 },
+    { category: 'combat', id: 'ECLIPSED FROSTGUARD', enemy: GameState.ENEMY_ECLIPSED_FROSTGUARD, weight: 10 },
   ];
   static ACT4_ENCOUNTERS = [
-    { category: 'combat', id: 'ENEMY_PLACEHOLDER', enemy: GameState.ENEMY_PLACEHOLDER, weight: 25 }
+    { category: 'combat', id: 'ENEMY_DARK_AKOLYTE 4', enemy: GameState.ENEMY_DARK_ACOLYTE4, weight: 25 }
   ];
   static ACT5_ENCOUNTERS = [
     { category: 'combat', id: 'ENEMY_PLACEHOLDER', enemy: GameState.ENEMY_PLACEHOLDER, weight: 25 }
@@ -415,8 +654,8 @@ static findEncounterList(gameState, location_id) {
     {location: GameState.ACT8_LOC1_NAME, encounters: GameState.ACT8_ENCOUNTERS},
   ];
 
-  static XP_TO_LEVEL2 = 25; 
-  static XP_SCALING = 1.2; 
+  static XP_TO_LEVEL2 = 75; 
+  static XP_SCALING = 1.3; 
     
   constructor(heroName, gender, location) {
     this.hero = {
