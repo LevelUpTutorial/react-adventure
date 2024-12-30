@@ -8,8 +8,8 @@ import heroMaleCombat from './assets/images/hero/hero_male_combat.png';
 import heroFemaleCombatT1Fire from './assets/images/hero/hero_female_combat_fire_t1.webp';
 import heroFemaleComabtT1Ice from './assets/images/hero/hero_female_combat_ice_t1.webp';
 import heroFemaleCombatT1Lightning from './assets/images/hero/hero_female_combat_lightning_t1.webp';
-import heroMaleCombatT1Fire from './assets/images/hero/hero/hero_male_combat_fire_t1.webp';
-import heroMaleCombatT1Ice from './assets/images/hero/hero/hero_male_combat_ice_t1.webp';
+import heroMaleCombatT1Fire from './assets/images/hero/hero_male_combat_fire_t1.webp';
+import heroMaleCombatT1Ice from './assets/images/hero/hero_male_combat_ice_t1.webp';
 import heroMaleCombatT1Lightning from './assets/images/hero/hero_male_combat_lightning_t1.webp'; 
 /* Hero Gear Tier 2 */
 /* Hero Gear Tier 3 */
