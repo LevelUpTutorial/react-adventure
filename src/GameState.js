@@ -27,7 +27,7 @@ import enemyDarkAcolyte from './assets/images/act1/enemy_dark_acolyte.webp';
 /* Enemies Act 2 */ 
 import enemySandshardStalker from './assets/images/act2/enemy_sandshard_stalker.webp';
 import enemyGlassfangVulture from './assets/images/act2/enemy_glassfang_vulture.webp';
-import enemyFragmentedSandguardian from './assets/images/act2/enemy_fragmented_sandguardian.webp';
+import enemyFragmentedSentinel from '.assets/images/act2/enemy_fragmented_sentinel.webp
 import enemyCinderhound from './assets/images/act2/enemy_cinderhound.webp';
 import enemyDuneWraith from './assets/images/act2/enemy_dune_wraith.webp';
 import enemyEclipseRevenant from './assets/images/act2/enemy_eclipse_revenant.webp';
@@ -237,8 +237,8 @@ class GameState {
     crit_damage: 50,
     image: enemyGlassfangVulture
   }
-  static ENEMY_FRAGMENTED_SANDGUARDIAN = {
-    name: 'Fragmented Sandguardian',
+  static ENEMY_FRAGMENTED_SENTINEL = {
+    name: 'Fragmented Sentinel',
     level: 14,
     xp_reward: 130, 
     health: 250,
@@ -248,7 +248,7 @@ class GameState {
     evade_chance: 10, 
     crit_chance: 15, 
     crit_damage: 50,
-    image: enemyFragmentedSandguardian
+    image: enemyFragmentedSentinel 
   }
   static ENEMY_CINDERHOUND = {
     name: 'Cinderhound',
@@ -611,7 +611,7 @@ static findEncounterList(gameState, location_id) {
   static ACT2_ENCOUNTERS = [
     { category: 'combat', id: 'SANDSHARD STALKER', enemy: GameState.ENEMY_SANDSHARD_STALKER, weight: 50 },
     { category: 'combat', id: 'GLASSFANG VULTURE', enemy: GameState.ENEMY_GLASSFANG_VULTURE, weight: 50 },
-    { category: 'combat', id: 'FRAGMENTED SANDGUARDIAN', enemy: GameState.ENEMY_FRAGMENTED_SANDGUARDIAN, weight: 40 },
+    { category: 'combat', id: 'FRAGMENTED SENTINEL', enemy: GGameState.ENEMY_FRAGMETED_SENTINEL, weight: 40 },
     { category: 'combat', id: 'CINDERHOUND', enemy: GameState.ENEMY_CINDERHOUND, weight: 40 },
     { category: 'combat', id: 'DUNE WRAITH', enemy: GameState.ENEMY_DUNE_WRAITH, weight: 20 },
     { category: 'combat', id: 'ECLIPSED REVENANT', enemy: GameState.ENEMY_ECLIPSED_REVENANT, weight: 15 },
