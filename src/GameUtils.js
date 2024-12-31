@@ -51,15 +51,15 @@ export function calculateXpToLevelUp(current_level) {
 export const UPGRADE_PER_LEVELUP = 3; 
 const OPTIONS_PER_LEVELUP = 3; 
 const UPGRADE_OPTIONS = [
-    { name: "Damage +5", effect: (hero) => hero.attack += 5, probability: 2 },
+    { name: "Damage +5", effect: (hero) => hero.attack += 5, probability: 1 },
     { name: "Max Health +50", effect: (hero) => { 
         hero.health_full += 50; 
         hero.health = hero.health_full; 
     }, probability: 2 },
     { name: "Crit Chance +2", effect: (hero) => hero.crit_chance += 2, probability: 2 },
     { name: "Crit Damage +10", effect: (hero) => hero.crit_damage += 10, probability: 2 },
-    { name: "Evade Chance +2", effect: (hero) => hero.evade_chance += 2, probability: 2 },
-    { name: "Attack Speed -20ms", effect: (hero) => hero.attack_speed -= 20, probability: 2 },
+    { name: "Evade Chance +2", effect: (hero) => hero.evade_chance += 2, probability: 3 },
+    { name: "Attack Speed -30ms", effect: (hero) => hero.attack_speed -= 30, probability: 2 },
 ];
 
 function rollUpgrades(options, numToChoose = OPTIONS_PER_LEVELUP) {
