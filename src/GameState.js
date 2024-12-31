@@ -83,7 +83,7 @@ class GameState {
   static ACT2_LOC1_NAME = 'Act 2: The Crimson Dunes';
   static ACT3_LOC1_NAME = 'Act 3: Frostspire Peaks';
   static ACT4_LOC1_NAME = 'Act 4: The Whispering Forest';
-  static ACT5_LOC1_NAME = 'Act 5: The Marshes of Ebonreach';
+  static ACT5_LOC1_NAME = 'Act 5: The Forgotten Underground City';
   static ACT6_LOC1_NAME = 'Act 6: The Radiant Spire';
   static ACT7_LOC1_NAME = 'Act 7: The Shattered Steppe';
   static ACT8_LOC1_NAME = 'Act 8: The Eclipse Gate';
