@@ -5,7 +5,7 @@ import {combatCalculation, playSound, SND_SWORD_HIT, calculateXpToLevelUp, onLev
 
 import PropTypes from "prop-types";
 
-const TICKS_PER_SECOND = 10;
+const TICKS_PER_SECOND = 20;
 const TICK_DURATION_ADVENTURE = Math.round(1000 / TICKS_PER_SECOND);
 const TICK_DURATION_CITY = 1000;
 
