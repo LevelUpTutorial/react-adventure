@@ -519,6 +519,7 @@ function handleResetHeroInTown(gameState) {
   const hero = gameState.hero;
   
   gameState.location = GameState.LOCATION_CITY;
+  setBodyBackground(gameState.location); 
   hero.health = hero.health_full; // Heal
   hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
 
