@@ -12,7 +12,7 @@ const TICK_DURATION_CITY = 1000;
 function Game({ heroName, gender, isGameRunning }) {
   // Initialize game state in React state
   const [gameState, setGameState] = useState(
-    new GameState(heroName, gender, GameState.DEFAULT_LOCATION)
+    new GameState(heroName, gender, GameState.LOCATION_ADVENTURE_ACT1)
   );
   
   const [storyEvent, setStoryEvent] = useState(null); // Holds the active story event object ({ title, text, background }).
