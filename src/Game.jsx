@@ -400,7 +400,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
     // console.log(`handleGameState: Hero HP -> ${hero.health}`);
     console.log(`handleGameState (after combat): Hero XP -> ${hero.xp}`);
     gameState = { ...gameState, hero, active_enemy}; 
-    return (hero.health > 0 ? gameState : handleLocationChange(GameState.LOCATION_CITY));
+    return (hero.health > 0 ? gameState : handleResetHeroInTown(gameState));
   }
 
   // handle Adventure outside of Combat
