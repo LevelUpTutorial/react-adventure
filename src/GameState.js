@@ -642,7 +642,12 @@ static findEncounterList(gameState, location_id) {
     { category: 'combat', id: 'ENEMY_PLACEHOLDER', enemy: GameState.ENEMY_PLACEHOLDER, weight: 25 }
   ];
 
-  next_encounters = [];
+  next_encounters = [
+    { category: 'combat', id: 'WILD_BOAR', enemy: GameState.ENEMY_WILD_BOAR, weight: 50 },
+    { category: 'combat', id: 'WILD_BOAR', enemy: GameState.ENEMY_WILD_BOAR, weight: 50 },
+    { category: 'combat', id: 'PLAGUE_CROW', enemy: GameState.ENEMY_PLAGUE_CROW, weight: 50 },
+    { category: 'combat', id: 'PLAGUE_CROW', enemy: GameState.ENEMY_PLAGUE_CROW, weight: 50 },
+  ];
   random_encounters = [
     {location: GameState.ACT1_LOC1_NAME, encounters: GameState.ACT1_ENCOUNTERS},
     {location: GameState.ACT2_LOC1_NAME, encounters: GameState.ACT2_ENCOUNTERS},
