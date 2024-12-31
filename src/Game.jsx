@@ -327,7 +327,7 @@ function setBodyBackground(location) {
 function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades) {
   const location = gameState.location;
   let {hero, active_enemy} = gameState;
-  console.log(`handleGameState: Hero -> ${hero}`);
+  console.log(`handleGameState (start): Hero XP -> ${hero.xp}`);
   if (active_enemy) {
     console.log(`handleGameState: Enemy -> ${active_enemy.name}`);
     // console.log(`handleGameState: Enemy Atk Sp -> ${active_enemy.attack_speed}`);
@@ -350,6 +350,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
     }
     console.log(`${active_enemy.name} HP: ${active_enemy.health}`); 
     hero.isInCombat = active_enemy.health > 0;
+    console.log(`handleGameState (before combat): Hero XP -> ${hero.xp}`);
     if (hero.isInCombat) {
       // Enemy still alive, handle its attack
       if (active_enemy.attack_cooldown <= 0) {
@@ -397,6 +398,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
     }
 
     // console.log(`handleGameState: Hero HP -> ${hero.health}`);
+    console.log(`handleGameState (after combat): Hero XP -> ${hero.xp}`);
     gameState = { ...gameState, hero, active_enemy}; 
     return (hero.health > 0 ? gameState : handleResetHeroInTown(gameState));
   }
@@ -404,6 +406,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
   // handle Adventure outside of Combat
   if (!hero.isInDialog && location.name !== GameState.LOCATION_CITY.name) {
     // handle roll new encounter
+    console.log(`handleGameState (before new encounter): Hero XP -> ${hero.xp}`);
     if (gameState.next_encounters.length === 0) {
       console.log('No active encounter - rolling new encounter');
       console.log('Accessing random_encounters:', gameState.random_encounters);
@@ -438,6 +441,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       console.error(`ERROR: Unknown encounter type category ${encounter.category}`);
     }
 
+    console.log(`handleGameState(after encounter roll): Hero XP -> ${hero.xp}`);
     return { ...gameState, hero };
   }
 
@@ -447,6 +451,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
 
   // return gameState unchanged
   // console.log('return gameState unchanged')
+  console.log(`handleGameState (return unchanged): Hero XP -> ${hero.xp}`);
   return gameState;
 }
 
