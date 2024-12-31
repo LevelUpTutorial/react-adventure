@@ -56,9 +56,9 @@ const UPGRADE_OPTIONS = [
         hero.health_full += 50; 
         hero.health = hero.health_full; 
     }, probability: 2 },
-    { name: "Crit Chance +2", effect: (hero) => hero.crit_chance += 2, probability: 2 },
-    { name: "Crit Damage +10", effect: (hero) => hero.crit_damage += 10, probability: 2 },
-    { name: "Evade Chance +2", effect: (hero) => hero.evade_chance += 2, probability: 3 },
+    { name: "Crit Chance +2%", effect: (hero) => hero.crit_chance += 2, probability: 2 },
+    { name: "Crit Damage +10%", effect: (hero) => hero.crit_damage += 10, probability: 2 },
+    { name: "Evade Chance +2%", effect: (hero) => hero.evade_chance += 2, probability: 2 },
     { name: "Attack Speed -25ms", effect: (hero) => hero.attack_speed -= 25, probability: 2 },
 ];
 
