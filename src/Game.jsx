@@ -181,7 +181,7 @@ function Game({ heroName, gender, isGameRunning }) {
       <div className="battle-container d-flex justify-content-around align-items-center gap-3">
         {/* Hero Section */}
         <div className="battle-container-hero text-center flex-fill">
-          <p className="fw-semibold text-success text-truncate" style={{ minWidth: "200px" }}>
+          <p className="fw-semibold text-success text-truncate">
             Hero ({gameState.hero.level}) - HP: {gameState.hero.health}
           </p>
           {renderCombatEvent(gameState.hero.last_combat_event)}
