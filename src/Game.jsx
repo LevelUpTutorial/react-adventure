@@ -178,9 +178,9 @@ function Game({ heroName, gender, isGameRunning }) {
   <>
     <div className="p-3 border-bottom border-secondary-subtle">
       <p className="fw-bold text-secondary">Location, {gameState.location.name}</p>
-      <div className="battle-container d-flex justify-content-around align-items-center gap-3">
+      <div className="battle-container d-flex justify-content-around align-items-center gap-2">
         {/* Hero Section */}
-        <div className="battle-container-hero text-center flex-fill">
+        <div className="battle-container-hero text-center flex-fill gap-2">
           <p className="fw-semibold text-success">
             Hero ({gameState.hero.level}) - HP: {gameState.hero.health}
           </p>
@@ -203,7 +203,7 @@ function Game({ heroName, gender, isGameRunning }) {
         </div>
 
         {/* Enemy Section */}
-        <div className="battle-container-enemy text-center flex-fill">
+        <div className="battle-container-enemy text-center flex-fill gap-2">
           {gameState.active_enemy && (() => {
             const eAttackProgress = (gameState.active_enemy.attack_cooldown / gameState.active_enemy.attack_speed) * 100;
 
@@ -248,7 +248,7 @@ function Game({ heroName, gender, isGameRunning }) {
       >
         {`${gameState.hero.xp} / ${gameState.hero.xp_to_levelup} exp`}
       </div>
-      <div className="btn-group-vertical btn-group-lg gap-3" role="group" aria-label="combat buttons">
+      <div className="btn-group-vertical btn-group-lg gap-2" role="group" aria-label="combat buttons">
         {/* Back to Counter Button */}
         <button
           type="button"
