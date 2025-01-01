@@ -181,7 +181,7 @@ function Game({ heroName, gender, isGameRunning }) {
       <div className="battle-container d-flex justify-content-around align-items-center gap-3">
         {/* Hero Section */}
         <div className="battle-container-hero text-center flex-fill">
-          <p className="fw-semibold text-success text-truncate">
+          <p className="fw-semibold text-success">
             Hero ({gameState.hero.level}) - HP: {gameState.hero.health}
           </p>
           {renderCombatEvent(gameState.hero.last_combat_event)}
@@ -209,7 +209,7 @@ function Game({ heroName, gender, isGameRunning }) {
 
             return (
               <>
-                <p className="fw-semibold text-danger text-truncate">
+                <p className="fw-semibold text-danger">
                   {gameState.active_enemy.name} ({gameState.active_enemy.level}) - HP: {gameState.active_enemy.health}
                 </p>
                 {renderCombatEvent(gameState.active_enemy.last_combat_event)}
