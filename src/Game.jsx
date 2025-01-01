@@ -180,7 +180,7 @@ function Game({ heroName, gender, isGameRunning }) {
       <p className="fw-bold text-secondary">Location, {gameState.location.name}</p>
       <div className="battle-container d-flex justify-content-around align-items-center gap-2">
         {/* Hero Section */}
-        <div className="battle-container-hero text-center flex-fill gap-2">
+        <div className="battle-container-hero text-center d-flex-column flex-fill gap-2">
           <p className="fw-semibold text-success">
             Hero ({gameState.hero.level}) - HP: {gameState.hero.health}
           </p>
@@ -203,7 +203,7 @@ function Game({ heroName, gender, isGameRunning }) {
         </div>
 
         {/* Enemy Section */}
-        <div className="battle-container-enemy text-center flex-fill gap-2">
+        <div className="battle-container-enemy text-center d-flex-column flex-fill gap-2">
           {gameState.active_enemy && (() => {
             const eAttackProgress = (gameState.active_enemy.attack_cooldown / gameState.active_enemy.attack_speed) * 100;
 
