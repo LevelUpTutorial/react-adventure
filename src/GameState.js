@@ -683,7 +683,7 @@ static findEncounterList(gameState, location_id) {
       crit_damage: 100, 
       last_combat_event: "", 
       image: (gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL), 
-      current_enchantment = { id: GameState.ID_NONE, selectReverse: (gameState) => {return gameState} },
+      current_enchantment: { id: GameState.ID_NONE, selectReverse: (gameState) => {return gameState} },
     }
     this.location = location;
   }
@@ -692,7 +692,7 @@ static findEncounterList(gameState, location_id) {
 GameState.propTypes = {
   heroName: PropTypes.string.isRequired,
   gender: PropTypes.string.isRequired,
-  location: PropTypes.arrayOf(PropTypes.string).isRequired
+  location: PropTypes.arrayOf(PropTypes.string).isRequired, 
 };
 
 export default GameState;
