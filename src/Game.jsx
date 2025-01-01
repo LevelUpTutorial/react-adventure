@@ -175,101 +175,102 @@ function Game({ heroName, gender, isGameRunning }) {
   
       {/* Adventure Location */}
       {gameState.location.name !== GameState.LOCATION_CITY.name && (
-        <>
-          <div className="p-3 border-bottom border-secondary-subtle">
-            <p className="fw-bold text-secondary">Location, {gameState.location.name}</p>
-            <div className="battle-container d-flex justify-content-around align-items-center">
-              {/* Hero Section */}
-              <div className="battle-container-hero text-center">
-                <p className="fw-semibold text-success">
-                  Hero ({gameState.hero.level}) - HP: {gameState.hero.health}
+  <>
+    <div className="p-3 border-bottom border-secondary-subtle">
+      <p className="fw-bold text-secondary">Location, {gameState.location.name}</p>
+      <div className="battle-container d-flex justify-content-around align-items-center gap-3">
+        {/* Hero Section */}
+        <div className="battle-container-hero text-center flex-fill">
+          <p className="fw-semibold text-success text-truncate" style={{ minWidth: "200px" }}>
+            Hero ({gameState.hero.level}) - HP: {gameState.hero.health}
+          </p>
+          {renderCombatEvent(gameState.hero.last_combat_event)}
+          <div 
+            className="progress-bar bg-success" 
+            role="progressbar" 
+            style={{ width: `${attackProgress}%`, height: '20px' }} 
+            aria-valuenow={attackProgress} 
+            aria-valuemin="0" 
+            aria-valuemax="100"
+          >{`${(gameState.hero.attack_cooldown / 1000).toFixed(1)}s`}
+          </div>
+          <img
+            src={gameState.hero.image}
+            alt="hero"
+            className="hero-image img-fluid rounded shadow-sm"
+            style={{ width: "100px", height: "150px" }}
+          />
+        </div>
+
+        {/* Enemy Section */}
+        <div className="battle-container-enemy text-center flex-fill">
+          {gameState.active_enemy && (() => {
+            const eAttackProgress = (gameState.active_enemy.attack_cooldown / gameState.active_enemy.attack_speed) * 100;
+
+            return (
+              <>
+                <p className="fw-semibold text-danger text-truncate" style={{ minWidth: "200px" }}>
+                  {gameState.active_enemy.name} ({gameState.active_enemy.level}) - HP: {gameState.active_enemy.health}
                 </p>
-                {renderCombatEvent(gameState.hero.last_combat_event)}
+                {renderCombatEvent(gameState.active_enemy.last_combat_event)}
                 <div 
-                  className="progress-bar bg-success" 
+                  className="progress-bar bg-danger" 
                   role="progressbar" 
-                  style={{ width: `${attackProgress}%`, height: '20px' }} 
-                  aria-valuenow={attackProgress} 
+                  style={{ width: `${eAttackProgress}%`, height: "20px" }} 
+                  aria-valuenow={eAttackProgress} 
                   aria-valuemin="0" 
                   aria-valuemax="100"
-                >{`${(gameState.hero.attack_cooldown / 1000).toFixed(1)}s`}
+                >{`${(gameState.active_enemy.attack_cooldown / 1000).toFixed(1)}s`}
                 </div>
-                <img
-                  src={gameState.hero.image}
-                  alt="hero"
-                  className="hero-image img-fluid rounded shadow-sm"
-                  style={{ width: "100px", height: "150px" }}
-                />
-              </div>
+              </>
+            );
+          })()}
+          {gameState.hero.isInCombat && (
+            <img
+              src={gameState.active_enemy.image}
+              alt="enemy"
+              className="enemy-image img-fluid rounded shadow-sm"
+              style={{ width: "100px", height: "150px" }}
+            />
+          )}
+        </div>
+      </div>
+    </div>
+    <div className="p-3 text-center">
+      {/* XP Progress Bar */}
+      <div 
+        className="progress-bar bg-info mb-3" 
+        role="progressbar" 
+        style={{ width: '100%', height: '20px' }} 
+        aria-valuenow={gameState.hero.xp} 
+        aria-valuemin="0" 
+        aria-valuemax="100"
+      >
+        {`${gameState.hero.xp} / ${gameState.hero.xp_to_levelup} exp`}
+      </div>
+      <div className="btn-group-vertical btn-group-lg gap-3" role="group" aria-label="combat buttons">
+        {/* Back to Counter Button */}
+        <button
+          type="button"
+          onClick={() => handleCounterAttack()}
+          className={`btn ${isCounterAttackActive ? "btn-success" : "btn-outline-secondary"} px-4`}
+          disabled={!isCounterAttackActive}
+        >
+          {isCounterAttackActive ? "Counter Attack" : "wait for evade"}
+        </button>
+        {/* Back to City Button */}
+        <button
+          type="button"
+          onClick={() => handleLocationChange(GameState.LOCATION_CITY)}
+          className="btn btn-primary px-4"
+        >
+          Return to {GameState.LOCATION_CITY.name}
+        </button>
+      </div>
+    </div>
+  </>
+)}
   
-              {/* Enemy Section */}
-              <div className="battle-container-enemy text-center">
-                {gameState.active_enemy && (() => {
-                  const eAttackProgress = (gameState.active_enemy.attack_cooldown / gameState.active_enemy.attack_speed) * 100;
-
-                  return (
-                    <>
-                      <p className="fw-semibold text-danger">
-                        {gameState.active_enemy.name} ({gameState.active_enemy.level}) - HP: {gameState.active_enemy.health}
-                      </p>
-                      {renderCombatEvent(gameState.active_enemy.last_combat_event)}
-                      <div 
-                        className="progress-bar bg-danger" 
-                        role="progressbar" 
-                        style={{ width: `${eAttackProgress}%`, height: "20px" }} 
-                        aria-valuenow={eAttackProgress} 
-                        aria-valuemin="0" 
-                        aria-valuemax="100"
-                      >{`${(gameState.active_enemy.attack_cooldown / 1000).toFixed(1)}s`}
-                      </div>
-                    </>
-                  );
-                })()}
-                {gameState.hero.isInCombat && (
-                  <img
-                    src={gameState.active_enemy.image}
-                    alt="enemy"
-                    className="enemy-image img-fluid rounded shadow-sm"
-                    style={{ width: "100px", height: "150px" }}
-                  />
-                )}
-              </div>
-            </div>
-          </div>
-          <div className="p-3 text-center gap-2">
-            {/* XP Progress Bar */}
-            <div 
-              className="progress-bar bg-info" 
-              role="progressbar" 
-              style={{ width: '100%', height: '20px' }} 
-              aria-valuenow={gameState.hero.xp} 
-              aria-valuemin="0" 
-              aria-valuemax="100"
-            >
-              {`${gameState.hero.xp} / ${gameState.hero.xp_to_levelup} exp`}
-            </div>
-            <div class="btn-group-vertical btn-group-lg" role="group" aria-label="combat buttons">
-              {/* Back to Counter Button */}
-              <button
-                type="button"
-                onClick={() => handleCounterAttack()}
-                className={`btn ${isCounterAttackActive ? "btn-success" : "btn-outline-secondary"} px-4`}
-                disabled={!isCounterAttackActive}
-              >
-                {isCounterAttackActive ? "Counter Attack" : "wait for evade"}
-              </button>
-              {/* Back to City Button */}
-              <button
-                type="button"
-                onClick={() => handleLocationChange(GameState.LOCATION_CITY)}
-                className="btn btn-primary px-4"
-              >
-                Return to {GameState.LOCATION_CITY.name}
-              </button>
-            </div>
-          </div>
-        </>
-      )}
   
       {/* Story Dialog */}
       {isStoryDialogOpen && storyEvent && (
