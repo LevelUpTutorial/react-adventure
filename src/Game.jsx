@@ -104,7 +104,7 @@ function Game({ heroName, gender, isGameRunning }) {
                                 <button
                                     key={index}
                                     onClick={() => onChoose(upgrade)}
-                                    className="btn btn-danger btn-lg"
+                                    className="btn btn-danger btn-lg px-4"
                                 >
                                     {upgrade.name}
                                 </button>
@@ -236,7 +236,7 @@ function Game({ heroName, gender, isGameRunning }) {
               </div>
             </div>
           </div>
-          <div className="p-3 text-center">
+          <div className="p-3 text-center gap-2">
             {/* XP Progress Bar */}
             <div 
               className="progress-bar bg-info" 
