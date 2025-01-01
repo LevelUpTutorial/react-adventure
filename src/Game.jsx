@@ -99,7 +99,7 @@ function Game({ heroName, gender, isGameRunning }) {
                     </div>
                     <div className="modal-body">
                         <p>Choose one upgrade ({numChooseUpgrades}/{UPGRADE_PER_LEVELUP})</p>
-                        <div className="d-flex flex-column gap-2">
+                        <div className="btn-group btn-group-lg d-flex flex-column gap-2" role="group" aria-label="buttons for upgrade choices">
                             {upgrades.map((upgrade, index) => (
                                 <button
                                     key={index}
@@ -158,7 +158,7 @@ function Game({ heroName, gender, isGameRunning }) {
           </div>
   
           {/* Navigation Buttons */}
-          <div className="p-3 d-flex flex-wrap gap-2 border-bottom border-secondary-subtle">
+          <div className="btn-group p-3 d-flex flex-wrap gap-2 border-bottom border-secondary-subtle" role="group" aria-label="location change buttons">
             {[...Array(8).keys()].map((act) => (
               <button
                 key={act}
@@ -248,23 +248,25 @@ function Game({ heroName, gender, isGameRunning }) {
             >
               {`${gameState.hero.xp} / ${gameState.hero.xp_to_levelup} exp`}
             </div>
-            {/* Back to Counter Button */}
-            <button
-              type="button"
-              onClick={() => handleCounterAttack()}
-              className={`btn ${isCounterAttackActive ? "btn-success" : "btn-outline-secondary"} px-4`}
-              disabled={!isCounterAttackActive}
-            >
-              {isCounterAttackActive ? "Counter Attack" : "wait for evade"}
-            </button>
-            {/* Back to City Button */}
-            <button
-              type="button"
-              onClick={() => handleLocationChange(GameState.LOCATION_CITY)}
-              className="btn btn-primary px-4"
-            >
-              Return to {GameState.LOCATION_CITY.name}
-            </button>
+            <div class="btn-group btn-group-lg" role="group" aria-label="combat buttons">
+              {/* Back to Counter Button */}
+              <button
+                type="button"
+                onClick={() => handleCounterAttack()}
+                className={`btn ${isCounterAttackActive ? "btn-success" : "btn-outline-secondary"} px-4`}
+                disabled={!isCounterAttackActive}
+              >
+                {isCounterAttackActive ? "Counter Attack" : "wait for evade"}
+              </button>
+              {/* Back to City Button */}
+              <button
+                type="button"
+                onClick={() => handleLocationChange(GameState.LOCATION_CITY)}
+                className="btn btn-primary px-4"
+              >
+                Return to {GameState.LOCATION_CITY.name}
+              </button>
+            </div>
           </div>
         </>
       )}
