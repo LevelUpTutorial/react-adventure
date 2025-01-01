@@ -298,6 +298,10 @@ function Game({ heroName, gender, isGameRunning }) {
   );
 }
 
+/* Constants for Effects */ 
+const onHitEffectsHero = [];
+const onCombatStartEffects = [];
+const onHitEffectsEnemy = [];
 /* Main Function to handle all In-game Event Logic */
 function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades) {
   const location = gameState.location;
@@ -457,7 +461,122 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
 
   return gameState;
 }
-  
+
+/**
+ * Functions for Enchantment and Skill Effects 
+ */ 
+/* Fire Enchantment */ 
+const fireCC = 2; 
+const fireCD = 10;
+const fireId = 'fire effect'; 
+function fireEffectSelectApply(gameState) {
+  gameState.hero.crit_chance += fireCC;
+  gameState.hero.crit_damage += fireCD;
+  return gameState; 
+}
+function fireEffectSelectReverse(gameState) {
+  gameState.hero.crit_chance -= fireCC;
+  gameState.hero.crit_damage -= fireCD;
+  return gameState; 
+}
+/* Ice Enchantment */ 
+const iceEC = 2;
+const iceSlow = 100; 
+const iceId = 'Ice Effect'; 
+function iceEffectSelectApply(gameState) {
+  gameState.hero.evade_chance += iceEC; 
+  addEffect(onHitEffectsHero, iceId, iceEffectOnHitApply, iceEffectOnHitReverse);
+  return gameState;
+}
+function iceEffectSelectReverse(gameState) {
+  gameState.hero.evade_chance -= iceEC;
+  removeEffect(onHitEffectsHero, iceId); 
+  // TODO remove onhit counter from enemy 
+  return gameState;
+}
+// TODO currently on hit effect stacks infinitly 
+function iceEffectOnHitApply(gameState) {
+  const active_enemy = gameState.active_enemy; 
+  if (active_enemy) {
+    active_enemy.attack_speed -= iceSlow; 
+  }
+  return gameState; 
+}
+// TODO reverse can not be used yet, because enemy doesnt remember number of stacks 
+function iceEffectOnHitReverse(gameState) {
+  const active_enemy = gameState.active_enemy; 
+  if (active_enemy) {
+    active_enemy.attack_speed += iceSlow; 
+  }
+  return gameState; 
+}
+/* Lightning Enchantment */ 
+const lightningAS = 100; 
+const lightningId = 'Lightning Effect'; 
+function lightningEffectSelectApply(gameState) {
+  gameState.hero.attack_speed -= lightningAS; 
+  addEffect(onHitEffectsHero, lightningId, lightningEffectOnHitApply, lightningEffectOnHitReverse);
+  return gameState;
+}
+function lightningEffectSelectReverse(gameState) {
+  gameState.hero.attack_speed += lightninAS; 
+  removeEffect(onHitEffectsHero, lightningId);
+  return gameState; 
+}
+function lightningEffectOnHitApply(gameState) {
+  // TODO apply on hit effect 
+  return gameState; 
+}
+function lightningEffectOnHitReverse(gameState) {
+  // nothing to do 
+  return gameState; 
+}
+/* 
+ * Select Enchantment Helper 
+ */ 
+const noneId = 'none'; 
+function selectEnchantment(gameState, enchantment) {
+  const hero = gameState.hero;  
+  /* remove from lists if exists */
+  const prevEnchantment = hero.current_enchantment; 
+  prevEnchantment.selectReverse(gameState); 
+  /* add new Enchantment to lists */ 
+  if (enchantment === fireId) {
+    fireEffectSelectApply(gameState); 
+    hero.current_enchantment = { id: fireId, selectReverse: fireEffectSelectReverse }; 
+  } else if (enchantment === iceId) {
+    iceEffectSelectApply(gameState); 
+    hero.current_enchantment = { id: iceId, selectReverse: iceEffectSelectReverse }; 
+  } else if (enchantment === lightningId) {
+    lightningEffectSelectApply(gameState); 
+    hero.current_enchantment = { id: lightningId, selectReverse: lightningEffectSelectReverse };
+  } else if (enchantment === noneId) {
+    hero.current_enchantment = { id: noneId, selectReverse: (gameState) => {return gameState} };
+  } else {
+    console.error(`unknown enchantment selected ${enchantment}`);
+  }
+
+  return { ...gameState, hero }; 
+}
+/* 
+ * Effect List Helper 
+ */ 
+function addEffect(effectList, id, applyFunction, reverseFunction) {
+  effectList.push({ id, applyFunction, reverseFunction });
+}
+function removeEffect(effectList, id) {
+  const index = effectList.findIndex(effect => effect.id === id);
+  if (index !== -1) {
+    effectList.splice(index, 1);
+  }
+}
+function applyEffects(effectList, gameState) {
+  effectList.forEach(effect => effect.applyFunction(gameState));
+}
+function reverseEffects(effectList, gameState) {
+  effectList.forEach(effect => effect.reverseFunction(gameState));
+}
+
 /**
  * Function to select a random item based on weights
  * @param {Array} entries - Array of objects with `item` and `weight` properties
