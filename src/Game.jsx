@@ -393,6 +393,8 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_COMBAT : GameState.IMG_HERO_FEMALE_COMBAT);
       // create active enemy as copy from template 
       gameState.active_enemy = {...encounter.enemy, last_combat_event: ""};
+      /* apply effects at the start of combat */ 
+      applyEffects(onCombatStartEffects, gameState); 
     } else if (encounter.category === 'story') {
       gameState = handleResetHeroControl(gameState);
       hero = gameState.hero;
@@ -425,6 +427,9 @@ function performHeroAttack(gameState) {
   const dmg = combatCalculation(hero, active_enemy); 
 
   if (dmg >= 0) {
+    /* apply on hit effects */ 
+    applyEffects(onHitEffectsHero, gameState); 
+    /* apply damage */ 
     if (dmg > hero.attack) {
       hero.last_combat_event = `crit ${dmg}`;
     } else {
@@ -449,6 +454,9 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
     active_enemy.last_combat_event = `missed`;
     setCounterAttackActive(true); // Enable Counter Attack button
   } else {
+    /* apply on hit effects */ 
+    applyEffects(onHitEffectsEnemy, gameState); 
+    /* apply damage */
     if (dmg > active_enemy.attack) {
       active_enemy.last_combat_event = `crit ${dmg}`;
     } else {
