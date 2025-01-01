@@ -209,7 +209,7 @@ function Game({ heroName, gender, isGameRunning }) {
 
             return (
               <>
-                <p className="fw-semibold text-danger text-truncate" style={{ minWidth: "200px" }}>
+                <p className="fw-semibold text-danger text-truncate">
                   {gameState.active_enemy.name} ({gameState.active_enemy.level}) - HP: {gameState.active_enemy.health}
                 </p>
                 {renderCombatEvent(gameState.active_enemy.last_combat_event)}
