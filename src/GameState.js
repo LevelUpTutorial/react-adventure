@@ -661,7 +661,9 @@ static findEncounterList(gameState, location_id) {
 
   static XP_TO_LEVEL2 = 75; 
   static XP_SCALING = 1.3; 
-    
+
+  static ID_NONE = 'none'; 
+  
   constructor(heroName, gender, location) {
     this.hero = {
       isInCombat: false,
@@ -680,7 +682,8 @@ static findEncounterList(gameState, location_id) {
       crit_chance: 15, 
       crit_damage: 100, 
       last_combat_event: "", 
-      image: (gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL)
+      image: (gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL), 
+      current_enchantment = { id: GameState.ID_NONE, selectReverse: (gameState) => {return gameState} },
     }
     this.location = location;
   }
