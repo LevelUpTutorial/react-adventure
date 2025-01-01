@@ -1,7 +1,11 @@
 import {useEffect, useRef, useState} from "react";
 import GameState from "./GameState.js";
 import StoryDialog from "./components/StoryDialog.jsx"
-import {combatCalculation, playSound, SND_SWORD_HIT, calculateXpToLevelUp, onLevelUp, UPGRADE_PER_LEVELUP, playConfettiFirework} from "./GameUtils.js";
+import {combatCalculation, playSound, SND_SWORD_HIT, 
+        calculateXpToLevelUp, onLevelUp, 
+        UPGRADE_PER_LEVELUP, playConfettiFirework, 
+        changeLocation, handleResetHeroControl
+       } from "./GameUtils.js";
 
 import PropTypes from "prop-types";
 
@@ -38,16 +42,7 @@ function Game({ heroName, gender, isGameRunning }) {
 
   const handleLocationChange = (newLocation) => {
     setGameState((prevState) => {
-      if (prevState.location.name === newLocation.name) {
-        return prevState;
-      }
-      setBodyBackground(newLocation);
-      
-      if (newLocation.name === GameState.LOCATION_CITY.name) {
-        return handleResetHeroInTown(prevState);
-      }
-      
-      return { ...prevState, location: newLocation };
+      return changeLocation(prevState, newLocation); 
     });
   };
 
@@ -300,29 +295,6 @@ function Game({ heroName, gender, isGameRunning }) {
   );
 }
 
-/* Set HTML <body> background based on location.background
-  "background-image: url("@/assets/images/background-default.jpg");"
-*/
-function setBodyBackground(location) {
-  console.log(`setBodyBackground: ${location.name}`);
-
-  // Determine whether the device is widescreen or portrait
-  const isWidescreen = window.innerWidth / window.innerHeight > 1;
-
-  // Select the appropriate background based on orientation
-  const background = isWidescreen ? location.bg_widescreen : location.bg_portrait;
-
-  console.log(`Using background: ${background}`);
-  // console.log(`setBodyBackground: ${location.name}`);
-  // console.log(`setBodyBackground: ${location.background}`);
-
-  const body = document.querySelector('body');
-  body.style.backgroundImage = `url(${background})`;
-  body.style.backgroundSize = "cover";
-  body.style.backgroundPosition = "center";
-  body.style.backgroundRepeat = "no-repeat";
-}
-
 /* Main Function to handle all In-game Event Logic */
 function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades) {
   const location = gameState.location;
@@ -361,10 +333,6 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       }
     } else {
       // Enemy died 
-      // console.log(`Hero XP: ${hero.xp}`);
-      // console.log(`Enemy XP Reward: ${active_enemy.xp_reward}`);
-      // console.log(`XP to Level Up: ${hero.xp_to_levelup}`);
-      // console.log(`Current Level: ${hero.level}`);
       if (hero.xp + active_enemy.xp_reward >= hero.xp_to_levelup) {
         console.log(`hero level up`); 
         // handle level up 
@@ -374,17 +342,6 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
         // trigger level up popup
         setNumChooseUpgrades(UPGRADE_PER_LEVELUP);
         playConfettiFirework(); 
-        // simple stat scaling 
-        //hero.health_full += 50; 
-        //hero.health += hero.health_full; 
-        //hero.attack += 5; 
-        //hero.attack_speed -= 20; 
-        //hero.evade_chance += 1; 
-        //hero.crit_chance += 2; 
-        //hero.crit_damage += 10; 
-        console.log(`hero level ${hero.level}`);
-        console.log(`hero xp ${hero.xp}`);
-        console.log(`hero xp tp level up ${hero.xp_to_levelup}`);
         gameState.hero = hero; 
       } else { 
         hero.xp += active_enemy.xp_reward;
@@ -400,7 +357,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
     // console.log(`handleGameState: Hero HP -> ${hero.health}`);
     console.log(`handleGameState (after combat): Hero XP -> ${hero.xp}`);
     gameState = { ...gameState, hero, active_enemy}; 
-    return (hero.health > 0 ? gameState : handleResetHeroInTown(gameState));
+    return (hero.health > 0 ? gameState : changeLocation(gameState, GameState.LOCATION_CITY));
   }
 
   // handle Adventure outside of Combat
@@ -446,15 +403,16 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
   }
 
   if (location.name === GameState.LOCATION_CITY.name) {
-    return handleResetHeroInTown(gameState);
+    return changeLocation(gameState, GameState.LOCATION_CITY);
   }
 
   // return gameState unchanged
   // console.log('return gameState unchanged')
-  console.log(`handleGameState (return unchanged): Hero XP -> ${hero.xp}`);
+  // console.log(`handleGameState (return unchanged): Hero XP -> ${hero.xp}`);
   return gameState;
 }
 
+/* performs hero attack */ 
 function performHeroAttack(gameState) {
   const {hero, active_enemy} = gameState;
   const dmg = combatCalculation(hero, active_enemy); 
@@ -474,7 +432,7 @@ function performHeroAttack(gameState) {
   hero.attack_cooldown = hero.attack_speed;
   return gameState; 
 }
-
+/* performs enemy attack */ 
 function performEnemyAttack(gameState, setCounterAttackActive) {
   const {hero, active_enemy} = gameState;
   const dmg = combatCalculation(active_enemy, hero); 
@@ -497,36 +455,6 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
   return gameState;
 }
   
-/*
-  handle reset Hero control variables
- */
-function handleResetHeroControl(gameState) {
-  const hero = gameState.hero;
-  hero.isInCombat = false;
-  hero.isInDialog = false;
-  hero.attack_cooldown = hero.attack_speed;
-  hero.last_combat_event = ""; 
-  gameState.active_enemy = null;
-
-  return { ...gameState, hero };
-}
-
-/*
-  handle reset Hero in Town
- */
-function handleResetHeroInTown(gameState) {
-  gameState = handleResetHeroControl(gameState);
-  const hero = gameState.hero;
-  
-  gameState.location = GameState.LOCATION_CITY;
-  setBodyBackground(gameState.location); 
-  hero.health = hero.health_full; // Heal
-  hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
-
-  // return new gameState
-  return { ...gameState, hero }; 
-}
-
 /**
  * Function to select a random item based on weights
  * @param {Array} entries - Array of objects with `item` and `weight` properties
