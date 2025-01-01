@@ -99,7 +99,7 @@ function Game({ heroName, gender, isGameRunning }) {
                     </div>
                     <div className="modal-body">
                         <p>Choose one upgrade ({numChooseUpgrades}/{UPGRADE_PER_LEVELUP})</p>
-                        <div className="btn-group btn-group-lg d-flex flex-column gap-2" role="group" aria-label="buttons for upgrade choices">
+                        <div className="btn-group-vertical btn-group-lg d-flex flex-column gap-2" role="group" aria-label="buttons for upgrade choices">
                             {upgrades.map((upgrade, index) => (
                                 <button
                                     key={index}
@@ -158,7 +158,7 @@ function Game({ heroName, gender, isGameRunning }) {
           </div>
   
           {/* Navigation Buttons */}
-          <div className="btn-group p-3 d-flex flex-wrap gap-2 border-bottom border-secondary-subtle" role="group" aria-label="location change buttons">
+          <div className="btn-group-vertical p-3 d-flex flex-wrap gap-2 border-bottom border-secondary-subtle" role="group" aria-label="location change buttons">
             {[...Array(8).keys()].map((act) => (
               <button
                 key={act}
@@ -248,7 +248,7 @@ function Game({ heroName, gender, isGameRunning }) {
             >
               {`${gameState.hero.xp} / ${gameState.hero.xp_to_levelup} exp`}
             </div>
-            <div class="btn-group btn-group-lg" role="group" aria-label="combat buttons">
+            <div class="btn-group-vertical btn-group-lg" role="group" aria-label="combat buttons">
               {/* Back to Counter Button */}
               <button
                 type="button"
