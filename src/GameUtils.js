@@ -187,7 +187,7 @@ export function handleResetHeroControl(gameState) {
 /*
   handle reset Hero in Town
  */
-export function handleResetHeroInTown(gameState) {
+function handleResetHeroInTown(gameState) {
   gameState = handleResetHeroControl(gameState);
   const hero = gameState.hero;
   
