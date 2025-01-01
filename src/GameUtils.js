@@ -2,6 +2,7 @@ import swordHit from './assets/sounds/sword-hit.ogg';
 import GameState from './GameState.js';  
 export const SND_SWORD_HIT = swordHit;
 
+/* Util to play Sound */
 export function playSound(filePath) {
     // Create a new Audio object
     const sound = new Audio(filePath);
@@ -16,6 +17,7 @@ export function playSound(filePath) {
         });
 }
 
+/* calculate combat dmg or evade */ 
 export function combatCalculation(attacker, defender) {
     // Roll a random number between 0 and 100
     const roll = () => Math.random() * 100;
@@ -41,6 +43,7 @@ export function combatCalculation(attacker, defender) {
     return Math.floor(attacker.attack);
 }
 
+/* calculate XP needed for leveling up */ 
 export function calculateXpToLevelUp(current_level) {
   return Math.ceil(GameState.XP_TO_LEVEL2 * Math.pow(current_level, GameState.XP_SCALING)); 
 }
@@ -129,3 +132,71 @@ export function playConfettiFirework() {
     startVelocity: 45,
   });
 }
+
+/* change location and change background */
+export function changeLocation(prevState, newLocation) {
+    if (prevState.location.name === newLocation.name) {
+        return prevState;
+      }
+      setBodyBackground(newLocation);
+      
+      if (newLocation.name === GameState.LOCATION_CITY.name) {
+        return handleResetHeroInTown(prevState);
+      }
+      
+      return { ...prevState, location: newLocation };
+}
+
+/* Set HTML <body> background based on location.background
+  "background-image: url("@/assets/images/background-default.jpg");"
+*/
+function setBodyBackground(location) {
+  console.log(`setBodyBackground: ${location.name}`);
+
+  // Determine whether the device is widescreen or portrait
+  const isWidescreen = window.innerWidth / window.innerHeight > 1;
+
+  // Select the appropriate background based on orientation
+  const background = isWidescreen ? location.bg_widescreen : location.bg_portrait;
+
+  console.log(`Using background: ${background}`);
+  // console.log(`setBodyBackground: ${location.name}`);
+  // console.log(`setBodyBackground: ${location.background}`);
+
+  const body = document.querySelector('body');
+  body.style.backgroundImage = `url(${background})`;
+  body.style.backgroundSize = "cover";
+  body.style.backgroundPosition = "center";
+  body.style.backgroundRepeat = "no-repeat";
+}
+
+/*
+  handle reset Hero control variables
+ */
+export function handleResetHeroControl(gameState) {
+  const hero = gameState.hero;
+  hero.isInCombat = false;
+  hero.isInDialog = false;
+  hero.attack_cooldown = hero.attack_speed;
+  hero.last_combat_event = ""; 
+  gameState.active_enemy = null;
+
+  return { ...gameState, hero };
+}
+
+/*
+  handle reset Hero in Town
+ */
+export function handleResetHeroInTown(gameState) {
+  gameState = handleResetHeroControl(gameState);
+  const hero = gameState.hero;
+  
+  gameState.location = GameState.LOCATION_CITY;
+  setBodyBackground(gameState.location); 
+  hero.health = hero.health_full; // Heal
+  hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
+
+  // return new gameState
+  return { ...gameState, hero }; 
+}
+
