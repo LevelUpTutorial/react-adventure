@@ -261,7 +261,7 @@ return (
             {/* enchantment selection */}
             <div class="dropdown">
               <button class="btn btn-success dropdown-toggle" type="button" id="enchantmentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                {`${gameState.hero.current_enchantment}`}
+                {`${gameState.hero.current_enchantment.id}`}
               </button>
               <ul class="dropdown-menu" aria-labelledby="enchantmentDropdown">
                 <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(noneId)}>None</a></li>
@@ -492,8 +492,8 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
  * Functions for Enchantment and Skill Effects 
  */ 
 /* Fire Enchantment */ 
-const fireCC = 2; 
-const fireCD = 10;
+const fireCC = 10; 
+const fireCD = 25; 
 const fireId = 'fire effect'; 
 function fireEffectSelectApply(gameState) {
   console.log(`apply fire select`);
@@ -508,7 +508,7 @@ function fireEffectSelectReverse(gameState) {
   return gameState; 
 }
 /* Ice Enchantment */ 
-const iceEC = 2;
+const iceEC = 10;
 const iceSlow = 100; 
 const iceId = 'Ice Effect'; 
 function iceEffectSelectApply(gameState) {
@@ -529,7 +529,8 @@ function iceEffectOnHitApply(gameState) {
   console.log(`apply ice on hit`);
   const active_enemy = gameState.active_enemy; 
   if (active_enemy) {
-    active_enemy.attack_speed -= iceSlow; 
+    active_enemy.attack_speed += iceSlow; 
+    active_enemy.attack_cooldown += iceSlow; 
   }
   return gameState; 
 }
@@ -538,7 +539,8 @@ function iceEffectOnHitReverse(gameState) {
   console.log(`revert ice on hit`);
   const active_enemy = gameState.active_enemy; 
   if (active_enemy) {
-    active_enemy.attack_speed += iceSlow; 
+    active_enemy.attack_speed -= iceSlow; 
+    // attack cooldown is not reverted because enemy remains temporarily slowed 
   }
   return gameState; 
 }
