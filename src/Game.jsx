@@ -282,9 +282,9 @@ return (
             </div>
           </div>
         </div>
-        <div className="p-3 text-center">
+        <div className="p-3 text-center d-flex flex-column gap-2">
           {/* XP Progress Bar */}
-          <div className="progress d-flex gap-2">
+          <div className="progress">
             <div 
               className="progress-bar bg-info mb-3" 
               role="progressbar" 
