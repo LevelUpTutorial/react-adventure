@@ -189,8 +189,22 @@ return (
             {/* Hero Section */}
             <div className="battle-container-hero text-center d-flex flex-column flex-fill gap-2">
               <p className="fw-semibold text-success">
-                Hero ({gameState.hero.level}) - HP: {gameState.hero.health}
+                Hero Level {gameState.hero.level} - HP: {gameState.hero.health}
               </p>
+              <div className="progress">
+                <div 
+                  className="progress-bar bg-success" 
+                  role="progressbar" 
+                  style={{width: `${gameState.hero.health / gameState.hero.health_full * 100}%`, height: '20px' }} 
+                  aria-valuenow={gameState.hero.health} aria-valuemin="0" aria-valuemax="100">
+                </div>
+                <div 
+                  className="progress-bar progress-bar-striped bg-danger" 
+                  role="progressbar" 
+                  style={{width: `${(gameState.hero.health_full - gameState.hero.health) / gameState.hero.health_full * 100}%`, height: '20px' }} 
+                  aria-valuenow={gameState.hero.health_full - gameState.hero.health} aria-valuemin="0" aria-valuemax="100">
+                </div>
+              </div>
               {renderCombatEvent(gameState.hero.last_combat_event)}
               <div 
                 className="progress-bar bg-success" 
