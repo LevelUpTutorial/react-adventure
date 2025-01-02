@@ -66,8 +66,9 @@ function Game({ heroName, gender, isGameRunning }) {
     });
   };
 
-  const attackProgress = Math.max(0, Math.min( ((gameState.hero.attack_cooldown / gameState.hero.attack_speed) * 100), 100));
-
+  const attackProgress = Math.max(0, Math.min( (gameState.hero.attack_cooldown / gameState.hero.attack_speed * 100), 100));
+  const xpProgress = gameState.hero.xp / gameState.hero.xp_to_levelup * 100; 
+  
   const renderCombatEvent = (text) => {
     let style;
 
@@ -231,7 +232,7 @@ return (
             {/* Enemy Section */}
             <div className="battle-container-enemy text-center d-flex flex-column flex-fill gap-2">
               {gameState.active_enemy && (() => {
-                const eAttackProgress = Math.max(0, Math.min( ((gameState.active_enemy.attack_cooldown / gameState.active_enemy.attack_speed) * 100), 100));
+                const eAttackProgress = Math.max(0, Math.min( (gameState.active_enemy.attack_cooldown / gameState.active_enemy.attack_speed * 100), 100));
 
                 return (
                   <>
@@ -283,15 +284,17 @@ return (
         </div>
         <div className="p-3 text-center">
           {/* XP Progress Bar */}
-          <div 
-            className="progress-bar bg-info mb-3" 
-            role="progressbar" 
-            style={{ width: '100%', height: '20px' }} 
-            aria-valuenow={gameState.hero.xp} 
-            aria-valuemin="0" 
-            aria-valuemax="100"
-          >
-            {`${gameState.hero.xp} / ${gameState.hero.xp_to_levelup} exp`}
+          <div className="progress">
+            <div 
+              className="progress-bar bg-info mb-3" 
+              role="progressbar" 
+              style={{ width: `${xpProgres}%`, height: '20px' }} 
+              aria-valuenow={xpProgress} 
+              aria-valuemin="0" 
+              aria-valuemax="100"
+            >
+              {`${gameState.hero.xp} / ${gameState.hero.xp_to_levelup} exp`}
+            </div>
           </div>
           <div className="btn-group-vertical btn-group-lg gap-2" role="group" aria-label="combat buttons">
             {/* enchantment selection */}
