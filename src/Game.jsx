@@ -257,6 +257,18 @@ return (
             {`${gameState.hero.xp} / ${gameState.hero.xp_to_levelup} exp`}
           </div>
           <div className="btn-group-vertical btn-group-lg gap-2" role="group" aria-label="combat buttons">
+            {/* enchantment selection */}
+            <div class="dropdown">
+              <button class="btn btn-success dropdown-toggle" type="button" id="enchantmentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Select Enchantment
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="enchantmentDropdown">
+                <li><a class="dropdown-item" href="#" onclick={() => handleSelectEnchantment(noneId)}>None</a></li>
+                <li><a class="dropdown-item" href="#" onclick={() => handleSelectEnchantment(fireId)}>Fire</a></li>
+                <li><a class="dropdown-item" href="#" onclick={() => handleSelectEnchantment(iceId)}>Ice</a></li>
+                <li><a class="dropdown-item" href="#" onclick={() => handleSelectEnchantment(lightningId)}>Lightning</a></li>
+              </ul>
+            </div>
             {/* Back to Counter Button */}
             <button
               type="button"
