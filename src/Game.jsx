@@ -492,9 +492,9 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
  * Functions for Enchantment and Skill Effects 
  */ 
 /* Fire Enchantment */ 
-const fireCC = 10; 
-const fireCD = 25; 
-const fireId = 'fire effect'; 
+const fireCC = 20; 
+const fireCD = 50; 
+const fireId = 'Fire'; 
 function fireEffectSelectApply(gameState) {
   console.log(`apply fire select`);
   gameState.hero.crit_chance += fireCC;
@@ -508,9 +508,9 @@ function fireEffectSelectReverse(gameState) {
   return gameState; 
 }
 /* Ice Enchantment */ 
-const iceEC = 10;
-const iceSlow = 100; 
-const iceId = 'Ice Effect'; 
+const iceEC = 20;
+const iceSlow = 200; 
+const iceId = 'Ice'; 
 function iceEffectSelectApply(gameState) {
   console.log(`apply ice select`);
   gameState.hero.evade_chance += iceEC; 
@@ -545,9 +545,9 @@ function iceEffectOnHitReverse(gameState) {
   return gameState; 
 }
 /* Lightning Enchantment */ 
-const lightningAS = 100; 
-const lightningStunChance = 15; 
-const lightningId = 'Lightning Effect'; 
+const lightningAS = 200; 
+const lightningStunChance = 20; 
+const lightningId = 'Lightning'; 
 function lightningEffectSelectApply(gameState) {
   console.log(`apply lightning select`);
   gameState.hero.attack_speed -= lightningAS; 
