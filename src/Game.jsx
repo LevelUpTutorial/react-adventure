@@ -60,7 +60,8 @@ function Game({ heroName, gender, isGameRunning }) {
   };
 
   const handleSelectEnchantment = (enchantment_id) => {
-    setGameState((prevState) => {
+      console.log(`handle select ${enchantment_id}`);
+      setGameState((prevState) => {
       return selectEnchantment(prevState, enchantment_id); 
     });
   };
@@ -263,10 +264,10 @@ return (
                 Select Enchantment
               </button>
               <ul class="dropdown-menu" aria-labelledby="enchantmentDropdown">
-                <li><a class="dropdown-item" href="#" onclick={() => handleSelectEnchantment(noneId)}>None</a></li>
-                <li><a class="dropdown-item" href="#" onclick={() => handleSelectEnchantment(fireId)}>Fire</a></li>
-                <li><a class="dropdown-item" href="#" onclick={() => handleSelectEnchantment(iceId)}>Ice</a></li>
-                <li><a class="dropdown-item" href="#" onclick={() => handleSelectEnchantment(lightningId)}>Lightning</a></li>
+                <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(noneId)}>None</a></li>
+                <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(fireId)}>Fire</a></li>
+                <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(iceId)}>Ice</a></li>
+                <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(lightningId)}>Lightning</a></li>
               </ul>
             </div>
             {/* Back to Counter Button */}
