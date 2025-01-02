@@ -66,7 +66,7 @@ function Game({ heroName, gender, isGameRunning }) {
     });
   };
 
-  const attackProgress = (gameState.hero.attack_cooldown / gameState.hero.attack_speed) * 100;
+  const attackProgress = Math.max(0, Math.min( ((gameState.hero.attack_cooldown / gameState.hero.attack_speed) * 100), 100));
 
   const renderCombatEvent = (text) => {
     let style;
