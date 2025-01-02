@@ -208,18 +208,18 @@ return (
                 </div>
               </div>
               {renderCombatEvent(gameState.hero.last_combat_event)}
-              <div className="progress">
-                <div 
-                  className="progress-bar" 
-                  role="progressbar" 
-                  style={{ width: `${attackProgress}%`, height: '20px' }} 
-                  aria-valuenow={attackProgress} 
-                  aria-valuemin="0" 
-                  aria-valuemax="100"
-                >
-                  {`${(gameState.hero.attack_cooldown / 1000).toFixed(1)}s`}
-                </div>
+              
+              <div 
+                className="progress-bar bg-primary" 
+                role="progressbar" 
+                style={{ width: `${attackProgress}%`, height: '20px' }} 
+                aria-valuenow={attackProgress} 
+                aria-valuemin="0" 
+                aria-valuemax="100"
+              >
+                {`${(gameState.hero.attack_cooldown / 1000).toFixed(1)}s`}
               </div>
+              
               <img
                 src={gameState.hero.image}
                 alt="hero"
@@ -231,7 +231,7 @@ return (
             {/* Enemy Section */}
             <div className="battle-container-enemy text-center d-flex flex-column flex-fill gap-2">
               {gameState.active_enemy && (() => {
-                const eAttackProgress = (gameState.active_enemy.attack_cooldown / gameState.active_enemy.attack_speed) * 100;
+                const eAttackProgress = Math.max(0, Math.min( ((gameState.active_enemy.attack_cooldown / gameState.active_enemy.attack_speed) * 100), 100));
 
                 return (
                   <>
@@ -255,18 +255,18 @@ return (
                       </div>
                     </div>
                     {renderCombatEvent(gameState.active_enemy.last_combat_event)}
-                    <div className="progress">
-                      <div 
-                        className="progress-bar" 
-                        role="progressbar" 
-                        style={{ width: `${eAttackProgress}%`, height: "20px" }} 
-                        aria-valuenow={eAttackProgress} 
-                        aria-valuemin="0" 
-                        aria-valuemax="100"
-                      >
-                        {`${(gameState.active_enemy.attack_cooldown / 1000).toFixed(1)}s`}
-                      </div>
+                    
+                    <div 
+                      className="progress-bar bg-primary" 
+                      role="progressbar" 
+                      style={{ width: `${eAttackProgress}%`, height: "20px" }} 
+                      aria-valuenow={eAttackProgress} 
+                      aria-valuemin="0" 
+                      aria-valuemax="100"
+                    >
+                      {`${(gameState.active_enemy.attack_cooldown / 1000).toFixed(1)}s`}
                     </div>
+                    
                   </>
                 );
               })()}
