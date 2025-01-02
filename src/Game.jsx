@@ -59,6 +59,12 @@ function Game({ heroName, gender, isGameRunning }) {
     });
   };
 
+  const handleSelectEnchantment = (enchantment_id) => {
+    setGameState((prevState) => {
+      return selectEnchantment(prevState, enchantment_id); 
+    });
+  };
+
   const attackProgress = (gameState.hero.attack_cooldown / gameState.hero.attack_speed) * 100;
 
   const renderCombatEvent = (text) => {
@@ -542,26 +548,26 @@ function lightningEffectOnHitReverse(gameState) {
 /* 
  * Select Enchantment Helper 
  */ 
-const noneId = 'none'; 
-function selectEnchantment(gameState, enchantment) {
+const noneId = GameState.ID_NONE; 
+function selectEnchantment(gameState, enchantment_id) {
   const hero = gameState.hero;  
   /* remove from lists if exists */
   const prevEnchantment = hero.current_enchantment; 
   prevEnchantment.selectReverse(gameState); 
   /* add new Enchantment to lists */ 
-  if (enchantment === fireId) {
+  if (enchantment_id === fireId) {
     fireEffectSelectApply(gameState); 
     hero.current_enchantment = { id: fireId, selectReverse: fireEffectSelectReverse }; 
-  } else if (enchantment === iceId) {
+  } else if (enchantment_id === iceId) {
     iceEffectSelectApply(gameState); 
     hero.current_enchantment = { id: iceId, selectReverse: iceEffectSelectReverse }; 
-  } else if (enchantment === lightningId) {
+  } else if (enchantment_id === lightningId) {
     lightningEffectSelectApply(gameState); 
     hero.current_enchantment = { id: lightningId, selectReverse: lightningEffectSelectReverse };
-  } else if (enchantment === noneId) {
+  } else if (enchantment_id === noneId) {
     hero.current_enchantment = { id: noneId, selectReverse: (gameState) => {return gameState} };
   } else {
-    console.error(`unknown enchantment selected ${enchantment}`);
+    console.error(`unknown enchantment selected ${enchantment_id}`);
   }
 
   return { ...gameState, hero }; 
