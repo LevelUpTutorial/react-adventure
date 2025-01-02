@@ -546,6 +546,7 @@ function iceEffectOnHitReverse(gameState) {
 }
 /* Lightning Enchantment */ 
 const lightningAS = 100; 
+const lightningStunChance = 15; 
 const lightningId = 'Lightning Effect'; 
 function lightningEffectSelectApply(gameState) {
   console.log(`apply lightning select`);
@@ -560,8 +561,12 @@ function lightningEffectSelectReverse(gameState) {
   return gameState; 
 }
 function lightningEffectOnHitApply(gameState) {
-  // TODO apply on hit effect 
   console.log(`apply lightning on hit`);
+  const roll = () => Math.random() * 100;
+  if (roll() < lightningStunChance) {
+    // stun successful 
+    gameState.active_enemy.attack_cooldown = gameState.active_enemy.attack_speed; 
+  }
   return gameState; 
 }
 function lightningEffectOnHitReverse(gameState) {
