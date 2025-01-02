@@ -211,7 +211,7 @@ return (
               {renderCombatEvent(gameState.hero.last_combat_event)}
               
               <div 
-                className="progress-bar bg-primary" 
+                className="progress-bar bg-primary rounded" 
                 role="progressbar" 
                 style={{ width: `${attackProgress}%`, height: '20px' }} 
                 aria-valuenow={attackProgress} 
@@ -258,7 +258,7 @@ return (
                     {renderCombatEvent(gameState.active_enemy.last_combat_event)}
                     
                     <div 
-                      className="progress-bar bg-primary" 
+                      className="progress-bar bg-primary rounded" 
                       role="progressbar" 
                       style={{ width: `${eAttackProgress}%`, height: "20px" }} 
                       aria-valuenow={eAttackProgress} 
@@ -284,7 +284,7 @@ return (
         </div>
         <div className="p-3 text-center">
           {/* XP Progress Bar */}
-          <div className="progress">
+          <div className="progress d-flex gap-2">
             <div 
               className="progress-bar bg-info mb-3" 
               role="progressbar" 
