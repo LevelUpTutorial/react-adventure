@@ -261,7 +261,7 @@ return (
             {/* enchantment selection */}
             <div class="dropdown">
               <button class="btn btn-success dropdown-toggle" type="button" id="enchantmentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                Select Enchantment
+                {`${gameState.hero.current_enchantment}`}
               </button>
               <ul class="dropdown-menu" aria-labelledby="enchantmentDropdown">
                 <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(noneId)}>None</a></li>
@@ -553,7 +553,7 @@ function lightningEffectSelectApply(gameState) {
 }
 function lightningEffectSelectReverse(gameState) {
   console.log(`revert lightning select`);
-  gameState.hero.attack_speed += lightninAS; 
+  gameState.hero.attack_speed += lightningAS; 
   removeEffect(onHitEffectsHero, lightningId);
   return gameState; 
 }
