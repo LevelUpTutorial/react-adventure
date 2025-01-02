@@ -288,7 +288,7 @@ return (
             <div 
               className="progress-bar bg-info mb-3" 
               role="progressbar" 
-              style={{ width: `${xpProgres}%`, height: '20px' }} 
+              style={{ width: `${xpProgress}%`, height: '20px' }} 
               aria-valuenow={xpProgress} 
               aria-valuemin="0" 
               aria-valuemax="100"
