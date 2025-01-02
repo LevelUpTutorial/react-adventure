@@ -208,15 +208,17 @@ return (
                 </div>
               </div>
               {renderCombatEvent(gameState.hero.last_combat_event)}
-              <div 
-                className="progress-bar" 
-                role="progressbar" 
-                style={{ width: `${attackProgress}%`, height: '20px' }} 
-                aria-valuenow={attackProgress} 
-                aria-valuemin="0" 
-                aria-valuemax="100"
-              >
-                {`${(gameState.hero.attack_cooldown / 1000).toFixed(1)}s`}
+              <div className="progress">
+                <div 
+                  className="progress-bar" 
+                  role="progressbar" 
+                  style={{ width: `${attackProgress}%`, height: '20px' }} 
+                  aria-valuenow={attackProgress} 
+                  aria-valuemin="0" 
+                  aria-valuemax="100"
+                >
+                  {`${(gameState.hero.attack_cooldown / 1000).toFixed(1)}s`}
+                </div>
               </div>
               <img
                 src={gameState.hero.image}
@@ -253,15 +255,17 @@ return (
                       </div>
                     </div>
                     {renderCombatEvent(gameState.active_enemy.last_combat_event)}
-                    <div 
-                      className="progress-bar" 
-                      role="progressbar" 
-                      style={{ width: `${eAttackProgress}%`, height: "20px" }} 
-                      aria-valuenow={eAttackProgress} 
-                      aria-valuemin="0" 
-                      aria-valuemax="100"
-                    >
-                      {`${(gameState.active_enemy.attack_cooldown / 1000).toFixed(1)}s`}
+                    <div className="progress">
+                      <div 
+                        className="progress-bar" 
+                        role="progressbar" 
+                        style={{ width: `${eAttackProgress}%`, height: "20px" }} 
+                        aria-valuenow={eAttackProgress} 
+                        aria-valuemin="0" 
+                        aria-valuemax="100"
+                      >
+                        {`${(gameState.active_enemy.attack_cooldown / 1000).toFixed(1)}s`}
+                      </div>
                     </div>
                   </>
                 );
