@@ -48,7 +48,7 @@ function App() {
                 />
                 <label 
                   for="select-male"
-                  className={gender === GameState.GENDER_MALE ? 'text-primary' : 'text-secondary'}
+                  className={`fw-bold ${gender === GameState.GENDER_MALE ? 'text-primary' : 'text-secondary'}`}
                   >
                     heavy hitter
                 </label>
@@ -67,7 +67,7 @@ function App() {
                 />
                 <label 
                   for="select-female"
-                  className={gender === GameState.GENDER_FEMALE ? 'text-primary' : 'text-secondary'} 
+                  className={`fw-bold ${gender === GameState.GENDER_FEMALE ? 'text-primary' : 'text-secondary'}`} 
                 >
                   fast & agily
                 </label>
