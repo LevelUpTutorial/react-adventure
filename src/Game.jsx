@@ -194,7 +194,7 @@ return (
               </p>
               <div className="progress">
                 <div 
-                  className="progress-bar bg-success" 
+                  className="progress-bar bg-success align-middle" 
                   role="progressbar" 
                   style={{width: `${gameState.hero.health / gameState.hero.health_full * 100}%`, height: '20px' }} 
                   aria-valuenow={gameState.hero.health} aria-valuemin="0" aria-valuemax="100"
@@ -241,7 +241,7 @@ return (
                     </p>
                     <div className="progress">
                       <div 
-                        className="progress-bar bg-success" 
+                        className="progress-bar bg-success align-middle" 
                         role="progressbar" 
                         style={{width: `${gameState.active_enemy.health / gameState.active_enemy.health_full * 100}%`, height: '20px' }} 
                         aria-valuenow={gameState.active_enemy.health} aria-valuemin="0" aria-valuemax="100"
@@ -286,7 +286,7 @@ return (
           {/* XP Progress Bar */}
           <div className="progress">
             <div 
-              className="progress-bar bg-info mb-3" 
+              className="progress-bar bg-info mb-3 align-middle" 
               role="progressbar" 
               style={{ width: `${xpProgress}%`, height: '20px' }} 
               aria-valuenow={xpProgress} 
