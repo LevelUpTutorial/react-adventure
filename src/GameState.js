@@ -676,11 +676,11 @@ static findEncounterList(gameState, location_id) {
       health: 100,
       health_full: 100, 
       attack: 5,
-      attack_speed: 1500, // in Milliseconds because of Interval Ticks
-      attack_cooldown: 1500,
-      evade_chance: 30, 
-      crit_chance: 15, 
-      crit_damage: 100, 
+      attack_speed: (gender === GameState.GENDER_MALE ? 1875 : 1475), // in Milliseconds because of Interval Ticks
+      attack_cooldown: (gender === GameState.GENDER_MALE ? 1875 : 1475),
+      evade_chance: (gender === GameState.GENDER_MALE ? 10 : 20), 
+      crit_chance: (gender === GameState.GENDER_MALE ? 35 : 15), 
+      crit_damage: (gender === GameState.GENDER_MALE ? 200 : 100), 
       last_combat_event: "", 
       image: (gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL), 
       current_enchantment: { id: GameState.ID_NONE, selectReverse: (gameState) => {return gameState} },
