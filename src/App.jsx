@@ -34,17 +34,19 @@ function App() {
           <div className="mb-4">
             <p className="fw-bold text-primary">Choose your Hero:</p>
             <div className="d-flex justify-content-center align-items-center gap-4">
-              <div
+              <div 
                 className={`p-2 border ${gender === GameState.GENDER_MALE ? 'border-primary' : 'border-secondary'} rounded shadow-sm`}
                 onClick={() => setGender(GameState.GENDER_MALE)}
                 style={{ cursor: 'pointer' }}
               >
                 <img
+                  id="select-male"
                   src={GameState.IMG_HERO_MALE_NEUTRAL}
                   alt="Male Hero"
                   className="img-fluid rounded"
                   style={{ width: '100px', height: '150px' }}
                 />
+                <label for="select-male">heavy hitter</label>
               </div>
               <div
                 className={`p-2 border ${gender === GameState.GENDER_FEMALE ? 'border-primary' : 'border-secondary'} rounded shadow-sm`}
@@ -52,11 +54,13 @@ function App() {
                 style={{ cursor: 'pointer' }}
               >
                 <img
+                  id="select-female" 
                   src={GameState.IMG_HERO_FEMALE_NEUTRAL}
                   alt="Female Hero"
                   className="img-fluid rounded"
                   style={{ width: '100px', height: '150px' }}
                 />
+                <label for="select-female">fast & agily</label>
               </div>
             </div>
           </div>
