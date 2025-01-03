@@ -46,7 +46,12 @@ function App() {
                   className="img-fluid rounded"
                   style={{ width: '100px', height: '150px' }}
                 />
-                <label for="select-male">heavy hitter</label>
+                <label 
+                  for="select-male"
+                  className={gender === GameState.GENDER_MALE ? 'text-primary' : 'text-secondary'}
+                  >
+                    heavy hitter
+                </label>
               </div>
               <div
                 className={`p-2 border ${gender === GameState.GENDER_FEMALE ? 'border-primary' : 'border-secondary'} rounded shadow-sm`}
@@ -60,7 +65,12 @@ function App() {
                   className="img-fluid rounded"
                   style={{ width: '100px', height: '150px' }}
                 />
-                <label for="select-female">fast & agily</label>
+                <label 
+                  for="select-female"
+                  className={gender === GameState.GENDER_FEMALE ? 'text-primary' : 'text-secondary'} 
+                >
+                  fast & agily
+                </label>
               </div>
             </div>
           </div>
