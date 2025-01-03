@@ -298,6 +298,7 @@ return (
           </div>
           <div className="btn-group-vertical btn-group-lg gap-2" role="group" aria-label="combat buttons">
             {/* enchantment selection */}
+            <label for="select-enchantment">Enchantment:</label>
             <div class="dropdown" id="select-enchantment">
               <button class="btn btn-success dropdown-toggle" type="button" id="enchantmentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 {`${gameState.hero.current_enchantment.id}`}
@@ -309,7 +310,6 @@ return (
                 <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(lightningId)}>Lightning</a></li>
               </ul>
             </div>
-            <label for="select-enchantment">Enchantment:</label>
             {/* Back to Counter Button */}
             <button
               type="button"
