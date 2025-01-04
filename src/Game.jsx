@@ -298,9 +298,9 @@ return (
           </div>
           {/* control panel */}
           <div className="container mt-4">
-            <div className="row gap-3">
+            <div className="row">
               {/* Left column with 3 dropdowns */}
-              <div className="col-md-6">
+              <div className="col-md-6 mb-3">
                 <div className="d-flex flex-column gap-2">
                   {/* enchantment selection */}
                   <label for="select-enchantment">Enchantment:</label>
@@ -334,8 +334,8 @@ return (
                    <li><a className="dropdown-item" href="#">Option 3</a></li>
                  </ul>
                </div>
-                 {/* Dropdown 3 */}
-                 <div className="dropdown">
+               {/* Dropdown 3 */}
+               <div className="dropdown">
                  <button
                    className="btn btn-success dropdown-toggle"
                    type="button"
@@ -353,43 +353,43 @@ return (
                  </ul>
                </div>
              </div>
-             </div>
-             {/* Right column with 3 buttons */}
-             <div className="col-md-6">
-               <div className="d-flex flex-column gap-2">
-                 {/* Button 1 */}
-                 <button
-                   type="button"
-                   className="btn btn-primary"
-                   onClick={() => alert('Button 1 clicked')}
-                   disabled={true}
-                 >
-                   Evade Roll 
-                 </button>
-                 {/* Back to Counter Button */}
-                   <button
-                     type="button"
-                     onClick={() => handleCounterAttack()}
-                     className={`btn ${isCounterAttackActive ? "btn-success" : "btn-outline-secondary"} px-4`}
-                     disabled={!isCounterAttackActive}
-                   >
-                     {isCounterAttackActive ? "Counter Attack" : "wait for evade"}
-                   </button>
-                   {/* Back to City Button */}
-                   <button
-                     type="button"
-                     onClick={() => handleLocationChange(GameState.LOCATION_CITY)}
-                     className="btn btn-primary px-4"
-                   >
-                     Return to {GameState.LOCATION_CITY.name}
-                   </button>
-                 </div>
-               </div>
+           </div>
+           {/* Right column with 3 buttons */}
+           <div className="col-md-6">
+             <div className="d-flex flex-column gap-2">
+               {/* Button 1 */}
+               <button
+                 type="button"
+                 className="btn btn-primary"
+                 onClick={() => alert('Button 1 clicked')}
+                 disabled={true}
+               >
+                 Evade Roll 
+               </button>
+               {/* Back to Counter Button */}
+               <button
+                 type="button"
+                 onClick={() => handleCounterAttack()}
+                 className={`btn ${isCounterAttackActive ? "btn-success" : "btn-outline-secondary"} px-4`}
+                 disabled={!isCounterAttackActive}
+               >
+                 {isCounterAttackActive ? "Counter Attack" : "wait for evade"}
+               </button>
+               {/* Back to City Button */}
+               <button
+                 type="button"
+                 onClick={() => handleLocationChange(GameState.LOCATION_CITY)}
+                 className="btn btn-primary px-4"
+               >
+                 Return to {GameState.LOCATION_CITY.name}
+               </button>
              </div>
            </div>
+          </div>
         </div>
-      </>
-    )}
+      </div>
+    </>
+  )}
       {/* Story Dialog */}
       {isStoryDialogOpen && storyEvent && (
         <StoryDialog
