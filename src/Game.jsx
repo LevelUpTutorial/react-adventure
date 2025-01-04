@@ -326,7 +326,7 @@ return (
                    aria-expanded="false"
                    disabled={true} 
                  >
-                   Skills (coming soon)
+                   Skills
                  </button>
                  <ul className="dropdown-menu" aria-labelledby="dropdown2">
                    <li><a className="dropdown-item" href="#">Option 1</a></li>
@@ -344,7 +344,7 @@ return (
                    aria-expanded="false"
                    disabled={true}
                  >
-                   Skills (coming soon)
+                   Skills
                  </button>
                  <ul className="dropdown-menu" aria-labelledby="dropdown3">
                    <li><a className="dropdown-item" href="#">Option 1</a></li>
@@ -364,7 +364,7 @@ return (
                  onClick={() => alert('Button 1 clicked')}
                  disabled={true}
                >
-                 try to dodge (coming soon)
+                 try to dodge
                </button>
                {/* Back to Counter Button */}
                <button
