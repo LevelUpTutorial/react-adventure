@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+. import {useEffect, useRef, useState} from "react";
 import GameState from "./GameState.js";
 import StoryDialog from "./components/StoryDialog.jsx"
 import {combatCalculation, playSound, SND_SWORD_HIT, 
@@ -296,38 +296,99 @@ return (
               {`${gameState.hero.xp} / ${gameState.hero.xp_to_levelup} exp`}
             </div>
           </div>
-          <div className="btn-group-vertical btn-group-lg gap-2" role="group" aria-label="combat buttons">
-            {/* enchantment selection */}
-            <label for="select-enchantment">Enchantment:</label>
-            <div class="dropdown" id="select-enchantment">
-              <button class="btn btn-success dropdown-toggle" type="button" id="enchantmentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                {`${gameState.hero.current_enchantment.id}`}
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="enchantmentDropdown">
-                <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(noneId)}>None</a></li>
-                <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(fireId)}>Fire</a></li>
-                <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(iceId)}>Ice</a></li>
-                <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(lightningId)}>Lightning</a></li>
-              </ul>
-            </div>
-            {/* Back to Counter Button */}
-            <button
-              type="button"
-              onClick={() => handleCounterAttack()}
-              className={`btn ${isCounterAttackActive ? "btn-success" : "btn-outline-secondary"} px-4`}
-              disabled={!isCounterAttackActive}
-            >
-              {isCounterAttackActive ? "Counter Attack" : "wait for evade"}
-            </button>
-            {/* Back to City Button */}
-            <button
-              type="button"
-              onClick={() => handleLocationChange(GameState.LOCATION_CITY)}
-              className="btn btn-primary px-4"
-            >
-              Return to {GameState.LOCATION_CITY.name}
-            </button>
-          </div>
+          {/* control panel */}
+          <div className="container mt-4">
+            <div className="row">
+              {/* Left column with 3 dropdowns */}
+              <div className="col-md-6">
+                <div className="d-flex flex-column gap-2">
+                  {/* enchantment selection */}
+                  <label for="select-enchantment">Enchantment:</label>
+                  <div class="dropdown" id="select-enchantment">
+                    <button class="btn btn-success dropdown-toggle" type="button" id="enchantmentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      {`${gameState.hero.current_enchantment.id}`}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="enchantmentDropdown">
+                      <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(noneId)}>None</a></li>
+                      <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(fireId)}>Fire</a></li>
+                      <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(iceId)}>Ice</a></li>
+                      <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(lightningId)}>Lightning</a></li>
+                    </ul>
+                 </div>
+                 {/* Dropdown 2 */}
+                 <label for="select-skill-1">Skills:</label>
+                 <div className="dropdown" id="select-skill-1">
+                 <button
+                   className="btn btn-success dropdown-toggle"
+                   type="button"
+                   id="dropdown2"
+                   data-bs-toggle="dropdown"
+                   aria-expanded="false"
+                   disabled={true} 
+                 >
+                   Skills (coming soon)
+                 </button>
+                 <ul className="dropdown-menu" aria-labelledby="dropdown2">
+                   <li><a className="dropdown-item" href="#">Option 1</a></li>
+                   <li><a className="dropdown-item" href="#">Option 2</a></li>
+                   <li><a className="dropdown-item" href="#">Option 3</a></li>
+                 </ul>
+               </div>
+                 {/* Dropdown 3 */}
+                 <div className="dropdown">
+                 <button
+                   className="btn btn-success dropdown-toggle"
+                   type="button"
+                   id="dropdown3"
+                   data-bs-toggle="dropdown"
+                   aria-expanded="false"
+                   disabled={true}
+                 >
+                   Skills (coming soon)
+                 </button>
+                 <ul className="dropdown-menu" aria-labelledby="dropdown3">
+                   <li><a className="dropdown-item" href="#">Option 1</a></li>
+                   <li><a className="dropdown-item" href="#">Option 2</a></li>
+                   <li><a className="dropdown-item" href="#">Option 3</a></li>
+                 </ul>
+               </div>
+             </div>
+             </div>
+             {/* Right column with 3 buttons */}
+             <div className="col-md-6">
+               <div className="d-flex flex-column gap-2">
+                 <div className="btn-group-vertical btn-group-lg" role="group" aria-label="combat buttons">
+                 {/* Button 1 */}
+                 <button
+                   type="button"
+                   className="btn btn-primary"
+                   onClick={() => alert('Button 1 clicked')}
+                   disabled={true}
+                 >
+                   Evade Roll 
+                 </button>
+                 {/* Back to Counter Button */}
+                   <button
+                     type="button"
+                     onClick={() => handleCounterAttack()}
+                     className={`btn ${isCounterAttackActive ? "btn-success" : "btn-outline-secondary"} px-4`}
+                     disabled={!isCounterAttackActive}
+                   >
+                     {isCounterAttackActive ? "Counter Attack" : "wait for evade"}
+                   </button>
+                   {/* Back to City Button */}
+                   <button
+                     type="button"
+                     onClick={() => handleLocationChange(GameState.LOCATION_CITY)}
+                     className="btn btn-primary px-4"
+                   >
+                     Return to {GameState.LOCATION_CITY.name}
+                   </button>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
         </div>
       </>
     )}
