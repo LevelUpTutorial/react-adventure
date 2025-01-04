@@ -1,4 +1,4 @@
-. import {useEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import GameState from "./GameState.js";
 import StoryDialog from "./components/StoryDialog.jsx"
 import {combatCalculation, playSound, SND_SWORD_HIT, 
