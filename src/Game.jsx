@@ -364,7 +364,7 @@ return (
                  onClick={() => alert('Button 1 clicked')}
                  disabled={true}
                >
-                 Evade Roll 
+                 try to dodge (coming soon)
                </button>
                {/* Back to Counter Button */}
                <button
