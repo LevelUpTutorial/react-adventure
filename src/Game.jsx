@@ -298,7 +298,7 @@ return (
           </div>
           {/* control panel */}
           <div className="container mt-4">
-            <div className="row">
+            <div className="row gap-3">
               {/* Left column with 3 dropdowns */}
               <div className="col-md-6">
                 <div className="d-flex flex-column gap-2">
