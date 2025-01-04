@@ -357,7 +357,6 @@ return (
              {/* Right column with 3 buttons */}
              <div className="col-md-6">
                <div className="d-flex flex-column gap-2">
-                 <div className="btn-group-vertical btn-group-lg" role="group" aria-label="combat buttons">
                  {/* Button 1 */}
                  <button
                    type="button"
@@ -384,7 +383,6 @@ return (
                    >
                      Return to {GameState.LOCATION_CITY.name}
                    </button>
-                   </div>
                  </div>
                </div>
              </div>
