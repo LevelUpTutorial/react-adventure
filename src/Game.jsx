@@ -300,8 +300,7 @@ return (
           <div className="container mt-4">
             <div className="row">
               {/* Left column with 3 dropdowns */}
-              <div className="col-md-6 mb-3">
-                <div className="d-flex flex-column gap-2">
+              <div className="col-6 d-flex flex-column gap-2">
                   {/* enchantment selection */}
                   <label for="select-enchantment">Enchantment:</label>
                   <div class="dropdown" id="select-enchantment">
@@ -333,7 +332,7 @@ return (
                    <li><a className="dropdown-item" href="#">Option 2</a></li>
                    <li><a className="dropdown-item" href="#">Option 3</a></li>
                  </ul>
-               </div>
+                 </div>
                {/* Dropdown 3 */}
                <div className="dropdown">
                  <button
@@ -351,12 +350,10 @@ return (
                    <li><a className="dropdown-item" href="#">Option 2</a></li>
                    <li><a className="dropdown-item" href="#">Option 3</a></li>
                  </ul>
-               </div>
              </div>
            </div>
            {/* Right column with 3 buttons */}
-           <div className="col-md-6">
-             <div className="d-flex flex-column gap-2">
+           <div className="col-6 d-flex flex-column gap-2">
                {/* Button 1 */}
                <button
                  type="button"
@@ -384,7 +381,6 @@ return (
                  Return to {GameState.LOCATION_CITY.name}
                </button>
              </div>
-           </div>
           </div>
         </div>
       </div>
