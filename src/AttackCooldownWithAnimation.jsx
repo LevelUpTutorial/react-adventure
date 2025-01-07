@@ -30,14 +30,17 @@ const AttackCooldownWithAnimation = ({ gameState, timingWindowStart, timingWindo
   const timingWindowWidth = widthTimingWindowEnd - widthTimingWindowStart;
 
   return (
-    <div style={{ position: 'relative', height: '20px', marginBottom: '1rem' }}>
+    <div style={{ position: 'relative', height: '20px' }}>
       <style>{pulseAnimation}</style>
 
       {/* Main cooldown progress bar */}
         <div
           className="progress-bar rounded bg-primary"
           role="progressbar"
-          style={{ width: `${widthCooldown}%` }}
+          style={{ 
+            width: `${widthCooldown}%`,
+            height: '100%', 
+          }}
           aria-valuenow={widthCooldown}
           aria-valuemin="0"
           aria-valuemax="100"
