@@ -50,7 +50,7 @@ const AttackCooldownWithAnimation = ({ gameState, timingWindowStart, timingWindo
 
       {/* Timing window indicator */}
       <div
-        className={`progress-bar ${isTimingWindowActive ? 'bg-success' : 'bg-info'} rounded`}
+        className={`progress-bar ${isTimingWindowActive ? 'bg-success' : 'bg-danger'} rounded`}
         style={{
           position: 'absolute',
           top: 0,
