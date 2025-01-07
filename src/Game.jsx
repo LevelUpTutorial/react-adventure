@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import GameState from "./GameState.js";
-import StoryDialog from "./components/StoryDialog.jsx"
+import StoryDialog from "./components/StoryDialog.jsx"; 
+import AttackCooldownWithAnimation from "./AttackCooldownWithAnimation.jsx"; 
 import {combatCalculation, playSound, SND_SWORD_HIT, 
         calculateXpToLevelUp, onLevelUp, 
         UPGRADE_PER_LEVELUP, playConfettiFirework, 
@@ -39,6 +40,9 @@ function Game({ heroName, gender, isGameRunning }) {
 
   // Use the game loop hook
   useGameLoop(updateGameState, isGameRunning, currentTickDuration);
+
+  const attackTimingWindowStart = 0; 
+  const attackTimingWindowStop = 200; 
 
   const handleLocationChange = (newLocation) => {
     setGameState((prevState) => {
@@ -296,6 +300,8 @@ return (
               {`${gameState.hero.xp} / ${gameState.hero.xp_to_levelup} exp`}
             </div>
           </div>
+          {/* Attack Cooldown Hero */} 
+          <AttackCooldownWithAnimation gameState = {gameState} timingWindowStart = {attackTimingWindowStart} timingWindowEnd = {attackTimingWindowStop} tickRate = {currentTickDuration} /> 
           {/* control panel */}
           <div className="container mt-4">
             <div className="row">
@@ -361,7 +367,7 @@ return (
                  onClick={() => alert('Button 1 clicked')}
                  disabled={true}
                >
-                 try to dodge (soon)
+                 Attack (soon)
                </button>
                {/* Back to Counter Button */}
                <button
