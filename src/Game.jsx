@@ -89,7 +89,7 @@ const handleActiveAttack = () => {
       const bonus = baseAttack * attackTimingBonus / 100; 
       // grant temporary Bonus for successfully timed activ attack 
       updatedState.hero.attack += bonus; 
-      updatedState = performHeroAttack(updatedState); 
+      performHeroAttack(updatedState); 
       updatedState.hero.attack = baseAttack;  
       return updatedState;
     } else {
