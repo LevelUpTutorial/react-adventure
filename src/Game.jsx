@@ -68,7 +68,7 @@ function Game({ heroName, gender, isGameRunning }) {
   };
 
 const attackTimingWindowStart = 0; 
-const attackTimingWindowStop = 200; 
+const attackTimingWindowStop = 150; 
 const attackErrorMargin = 25; 
 const attackTimingBonus = 50; 
 
