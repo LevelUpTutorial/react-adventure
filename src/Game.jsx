@@ -250,16 +250,19 @@ return (
               </div>
               {renderCombatEvent(gameState.hero.last_combat_event)}
               
-              <div 
-                className="progress-bar bg-primary rounded" 
-                role="progressbar" 
-                style={{ width: `${attackProgress}%`, height: '20px' }} 
-                aria-valuenow={attackProgress} 
-                aria-valuemin="0" 
-                aria-valuemax="100"
-              >
-                {`${(gameState.hero.attack_cooldown / 1000).toFixed(1)}s`}
-              </div>
+              {/* XP Progress Bar */}
+          <div className="progress">
+            <div 
+              className="progress-bar bg-info mb-3 align-middle" 
+              role="progressbar" 
+              style={{ width: `${xpProgress}%`, height: '20px' }} 
+              aria-valuenow={xpProgress} 
+              aria-valuemin="0" 
+              aria-valuemax="100"
+            >
+              {`${gameState.hero.xp} / ${gameState.hero.xp_to_levelup} exp`}
+            </div>
+          </div>
               
               <img
                 src={gameState.hero.image}
@@ -323,19 +326,6 @@ return (
           </div>
         </div>
         <div className="p-3 text-center d-flex flex-column gap-2">
-          {/* XP Progress Bar */}
-          <div className="progress">
-            <div 
-              className="progress-bar bg-info mb-3 align-middle" 
-              role="progressbar" 
-              style={{ width: `${xpProgress}%`, height: '20px' }} 
-              aria-valuenow={xpProgress} 
-              aria-valuemin="0" 
-              aria-valuemax="100"
-            >
-              {`${gameState.hero.xp} / ${gameState.hero.xp_to_levelup} exp`}
-            </div>
-          </div>
           {/* Attack Cooldown Hero */} 
           <AttackCooldownWithAnimation gameState = {gameState} timingWindowStart = {attackTimingWindowStart} timingWindowEnd = {attackTimingWindowStop} tickRate = {currentTickDuration} /> 
           {/* control panel */}
