@@ -67,9 +67,9 @@ function Game({ heroName, gender, isGameRunning }) {
     });
   };
 
-const attackTimingWindowStart = 0;
-const attackTimingWindowStop = 200;
-const attackErrorMargin = 50;
+const attackTimingWindowStart = 0; 
+const attackTimingWindowStop = 200; 
+const attackErrorMargin = 25; 
 const attackTimingBonus = 50; 
 
 const handleActiveAttack = () => {
@@ -85,12 +85,16 @@ const handleActiveAttack = () => {
 
     if (isSuccessfulAttack) {
       console.log(`Active attack successful @${cooldown}ms`); 
+      const baseEvade = updatedState.active_enemy.evade_chance; 
       const baseAttack = updatedState.hero.attack; 
       const bonus = baseAttack * attackTimingBonus / 100; 
       // grant temporary Bonus for successfully timed activ attack 
+      // cant miss 
       updatedState.hero.attack += bonus; 
+      updatedState.active_enemy.evade_chance = 0; 
       performHeroAttack(updatedState); 
       updatedState.hero.attack = baseAttack;  
+      updatedState.active_enemy.evade_chance = baseEvade; 
       return updatedState;
     } else {
       console.log(`Active attack missed @${cooldown}ms`);
