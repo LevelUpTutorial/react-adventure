@@ -41,9 +41,6 @@ function Game({ heroName, gender, isGameRunning }) {
   // Use the game loop hook
   useGameLoop(updateGameState, isGameRunning, currentTickDuration);
 
-  const attackTimingWindowStart = 0; 
-  const attackTimingWindowStop = 200; 
-
   const handleLocationChange = (newLocation) => {
     setGameState((prevState) => {
       return changeLocation(prevState, newLocation); 
@@ -70,12 +67,40 @@ function Game({ heroName, gender, isGameRunning }) {
     });
   };
 
-  const handleActiveAttack = () => {
-      console.log(`Active attack performed @${gameState.hero.attack_cooldown}ms`);
-      setGameState((prevState) => {
-      return performHeroAttack(prevState); 
-    });
-  };
+const attackTimingWindowStart = 0;
+const attackTimingWindowStop = 200;
+const attackErrorMargin = 50;
+const attackTimingBonus = 50; 
+
+const handleActiveAttack = () => {
+  const cooldown = gameState.hero.attack_cooldown;
+
+  // Check if attack is within the correct timing window
+  const isSuccessfulAttack =
+    cooldown >= attackTimingWindowStart &&
+    cooldown <= attackTimingWindowStop + attackErrorMargin;
+
+  setGameState((prevState) => {
+    const updatedState = { ...prevState };
+
+    if (isSuccessfulAttack) {
+      console.log(`Active attack successful @${cooldown}ms`); 
+      const baseAttack = updatedState.hero.attack; 
+      const bonus = baseAttack * attackTimingBonus / 100; 
+      // grant temporary Bonus for successfully timed activ attack 
+      updatedState.hero.attack += bonus; 
+      updatedState = performHeroAttack(updatedState); 
+      updatedState.hero.attack = baseAttack;  
+      return updatedState;
+    } else {
+      console.log(`Active attack missed @${cooldown}ms`);
+      updatedState.hero.last_combat_event = `missed`; 
+      updatedState.hero.attack_cooldown = updatedState.hero.attack_speed;
+    } 
+
+    return updatedState;
+  });
+};
 
   const attackProgress = Math.max(0, Math.min( (gameState.hero.attack_cooldown / gameState.hero.attack_speed * 100), 100));
   const xpProgress = gameState.hero.xp / gameState.hero.xp_to_levelup * 100; 
