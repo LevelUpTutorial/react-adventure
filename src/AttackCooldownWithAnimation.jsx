@@ -24,25 +24,25 @@ const AttackCooldownWithAnimation = ({ gameState, timingWindowStart, timingWindo
     return () => clearInterval(interval);
   }, [cooldown, timingWindowStart, timingWindowEnd]);
 
-  const widthCooldown = (cooldown.current / cooldown.total) * 100;
+  const widthCooldown = Math.max(0, Math.min( (cooldown.current / cooldown.total * 100), 100)); 
   const widthTimingWindowStart = (timingWindowStart / cooldown.total) * 100;
   const widthTimingWindowEnd = (timingWindowEnd / cooldown.total) * 100;
   const timingWindowWidth = widthTimingWindowEnd - widthTimingWindowStart;
 
   return (
-    <div style={{ position: 'relative', height: '1.5rem', marginBottom: '1rem' }}>
+    <div style={{ position: 'relative', height: '20px', marginBottom: '1rem' }}>
       <style>{pulseAnimation}</style>
 
       {/* Main cooldown progress bar */}
         <div
-          className="progress-bar rounded"
+          className="progress-bar rounded bg-primary"
           role="progressbar"
           style={{ width: `${widthCooldown}%` }}
           aria-valuenow={widthCooldown}
           aria-valuemin="0"
           aria-valuemax="100"
         >
-          {`${Math.round(widthCooldown)}%`}
+          {`${Math.max(0, (cooldown.current / 1000).toFixed(1) )}s`}
         </div>
 
       {/* Timing window indicator */}
@@ -55,7 +55,7 @@ const AttackCooldownWithAnimation = ({ gameState, timingWindowStart, timingWindo
           width: `${timingWindowWidth}%`,
           height: '100%',
           zIndex: 1,
-          animation: isTimingWindowActive ? 'pulse 1s infinite' : 'none',
+          animation: isTimingWindowActive ? `pulse ${timingWindowWidth}ms infinite` : 'none',
         }}
       ></div>
     </div>
