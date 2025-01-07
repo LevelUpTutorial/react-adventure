@@ -70,6 +70,13 @@ function Game({ heroName, gender, isGameRunning }) {
     });
   };
 
+  const handleActiveAttack = () => {
+      console.log(`Active attack performed @${gameState.hero.attack_cooldown}ms`);
+      setGameState((prevState) => {
+      return performHeroAttack(prevState); 
+    });
+  };
+
   const attackProgress = Math.max(0, Math.min( (gameState.hero.attack_cooldown / gameState.hero.attack_speed * 100), 100));
   const xpProgress = gameState.hero.xp / gameState.hero.xp_to_levelup * 100; 
   
@@ -363,11 +370,10 @@ return (
                {/* Button 1 */}
                <button
                  type="button"
-                 className="btn btn-primary"
-                 onClick={() => alert('Button 1 clicked')}
-                 disabled={true}
+                 className="btn btn-danger"
+                 onClick={() => handleActiveAttack()}
                >
-                 Attack (soon)
+                 Attack
                </button>
                {/* Back to Counter Button */}
                <button
