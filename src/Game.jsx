@@ -67,7 +67,7 @@ function Game({ heroName, gender, isGameRunning }) {
     });
   };
 
-const attackTimingWindowStart = 0; 
+const attackTimingWindowStart = 100; 
 const attackTimingWindowStop = 150; 
 const attackErrorMargin = 25; 
 const attackTimingBonus = 50; 
