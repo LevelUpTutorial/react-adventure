@@ -68,8 +68,8 @@ function Game({ heroName, gender, isGameRunning }) {
   };
 
 const attackTimingWindowStart = 100; 
-const attackTimingWindowStop = 150; 
-const attackErrorMargin = 25; 
+const attackTimingWindowStop = 200; 
+const attackErrorMargin = 10; 
 const attackTimingBonus = 50; 
 
 const handleActiveAttack = () => {
@@ -226,7 +226,7 @@ return (
       <>
         <div className="container p-3 border-bottom border-secondary-subtle">
           <p className="fw-bold text-secondary">Location, {gameState.location.name}</p>
-          <div className="battle-container d-flex justify-content-around align-items-center">
+          <div className="battle-container d-flex justify-content-around align-items-center gap-1">
             {/* Hero Section */}
             <div className="battle-container-hero col-6 text-center d-flex flex-column flex-fill gap-2">
               <p className="fw-semibold text-success">
