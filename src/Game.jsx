@@ -224,7 +224,7 @@ return (
       {/* Adventure Location */}
       {gameState.location.name !== GameState.LOCATION_CITY.name && (
       <>
-        <div className="container p-3 border-bottom border-secondary-subtle">
+        <div className="container container-fluid p-3 border-bottom border-secondary-subtle">
           <p className="fw-bold text-secondary">Location, {gameState.location.name}</p>
           <div className="battle-container row gap-2">
             {/* Hero Section */}
