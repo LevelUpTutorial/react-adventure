@@ -226,9 +226,9 @@ return (
       <>
         <div className="p-3 border-bottom border-secondary-subtle">
           <p className="fw-bold text-secondary">Location, {gameState.location.name}</p>
-          <div className="battle-container d-flex justify-content-around align-items-center gap-2">
+          <div className="battle-container row gap-2">
             {/* Hero Section */}
-            <div className="battle-container-hero text-center d-flex flex-column flex-fill gap-2">
+            <div className="battle-container-hero col-6 text-center d-flex flex-column gap-2">
               <p className="fw-semibold text-success">
                 Hero ({gameState.hero.level})
               </p>
@@ -267,7 +267,7 @@ return (
             </div>
 
             {/* Enemy Section */}
-            <div className="battle-container-enemy text-center d-flex flex-column flex-fill gap-2">
+            <div className="battle-container-enemy col-6 text-center d-flex flex-column gap-2">
               {gameState.active_enemy && (() => {
                 const eAttackProgress = Math.max(0, Math.min( (gameState.active_enemy.attack_cooldown / gameState.active_enemy.attack_speed * 100), 100));
 
