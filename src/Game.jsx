@@ -232,7 +232,7 @@ return (
               className="battle-container-hero text-center d-flex flex-column flex-fill gap-2"
               style={{ width: '50%' }} 
               >
-              <p className="fw-semibold text-success flex-fill">
+              <p className="fw-semibold text-success">
                 Hero ({gameState.hero.level})
               </p>
               <div className="progress">
@@ -279,7 +279,7 @@ return (
 
                 return (
                   <>
-                    <p className="fw-semibold text-danger flex-fill">
+                    <p className="fw-semibold text-danger">
                       {gameState.active_enemy.name} ({gameState.active_enemy.level})
                     </p>
                     <div className="progress">
