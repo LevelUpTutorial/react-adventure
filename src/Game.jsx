@@ -77,7 +77,7 @@ const handleActiveAttack = () => {
 
   // Check if attack is within the correct timing window
   const isSuccessfulAttack =
-    cooldown >= attackTimingWindowStart &&
+    cooldown >= attackTimingWindowStart - attackErrorMargin &&
     cooldown <= attackTimingWindowStop + attackErrorMargin;
 
   setGameState((prevState) => {
@@ -256,8 +256,8 @@ return (
               {/* Attack Cooldown Hero */} 
           <AttackCooldownWithAnimation 
             gameState = {gameState} 
-            timingWindowStart = {attackTimingWindowStart} 
-            timingWindowEnd = {attackTimingWindowStop} 
+            timingWindowStart = {attackTimingWindowStart - attackErrorMargin} 
+            timingWindowEnd = {attackTimingWindowStop + attackErrorMargin} 
             tickRate = {currentTickDuration} 
             />
               
