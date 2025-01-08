@@ -40,12 +40,16 @@ import enemyDarkAcolyte3 from './assets/images/act3/enemy_dark_acolyte.webp';
 import enemyFrostElemental from './assets/images/act3/enemy_frost_elemental.webp';
 import enemyAvalancheBehemoth from './assets/images/act3/enemy_avalanche_behemoth.webp';
 import enemyEclipsedFrostguard from './assets/images/act3/enemy_eclipsed_frostguard.webp';
+import enemyKaelithsWraith from './assets/images/act3/enemy_kaeliths_wraith.webp';
+import enemyChillrendColossus from './assets/images/act3/enemy_chillrend_colossus.webp';
 /* Enemies Act 4 */
 import enemyDarkAcolyte4 from './assets/images/act4/enemy_dark_acolyte.webp';
 /* Enemies Act 5 */
 /* Enemies Act 6 */ 
 /* Enemies Act 7 */ 
 /* Enemies Act 8 */ 
+/* Enemies Mid-Act Bosses */
+/* Enemies End-Act Bosses */
 /* LOCATIONS */
 // TODO change city background ws and po when available 
 import backgroundCityws from './assets/images/backgrounds/background-act1-ws.webp';
