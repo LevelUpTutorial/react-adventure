@@ -229,7 +229,7 @@ return (
           <div className="battle-container d-flex justify-content-around align-items-center gap-1">
             {/* Hero Section */}
             <div className="battle-container-hero col-6 text-center d-flex flex-column flex-fill gap-2">
-              <p className="fw-semibold text-success">
+              <p className="fw-semibold text-success flex-fill">
                 Hero ({gameState.hero.level})
               </p>
               <div className="progress">
@@ -273,7 +273,7 @@ return (
 
                 return (
                   <>
-                    <p className="fw-semibold text-danger">
+                    <p className="fw-semibold text-danger flex-fill">
                       {gameState.active_enemy.name} ({gameState.active_enemy.level})
                     </p>
                     <div className="progress">
