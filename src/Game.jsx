@@ -226,7 +226,7 @@ return (
       <>
         <div className="p-3 border-bottom border-secondary-subtle">
           <p className="fw-bold text-secondary">Location, {gameState.location.name}</p>
-          <div className="battle-container row gap-2">
+          <div className="battle-container container-fluid row gap-2">
             {/* Hero Section */}
             <div className="battle-container-hero col-6 text-center d-flex flex-column gap-2">
               <p className="fw-semibold text-success">
