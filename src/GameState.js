@@ -44,6 +44,13 @@ import enemyKaelithsWraith from './assets/images/act3/enemy_kaeliths_wraith.webp
 import enemyChillrendColossus from './assets/images/act3/enemy_chillrend_colossus.webp';
 /* Enemies Act 4 */
 import enemyDarkAcolyte4 from './assets/images/act4/enemy_dark_acolyte.webp';
+import enemyCreepingVine from './assets/images/act4/enemy_creeping_vine.webp'; 
+import enemyEchoedGuardian from './assets/images/act4/enemy_echoed_guardian.webp';
+import enemyForestGuardian from './assets/images/act4/enemy_forest_guardian.webp';
+import enemyKaelithsShadow from './assets/images/act4/enemy_kaeliths_shadow.webp';
+import enemyPhantomStalker from './assets/images/act4/enemy_phantom_stalker.webp';
+import enemyShadowSprite from './assets/images/act4/enemy_shadow_sprite.webp';
+import enemyTwistedBeast from './assets/images/act4/enemy_twisted_beast.webp';
 /* Enemies Act 5 */
 /* Enemies Act 6 */ 
 /* Enemies Act 7 */ 
