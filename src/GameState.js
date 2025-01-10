@@ -75,7 +75,7 @@ import enemyTheHeraldOfDespair from './assets/images/act7/enemy_the_herald_of_de
 /* Enemies Act 8 */ 
 import enemyAbyssalWisps from './assets/images/act8/enemy_abyssal_wisps.webp'; 
 import enemyCosmicSentinel from './assets/images/act8/enemy_cosmic_sentinel.webp'; 
-import enemyEclipsedShardlings from './assets/images/act8/enemy_eclipsed_shardlings.webp'; 
+import enemyEclipseShardlings from './assets/images/act8/enemy_eclipse_shardlings.webp'; 
 import enemyRealityFragments from './assets/images/act8/enemy_reality_fragments.webp'; 
 import enemyVoidRevenant from './assets/images/act8/enemy_void_revenant.webp'; 
 /* Enemies Mid-Act Bosses */
