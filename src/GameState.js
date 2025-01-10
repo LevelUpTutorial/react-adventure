@@ -80,8 +80,22 @@ import enemyRealityFragments from './assets/images/act8/enemy_reality_fragments.
 import enemyVoidRevenant from './assets/images/act8/enemy_void_revenant.webp'; 
 /* Enemies Mid-Act Bosses */
 import enemyA1B1TheCorruptedChieftain from './assets/images/mid_act_bosses/act1_boss1_the_corrupted_chieftain.webp'; 
-
+import enemyA2B1TheScorchscaleBehemoth from './assets/images/mid_act_bosses/act2_boss1_the_scorchscale_behemoth.webp'; 
+import enemyA3B1FrostclawAlpha from './assets/images/mid_act_bosses/act3_boss1_frostclaw_alpha.webp'; 
+import enemyA4B1TheWisperingEldertree from './assets/images/mid_act_bosses/act4_boss1_the_wispering_eldertree.webp'; 
+import enemyA5B1TheObsidianMaw from './assets/images/mid_act_bosses/act5_boss1_the_obsidian_maw.webp'; 
+import enemyA6B1TheShardboundOracle from './assets/images/mid_act_bosses/act6_boss1_the_shardbound_oracle.webp'; 
+import enemyA7B1TheSteppeTitan from './assets/images/mid_act_bosses/act7_boss1_the_steppe_titan.webp'; 
+import enemyA8B1TheRiftbornDevourer from './assets/images/mid_act_bosses/act8_boss1_the_riftborn_devourer.webp; 
 /* Enemies End-Act Bosses */
+import enemyA1B2TheCultInfiltrator from './assets/images/act-bosses/act1_boss2_the_cult_infiltrator.webp'; 
+import enemyA2B2TheAshbinderPriestess from './assets/images/act-bosses/act2_boss2_the_ashbinder_priestess.webp'; 
+import enemyA3B2TheBoundMonk from './assets/images/act-bosses/act3_boss2_the_bound_monk.webp'; 
+import enemyA4B2KaelithsNightmare from './assets/images/act-bosses/act4_boss2_kaeliths_nightmare.webp'; 
+import enemyA5B2TheKeeperOfTheAbyss from './assets/images/act-bosses/act5_boss2_the_keeper_of_the_abyss.webp'; 
+import enemyA6B2TheTyrantKing from './assets/images/act-bosses/act6_boss2_the_tyrant_king.webp'; 
+import enemyA7B2TheShroudboundHighPriest from './assets/images/act-bosses/act7_boss2_the_shroudbound_high_priest.webp'; 
+import enemyA8B2TheEclipseAvatar from './assets/images/act-bosses/act8_boss2_the_eclipse_avatar.webp'; 
 /* LOCATIONS */
 // TODO change city background ws and po when available 
 import backgroundCityws from './assets/images/backgrounds/background-act1-ws.webp';
