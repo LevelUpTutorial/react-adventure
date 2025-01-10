@@ -444,6 +444,32 @@ class GameState {
     crit_damage: 50,
     image: enemyEclipsedFrostguard
   }
+  static ENEMY_KAELITHS_WRAITH = {
+    name: "Kaelith's Wraith",
+    level: 27,
+    xp_reward: 890, 
+    health: 1300,
+    attack: 300,
+    attack_speed: 1600,
+    attack_cooldown: 1600,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyKaelithsWraith
+  }
+  static ENEMY_CHILLREND_COLOSSUS = {  
+    name: 'Chillrend Colossus',
+    level: 28,
+    xp_reward: 950, 
+    health: 1900,
+    attack: 450,
+    attack_speed: 3500,
+    attack_cooldown: 3500,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyChillrendColossus 
+  }
     /* Enemy Templates Act4 */
   static ENEMY_DARK_ACOLYTE4 = {
     name: 'Dark Acolyte',
@@ -675,6 +701,8 @@ static findEncounterList(gameState, location_id) {
     { category: 'combat', id: 'FROST ELEMENTAL', enemy: GameState.ENEMY_FROST_ELEMENTAL, weight: 30 },
     { category: 'combat', id: 'AVALANCHE BEHEMOUTH', enemy: GameState.ENEMY_AVALANCHE_BEHEMOTH, weight: 30 },
     { category: 'combat', id: 'ECLIPSED FROSTGUARD', enemy: GameState.ENEMY_ECLIPSED_FROSTGUARD, weight: 10 },
+    { category: 'combat', id: 'KAELITHS WRAITH', enemy: GameState.ENEMY_KAELITHS_WRAITH, weight: 5 },
+    { category: 'combat', id: 'CHILLREND COLOSSUS', enemy: GameState.ENEMY_CHILLREND_COLOSSUS, weight: 5 },
   ];
   static ACT4_ENCOUNTERS = [
     { category: 'combat', id: 'ENEMY_DARK_AKOLYTE 4', enemy: GameState.ENEMY_DARK_ACOLYTE4, weight: 25 }
