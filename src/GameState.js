@@ -86,7 +86,7 @@ import enemyA4B1TheWisperingEldertree from './assets/images/mid_act_bosses/act4_
 import enemyA5B1TheObsidianMaw from './assets/images/mid_act_bosses/act5_boss1_the_obsidian_maw.webp'; 
 import enemyA6B1TheShardboundOracle from './assets/images/mid_act_bosses/act6_boss1_the_shardbound_oracle.webp'; 
 import enemyA7B1TheSteppeTitan from './assets/images/mid_act_bosses/act7_boss1_the_steppe_titan.webp'; 
-import enemyA8B1TheRiftbornDevourer from './assets/images/mid_act_bosses/act8_boss1_the_riftborn_devourer.webp; 
+import enemyA8B1TheRiftbornDevourer from './assets/images/mid_act_bosses/act8_boss1_the_riftborn_devourer.webp'; 
 /* Enemies End-Act Bosses */
 import enemyA1B2TheCultInfiltrator from './assets/images/act-bosses/act1_boss2_the_cult_infiltrator.webp'; 
 import enemyA2B2TheAshbinderPriestess from './assets/images/act-bosses/act2_boss2_the_ashbinder_priestess.webp'; 
