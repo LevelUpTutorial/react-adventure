@@ -73,13 +73,13 @@ import enemySteppeCrawler from './assets/images/act7/enemy_steppe_crawler.webp';
 import enemyStormboundFiend from './assets/images/act7/enemy_stormbound_fiend.webp'; 
 import enemyTheHeraldOfDespair from './assets/images/act7/enemy_the_herald_of_despair.webp'; 
 /* Enemies Act 8 */ 
-import enemyAbyssalWisps from './assets/image/act8/enemy_abyssal_wisps.webp'; 
-import enemyCosmicSentinel from './assets/image/act8/enemy_cosmic_sentinel.webp'; 
-import enemyEclipsedShardlings from './assets/image/act8/enemy_eclipsed_shardlings.webp'; 
-import enemyRealityFragments from './assets/image/act8/enemy_reality_fragments.webp'; 
-import enemyVoidRevenant from './assets/image/act8/enemy_void_revenant.webp'; 
+import enemyAbyssalWisps from './assets/images/act8/enemy_abyssal_wisps.webp'; 
+import enemyCosmicSentinel from './assets/images/act8/enemy_cosmic_sentinel.webp'; 
+import enemyEclipsedShardlings from './assets/images/act8/enemy_eclipsed_shardlings.webp'; 
+import enemyRealityFragments from './assets/images/act8/enemy_reality_fragments.webp'; 
+import enemyVoidRevenant from './assets/images/act8/enemy_void_revenant.webp'; 
 /* Enemies Mid-Act Bosses */
-import enemyA1B1TheCorruptedChieftain from './assets/image/mid_act_bosses/act1_boss1_the_corrupted_chieftain.webp'; 
+import enemyA1B1TheCorruptedChieftain from './assets/images/mid_act_bosses/act1_boss1_the_corrupted_chieftain.webp'; 
 
 /* Enemies End-Act Bosses */
 /* LOCATIONS */
