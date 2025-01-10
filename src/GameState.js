@@ -82,7 +82,7 @@ import enemyVoidRevenant from './assets/images/act8/enemy_void_revenant.webp';
 import enemyA1B1TheCorruptedChieftain from './assets/images/mid_act_bosses/act1_boss1_the_corrupted_chieftain.webp'; 
 import enemyA2B1TheScorchscaleBehemoth from './assets/images/mid_act_bosses/act2_boss1_the_scorchscale_behemoth.webp'; 
 import enemyA3B1FrostclawAlpha from './assets/images/mid_act_bosses/act3_boss1_frostclaw_alpha.webp'; 
-import enemyA4B1TheWisperingEldertree from './assets/images/mid_act_bosses/act4_boss1_the_wispering_eldertree.webp'; 
+import enemyA4B1TheWhisperingEldertree from './assets/images/mid_act_bosses/act4_boss1_the_whispering_eldertree.webp'; 
 import enemyA5B1TheObsidianMaw from './assets/images/mid_act_bosses/act5_boss1_the_obsidian_maw.webp'; 
 import enemyA6B1TheShardboundOracle from './assets/images/mid_act_bosses/act6_boss1_the_shardbound_oracle.webp'; 
 import enemyA7B1TheSteppeTitan from './assets/images/mid_act_bosses/act7_boss1_the_steppe_titan.webp'; 
