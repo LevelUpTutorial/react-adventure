@@ -52,10 +52,35 @@ import enemyPhantomStalker from './assets/images/act4/enemy_phantom_stalker.webp
 import enemyShadowSprite from './assets/images/act4/enemy_shadow_sprite.webp';
 import enemyTwistedBeast from './assets/images/act4/enemy_twisted_beast.webp';
 /* Enemies Act 5 */
+import enemyAncientSentinel from './assets/images/act5/enemy_ancient_sentinel.webp'; 
+import enemyCollapdedPhantom from './assets/images/act5/enemy_collapsed_phantom.webp'; 
+import enemyCultExcavator from './assets/images/act5/enemy_cult_excavator.webp'; 
+import enemyRuneWroughtTitan from './assets/images/act5/enemy_rune_wrought_titan.webp'; 
+import enemyShadowSpider from './assets/images/act5/enemy_shadow_spider.webp'; 
+import enemyTheForsakenArchivist from './assets/images/act5/enemy_the_forsaken_archivist.webp'; 
 /* Enemies Act 6 */ 
+import enemyEclipsedCultOperative from './assets/images/act6/enemy_eclipsed_cult_operative.webp'; 
+import enemyGildedWretch from './assets/images/act6/enemy_gilded_wretch.webp'; 
+import enemySkybornHarbinger from './assets/images/act6/enemy_skyborn_harbinger.webp'; 
+import enemySunlitPhantom from './assets/images/act6/enemy_sunlit_phantom.webp'; 
+import enemySunstoneConstruct from './assets/images/act6/enemy_sunstone_construct.webp'; 
+import enemyTyrantsEnforcer from './assets/images/act6/enemy_tyrants_enforcer.webp'; 
 /* Enemies Act 7 */ 
+import enemyAshWraith from './assets/images/act7/enemy_ash_wraith.webp'; 
+import enemyCultPyromancer from './assets/images/act7/enemy_cult_pyromancer.webp'; 
+import enemyEclipsedMarauder from './assets/images/act7/enemy_eclipsed_marauder.webp'; 
+import enemySteppeCrawler from './assets/images/act7/enemy_steppe_crawler.webp'; 
+import enemyStormboundFiend from './assets/images/act7/enemy_stormbound_fiend.webp'; 
+import enemyTheHeraldOfDespair from './assets/images/act7/enemy_the_herald_of_despair.webp'; 
 /* Enemies Act 8 */ 
+import enemyAbyssalWisps from './assets/image/act8/enemy_abyssal_wisps.webp'; 
+import enemyCosmicSentinel from './assets/image/act8/enemy_cosmic_sentinel.webp'; 
+import enemyEclipsedShardlings from './assets/image/act8/enemy_eclipsed_shardlings.webp'; 
+import enemyRealityFragments from './assets/image/act8/enemy_reality_fragments.webp'; 
+import enemyVoidRevenant from './assets/image/act8/enemy_void_revenant.webp'; 
 /* Enemies Mid-Act Bosses */
+import enemyA1B1TheCorruptedChieftain from './assets/image/mid_act_bosses/act1_boss1_the_corrupted_chieftain.webp'; 
+
 /* Enemies End-Act Bosses */
 /* LOCATIONS */
 // TODO change city background ws and po when available 
