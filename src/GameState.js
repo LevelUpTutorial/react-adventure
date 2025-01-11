@@ -501,6 +501,19 @@ class GameState {
     name: 'Phantom Stalker',
     level: 33,
     xp_reward: 1450, 
+    health: 1850,
+    attack: 590,
+    attack_speed: 1500,
+    attack_cooldown: 1500,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyPhantomStalker,
+  }
+  static ENEMY_TWISTED_BEAST = {
+    name: 'Twisted Beast',
+    level: 33,
+    xp_reward: 1550, 
     health: 1350,
     attack: 250,
     attack_speed: 500,
@@ -508,7 +521,7 @@ class GameState {
     evade_chance: 10, 
     crit_chance: 15, 
     crit_damage: 50,
-    image: enemyPhantomStalker,
+    image: enemyTwistedBeast,
   }
   static ENEMY_DARK_ACOLYTE4 = {
     name: 'Dark Acolyte',
