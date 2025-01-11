@@ -53,7 +53,7 @@ import enemyShadowSprite from './assets/images/act4/enemy_shadow_sprite.webp';
 import enemyTwistedBeast from './assets/images/act4/enemy_twisted_beast.webp';
 /* Enemies Act 5 */
 import enemyAncientSentinel from './assets/images/act5/enemy_ancient_sentinel.webp'; 
-import enemyCollapdedPhantom from './assets/images/act5/enemy_collapsed_phantom.webp'; 
+import enemyCollapsedPhantom from './assets/images/act5/enemy_collapsed_phantom.webp'; 
 import enemyCultExcavator from './assets/images/act5/enemy_cult_excavator.webp'; 
 import enemyRuneWroughtTitan from './assets/images/act5/enemy_rune_wrought_titan.webp'; 
 import enemyShadowSpider from './assets/images/act5/enemy_shadow_spider.webp'; 
@@ -526,7 +526,7 @@ class GameState {
   static ENEMY_DARK_ACOLYTE4 = {
     name: 'Dark Acolyte',
     level: 35,
-    xp_reward: 1480, 
+    xp_reward: 1660, 
     health: 2000,
     attack: 600,
     attack_speed: 1600,
@@ -536,10 +536,270 @@ class GameState {
     crit_damage: 50,
     image: enemyDarkAcolyte4
   }
+  static ENEMY_ECHOED_GUARDIAN = {
+    name: 'Echoed Guardian',
+    level: 36,
+    xp_reward: 1800, 
+    health: 2250,
+    attack: 800,
+    attack_speed: 2000,
+    attack_cooldown: 2000,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyEchoedGuardian,
+  }
+  static ENEMY_KAELITHS_SHADOW = {
+    name: "Kaelith's Shadow",
+    level: 38,
+    xp_reward: 2000, 
+    health: 2400,
+    attack: 800,
+    attack_speed: 1100,
+    attack_cooldown: 1100,
+    evade_chance: 30, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyKaelithsShadow,
+  }  
   /* Enemy Templates Act5 */
+  static ENEMY_ANCIENT_SENTINEL = {
+    name: "Ancient Sentinel",
+    level: 40,
+    xp_reward: 2290, 
+    health: 2500,
+    attack: 880,
+    attack_speed: 1500,
+    attack_cooldown: 1500,
+    evade_chance: 15, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyAncientSentinel,
+  }
+  static ENEMY_COLLAPSED_PHANTOM = {
+    name: "Collapsed Phantom",
+    level: 41,
+    xp_reward: 2360, 
+    health: 2550,
+    attack: 910,
+    attack_speed: 1400,
+    attack_cooldown: 1400,
+    evade_chance: 35, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyCollapsedPhantom,
+  }
+  static ENEMY_SHADOW_SPIDER = {
+    name: "Shadow Spider",
+    level: 42,
+    xp_reward: 2550, 
+    health: 2900,
+    attack: 1100,
+    attack_speed: 1900,
+    attack_cooldown: 1900,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyShadowSpider,
+  }
+  static ENEMY_CULT_EXCAVATOR = {
+    name: "Cult Excavator",
+    level: 43,
+    xp_reward: 2670, 
+    health: 2900,
+    attack: 1100,
+    attack_speed: 1400,
+    attack_cooldown: 1400,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyCultExcavator,
+  }
+  static ENEMY_RUNE_WROUGHT_TITAN = {
+    name: "Rune-Wrought Titan",
+    level: 45,
+    xp_reward: 3070, 
+    health: 3500,
+    attack: 2000,
+    attack_speed: 2100,
+    attack_cooldown: 2100,
+    evade_chance: 10, 
+    crit_chance: 25, 
+    crit_damage: 50,
+    image: enemyRuneWroughtTitan,
+  }
+  static ENEMY_THE_FORSAKEN_ARCHIVIST = {
+    name: "Forsaken Archivist",
+    level: 45,
+    xp_reward: 3090, 
+    health: 3150,
+    attack: 1250,
+    attack_speed: 1400,
+    attack_cooldown: 1400,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyTheForsakenArchivist,
+  }
   /* Enemy Templates Act6 */
+  static ENEMY_GILDED_WRETCH = {
+    name: "Gilded Wretch",
+    level: 48,
+    xp_reward: 3390, 
+    health: 3400,
+    attack: 1250,
+    attack_speed: 1500,
+    attack_cooldown: 1500,
+    evade_chance: 25, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyGildedWretch,
+  }
+  static ENEMY_SUNSTONE_CONSTRUCT = {
+    name: "Sunstone Construct",
+    level: 49,
+    xp_reward: 3490, 
+    health: 3900,
+    attack: 1600,
+    attack_speed: 1800,
+    attack_cooldown: 1800,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemySunstoneConstruct,
+  }
+  static ENEMY_SKYBORN_HARBINGER = {
+    name: "Skyborn Harbinger",
+    level: 50,
+    xp_reward: 3490, 
+    health: 3600,
+    attack: 1500,
+    attack_speed: 1500,
+    attack_cooldown: 1500,
+    evade_chance: 35, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemySkybornHarbinger,
+  }
+  static ENEMY_TYRANTS_ENFORCER = {
+    name: "Tyrant's Enforcer",
+    level: 50,
+    xp_reward: 3490, 
+    health: 3600,
+    attack: 1500,
+    attack_speed: 1500,
+    attack_cooldown: 1500,
+    evade_chance: 35, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyTyrantsEnforcer,
+  }
+  static ENEMY_CULT_OPERATIVE = {
+    name: "Cult Operative",
+    level: 51,
+    xp_reward: 3610, 
+    health: 3660,
+    attack: 1350,
+    attack_speed: 1000,
+    attack_cooldown: 1000,
+    evade_chance: 40, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyCultOperative,
+  }
+  static ENEMY_SUNLIT_PHANTOM = {
+    name: "SUNLIT PHANTOM",
+    level: 53,
+    xp_reward: 3830, 
+    health: 3930,
+    attack: 1470,
+    attack_speed: 1300,
+    attack_cooldown: 1300,
+    evade_chance: 40, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemySunlitPhantom,
+  }
   /* Enemy Templates Act7 */
-  /* Enemy Templates Act8 */
+  static ENEMY_STORMBOUND_FIEND = {
+    name: "Stormbound Fiend",
+    level: 55,
+    xp_reward: 4100, 
+    health: 4500,
+    attack: 1600,
+    attack_speed: 1400,
+    attack_cooldown: 1400,
+    evade_chance: 35, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyStormboundFiend,
+  }
+  static ENEMY_STEPPE_CRAWLER = {
+    name: "Steppe Crawler",
+    level: 55,
+    xp_reward: 4050, 
+    health: 4400,
+    attack: 1600,
+    attack_speed: 1700,
+    attack_cooldown: 1700,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemySteppeCrawler,
+  }
+  static ENEMY_ASH_WRAITH = {
+    name: "Ash Wraith",
+    level: 56,
+    xp_reward: 4290, 
+    health: 4100,
+    attack: 1630,
+    attack_speed: 1200,
+    attack_cooldown: 1200,
+    evade_chance: 65, 
+    crit_chance: 25, 
+    crit_damage: 50,
+    image: enemyAshWraith,
+  }
+  static ENEMY_CULT_PYROMANCER = {
+    name: "Cult Pyromancer",
+    level: 56,
+    xp_reward: 4410, 
+    health: 4400,
+    attack: 900,
+    attack_speed: 1600,
+    attack_cooldown: 1600,
+    evade_chance: 20, 
+    crit_chance: 65, 
+    crit_damage: 100,
+    image: enemyCultPyromancer,
+  }
+  static ENEMY_ECLIPSED_MARAUDER = {
+    name: "Eclipsed Marauder",
+    level: 58,
+    xp_reward: 4790, 
+    health: 4900,
+    attack: 1850,
+    attack_speed: 1600,
+    attack_cooldown: 1600,
+    evade_chance: 30, 
+    crit_chance: 45, 
+    crit_damage: 50,
+    image: enemyEclispedMarauder,
+  }
+  static ENEMY_THE_HERALD_OF_DESPAIR = {
+    name: "Herald of Despair",
+    level: 59,
+    xp_reward: 4930, 
+    health: 4900,
+    attack: 1950,
+    attack_speed: 1500,
+    attack_cooldown: 1500,
+    evade_chance: 60, 
+    crit_chance: 55, 
+    crit_damage: 50,
+    image: enemyTheHeraldOfDespair,
+  }
+  /* Enemy  Act8 */
   /* Enemy Templates Placeholder */
   static ENEMY_PLACEHOLDER  = {
     name: 'Random Enemy',
