@@ -470,7 +470,46 @@ class GameState {
     crit_damage: 50,
     image: enemyChillrendColossus 
   }
-    /* Enemy Templates Act4 */
+  /* Enemy Templates Act4 */
+  static ENEMY_SHADOW_SPRITE = {
+    name: 'Shadow Sprite',
+    level: 30,
+    xp_reward: 1100, 
+    health: 1300,
+    attack: 300,
+    attack_speed: 1600,
+    attack_cooldown: 1600,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyShadowSprite,
+  }
+  static ENEMY_CREEPING_VINE = {
+    name: 'Creeping Vine',
+    level: 31,
+    xp_reward: 1100, 
+    health: 1400,
+    attack: 310,
+    attack_speed: 1000,
+    attack_cooldown: 1000,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyCreepingVine,
+  }
+  static ENEMY_PHANTOM_STALKER = {
+    name: 'Phantom Stalker',
+    level: 33,
+    xp_reward: 1450, 
+    health: 1350,
+    attack: 250,
+    attack_speed: 500,
+    attack_cooldown: 500,
+    evade_chance: 10, 
+    crit_chance: 15, 
+    crit_damage: 50,
+    image: enemyPhantomStalker,
+  }
   static ENEMY_DARK_ACOLYTE4 = {
     name: 'Dark Acolyte',
     level: 35,
