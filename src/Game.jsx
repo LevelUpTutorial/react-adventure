@@ -69,7 +69,7 @@ function Game({ heroName, gender, isGameRunning }) {
 
 const attackTimingWindowStart = 100; 
 const attackTimingWindowStop = 200; 
-const attackErrorMargin = 10; 
+const attackErrorMargin = 20; 
 const attackTimingBonus = 50; 
 
 const handleActiveAttack = () => {
