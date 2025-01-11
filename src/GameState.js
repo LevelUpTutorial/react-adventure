@@ -694,8 +694,8 @@ class GameState {
     crit_damage: 50,
     image: enemyTyrantsEnforcer,
   }
-  static ENEMY_CULT_OPERATIVE = {
-    name: "Cult Operative",
+  static ENEMY_ECLIPSED_CULT_OPERATIVE = {
+    name: "Eclipsed Cult Operative",
     level: 51,
     xp_reward: 3610, 
     health: 3660,
@@ -705,7 +705,7 @@ class GameState {
     evade_chance: 40, 
     crit_chance: 15, 
     crit_damage: 50,
-    image: enemyCultOperative,
+    image: enemyEclipsedCultOperative,
   }
   static ENEMY_SUNLIT_PHANTOM = {
     name: "SUNLIT PHANTOM",
