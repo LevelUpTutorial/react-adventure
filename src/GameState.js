@@ -800,6 +800,71 @@ class GameState {
     image: enemyTheHeraldOfDespair,
   }
   /* Enemy  Act8 */
+  static ENEMY_REALITY_FRAGMENTS = {
+    name: "Reality Fragments",
+    level: 60,
+    xp_reward: 5110, 
+    health: 5000,
+    attack: 1700,
+    attack_speed: 1000,
+    attack_cooldown: 1000,
+    evade_chance: 60, 
+    crit_chance: 20, 
+    crit_damage: 50,
+    image: enemyRealityFragments,
+  }
+  static ENEMY_ABYSSAL_WISPS = {
+    name: "Abyssal Wisps",
+    level: 60,
+    xp_reward: 5110, 
+    health: 5000,
+    attack: 1700,
+    attack_speed: 1000,
+    attack_cooldown: 1000,
+    evade_chance: 60, 
+    crit_chance: 20, 
+    crit_damage: 50,
+    image: enemyAbyssalWisps,
+  }
+  static ENEMY_COSMIC_SENTINEL = {
+    name: "Cosmic Sentinel",
+    level: 62,
+    xp_reward: 5490, 
+    health: 5600,
+    attack: 1990,
+    attack_speed: 2000,
+    attack_cooldown: 2000,
+    evade_chance: 10, 
+    crit_chance: 30, 
+    crit_damage: 50,
+    image: enemyCosmicSentinel,
+  }
+  static ENEMY_ECLIPSE_SHARDLINGS = {
+    name: "Eclipse Shardlings",
+    level: 62,
+    xp_reward: 5490, 
+    health: 5100,
+    attack: 1890,
+    attack_speed: 1500,
+    attack_cooldown: 1500,
+    evade_chance: 45, 
+    crit_chance: 30, 
+    crit_damage: 50,
+    image: enemyEclipseShardlings,
+  }
+  static ENEMY_VOID_REVENANT = {
+    name: "Void Revenant",
+    level: 63,
+    xp_reward: 5790, 
+    health: 5500,
+    attack: 2090,
+    attack_speed: 1300,
+    attack_cooldown: 1300,
+    evade_chance: 60, 
+    crit_chance: 30, 
+    crit_damage: 50,
+    image: enemyVoidRevenant,
+  }
   /* Enemy Templates Placeholder */
   static ENEMY_PLACEHOLDER  = {
     name: 'Random Enemy',
@@ -1017,19 +1082,43 @@ static findEncounterList(gameState, location_id) {
     { category: 'combat', id: 'CHILLREND COLOSSUS', enemy: GameState.ENEMY_CHILLREND_COLOSSUS, weight: 5 },
   ];
   static ACT4_ENCOUNTERS = [
-    { category: 'combat', id: 'ENEMY_DARK_AKOLYTE 4', enemy: GameState.ENEMY_DARK_ACOLYTE4, weight: 25 }
+    { category: 'combat', id: 'SHADOW SPRITE', enemy: GameState.ENEMY_SHADOW_SPRITE, weight: 50 },
+    { category: 'combat', id: 'CREEPING VINE', enemy: GameState.ENEMY_CREEPING_VINE, weight: 50 },
+    { category: 'combat', id: 'PHANTOM STALKER', enemy: GameState.ENEMY_PHANTOM_STALKER, weight: 40 },
+    { category: 'combat', id: 'ENEMY_DARK_AKOLYTE 4', enemy: GameState.ENEMY_DARK_ACOLYTE4, weight: 25 },
+    { category: 'combat', id: 'ECHOED GUARDIAN', enemy: GameState.ENEMY_ECHOED_GUARDIAN, weight: 15 },
+    { category: 'combat', id: "Kaelith's Shadow", enemy: GameState.ENEMY_KAELITHS_SHADOW, weight: 15 },
   ];
   static ACT5_ENCOUNTERS = [
-    { category: 'combat', id: 'ENEMY_PLACEHOLDER', enemy: GameState.ENEMY_PLACEHOLDER, weight: 25 }
+    { category: 'combat', id: 'ANCIENT SENTINEL', enemy: GameState.ENEMY_ANCIENT_SENTINEL, weight: 50 },
+    { category: 'combat', id: 'COLLAPSED PHANTOM', enemy: GameState.ENEMY_COLLAPSED_PHANTOM, weight: 50 },
+    { category: 'combat', id: 'SHADOW SPIDER', enemy: GameState.ENEMY_SHADOW_SPIDER, weight: 40 },
+    { category: 'combat', id: 'CULT EXCAVATOR', enemy: GameState.ENEMY_CULT_EXCAVATOR, weight: 35 },
+    { category: 'combat', id: 'RUNE-WROUGHT TITAN', enemy: GameState.ENEMY_RUNE_WROUGHT_TITAN, weight: 15 },
+    { category: 'combat', id: 'FORSAKEN ARCHIVIST', enemy: GameState.ENEMY_THE_FORSAKEN_ARCHIVIST, weight: 15 },
   ];
   static ACT6_ENCOUNTERS = [
-    { category: 'combat', id: 'ENEMY_PLACEHOLDER', enemy: GameState.ENEMY_PLACEHOLDER, weight: 25 }
-  ];
+    { category: 'combat', id: 'GILDED WRETCH', enemy: GameState.ENEMY_GILDED_WRETCH, weight: 50 },
+    { category: 'combat', id: 'SUNSTONE CONSTRUCT', enemy: GameState.ENEMY_SUNSTONE_CONSTRUCT, weight: 50 },
+    { category: 'combat', id: 'SKYBORN HARBINGER', enemy: GameState.ENEMY_SKYBORN_HARBINGER, weight: 35 },
+    { category: 'combat', id: "TYRANT'S ENFORCER", enemy: GameState.ENEMY_TYRANTS_ENFORCER, weight: 30 },
+    { category: 'combat', id: 'ECLIPSED CULT OPERATIVE', enemy: GameState.ENEMY_ECLIPSED_CULT_OPERATIVE, weight: 25 },
+    { category: 'combat', id: 'SUNLIT PHANTOM', enemy: GameState.ENEMY_SUNLIT_PHANTOM, weight: 15 },
+];
   static ACT7_ENCOUNTERS = [
-    { category: 'combat', id: 'ENEMY_PLACEHOLDER', enemy: GameState.ENEMY_PLACEHOLDER, weight: 25 }
+    { category: 'combat', id: 'STORMBOUND FIEND', enemy: GameState.ENEMY_STORMBOUND_FIEND, weight: 50 },
+    { category: 'combat', id: 'STEPPE CRAWLER', enemy: GameState.ENEMY_STEPPE_CRAWLER, weight: 50 },
+    { category: 'combat', id: 'ASH WRAITH', enemy: GameState.ENEMY_ASH_WRAITH, weight: 40 },
+    { category: 'combat', id: 'CULT PYROMANCER', enemy: GameState.ENEMY_CULT_PYROMANCER, weight: 30 },
+    { category: 'combat', id: 'ECLIPSED MARAUDER', enemy: GameState.ENEMY_ECLIPSED_MARAUDER, weight: 25 },
+    { category: 'combat', id: 'HERALD OF DESPAIR', enemy: GameState.ENEMY_THE_HERALD_OF_DESPAIR, weight: 15 },
   ];
   static ACT8_ENCOUNTERS = [
-    { category: 'combat', id: 'ENEMY_PLACEHOLDER', enemy: GameState.ENEMY_PLACEHOLDER, weight: 25 }
+    { category: 'combat', id: 'REALITY FRAGMENTS', enemy: GameState.ENEMY_REALITY_FRAGMENTS, weight: 50 },
+    { category: 'combat', id: 'ABYSSAL WISPS', enemy: GameState.ENEMY_ABYSSAL_WISPS, weight: 50 },
+    { category: 'combat', id: 'COSMIC SENTINEL', enemy: GameState.ENEMY_COSMIC_SENTINEL, weight: 35 },
+    { category: 'combat', id: 'ECLIPSE SHARDLINGS', enemy: GameState.ENEMY_ECLIPSE_SHARDLINGS, weight: 25 },
+    { category: 'combat', id: 'VOID REVENANT', enemy: GameState.ENEMY_VOID_REVENANT, weight: 15 },
   ];
 
   next_encounters = [
@@ -1049,7 +1138,7 @@ static findEncounterList(gameState, location_id) {
     {location: GameState.ACT8_LOC1_NAME, encounters: GameState.ACT8_ENCOUNTERS},
   ];
 
-  static XP_TO_LEVEL2 = 75; 
+  static XP_TO_LEVEL2 = 25; 
   static XP_SCALING = 1.3; 
 
   static ID_NONE = 'none'; 
