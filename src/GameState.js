@@ -784,7 +784,7 @@ class GameState {
     evade_chance: 30, 
     crit_chance: 45, 
     crit_damage: 50,
-    image: enemyEclispedMarauder,
+    image: enemyEclipsedMarauder,
   }
   static ENEMY_THE_HERALD_OF_DESPAIR = {
     name: "Herald of Despair",
