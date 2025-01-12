@@ -232,7 +232,7 @@ class GameState {
     evade_chance: 10, 
     crit_chance: 25, 
     crit_damage: 50,
-    image: enemyA1B1enemyA1B1TheCorruptedChieftain, 
+    image: enemyA1B1TheCorruptedChieftain, 
     isElite: true, 
   }
   static ENEMY_CORRUPTED_FOREST_GUARDIAN = {
@@ -285,7 +285,7 @@ class GameState {
     evade_chance: 60, 
     crit_chance: 25, 
     crit_damage: 50,
-    image: enemyA1B2enemyA1B2TheCultInfiltrator, 
+    image: enemyA1B2TheCultInfiltrator, 
     isElite: true, 
   }
   /* Enemy Templates Act2 */
