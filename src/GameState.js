@@ -221,6 +221,20 @@ class GameState {
     crit_damage: 50,
     image: enemyMischievousFaerie
   }
+  static ENEMY_A1B1_THE_CORRUPTED_CHIEFTAIN = {
+    name: 'The Corrupted Chieftain (elite)',
+    level: 5,
+    health: 300,
+    xp_reward: 310, 
+    attack: 50,
+    attack_speed: 3000,
+    attack_cooldown: 3000,
+    evade_chance: 10, 
+    crit_chance: 25, 
+    crit_damage: 50,
+    image: enemyA1B1enemyA1B1TheCorruptedChieftain, 
+    isElite: true, 
+  }
   static ENEMY_CORRUPTED_FOREST_GUARDIAN = {
     name: 'Corrupted Forest Guardian',
     level: 7,
@@ -259,6 +273,20 @@ class GameState {
     crit_chance: 15, 
     crit_damage: 50,
     image: enemyDarkAcolyte
+  }
+  static ENEMY_A1B2_THE_CULT_INFILTRATOR = {
+    name: 'The Cult Infiltrator (Boss)',
+    level: 10,
+    xp_reward: 900, 
+    health: 900,
+    attack: 45,
+    attack_speed: 900,
+    attack_cooldown: 900,
+    evade_chance: 60, 
+    crit_chance: 25, 
+    crit_damage: 50,
+    image: enemyA1B2enemyA1B2TheCultInfiltrator, 
+    isElite: true, 
   }
   /* Enemy Templates Act2 */
   static ENEMY_SANDSHARD_STALKER = {
@@ -1055,11 +1083,15 @@ static findEncounterList(gameState, location_id) {
     { category: 'combat', id: 'GOBLIN_SCOUT', enemy: GameState.ENEMY_GOBLIN_SCOUT, weight: 50 },
     { category: 'combat', id: 'WILD_WOLF', enemy: GameState.ENEMY_WILD_WOLF, weight: 40 },
     { category: 'combat', id: 'MISCHIEVOUS_FAERIE', enemy: GameState.ENEMY_MISCHIEVOUS_FAERIE, weight: 40 },
-    { category: 'combat', id: 'CORRUPTED_FOREST_GUARDIAN', enemy: GameState.ENEMY_CORRUPTED_FOREST_GUARDIAN, weight: 20 },
-    { category: 'combat', id: 'BANDIT CAPTIAN', enemy: GameState.ENEMY_BANDIT_CAPTAIN, weight: 10 },
-    { category: 'combat', id: 'DARK_ACOLYTE', enemy: GameState.ENEMY_DARK_ACOLYTE, weight: 5 },
+    { category: 'combat', id: 'The Corrupted Chieftain', enemy: GameState.ENEMY_A1B1_THE_CORRUPTED_CHIEFTAIN, weight: 10 },
     { category: 'story', id: 'STORY_ACT1_1', dialog: GameState.STORY_DIALOG_ACT1_1, weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT, completed: false },
     { category: 'story', id: 'STORY_ACT1_SECRET', dialog: GameState.STORY_DIALOG_ACT1_SECRET, weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT, completed: false}
+  ];
+  static ACT1_ENCOUNTERS_2 = [
+    { category: 'combat', id: 'CORRUPTED_FOREST_GUARDIAN', enemy: GameState.ENEMY_CORRUPTED_FOREST_GUARDIAN, weight: 20 },
+    { category: 'combat', id: 'BANDIT CAPTIAN', enemy: GameState.ENEMY_BANDIT_CAPTAIN, weight: 10 },
+    { category: 'combat', id: 'DARK_ACOLYTE', enemy: GameState.ENEMY_DARK_ACOLYTE, weight: 10 },
+    { category: 'combat', id: 'The Cult Infiltrator', enemy: GameState.ENEMY_A1B2_THE_CULT_INFILTRATOR, weight: 5 },
   ];
   static ACT2_ENCOUNTERS = [
     { category: 'combat', id: 'SANDSHARD STALKER', enemy: GameState.ENEMY_SANDSHARD_STALKER, weight: 50 },
