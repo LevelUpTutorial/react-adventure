@@ -200,3 +200,8 @@ function handleResetHeroInTown(gameState) {
   return { ...gameState, hero }; 
 }
 
+/* Merges List 2 into List 1 */ 
+export function mergeLists(list1, list2) {
+    list2.forEach(item => list1.push(item));
+    return list1;
+} 
