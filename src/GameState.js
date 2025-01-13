@@ -1,3 +1,5 @@
+import { mergeList2inList1 } from './GameUtils.jsx'; 
+
 /* Hero */
 /* Hero Gear Tier 0 */ 
 import heroFemaleNeutral from './assets/images/hero/hero_female_neutral.jpg';
@@ -234,6 +236,7 @@ class GameState {
     crit_damage: 50,
     image: enemyA1B1TheCorruptedChieftain, 
     isElite: true, 
+    runAfter: () => GameState.ACT1_ENCOUNTERS = mergeList2inList1(GameState.ACT1_ENCOUNTERS, GameState.ACT1_ENCOUNTERS_2), 
   }
   static ENEMY_CORRUPTED_FOREST_GUARDIAN = {
     name: 'Corrupted Forest Guardian',
@@ -1076,7 +1079,7 @@ static findEncounterList(gameState, location_id) {
     }
   }
 
-  static STORY_DIALOG_DEFAULT_WEIGHT = 25;
+  static STORY_DIALOG_DEFAULT_WEIGHT = 5;
   static ACT1_ENCOUNTERS = [
     { category: 'combat', id: 'WILD_BOAR', enemy: GameState.ENEMY_WILD_BOAR, weight: 50 },
     { category: 'combat', id: 'PLAGUE_CROW', enemy: GameState.ENEMY_PLAGUE_CROW, weight: 50 },
@@ -1088,9 +1091,15 @@ static findEncounterList(gameState, location_id) {
     { category: 'story', id: 'STORY_ACT1_SECRET', dialog: GameState.STORY_DIALOG_ACT1_SECRET, weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT, completed: false}
   ];
   static ACT1_ENCOUNTERS_2 = [
+    { category: 'combat', id: 'WILD_BOAR', enemy: GameState.ENEMY_WILD_BOAR, weight: 5 },
+    { category: 'combat', id: 'PLAGUE_CROW', enemy: GameState.ENEMY_PLAGUE_CROW, weight: 5 },
+    { category: 'combat', id: 'GOBLIN_SCOUT', enemy: GameState.ENEMY_GOBLIN_SCOUT, weight: 5 },
+    { category: 'combat', id: 'WILD_WOLF', enemy: GameState.ENEMY_WILD_WOLF, weight: 15 },
+    { category: 'combat', id: 'MISCHIEVOUS_FAERIE', enemy: GameState.ENEMY_MISCHIEVOUS_FAERIE, weight: 25 },
+    { category: 'combat', id: 'The Corrupted Chieftain', enemy: GameState.ENEMY_A1B1_THE_CORRUPTED_CHIEFTAIN, weight: 0 },
     { category: 'combat', id: 'CORRUPTED_FOREST_GUARDIAN', enemy: GameState.ENEMY_CORRUPTED_FOREST_GUARDIAN, weight: 20 },
-    { category: 'combat', id: 'BANDIT CAPTIAN', enemy: GameState.ENEMY_BANDIT_CAPTAIN, weight: 10 },
-    { category: 'combat', id: 'DARK_ACOLYTE', enemy: GameState.ENEMY_DARK_ACOLYTE, weight: 10 },
+    { category: 'combat', id: 'BANDIT CAPTIAN', enemy: GameState.ENEMY_BANDIT_CAPTAIN, weight: 15 },
+    { category: 'combat', id: 'DARK_ACOLYTE', enemy: GameState.ENEMY_DARK_ACOLYTE, weight: 15 },
     { category: 'combat', id: 'The Cult Infiltrator', enemy: GameState.ENEMY_A1B2_THE_CULT_INFILTRATOR, weight: 5 },
   ];
   static ACT2_ENCOUNTERS = [
