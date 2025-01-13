@@ -10,7 +10,7 @@ import {combatCalculation, playSound, SND_SWORD_HIT,
 
 import PropTypes from "prop-types";
 
-const TICKS_PER_SECOND = 20;
+const TICKS_PER_SECOND = 30;
 const TICK_DURATION_ADVENTURE = Math.round(1000 / TICKS_PER_SECOND);
 const TICK_DURATION_CITY = 1000;
 
@@ -68,7 +68,7 @@ function Game({ heroName, gender, isGameRunning }) {
   };
 
 const attackTimingWindowStart = 100; 
-const attackTimingWindowStop = 200; 
+const attackTimingWindowStop = 225; 
 const attackErrorMargin = 20; 
 const attackTimingBonus = 50; 
 
@@ -477,8 +477,11 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
   if (hero.isInCombat) {
     // console.log('hero is in combat');
     if (hero.attack_cooldown <= 0) {
-      gameState = performHeroAttack(gameState); 
-      ({ hero, active_enemy } = gameState);
+      /* try disable Auto combat */
+      //gameState = performHeroAttack(gameState); 
+      //({ hero, active_enemy } = gameState); 
+      hero.attack_cooldown = hero.attack_speed;
+      hero.last_combat_event = 'missed'; 
     } else {
       hero.attack_cooldown -= TICK_DURATION_ADVENTURE;
     }
