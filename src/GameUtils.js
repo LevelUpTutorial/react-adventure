@@ -201,7 +201,15 @@ function handleResetHeroInTown(gameState) {
 }
 
 /* Merges List 2 into List 1 */ 
-export function mergeLists(list1, list2) {
-    list2.forEach(item => list1.push(item));
-    return list1;
+export function mergeList2inList1(list1, list2) {
+    // Create a Set of IDs from list2 for quick lookup
+    const idsInList2 = new Set(list2.map(item => item.id));
+    
+    // Filter out entries in list1 that have an updated version in list2
+    const filteredList1 = list1.filter(item => !idsInList2.has(item.id));
+    
+    // Merge the remaining list1 entries with list2
+    const resultList = [...filteredList1, ...list2];
+    
+    return resultList;
 } 
