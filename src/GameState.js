@@ -1,4 +1,4 @@
-import { mergeList2inList1 } from './GameUtils.jsx'; 
+import { mergeList2inList1 } from './GameUtils.js'; 
 
 /* Hero */
 /* Hero Gear Tier 0 */ 
