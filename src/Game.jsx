@@ -498,6 +498,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       }
     } else {
       // Enemy died 
+      // check for lvl up
       if (hero.xp + active_enemy.xp_reward >= hero.xp_to_levelup) {
         console.log(`hero level up`); 
         // handle level up 
