@@ -236,7 +236,7 @@ class GameState {
     crit_damage: 50,
     image: enemyA1B1TheCorruptedChieftain, 
     isElite: true, 
-    runAfter: () => GameState.ACT1_ENCOUNTERS = mergeList2inList1(GameState.ACT1_ENCOUNTERS, GameState.ACT1_ENCOUNTERS_2), 
+    runAfter: (gameState) => GameState.ACT1_ENCOUNTERS = mergeList2inList1(GameState.ACT1_ENCOUNTERS, GameState.ACT1_ENCOUNTERS_2), 
   }
   static ENEMY_CORRUPTED_FOREST_GUARDIAN = {
     name: 'Corrupted Forest Guardian',
