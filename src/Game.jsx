@@ -498,6 +498,10 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       }
     } else {
       // Enemy died 
+      // execute enemy after function if he had one 
+      if (active_enemy.runAfter) {
+        active_enemy.runAfter(gameState); 
+      }
       // check for lvl up
       if (hero.xp + active_enemy.xp_reward >= hero.xp_to_levelup) {
         console.log(`hero level up`); 
