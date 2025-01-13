@@ -200,16 +200,15 @@ function handleResetHeroInTown(gameState) {
   return { ...gameState, hero }; 
 }
 
-/* Merges List 2 into List 1 */ 
+/* 
+  Merges List 2 into List 1 in place, 
+  List1 is already modified, its only returned for optional chaining! 
+*/ 
 export function mergeList2inList1(list1, list2) {
-    // Create a Set of IDs from list2 for quick lookup
     const idsInList2 = new Set(list2.map(item => item.id));
-    
-    // Filter out entries in list1 that have an updated version in list2
     const filteredList1 = list1.filter(item => !idsInList2.has(item.id));
-    
-    // Merge the remaining list1 entries with list2
-    const resultList = [...filteredList1, ...list2];
-    
-    return resultList;
+    // Clear list1 and add merged content
+    list1.length = 0;
+    list1.push(...filteredList1, ...list2);
+    return list1; // Optional, for chaining
 } 
