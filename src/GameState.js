@@ -344,6 +344,21 @@ class GameState {
     crit_damage: 50,
     image: enemyCinderhound
   }
+  static ENEMY_A2B1_THE_SCORCHSCALE_BEHEMOTH = {
+    name: 'The Scourchscale Behemoth (elite)',
+    level: 15,
+    health: 2000,
+    xp_reward: 1500, 
+    attack: 320,
+    attack_speed: 3000,
+    attack_cooldown: 3000,
+    evade_chance: 10, 
+    crit_chance: 25, 
+    crit_damage: 50,
+    image: enemyA2B1TheScorchscaleBehemoth, 
+    isElite: true, 
+    runAfter: (gameState) => GameState.ACT2_ENCOUNTERS = mergeList2inList1(GameState.ACT2_ENCOUNTERS, GameState.ACT2_ENCOUNTERS_2), 
+  }
   static ENEMY_DUNE_WRAITH = {
     name: 'Dune Wraith',
     level: 17,
@@ -382,6 +397,20 @@ class GameState {
     crit_chance: 15, 
     crit_damage: 50,
     image: enemyDarkAcolyte2
+  }
+  static ENEMY_A2B2_THE_ASHBINDER_PRIESTESS = {
+    name: 'The Ashbinder Priestess (Boss)',
+    level: 20,
+    health: 4200,
+    xp_reward: 2500, 
+    attack: 280,
+    attack_speed: 2000,
+    attack_cooldown: 2000,
+    evade_chance: 25, 
+    crit_chance: 45, 
+    crit_damage: 60,
+    image: enemyA2B2TheAshbinderPriestess, 
+    isElite: true, 
   }
   /* Enemy Templates Act3 */
   static ENEMY_SNOW_WARG = {
@@ -1105,11 +1134,20 @@ static findEncounterList(gameState, location_id) {
   static ACT2_ENCOUNTERS = [
     { category: 'combat', id: 'SANDSHARD STALKER', enemy: GameState.ENEMY_SANDSHARD_STALKER, weight: 50 },
     { category: 'combat', id: 'GLASSFANG VULTURE', enemy: GameState.ENEMY_GLASSFANG_VULTURE, weight: 50 },
-    { category: 'combat', id: 'FRAGMENTED SENTINEL', enemy: GameState.ENEMY_FRAGMENTED_SENTINEL, weight: 40 },
-    { category: 'combat', id: 'CINDERHOUND', enemy: GameState.ENEMY_CINDERHOUND, weight: 40 },
+    { category: 'combat', id: 'FRAGMENTED SENTINEL', enemy: GameState.ENEMY_FRAGMENTED_SENTINEL, weight: 30 },
+    { category: 'combat', id: 'CINDERHOUND', enemy: GameState.ENEMY_CINDERHOUND, weight: 30 },
+    { category: 'combat', id: 'THE SCORCHSCALE BEHEMOTH', enemy: GameState.ENEMY_A2B1_THE_SCORCHSCALE_BEHEMOTH, weight: 5 },
+  ];
+  static ACT2_ENCOUNTERS_2 = [
+    { category: 'combat', id: 'SANDSHARD STALKER', enemy: GameState.ENEMY_SANDSHARD_STALKER, weight: 5 },
+    { category: 'combat', id: 'GLASSFANG VULTURE', enemy: GameState.ENEMY_GLASSFANG_VULTURE, weight: 5 },
+    { category: 'combat', id: 'FRAGMENTED SENTINEL', enemy: GameState.ENEMY_FRAGMENTED_SENTINEL, weight: 10 },
+    { category: 'combat', id: 'CINDERHOUND', enemy: GameState.ENEMY_CINDERHOUND, weight: 15 },
     { category: 'combat', id: 'DUNE WRAITH', enemy: GameState.ENEMY_DUNE_WRAITH, weight: 20 },
-    { category: 'combat', id: 'ECLIPSED REVENANT', enemy: GameState.ENEMY_ECLIPSED_REVENANT, weight: 15 },
-    { category: 'combat', id: 'DARK ACOLYTE 2', enemy: GameState.ENEMY_DARK_ACOLYTE2, weight: 5 },
+    { category: 'combat', id: 'ECLIPSED REVENANT', enemy: GameState.ENEMY_ECLIPSED_REVENANT, weight: 20 },
+    { category: 'combat', id: 'DARK ACOLYTE 2', enemy: GameState.ENEMY_DARK_ACOLYTE2, weight: 20 },
+    { category: 'combat', id: 'THE SCORCHSCALE BEHEMOTH', enemy: GameState.ENEMY_A2B1_THE_SCORCHSCALE_BEHEMOTH, weight: 0 },
+    { category: 'combat', id: 'THE ASHBINDER PRIESTESS', enemy: GameState.ENEMY_A2B2_THE_ASHBINDER_PRIESTESS, weight: 5 },
   ];
   static ACT3_ENCOUNTERS = [
     { category: 'combat', id: 'SNOW WARG', enemy: GameState.ENEMY_SNOW_WARG, weight: 50 },
