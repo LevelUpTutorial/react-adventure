@@ -180,6 +180,14 @@ function setBodyBackground(location) {
   body.style.backgroundRepeat = "no-repeat";
 }
 
+/* 
+  sets new images for the hero depending on 
+  gender, level, enchantment for neutral and combat 
+*/
+export function setHeroImages(gameState) {
+  
+}
+
 /*
   handle reset Hero control variables
  */
