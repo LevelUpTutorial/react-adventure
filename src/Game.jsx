@@ -5,7 +5,8 @@ import AttackCooldownWithAnimation from "./AttackCooldownWithAnimation.jsx";
 import {combatCalculation, playSound, SND_SWORD_HIT, 
         calculateXpToLevelUp, onLevelUp, 
         UPGRADE_PER_LEVELUP, playConfettiFirework, 
-        changeLocation, handleResetHeroControl
+        changeLocation, handleResetHeroControl, 
+        ID_NONE, ID_FIRE, ID_LIGHTNING, ID_ICE 
        } from "./GameUtils.js";
 
 import PropTypes from "prop-types";
@@ -645,7 +646,7 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
 /* Fire Enchantment */ 
 const fireCC = 20; 
 const fireCD = 50; 
-const fireId = 'Fire'; 
+const fireId = ID_FIRE; 
 function fireEffectSelectApply(gameState) {
   console.log(`apply fire select`);
   gameState.hero.crit_chance += fireCC;
@@ -661,7 +662,7 @@ function fireEffectSelectReverse(gameState) {
 /* Ice Enchantment */ 
 const iceEC = 20;
 const iceSlow = 200; 
-const iceId = 'Ice'; 
+const iceId = ID_ICE; 
 function iceEffectSelectApply(gameState) {
   console.log(`apply ice select`);
   gameState.hero.evade_chance += iceEC; 
@@ -698,7 +699,7 @@ function iceEffectOnHitReverse(gameState) {
 /* Lightning Enchantment */ 
 const lightningAS = 200; 
 const lightningStunChance = 20; 
-const lightningId = 'Lightning'; 
+const lightningId = ID_LIGHTNING; 
 function lightningEffectSelectApply(gameState) {
   console.log(`apply lightning select`);
   gameState.hero.attack_speed -= lightningAS; 
@@ -728,7 +729,7 @@ function lightningEffectOnHitReverse(gameState) {
 /* 
  * Select Enchantment Helper 
  */ 
-const noneId = GameState.ID_NONE; 
+const noneId = ID_NONE; 
 function selectEnchantment(gameState, enchantment_id) {
   console.log(`selected enchantment ${enchantment_id}`);
   const hero = gameState.hero;  
