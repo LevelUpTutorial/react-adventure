@@ -1,5 +1,21 @@
 import swordHit from './assets/sounds/sword-hit.ogg';
 import GameState from './GameState.js';  
+/* Hero */
+/* Hero Gear Tier 0 */ 
+import heroFemaleNeutral from './assets/images/hero/hero_female_neutral.jpg';
+import heroMaleNeutral from './assets/images/hero/hero_male_neutral.jpg';
+import heroFemaleCombatT0None from './assets/images/hero/hero_female_combat.png';
+import heroMaleCombatT0None from './assets/images/hero/hero_male_combat.png';
+/* Hero Gear Tier 1 */
+import heroFemaleCombatT1Fire from './assets/images/hero/hero_female_combat_fire_t1.webp';
+import heroFemaleComabtT1Ice from './assets/images/hero/hero_female_combat_ice_t1.webp';
+import heroFemaleCombatT1Lightning from './assets/images/hero/hero_female_combat_lightning_t1.webp';
+import heroMaleCombatT1Fire from './assets/images/hero/hero_male_combat_fire_t1.webp';
+import heroMaleCombatT1Ice from './assets/images/hero/hero_male_combat_ice_t1.webp';
+import heroMaleCombatT1Lightning from './assets/images/hero/hero_male_combat_lightning_t1.webp'; 
+/* Hero Gear Tier 2 */
+/* Hero Gear Tier 3 */
+
 export const SND_SWORD_HIT = swordHit;
 
 /* Util to play Sound */
@@ -189,7 +205,36 @@ export const ID_LIGHTNING = 'Lightning';
   gender, level, enchantment for neutral and combat 
 */
 export function setHeroImages(gameState) {
-  
+  const hero = gameState.hero; 
+  const enc_id = hero.current_enchantment.id; 
+  if (hero.gender === GameState.GENDER_MALE) {
+    GameState.IMG_HERO_MALE_NEUTRAL = heroMaleNeutral;
+    if (enc_id === ID_NONE) {
+      GameState.IMG_HERO_MALE_COMBAT = heroMaleCombatT0None; 
+    } else if (enc_id === ID_FIRE) {
+      GameState.IMG_HERO_MALE_COMBAT = heroMaleCombatT1Fire;
+    } else if (enc_id === ID_ICE) {
+      GameState.IMG_HERO_MALE_COMBAT = heroMaleCombatT1Ice;
+    } else if (enc_id === ID_LIGHTNING) {
+      GameState.IMG_HERO_MALE_COMBAT = heroMaleCombatT1Lightning;
+    } else {
+      console.error(`unknown enchantment_id ${enc_id}`);
+    }
+  } else {
+    // Female Hero 
+    GameState.IMG_HERO_FEMALE_NEUTRAL = heroFemaleNeutral;
+    if (enc_id === ID_NONE) {
+      GameState.IMG_HERO_FEMALE_COMBAT = heroFemaleCombatT0None; 
+    } else if (enc_id === ID_FIRE) {
+      GameState.IMG_HERO_FEMALE_COMBAT = heroFemaleCombatT1Fire;
+    } else if (enc_id === ID_ICE) {
+      GameState.IMG_HERO_FEMALE_COMBAT = heroFemaleCombatT1Ice;
+    } else if (enc_id === ID_LIGHTNING) {
+      GameState.IMG_HERO_FEMALE_COMBAT = heroFemaleCombatT1Lightning;
+    } else {
+      console.error(`unknown enchantment_id ${enc_id}`);
+    }
+  }
 }
 
 /*
