@@ -1,4 +1,4 @@
-import { mergeList2inList1, updateLocation } from './GameUtils.js'; 
+import { mergeList2inList1, updateLocation, ID_NONE } from './GameUtils.js'; 
 
 /* Hero */
 /* Hero Gear Tier 0 */ 
@@ -1229,8 +1229,6 @@ static findEncounterList(gameState, location_id) {
 
   static XP_TO_LEVEL2 = 25; 
   static XP_SCALING = 1.3; 
-
-  static ID_NONE = 'none'; 
   
   constructor(heroName, gender, location) {
     this.hero = {
@@ -1251,7 +1249,7 @@ static findEncounterList(gameState, location_id) {
       crit_damage: (gender === GameState.GENDER_MALE ? 200 : 100), 
       last_combat_event: "", 
       image: (gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL), 
-      current_enchantment: { id: GameState.ID_NONE, selectReverse: (gameState) => {return gameState} },
+      current_enchantment: { id: ID_NONE, selectReverse: (gameState) => {return gameState} },
     }
     this.location = location;
   }
