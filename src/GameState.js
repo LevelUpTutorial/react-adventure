@@ -1,4 +1,4 @@
-import { mergeList2inList1 } from './GameUtils.js'; 
+import { mergeList2inList1, updateLocation } from './GameUtils.js'; 
 
 /* Hero */
 /* Hero Gear Tier 0 */ 
@@ -292,7 +292,10 @@ class GameState {
     crit_damage: 50,
     image: enemyA1B2TheCultInfiltrator, 
     isElite: true, 
-    runAfter: (gameState) => gameState.acts_progression = 2,  
+    runAfter: (gameState) => {
+      gameState.acts_progression = 2; 
+      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT2); 
+    },  
   }
   /* Enemy Templates Act2 */
   static ENEMY_SANDSHARD_STALKER = {
@@ -414,7 +417,10 @@ class GameState {
     crit_damage: 60,
     image: enemyA2B2TheAshbinderPriestess, 
     isElite: true, 
-    runAfter: (gameState) => gameState.acts_progression = 3, 
+    runAfter: (gameState) => {
+      gameState.acts_progression = 3; 
+      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT3); 
+    }, 
   }
   /* Enemy Templates Act3 */
   static ENEMY_SNOW_WARG = {
