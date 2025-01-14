@@ -6,7 +6,8 @@ import {combatCalculation, playSound, SND_SWORD_HIT,
         calculateXpToLevelUp, onLevelUp, 
         UPGRADE_PER_LEVELUP, playConfettiFirework, 
         changeLocation, handleResetHeroControl, 
-        ID_NONE, ID_FIRE, ID_LIGHTNING, ID_ICE 
+        ID_NONE, ID_FIRE, ID_LIGHTNING, ID_ICE,
+        setHeroImages
        } from "./GameUtils.js";
 
 import PropTypes from "prop-types";
@@ -520,6 +521,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
         setNumChooseUpgrades(UPGRADE_PER_LEVELUP);
         playConfettiFirework(); 
         gameState.hero = hero; 
+        setHeroImages(gameState); 
       } else { 
         hero.xp += active_enemy.xp_reward;
         gameState.hero = hero;
@@ -753,6 +755,7 @@ function selectEnchantment(gameState, enchantment_id) {
     console.error(`unknown enchantment selected ${enchantment_id}`);
   }
   console.log(`new enchantment hero ${gameState.hero.current_enchantment}`);
+  setHeroImages(gameState); 
   return { ...gameState, hero }; 
 }
 /* 
