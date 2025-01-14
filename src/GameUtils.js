@@ -180,6 +180,10 @@ function setBodyBackground(location) {
   body.style.backgroundRepeat = "no-repeat";
 }
 
+export const ID_NONE = 'none'; 
+export const ID_FIRE = 'Fire'; 
+export const ID_ICE = 'Ice'; 
+export const ID_LIGHTNING = 'Lightning'; 
 /* 
   sets new images for the hero depending on 
   gender, level, enchantment for neutral and combat 
