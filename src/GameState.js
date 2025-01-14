@@ -156,8 +156,9 @@ class GameState {
   static IMG_HERO_FEMALE_COMBAT = heroFemaleCombat;
   static IMG_HERO_MALE_COMBAT = heroMaleCombat;
 
+  attack_combo = 0; 
   acts_progression = 1; 
-  active_enemy = null;
+  active_enemy = null; 
   /* Enemy Templates Act1 */ 
   static ENEMY_WILD_BOAR = {
     name: 'Wild Boar',
