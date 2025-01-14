@@ -88,6 +88,7 @@ const handleActiveAttack = () => {
 
     if (isSuccessfulAttack) {
       console.log(`Active attack successful @${cooldown}ms`); 
+      updatedState.attack_combo += 1; 
       const baseEvade = updatedState.active_enemy.evade_chance; 
       const baseAttack = updatedState.hero.attack;  
       const bonus = baseAttack * attackTimingBonus * comboMultiplier / 100; 
