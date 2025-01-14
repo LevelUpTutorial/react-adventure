@@ -156,7 +156,7 @@ class GameState {
   static IMG_HERO_FEMALE_COMBAT = heroFemaleCombat;
   static IMG_HERO_MALE_COMBAT = heroMaleCombat;
 
-  attack_combo = 1; 
+  attack_combo = 0; 
   acts_progression = 1; 
   active_enemy = null; 
   /* Enemy Templates Act1 */ 
