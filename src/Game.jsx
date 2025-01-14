@@ -483,6 +483,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
   // handle Combat
   if (hero.isInCombat) {
     // console.log('hero is in combat');
+    hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_COMBAT : GameState.IMG_HERO_FEMALE_COMBAT);
     if (hero.attack_cooldown <= 0) {
       /* try disable Auto combat */
       //gameState = performHeroAttack(gameState); 
@@ -562,7 +563,6 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       gameState = handleResetHeroControl(gameState);
       hero = gameState.hero;
       hero.isInCombat = true;
-      hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_COMBAT : GameState.IMG_HERO_FEMALE_COMBAT);
       // create active enemy as copy from template 
       gameState.active_enemy = {...encounter.enemy, health_full: encounter.enemy.health, last_combat_event: ""};
       /* apply effects at the start of combat */ 
