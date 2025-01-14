@@ -203,7 +203,7 @@ return (
               <p>Level: {gameState.hero.level}</p>
               <p>Health: {gameState.hero.health}</p>
               <p>Attack: {gameState.hero.attack}</p>
-              <p>Attack Speed: {gameState.hero.attack_speed / 1000}s</p>
+              <p>Attack Cooldown: {gameState.hero.attack_speed / 1000}s</p>
               <p>Evade Chance: {gameState.hero.evade_chance}%</p>
               <p>Crit Chance: {gameState.hero.crit_chance}%</p>
               <p>Crit Damage: {gameState.hero.crit_damage}%</p>
