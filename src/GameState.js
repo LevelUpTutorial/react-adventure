@@ -156,6 +156,7 @@ class GameState {
   static IMG_HERO_FEMALE_COMBAT = heroFemaleCombat;
   static IMG_HERO_MALE_COMBAT = heroMaleCombat;
 
+  acts_progression = 1; 
   active_enemy = null;
   /* Enemy Templates Act1 */ 
   static ENEMY_WILD_BOAR = {
@@ -290,6 +291,7 @@ class GameState {
     crit_damage: 50,
     image: enemyA1B2TheCultInfiltrator, 
     isElite: true, 
+    runAfter: (gameState) => gameState.acts_progression = 2,  
   }
   /* Enemy Templates Act2 */
   static ENEMY_SANDSHARD_STALKER = {
@@ -411,6 +413,7 @@ class GameState {
     crit_damage: 60,
     image: enemyA2B2TheAshbinderPriestess, 
     isElite: true, 
+    runAfter: (gameState) => gameState.acts_progression = 3, 
   }
   /* Enemy Templates Act3 */
   static ENEMY_SNOW_WARG = {
@@ -1183,7 +1186,7 @@ static findEncounterList(gameState, location_id) {
     { category: 'combat', id: "TYRANT'S ENFORCER", enemy: GameState.ENEMY_TYRANTS_ENFORCER, weight: 30 },
     { category: 'combat', id: 'ECLIPSED CULT OPERATIVE', enemy: GameState.ENEMY_ECLIPSED_CULT_OPERATIVE, weight: 25 },
     { category: 'combat', id: 'SUNLIT PHANTOM', enemy: GameState.ENEMY_SUNLIT_PHANTOM, weight: 15 },
-];
+  ];
   static ACT7_ENCOUNTERS = [
     { category: 'combat', id: 'STORMBOUND FIEND', enemy: GameState.ENEMY_STORMBOUND_FIEND, weight: 50 },
     { category: 'combat', id: 'STEPPE CRAWLER', enemy: GameState.ENEMY_STEPPE_CRAWLER, weight: 50 },
