@@ -70,8 +70,11 @@ function Game({ heroName, gender, isGameRunning }) {
 const attackTimingWindowStart = 100; 
 const attackTimingWindowStop = 225; 
 const attackErrorMargin = 20; 
-const attackTimingBonus = 50; 
-
+const attackTimingBonus = 2; 
+const maxComboMultiplier = 50; 
+const comboMultiplier = Math.max(gameState.attack_combo, maxComboMultiplier);
+const comboDisplay = gameState.attack_combo > 0 ? `${gameState.attack_combo}x Combo ${100 + comboMultiplier}% Dmg` : `Hero (${gameState.hero.level})`; 
+  
 const handleActiveAttack = () => {
   const cooldown = gameState.hero.attack_cooldown;
 
@@ -86,8 +89,8 @@ const handleActiveAttack = () => {
     if (isSuccessfulAttack) {
       console.log(`Active attack successful @${cooldown}ms`); 
       const baseEvade = updatedState.active_enemy.evade_chance; 
-      const baseAttack = updatedState.hero.attack; 
-      const bonus = baseAttack * attackTimingBonus / 100; 
+      const baseAttack = updatedState.hero.attack;  
+      const bonus = baseAttack * attackTimingBonus * comboMultiplier / 100; 
       // grant temporary Bonus for successfully timed activ attack 
       // cant miss 
       updatedState.hero.attack += bonus; 
@@ -98,6 +101,7 @@ const handleActiveAttack = () => {
       return updatedState;
     } else {
       console.log(`Active attack missed @${cooldown}ms`);
+      updatedState.attack_combo = 0; 
       updatedState.hero.last_combat_event = `missed`; 
       updatedState.hero.attack_cooldown = updatedState.hero.attack_speed;
     } 
@@ -233,7 +237,7 @@ return (
               style={{ width: '50%' }} 
               >
               <p className="fw-semibold text-success">
-                Hero ({gameState.hero.level})
+                {comboDisplay}
               </p>
               <div className="progress">
                 <div 
@@ -482,6 +486,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       //({ hero, active_enemy } = gameState); 
       hero.attack_cooldown = hero.attack_speed;
       hero.last_combat_event = 'missed'; 
+      gameState.attack_combo = 0; 
     } else {
       hero.attack_cooldown -= TICK_DURATION_ADVENTURE;
     }
