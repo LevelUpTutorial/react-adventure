@@ -72,8 +72,8 @@ const attackTimingWindowStop = 225;
 const attackErrorMargin = 20; 
 const attackTimingBonus = 2; 
 const maxComboMultiplier = 50; 
-const comboMultiplier = Math.min(gameState.attack_combo, maxComboMultiplier);
-const comboDisplay = gameState.attack_combo > 0 ? `${gameState.attack_combo}x Combo ${100 + comboMultiplier}% Dmg` : `Hero (${gameState.hero.level})`; 
+const comboMultiplier = Math.min(gameState.attack_combo - 1, maxComboMultiplier);
+const comboDisplay = gameState.attack_combo > 1 ? `${gameState.attack_combo}x Combo ${comboMultiplier * attackTimingBonus + 100}% Dmg` : `Hero (${gameState.hero.level})`; 
   
 const handleActiveAttack = () => {
   const cooldown = gameState.hero.attack_cooldown;
