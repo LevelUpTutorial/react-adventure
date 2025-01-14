@@ -219,8 +219,8 @@ return (
                 key={act}
                 type="button"
                 onClick={() => handleLocationChange(GameState[`LOCATION_ADVENTURE_ACT${act + 1}`])}
-                className="btn btn-primary px-4"
-                disabled={gameState.acts_progression > act}
+                className=`btn ${ gameState.acts_progression > act ? btn-primary : btn-outline-secondary} px-4`
+                disabled={!gameState.acts_progression > act}
               >
                 {GameState[`LOCATION_ADVENTURE_ACT${act + 1}`].name}
               </button>
