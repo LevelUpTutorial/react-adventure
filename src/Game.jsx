@@ -54,7 +54,7 @@ function Game({ heroName, gender, isGameRunning }) {
 
     setGameState((prevState) => {
       const state = performHeroAttack(prevState); 
-      
+      state.attack_combo += 1; 
       // Reset the button state
       setCounterAttackActive(false);
 
