@@ -133,18 +133,28 @@ export function playConfettiFirework() {
   });
 }
 
-/* change location and change background */
+/* 
+  change location and change background 
+  Returns a new State object to trigger react rendering 
+*/
 export function changeLocation(prevState, newLocation) {
-    if (prevState.location.name === newLocation.name) {
-        return prevState;
-      }
-      setBodyBackground(newLocation);
+  updateLocation(prevState, newLocation); 
+  return { ...prevState}; 
+}
+
+/* changed gameState in place */
+export function updateLocation(gameState, newLocation) {
+  if (gameState.location.name === newLocation.name) {
+    return gameState;
+  }
+  gameState.location = newLocation; 
+  setBodyBackground(newLocation);
       
-      if (newLocation.name === GameState.LOCATION_CITY.name) {
-        return handleResetHeroInTown(prevState);
-      }
-      
-      return { ...prevState, location: newLocation };
+  if (newLocation.name === GameState.LOCATION_CITY.name) {
+    return handleResetHeroInTown(gameState);
+  }
+
+  return gameState; 
 }
 
 /* Set HTML <body> background based on location.background
