@@ -101,6 +101,9 @@ const handleActiveAttack = () => {
       performHeroAttack(updatedState); 
       updatedState.hero.attack = baseAttack;  
       updatedState.active_enemy.evade_chance = baseEvade; 
+
+      // Trigger the attack animation
+      triggerAttackAnimation();
       return updatedState;
     } else {
       console.log(`Active attack missed @${cooldown}ms`);
@@ -459,6 +462,23 @@ return (
       )}
     </div>
   );
+}
+
+/* trigger attack animation */
+function triggerAttackAnimation() {
+  const heroImage = document.querySelector('.hero-image');
+  const enemyImage = document.querySelector('.enemy-image');
+
+  if (heroImage && enemyImage) {
+    heroImage.style.animation = 'attack 0.5s ease-in-out';
+    enemyImage.style.animation = 'hit 0.5s ease-in-out';
+
+    // Remove the animation classes after the animation ends
+    setTimeout(() => {
+      heroImage.style.animation = '';
+      enemyImage.style.animation = '';
+    }, 500); // Duration of the animation
+  }
 }
 
 /* Constants for Effects */ 
