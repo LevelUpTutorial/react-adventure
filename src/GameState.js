@@ -518,7 +518,7 @@ class GameState {
     crit_damage: 50,
     image: enemyEclipsedFrostguard
   }
-  static ENEMY_A3B1_FrostclawAlpha = {
+  static ENEMY_A3B1_FROSTCLAW_ALPHA = {
     name: 'Frostclaw Alpha (elite)',
     level: 25,
     health: 1500,
