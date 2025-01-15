@@ -69,42 +69,52 @@ export function calculateXpToLevelUp(current_level) {
 */ 
 export const UPGRADE_PER_LEVELUP = 3; 
 const OPTIONS_PER_LEVELUP = 3; 
+export const UPGRADE_DAMAGE = "Damage +5";
+export const UPGRADE_MAX_HEALTH = "Max Health +50";
+export const UPGRADE_CRIT_CHANCE = "Crit Chance +2%";
+export const UPGRADE_CRIT_DAMAGE = "Crit Damage +10%";
+export const UPGRADE_EVADE_CHANCE = "Evade Chance +2%";
+export const UPGRADE_ATTACK_SPEED = "Attack Cooldown -20ms";
 const UPGRADE_OPTIONS = [
-    { name: "Damage +5", effect: (hero) => hero.attack += 5, probability: 1 },
-    { name: "Max Health +50", effect: (hero) => { 
+    { name: UPGRADE_DAMAGE, effect: (hero) => hero.attack += 5, probability: 2 },
+    { name: UPGRADE_MAX_HEALTH, effect: (hero) => { 
         hero.health_full += 50; 
         hero.health = hero.health_full; 
     }, probability: 2 },
-    { name: "Crit Chance +2%", effect: (hero) => hero.crit_chance += 2, probability: 2 },
-    { name: "Crit Damage +10%", effect: (hero) => hero.crit_damage += 10, probability: 2 },
-    { name: "Evade Chance +2%", effect: (hero) => hero.evade_chance += 2, probability: 2 },
-    { name: "Attack Cooldown -20ms", effect: (hero) => hero.attack_speed -= 20, probability: 2 },
+    { name: UPGRADE_CRIT_CHANCE, effect: (hero) => hero.crit_chance += 2, probability: 2 },
+    { name: UPGRADE_CRIT_DAMAGE, effect: (hero) => hero.crit_damage += 10, probability: 2 },
+    { name: UPGRADE_EVADE_CHANCE, effect: (hero) => hero.evade_chance += 2, probability: 2 },
+    { name: UPGRADE_ATTACK_SPEED, effect: (hero) => hero.attack_speed -= 20, probability: 2 },
 ];
+function rollUpgrades(options, numToChoose = OPTIONS_PER_LEVELUP, hero) {
+  const weighted = options.flatMap((option) => {
+    const limit = GameState.UPGRADE_LIMITS[option.name];
+    const count = hero.upgradeCounts[option.name];
+    if (count < limit) {
+      return Array(Math.floor(option.probability * 100)).fill(option);
+    }
+    return [];
+  });
 
-function rollUpgrades(options, numToChoose = OPTIONS_PER_LEVELUP) {
-    const weighted = options.flatMap((option) =>
-        Array(Math.floor(option.probability * 100)).fill(option)
-    );
-
-    const selected = new Set();
-    while (selected.size < numToChoose && weighted.length > 0) {
-        const index = Math.floor(Math.random() * weighted.length);
-        const chosenOption = weighted[index];
-        
-        if (!selected.has(chosenOption)) {
-            selected.add(chosenOption);
-        }
-
-        weighted.splice(index, 1); // Remove the selected element from the pool
+  const selected = new Set();
+  while (selected.size < numToChoose && weighted.length > 0) {
+    const index = Math.floor(Math.random() * weighted.length);
+    const chosenOption = weighted[index];
+    
+    if (!selected.has(chosenOption)) {
+      selected.add(chosenOption);
     }
 
-    return Array.from(selected);
+    weighted.splice(index, 1); // Remove the selected element from the pool
+  }
+
+  return Array.from(selected);
 }
 
-export function onLevelUp(setUpgradeOptions, setUpgradePopupVisible) {
-    const upgrades = rollUpgrades(UPGRADE_OPTIONS, OPTIONS_PER_LEVELUP); 
-    setUpgradeOptions(upgrades); 
-    setUpgradePopupVisible(true); 
+export function onLevelUp(setUpgradeOptions, setUpgradePopupVisible, hero) {
+  const upgrades = rollUpgrades(UPGRADE_OPTIONS, OPTIONS_PER_LEVELUP, hero); 
+  setUpgradeOptions(upgrades); 
+  setUpgradePopupVisible(true); 
 }
 
 /* 
