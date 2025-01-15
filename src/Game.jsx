@@ -139,9 +139,11 @@ const handleActiveAttack = () => {
 
   const handleUpgradeChoice = (chosenUpgrade) => {
     chosenUpgrade.effect(gameState.hero); // Apply the effect
+    gameState.hero.upgradeCounts[chosenUpgrade.name] += 1; // Increment the count
     setUpgradeOptions([]); // reset options 
     setUpgradePopupVisible(false); // Close popup
     setNumChooseUpgrades(numChooseUpgrades - 1); 
+    setGameState({ ...gameState }); // Update the game state
   }; 
 
   const UpgradePopup = ({ upgrades, onChoose }) => {
@@ -176,7 +178,7 @@ useEffect(() => {
   if (numChooseUpgrades > 0) {
     gameState.hero.isInDialog = true; 
     setGameState({ ...gameState }); 
-    onLevelUp(setUpgradeOptions, setUpgradePopupVisible); // Continue level-up if rolling multiple times
+    onLevelUp(setUpgradeOptions, setUpgradePopupVisible, gameState.hero); 
   } else {
     gameState.hero.isInDialog = false; 
     setGameState({ ...gameState }); 
@@ -539,16 +541,18 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       }
       // check for lvl up
       if (hero.xp + active_enemy.xp_reward >= hero.xp_to_levelup) {
-        console.log(`hero level up`); 
-        // handle level up 
-        hero.level += 1; 
-        hero.xp = hero.xp + active_enemy.xp_reward - hero.xp_to_levelup; 
-        hero.xp_to_levelup = calculateXpToLevelUp(hero.level); 
-        // trigger level up popup
-        setNumChooseUpgrades(UPGRADE_PER_LEVELUP);
-        playConfettiFirework(); 
-        gameState.hero = hero; 
-        setHeroImages(gameState); 
+        if (hero.level < GameState.MAX_LEVEL) {
+          hero.level += 1; 
+          hero.xp = hero.xp + active_enemy.xp_reward - hero.xp_to_levelup; 
+          hero.xp_to_levelup = calculateXpToLevelUp(hero.level); 
+          // trigger level up popup
+          setNumChooseUpgrades(UPGRADE_PER_LEVELUP);
+          playConfettiFirework(); 
+          gameState.hero = hero; 
+          setHeroImages(gameState); 
+        } else {
+          hero.xp = hero.xp_to_levelup; // Cap XP at max level
+        }
       } else { 
         hero.xp += active_enemy.xp_reward;
         gameState.hero = hero;
