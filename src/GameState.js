@@ -1,4 +1,8 @@
-import { mergeList2inList1, updateLocation, ID_NONE } from './GameUtils.js'; 
+import { 
+  mergeList2inList1, updateLocation, ID_NONE, 
+  UPGRADE_DAMAGE, UPGRADE_MAX_HEALTH, UPGRADE_CRIT_CHANCE, 
+  UPGRADE_CRIT_DAMAGE, UPGRADE_EVADE_CHANCE, UPGRADE_ATTACK_SPEED,
+} from './GameUtils.js'; 
 
 /* Hero */
 /* Hero Gear Tier 0 */ 
@@ -1272,8 +1276,17 @@ static findEncounterList(gameState, location_id) {
     {location: GameState.ACT8_LOC1_NAME, encounters: GameState.ACT8_ENCOUNTERS},
   ];
 
-  static XP_TO_LEVEL2 = 25; 
+  static MAX_LEVEL = 70;
+  static XP_TO_LEVEL2 = 75; 
   static XP_SCALING = 1.3; 
+  static UPGRADE_LIMITS = {
+    [UPGRADE_DAMAGE]: 999,
+    [UPGRADE_MAX_HEALTH]: 999,
+    [UPGRADE_CRIT_CHANCE]: 999,
+    [UPGRADE_CRIT_DAMAGE]: 999,
+    [UPGRADE_EVADE_CHANCE]: 20,
+    [UPGRADE_ATTACK_SPEED]: 30,
+  };
   
   constructor(heroName, gender, location) {
     this.hero = {
@@ -1295,6 +1308,14 @@ static findEncounterList(gameState, location_id) {
       last_combat_event: "", 
       image: (gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL), 
       current_enchantment: { id: ID_NONE, selectReverse: (gameState) => {return gameState} },
+      upgradeCounts: {
+        [UPGRADE_DAMAGE]: 0,
+        [UPGRADE_MAX_HEALTH]: 0,
+        [UPGRADE_CRIT_CHANCE]: 0,
+        [UPGRADE_CRIT_DAMAGE]: 0,
+        [UPGRADE_EVADE_CHANCE]: 0,
+        [UPGRADE_ATTACK_SPEED]: 0,
+      }
     }
     this.location = location;
   }
