@@ -514,6 +514,21 @@ class GameState {
     crit_damage: 50,
     image: enemyEclipsedFrostguard
   }
+  static ENEMY_A3B1_FrostclawAlpha = {
+    name: 'Frostclaw Alpha (elite)',
+    level: 25,
+    health: 1500,
+    xp_reward: 1000, 
+    attack: 230,
+    attack_speed: 1100,
+    attack_cooldown: 1100,
+    evade_chance: 25, 
+    crit_chance: 25, 
+    crit_damage: 50,
+    image: enemyA3B1FrostclawAlpha, 
+    isElite: true, 
+    runAfter: (gameState) => mergeList2inList1(GameState.ACT3_ENCOUNTERS, GameState.ACT3_ENCOUNTERS_2), 
+  }
   static ENEMY_KAELITHS_WRAITH = {
     name: "Kaelith's Wraith",
     level: 27,
@@ -540,6 +555,24 @@ class GameState {
     crit_damage: 50,
     image: enemyChillrendColossus 
   }
+static ENEMY_A3B2_THE_BOUND_MONK = {
+    name: 'The Bound Monk (Boss)',
+    level: 30,
+    health: 7200,
+    xp_reward: 5000, 
+    attack: 450,
+    attack_speed: 2500,
+    attack_cooldown: 2500,
+    evade_chance: 45, 
+    crit_chance: 45, 
+    crit_damage: 60,
+    image: enemyA3B2TheBoundMonk, 
+    isElite: true, 
+    runAfter: (gameState) => {
+      gameState.acts_progression = 4; 
+      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT4); 
+    }, 
+}
   /* Enemy Templates Act4 */
   static ENEMY_SHADOW_SPRITE = {
     name: 'Shadow Sprite',
@@ -606,6 +639,7 @@ class GameState {
     crit_damage: 50,
     image: enemyDarkAcolyte4
   }
+
   static ENEMY_ECHOED_GUARDIAN = {
     name: 'Echoed Guardian',
     level: 36,
@@ -1161,14 +1195,25 @@ static findEncounterList(gameState, location_id) {
   ];
   static ACT3_ENCOUNTERS = [
     { category: 'combat', id: 'SNOW WARG', enemy: GameState.ENEMY_SNOW_WARG, weight: 50 },
-    { category: 'combat', id: 'ICEBOUND CONSTRUC', enemy: GameState.ENEMY_ICEBOUND_CONSTRUCT, weight: 45 },
+    { category: 'combat', id: 'ICEBOUND CONSTRUC', enemy: GameState.ENEMY_ICEBOUND_CONSTRUCT, weight: 50 },
     { category: 'combat', id: 'SHROUDBOUND HERALD', enemy: GameState.ENEMY_SHROUDBOUND_HERALD, weight: 45 },
     { category: 'combat', id: 'DARK ACOLYTE 3', enemy: GameState.ENEMY_DARK_ACOLYTE3, weight: 45 },
     { category: 'combat', id: 'FROST ELEMENTAL', enemy: GameState.ENEMY_FROST_ELEMENTAL, weight: 30 },
     { category: 'combat', id: 'AVALANCHE BEHEMOUTH', enemy: GameState.ENEMY_AVALANCHE_BEHEMOTH, weight: 30 },
-    { category: 'combat', id: 'ECLIPSED FROSTGUARD', enemy: GameState.ENEMY_ECLIPSED_FROSTGUARD, weight: 10 },
-    { category: 'combat', id: 'KAELITHS WRAITH', enemy: GameState.ENEMY_KAELITHS_WRAITH, weight: 5 },
-    { category: 'combat', id: 'CHILLREND COLOSSUS', enemy: GameState.ENEMY_CHILLREND_COLOSSUS, weight: 5 },
+    { category: 'combat', id: 'FROSTCLAW ALPHA', enemy: GameState.ENEMY_A3B1_FROSTCLAW_ALPHA, weight: 10 },
+  ];
+  static ACT3_ENCOUNTERS_2 = [
+    { category: 'combat', id: 'SNOW WARG', enemy: GameState.ENEMY_SNOW_WARG, weight: 5 },
+    { category: 'combat', id: 'ICEBOUND CONSTRUC', enemy: GameState.ENEMY_ICEBOUND_CONSTRUCT, weight: 5 },
+    { category: 'combat', id: 'SHROUDBOUND HERALD', enemy: GameState.ENEMY_SHROUDBOUND_HERALD, weight: 5 },
+    { category: 'combat', id: 'DARK ACOLYTE 3', enemy: GameState.ENEMY_DARK_ACOLYTE3, weight: 15 },
+    { category: 'combat', id: 'FROST ELEMENTAL', enemy: GameState.ENEMY_FROST_ELEMENTAL, weight: 25 },
+    { category: 'combat', id: 'AVALANCHE BEHEMOUTH', enemy: GameState.ENEMY_AVALANCHE_BEHEMOTH, weight: 25 },
+    { category: 'combat', id: 'FROSTCLAW ALPHA', enemy: GameState.ENEMY_A3B1_FROSTCLAW_ALPHA, weight: 0 },
+    { category: 'combat', id: 'ECLIPSED FROSTGUARD', enemy: GameState.ENEMY_ECLIPSED_FROSTGUARD, weight: 30 },
+    { category: 'combat', id: 'KAELITHS WRAITH', enemy: GameState.ENEMY_KAELITHS_WRAITH, weight: 30 },
+    { category: 'combat', id: 'CHILLREND COLOSSUS', enemy: GameState.ENEMY_CHILLREND_COLOSSUS, weight: 20 },
+    { category: 'combat', id: 'THE BOUND MONK', enemy: GameState.ENEMY_A3B2_THE_BOUND_MONK, weight: 10 },
   ];
   static ACT4_ENCOUNTERS = [
     { category: 'combat', id: 'SHADOW SPRITE', enemy: GameState.ENEMY_SHADOW_SPRITE, weight: 50 },
