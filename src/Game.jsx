@@ -7,7 +7,9 @@ import {combatCalculation, playSound, SND_SWORD_HIT,
         UPGRADE_PER_LEVELUP, playConfettiFirework, 
         changeLocation, handleResetHeroControl, 
         ID_NONE, ID_FIRE, ID_LIGHTNING, ID_ICE,
-        setHeroImages
+        setHeroImages,
+        UPGRADE_DAMAGE, UPGRADE_MAX_HEALTH, UPGRADE_CRIT_CHANCE, 
+        UPGRADE_CRIT_DAMAGE, UPGRADE_EVADE_CHANCE, UPGRADE_ATTACK_SPEED,
        } from "./GameUtils.js";
 
 import PropTypes from "prop-types";
@@ -204,13 +206,13 @@ return (
                 className="hero-image img-fluid rounded shadow-sm"
                 style={{ width: "100px", height: "150px" }}
               />
-              <p>Level: {gameState.hero.level}</p>
-              <p>Health: {gameState.hero.health}</p>
-              <p>Attack: {gameState.hero.attack}</p>
-              <p>Attack Cooldown: {gameState.hero.attack_speed / 1000}s</p>
-              <p>Evade Chance: {gameState.hero.evade_chance}%</p>
-              <p>Crit Chance: {gameState.hero.crit_chance}%</p>
-              <p>Crit Damage: {gameState.hero.crit_damage}%</p>
+              <p>Level: {gameState.hero.level}{gameState.hero.level >= GameState.MAX_LEVEL ? " (max)" : ""}</p>
+              <p>Health: {gameState.hero.health}{gameState.hero.upgradeCounts[UPGRADE_MAX_HEALTH] >= GameState.UPGRADE_LIMITS[UPGRADE_MAX_HEALTH] ? " (max)" : ""}</p>
+              <p>Attack: {gameState.hero.attack}{gameState.hero.upgradeCounts[UPGRADE_DAMAGE] >= GameState.UPGRADE_LIMITS[UPGRADE_DAMAGE] ? " (max)" : ""}</p>
+              <p>Attack Cooldown: {gameState.hero.attack_speed / 1000}s{gameState.hero.upgradeCounts[UPGRADE_ATTACK_SPEED] >= GameState.UPGRADE_LIMITS[UPGRADE_ATTACK_SPEED] ? " (max)" : ""}</p>
+              <p>Evade Chance: {gameState.hero.evade_chance}%{gameState.hero.upgradeCounts[UPGRADE_EVADE_CHANCE] >= GameState.UPGRADE_LIMITS[UPGRADE_EVADE_CHANCE] ? " (max)" : ""}</p>
+              <p>Crit Chance: {gameState.hero.crit_chance}%{gameState.hero.upgradeCounts[UPGRADE_CRIT_CHANCE] >= GameState.UPGRADE_LIMITS[UPGRADE_CRIT_CHANCE] ? " (max)" : ""}</p>
+              <p>Crit Damage: {gameState.hero.crit_damage}%{gameState.hero.upgradeCounts[UPGRADE_CRIT_DAMAGE] >= GameState.UPGRADE_LIMITS[UPGRADE_CRIT_DAMAGE] ? " (max)" : ""}</p>
             </div>
           </div>
   
