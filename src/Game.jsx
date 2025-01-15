@@ -101,9 +101,6 @@ const handleActiveAttack = () => {
       performHeroAttack(updatedState); 
       updatedState.hero.attack = baseAttack;  
       updatedState.active_enemy.evade_chance = baseEvade; 
-
-      // Trigger the attack animation
-      triggerAttackAnimation();
       return updatedState;
     } else {
       console.log(`Active attack missed @${cooldown}ms`);
@@ -465,20 +462,28 @@ return (
 }
 
 /* trigger attack animation */
-function triggerAttackAnimation() {
-  const heroImage = document.querySelector('.hero-image');
-  const enemyImage = document.querySelector('.enemy-image');
+function triggerAttackAnimation(attacker, hit, duration) {
+  const attackerImage = document.querySelector(attacker);
+  const hitImage = document.querySelector(hit);
 
-  if (heroImage && enemyImage) {
-    heroImage.style.animation = 'attack 0.5s ease-in-out';
-    enemyImage.style.animation = 'hit 0.5s ease-in-out';
+  if (attackerImage && hitImage) {
+    attackerImage.style.animation = 'attack 0.5s ease-in-out';
+    hitImage.style.animation = 'hit 0.5s ease-in-out';
 
     // Remove the animation classes after the animation ends
     setTimeout(() => {
-      heroImage.style.animation = '';
-      enemyImage.style.animation = '';
-    }, 500); // Duration of the animation
+      attackerImage.style.animation = '';
+      hitImage.style.animation = '';
+    }, duration); // Duration of the animation
   }
+}
+const heroImage = '.hero-image';
+const enemyImage = '.enemy-image';
+function triggerHeroAttackAnimation(duration) {
+  triggerAttackAnimation(heroImage, enemyImage, duration); 
+}
+function triggerEnemyAttackAnimation(duration) {
+  triggerAttackAnimation(enemyImage, heroImage, duration); 
 }
 
 /* Constants for Effects */ 
@@ -630,6 +635,7 @@ function performHeroAttack(gameState) {
     }
     active_enemy.health -= dmg;
     playSound(SND_SWORD_HIT);
+    triggerHeroAttackAnimation(500);
   } else {
     hero.last_combat_event = `missed`;
   }
@@ -656,6 +662,7 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
       active_enemy.last_combat_event = `dealt ${dmg}`; 
     }
     hero.health -= dmg; // No evade, apply damage
+    triggerEnemyAttackAnimation(500);
     setCounterAttackActive(false); // Disable Counter Attack button
   }
   active_enemy.attack_cooldown = active_enemy.attack_speed;
