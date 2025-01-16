@@ -559,7 +559,7 @@ class GameState {
     crit_damage: 50,
     image: enemyChillrendColossus 
   }
-static ENEMY_A3B2_THE_BOUND_MONK = {
+  static ENEMY_A3B2_THE_BOUND_MONK = {
     name: 'The Bound Monk (Boss)',
     level: 30,
     health: 7200,
@@ -643,7 +643,21 @@ static ENEMY_A3B2_THE_BOUND_MONK = {
     crit_damage: 50,
     image: enemyDarkAcolyte4
   }
-
+  static ENEMY_THE_WISPERING_ELDERTREE = {
+    name: 'The Wispering Eldertree (elite)',
+    level: 35,
+    health: 9000,
+    xp_reward: 3000, 
+    attack: 1200,
+    attack_speed: 2500,
+    attack_cooldown: 2500,
+    evade_chance: 15, 
+    crit_chance: 25, 
+    crit_damage: 50,
+    image: enemyA4B1TheWisperingEldertree, 
+    isElite: true, 
+    runAfter: (gameState) => mergeList2inList1(GameState.ACT4_ENCOUNTERS, GameState.ACT4_ENCOUNTERS_2), 
+  }
   static ENEMY_ECHOED_GUARDIAN = {
     name: 'Echoed Guardian',
     level: 36,
@@ -670,6 +684,24 @@ static ENEMY_A3B2_THE_BOUND_MONK = {
     crit_damage: 50,
     image: enemyKaelithsShadow,
   }  
+  static ENEMY_A4B2_KAELITHS_NIGHTMARE = {
+    name: "Kaelith's Nightmare (Boss)",
+    level: 40,
+    health: 9000,
+    xp_reward: 4000, 
+    attack: 1000,
+    attack_speed: 1300,
+    attack_cooldown: 1300,
+    evade_chance: 45, 
+    crit_chance: 45, 
+    crit_damage: 60,
+    image: enemyA4B2KaelithsNightmare, 
+    isElite: true, 
+    runAfter: (gameState) => {
+      gameState.acts_progression = 5; 
+      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT5); 
+    },
+  }
   /* Enemy Templates Act5 */
   static ENEMY_ANCIENT_SENTINEL = {
     name: "Ancient Sentinel",
@@ -723,6 +755,21 @@ static ENEMY_A3B2_THE_BOUND_MONK = {
     crit_damage: 50,
     image: enemyCultExcavator,
   }
+  static ENEMY_THE_OBSIDIAN_MAW = {
+    name: 'The Obsidian Maw (elite)',
+    level: 43,
+    health: 10000,
+    xp_reward: 3500, 
+    attack: 1450,
+    attack_speed: 1500,
+    attack_cooldown: 1500,
+    evade_chance: 35, 
+    crit_chance: 35, 
+    crit_damage: 50,
+    image: enemyA5B1TheObsidianMaw, 
+    isElite: true, 
+    runAfter: (gameState) => mergeList2inList1(GameState.ACT5_ENCOUNTERS, GameState.ACT5_ENCOUNTERS_2), 
+  }
   static ENEMY_RUNE_WROUGHT_TITAN = {
     name: "Rune-Wrought Titan",
     level: 45,
@@ -748,6 +795,24 @@ static ENEMY_A3B2_THE_BOUND_MONK = {
     crit_chance: 15, 
     crit_damage: 50,
     image: enemyTheForsakenArchivist,
+  }
+  static ENEMY_A5B2_THE_KEEPER_OF_THE_ABYSS = {
+    name: "The Keeper of the Abyss (Boss)",
+    level: 45,
+    health: 15000,
+    xp_reward: 8000, 
+    attack: 1900,
+    attack_speed: 1800,
+    attack_cooldown: 1800,
+    evade_chance: 45, 
+    crit_chance: 45, 
+    crit_damage: 60,
+    image: enemyA5B2TheKeeperOfTheAbyss, 
+    isElite: true, 
+    runAfter: (gameState) => {
+      gameState.acts_progression = 6; 
+      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT6); 
+    },
   }
   /* Enemy Templates Act6 */
   static ENEMY_GILDED_WRETCH = {
