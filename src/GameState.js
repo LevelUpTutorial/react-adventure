@@ -854,6 +854,21 @@ class GameState {
     crit_damage: 50,
     image: enemySkybornHarbinger,
   }
+  static ENEMY_A6B1_THE_SHARDBOUND_ORACLE = {
+    name: 'The Shardbound Oracle (elite)',
+    level: 50,
+    health: 19500,
+    xp_reward: 9000, 
+    attack: 1950,
+    attack_speed: 1700,
+    attack_cooldown: 1700,
+    evade_chance: 45, 
+    crit_chance: 45, 
+    crit_damage: 70,
+    image: enemyA6B1TheShardboundOracle, 
+    isElite: true, 
+    runAfter: (gameState) => mergeList2inList1(GameState.ACT6_ENCOUNTERS, GameState.ACT6_ENCOUNTERS_2), 
+  }
   static ENEMY_TYRANTS_ENFORCER = {
     name: "Tyrant's Enforcer",
     level: 50,
@@ -892,6 +907,24 @@ class GameState {
     crit_chance: 15, 
     crit_damage: 50,
     image: enemySunlitPhantom,
+  }
+  static ENEMY_A6B2_THE_TYRANT_KING = {
+    name: "The Tyrant King (Boss)",
+    level: 53,
+    health: 25000,
+    xp_reward: 12000, 
+    attack: 2300,
+    attack_speed: 1400,
+    attack_cooldown: 1400,
+    evade_chance: 45, 
+    crit_chance: 45, 
+    crit_damage: 70,
+    image: enemyA6B2TheTyrantKing, 
+    isElite: true, 
+    runAfter: (gameState) => {
+      gameState.acts_progression = 7; 
+      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT7); 
+    },
   }
   /* Enemy Templates Act7 */
   static ENEMY_STORMBOUND_FIEND = {
@@ -946,6 +979,21 @@ class GameState {
     crit_damage: 100,
     image: enemyCultPyromancer,
   }
+  static ENEMY_A7B1_THE_STEPPE_TITAN = {
+    name: 'The Steppe Titan (elite)',
+    level: 56,
+    health: 27500,
+    xp_reward: 14000, 
+    attack: 2600, 
+    attack_speed: 1800,
+    attack_cooldown: 1800,
+    evade_chance: 45, 
+    crit_chance: 45, 
+    crit_damage: 70,
+    image: enemyA7B1TheSteppeTitan, 
+    isElite: true, 
+    runAfter: (gameState) => mergeList2inList1(GameState.ACT7_ENCOUNTERS, GameState.ACT7_ENCOUNTERS_2), 
+  }
   static ENEMY_ECLIPSED_MARAUDER = {
     name: "Eclipsed Marauder",
     level: 58,
@@ -971,6 +1019,24 @@ class GameState {
     crit_chance: 55, 
     crit_damage: 50,
     image: enemyTheHeraldOfDespair,
+  }
+  static ENEMY_A7B2_THE_SHROUDBOUND_HIGH_PRIEST = {
+    name: "The Shroudbound High Priest (Boss)",
+    level: 60,
+    health: 32000,
+    xp_reward: 17000, 
+    attack: 1850,
+    attack_speed: 1300,
+    attack_cooldown: 1300,
+    evade_chance: 45, 
+    crit_chance: 45, 
+    crit_damage: 80,
+    image: enemyA7B2TheShroudboundHighPriest, 
+    isElite: true, 
+    runAfter: (gameState) => {
+      gameState.acts_progression = 8; 
+      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT8); 
+    },
   }
   /* Enemy  Act8 */
   static ENEMY_REALITY_FRAGMENTS = {
@@ -1025,6 +1091,21 @@ class GameState {
     crit_damage: 50,
     image: enemyEclipseShardlings,
   }
+  static ENEMY_A8B1_THE_RIFTBORN_DEVOURER = {
+    name: 'The Riftborn Devourer (elite)',
+    level: 63,
+    health: 35000,
+    xp_reward: 19500, 
+    attack: 2350, 
+    attack_speed: 1900,
+    attack_cooldown: 1900,
+    evade_chance: 45, 
+    crit_chance: 45, 
+    crit_damage: 90,
+    image: enemyA8B1TheRiftbornDevourer, 
+    isElite: true, 
+    runAfter: (gameState) => mergeList2inList1(GameState.ACT8_ENCOUNTERS, GameState.ACT8_ENCOUNTERS_2), 
+  }
   static ENEMY_VOID_REVENANT = {
     name: "Void Revenant",
     level: 63,
@@ -1038,17 +1119,35 @@ class GameState {
     crit_damage: 50,
     image: enemyVoidRevenant,
   }
+  static ENEMY_A8B2_THE_ECLIPSE_AVATAR = {
+    name: "The Eclipse Avatar (Final-Boss)",
+    level: 70,
+    health: 60000,
+    xp_reward: 30000, 
+    attack: 2450,
+    attack_speed: 1200,
+    attack_cooldown: 1200,
+    evade_chance: 45, 
+    crit_chance: 45, 
+    crit_damage: 100,
+    image: enemyA8B2TheEclipseAvatar, 
+    isElite: true, 
+    runAfter: (gameState) => {
+      gameState.acts_progression = 9; 
+      updateLocation(gameState, GameState.LOCATION_CITY); 
+    },
+  }
   /* Enemy Templates Placeholder */
   static ENEMY_PLACEHOLDER  = {
     name: 'Random Enemy',
-    level: 50,
-    health: 20000,
-    xp_reward: 20000, 
-    attack: 2000,
-    attack_speed: 5000,
-    attack_cooldown: 5000,
+    level: 65,
+    health: 14000,
+    xp_reward: 5950, 
+    attack: 2500, 
+    attack_speed: 2000,
+    attack_cooldown: 2000,
     evade_chance: 40, 
-    crit_chance: 30, 
+    crit_chance: 50, 
     crit_damage: 50,
     image: enemyPlaceholder
   }
