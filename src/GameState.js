@@ -654,7 +654,7 @@ class GameState {
     evade_chance: 15, 
     crit_chance: 25, 
     crit_damage: 50,
-    image: enemyA4B1TheWisperingEldertree, 
+    image: enemyA4B1TheWhisperingEldertree, 
     isElite: true, 
     runAfter: (gameState) => mergeList2inList1(GameState.ACT4_ENCOUNTERS, GameState.ACT4_ENCOUNTERS_2), 
   }
