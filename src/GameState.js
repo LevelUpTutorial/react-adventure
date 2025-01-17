@@ -1133,6 +1133,7 @@ class GameState {
     image: enemyA8B2TheEclipseAvatar, 
     isElite: true, 
     runAfter: (gameState) => {
+      alert('Thanks for playing! You prevented the Eclipse this time, but at what cost? Will you be able to break the cicle? [ "Newgame+" coming soon ]');
       gameState.acts_progression = 9; 
       updateLocation(gameState, GameState.LOCATION_CITY); 
     },
