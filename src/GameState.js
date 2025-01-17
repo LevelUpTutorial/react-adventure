@@ -643,8 +643,8 @@ class GameState {
     crit_damage: 50,
     image: enemyDarkAcolyte4
   }
-  static ENEMY_THE_WISPERING_ELDERTREE = {
-    name: 'The Wispering Eldertree (elite)',
+  static ENEMY_THE_WHISPERING_ELDERTREE = {
+    name: 'The Whispering Eldertree (elite)',
     level: 35,
     health: 9000,
     xp_reward: 3000, 
@@ -1389,14 +1389,14 @@ static findEncounterList(gameState, location_id) {
     { category: 'combat', id: 'CREEPING VINE', enemy: GameState.ENEMY_CREEPING_VINE, weight: 50 },
     { category: 'combat', id: 'PHANTOM STALKER', enemy: GameState.ENEMY_PHANTOM_STALKER, weight: 40 },
     { category: 'combat', id: 'ENEMY_DARK_AKOLYTE 4', enemy: GameState.ENEMY_DARK_ACOLYTE4, weight: 25 },
-    { category: 'combat', id: 'THE WISPERING ELDERTREE', enemy: GameState.ENEMY_A4B1_THE_WISPERING_ELDERTREE, weight: 10 },
+    { category: 'combat', id: 'THE WHISPERING ELDERTREE', enemy: GameState.ENEMY_A4B1_THE_WHISPERING_ELDERTREE, weight: 10 },
   ];
   static ACT4_ENCOUNTERS_2 = [
     { category: 'combat', id: 'SHADOW SPRITE', enemy: GameState.ENEMY_SHADOW_SPRITE, weight: 5 },
     { category: 'combat', id: 'CREEPING VINE', enemy: GameState.ENEMY_CREEPING_VINE, weight: 5 },
     { category: 'combat', id: 'PHANTOM STALKER', enemy: GameState.ENEMY_PHANTOM_STALKER, weight: 10 },
     { category: 'combat', id: 'ENEMY_DARK_AKOLYTE 4', enemy: GameState.ENEMY_DARK_ACOLYTE4, weight: 15 },
-    { category: 'combat', id: 'THE WISPERING ELDERTREE', enemy: GameState.ENEMY_A4B1_THE_WISPERING_ELDERTREE, weight: 0 },
+    { category: 'combat', id: 'THE WHISPERING ELDERTREE', enemy: GameState.ENEMY_A4B1_THE_WHISPERING_ELDERTREE, weight: 0 },
     { category: 'combat', id: 'ECHOED GUARDIAN', enemy: GameState.ENEMY_ECHOED_GUARDIAN, weight: 25 },
     { category: 'combat', id: "Kaelith's Shadow", enemy: GameState.ENEMY_KAELITHS_SHADOW, weight: 25 },
     { category: 'combat', id: 'Kaelith s NIGHTMARE', enemy: GameState.ENEMY_A4B2_KAELITHS_NIGHTMARE, weight: 5 },
