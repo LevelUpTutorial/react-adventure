@@ -643,7 +643,7 @@ class GameState {
     crit_damage: 50,
     image: enemyDarkAcolyte4
   }
-  static ENEMY_THE_WHISPERING_ELDERTREE = {
+  static ENEMY_A4B1_THE_WHISPERING_ELDERTREE = {
     name: 'The Whispering Eldertree (elite)',
     level: 35,
     health: 9000,
