@@ -161,7 +161,7 @@ y
         // return stats 
         if (key === UPGRADE_DAMAGE) {
           hero.attack -= count * DAMAGE_INCREMENT;
-        } else if (key === UPGRADE_MAX_HEALTH_INCREMENT) {
+        } else if (key === UPGRADE_MAX_HEALTH) {
           hero.health_full -= count * MAX_HEALTH_INCREMENT;
           hero.health = hero.health_full;
         } else if (key === UPGRADE_CRIT_CHANCE) {
