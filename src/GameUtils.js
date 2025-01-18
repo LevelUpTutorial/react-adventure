@@ -69,22 +69,28 @@ export function calculateXpToLevelUp(current_level) {
 */ 
 export const UPGRADE_PER_LEVELUP = 3; 
 const OPTIONS_PER_LEVELUP = 3; 
-export const UPGRADE_DAMAGE = "Damage +5";
-export const UPGRADE_MAX_HEALTH = "Max Health +50";
-export const UPGRADE_CRIT_CHANCE = "Crit Chance +2%";
-export const UPGRADE_CRIT_DAMAGE = "Crit Damage +10%";
-export const UPGRADE_EVADE_CHANCE = "Evade Chance +2%";
-export const UPGRADE_ATTACK_SPEED = "Attack Cooldown -20ms";
+export const DAMAGE_INCREMENT = 5; 
+export const MAX_HEALTH_INCREMENT = 50; 
+export const CRIT_CHANCE_INCREMENT = 2; 
+export const CRIT_DAMAGE_INCREMENT = 10;
+export const EVADE_CHANCE_INCREMENT = 2;
+export const ATTACK_SPEED_DECREASE = 20; 
+export const UPGRADE_DAMAGE = `Damage +${DAMAGE_INCREMENT}`;
+export const UPGRADE_MAX_HEALTH = `Max Health +${MAX_HEALTH_INCREMENT}`;
+export const UPGRADE_CRIT_CHANCE = `Crit Chance +${CRIT_CHANCE_INCREMENT}%`;
+export const UPGRADE_CRIT_DAMAGE = `Crit Damage +${CRIT_DAMAGE_INCREMENT}%`;
+export const UPGRADE_EVADE_CHANCE = `Evade Chance +${EVADE_CHANCE_INCREMENT}%`;
+export const UPGRADE_ATTACK_SPEED = `Attack Cooldown -${ATTACK_SPEED_DECREASE}ms`;
 const UPGRADE_OPTIONS = [
-    { name: UPGRADE_DAMAGE, effect: (hero) => hero.attack += 5, probability: 2 },
+    { name: UPGRADE_DAMAGE, effect: (hero) => hero.attack += DAMAGE_INCREMENT, probability: 2 },
     { name: UPGRADE_MAX_HEALTH, effect: (hero) => { 
-        hero.health_full += 50; 
+        hero.health_full += MAX_HEALTH_INCREMENT; 
         hero.health = hero.health_full; 
     }, probability: 2 },
-    { name: UPGRADE_CRIT_CHANCE, effect: (hero) => hero.crit_chance += 2, probability: 2 },
-    { name: UPGRADE_CRIT_DAMAGE, effect: (hero) => hero.crit_damage += 10, probability: 2 },
-    { name: UPGRADE_EVADE_CHANCE, effect: (hero) => hero.evade_chance += 2, probability: 2 },
-    { name: UPGRADE_ATTACK_SPEED, effect: (hero) => hero.attack_speed -= 20, probability: 2 },
+    { name: UPGRADE_CRIT_CHANCE, effect: (hero) => hero.crit_chance += CRIT_CHANCE_INCREMENT, probability: 2 },
+    { name: UPGRADE_CRIT_DAMAGE, effect: (hero) => hero.crit_damage += CRIT_DAMAGE_INCREMENT, probability: 2 },
+    { name: UPGRADE_EVADE_CHANCE, effect: (hero) => hero.evade_chance += EVADE_CHANCE_INCREMENT, probability: 2 },
+    { name: UPGRADE_ATTACK_SPEED, effect: (hero) => hero.attack_speed -= ATTACK_SPEED_DECREASE, probability: 2 },
 ];
 function rollUpgrades(options, numToChoose = OPTIONS_PER_LEVELUP, hero) {
   const weighted = options.flatMap((option) => {
