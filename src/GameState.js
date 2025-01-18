@@ -298,7 +298,9 @@ class GameState {
     isElite: true, 
     runAfter: (gameState) => {
       gameState.acts_progression = 2; 
-      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT2); 
+      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT2);
+      const list = [{ category: 'combat', id: 'The Cult Infiltrator', enemy: GameState.ENEMY_A1B2_THE_CULT_INFILTRATOR, weight: 0 }];
+      mergeList2inList1(GameState.ACT1_ENCOUNTERS, list); 
     },  
   }
   /* Enemy Templates Act2 */
@@ -424,6 +426,8 @@ class GameState {
     runAfter: (gameState) => {
       gameState.acts_progression = 3; 
       updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT3); 
+      const list = [{ category: 'combat', id: 'THE ASHBINDER PRIESTESS', enemy: GameState.ENEMY_A2B2_THE_ASHBINDER_PRIESTESS, weight: 0 }];
+      mergeList2inList1(GameState.ACT2_ENCOUNTERS, list);
     }, 
   }
   /* Enemy Templates Act3 */
@@ -574,7 +578,9 @@ class GameState {
     isElite: true, 
     runAfter: (gameState) => {
       gameState.acts_progression = 4; 
-      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT4); 
+      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT4);
+      const list = [{ category: 'combat', id: 'THE BOUND MONK', enemy: GameState.ENEMY_A3B2_THE_BOUND_MONK, weight: 0 }];
+      mergeList2inList1(GameState.ACT3_ENCOUNTERS, list);
     }, 
 }
   /* Enemy Templates Act4 */
@@ -700,6 +706,8 @@ class GameState {
     runAfter: (gameState) => {
       gameState.acts_progression = 5; 
       updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT5); 
+      const list = [{ category: 'combat', id: 'Kaelith s NIGHTMARE', enemy: GameState.ENEMY_A4B2_KAELITHS_NIGHTMARE, weight: 0 }];
+      mergeList2inList1(GameState.ACT4_ENCOUNTERS, list);
     },
   }
   /* Enemy Templates Act5 */
@@ -812,6 +820,8 @@ class GameState {
     runAfter: (gameState) => {
       gameState.acts_progression = 6; 
       updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT6); 
+      const list = [{ category: 'combat', id: 'KEEPER OF THE ABYSS', enemy: GameState.ENEMY_A5B2_THE_KEEPER_OF_THE_ABYSS, weight: 0 }];
+      mergeList2inList1(GameState.ACT5_ENCOUNTERS, list);
     },
   }
   /* Enemy Templates Act6 */
@@ -924,6 +934,8 @@ class GameState {
     runAfter: (gameState) => {
       gameState.acts_progression = 7; 
       updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT7); 
+      const list = [{ category: 'combat', id: 'TYRANT KING', enemy: GameState.ENEMY_A6B2_THE_TYRANT_KING, weight: 0 }];
+      mergeList2inList1(GameState.ACT6_ENCOUNTERS, list);
     },
   }
   /* Enemy Templates Act7 */
@@ -1036,6 +1048,8 @@ class GameState {
     runAfter: (gameState) => {
       gameState.acts_progression = 8; 
       updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT8); 
+      const list = [{ category: 'combat', id: 'SHROUDBOUND HIGH PRIEST', enemy: GameState.ENEMY_A7B2_THE_SHROUDBOUND_HIGH_PRIEST, weight: 0 }];
+      mergeList2inList1(GameState.ACT7_ENCOUNTERS, list);
     },
   }
   /* Enemy  Act8 */
