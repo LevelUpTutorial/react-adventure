@@ -137,7 +137,7 @@ const handleActiveAttack = () => {
       // Render an invisible placeholder
       return <p style={{ visibility: "hidden", ...style }}>Placeholder</p>;
     }
-y
+
     return <p style={style}>{text}</p>;
   };
 
