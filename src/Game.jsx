@@ -9,7 +9,9 @@ import {combatCalculation, playSound, SND_SWORD_HIT,
         ID_NONE, ID_FIRE, ID_LIGHTNING, ID_ICE,
         setHeroImages,
         UPGRADE_DAMAGE, UPGRADE_MAX_HEALTH, UPGRADE_CRIT_CHANCE, 
-        UPGRADE_CRIT_DAMAGE, UPGRADE_EVADE_CHANCE, UPGRADE_ATTACK_SPEED,
+        UPGRADE_CRIT_DAMAGE, UPGRADE_EVADE_CHANCE, UPGRADE_ATTACK_SPEED, 
+        DAMAGE_INCREASE, MAX_HEALTH_INCREASE, CRIT_CHANCE_INCREASE, 
+        CRIT_DAMAGE_INCREASE, EVADE_CHANCE_INCREASE, ATTACK_SPEED_DECREASE, 
        } from "./GameUtils.js";
 
 import PropTypes from "prop-types";
@@ -135,7 +137,7 @@ const handleActiveAttack = () => {
       // Render an invisible placeholder
       return <p style={{ visibility: "hidden", ...style }}>Placeholder</p>;
     }
-
+y
     return <p style={style}>{text}</p>;
   };
 
@@ -147,6 +149,37 @@ const handleActiveAttack = () => {
     setNumChooseUpgrades(numChooseUpgrades - 1); 
     setGameState({ ...gameState }); // Update the game state
   }; 
+
+  const handleRespecCharacter = () => {
+    setGameState((prevState) => { 
+      const hero = prevState.hero; 
+      let totalPoints = 0; 
+      for (let key in hero.upgradeCounts) {
+        const count = hero.upgradeCounts[key];
+        totalPoints += count; 
+        hero.upgradeCounts[key] = 0; 
+        // return stats 
+        if (key === UPGRADE_DAMAGE) {
+          hero.attack -= count * DAMAGE_INCREMENT;
+        } else if (key === UPGRADE_MAX_HEALTH_INCREMENT) {
+          hero.health_full -= count * MAX_HEALTH_INCREMENT;
+          hero.health = hero.health_full;
+        } else if (key === UPGRADE_CRIT_CHANCE) {
+          hero.crit_chance -= count * CRIT_CHANCE_INCREMENT;
+        } else if (key === UPGRADE_CRIT_DAMAGE) {
+          hero.crit_damage -= count * CRIT_DAMAGE_INCREMENT;
+        } else if (key === UPGRADE_EVADE_CHANCE) {
+          hero.evade_chance -= count * EVADE_CHANCE_INCREMENT;
+        } else if (key === UPGRADE_ATTACK_SPEED) {
+          hero.attack_speed += count * ATTACK_SPEED_DECREASE;
+          hero.attack_cooldown = hero.attack_speed; 
+        }
+      }
+      // refund points 
+      setNumChooseUpgrades(totalPoints);
+      return { ...prevState, hero }; 
+    });
+  };
 
   const UpgradePopup = ({ upgrades, onChoose }) => {
     return (
@@ -213,6 +246,13 @@ return (
               <p>Evade Chance: {gameState.hero.evade_chance}%{gameState.hero.upgradeCounts[UPGRADE_EVADE_CHANCE] >= GameState.UPGRADE_LIMITS[UPGRADE_EVADE_CHANCE] ? " (max)" : ""}</p>
               <p>Crit Chance: {gameState.hero.crit_chance}%{gameState.hero.upgradeCounts[UPGRADE_CRIT_CHANCE] >= GameState.UPGRADE_LIMITS[UPGRADE_CRIT_CHANCE] ? " (max)" : ""}</p>
               <p>Crit Damage: {gameState.hero.crit_damage}%{gameState.hero.upgradeCounts[UPGRADE_CRIT_DAMAGE] >= GameState.UPGRADE_LIMITS[UPGRADE_CRIT_DAMAGE] ? " (max)" : ""}</p>
+              <button
+                 type="button"
+                 className="btn btn-danger"
+                 onClick={() => handleRespecCharacter()}
+               >
+                 Respec Stats
+               </button>
             </div>
           </div>
   
