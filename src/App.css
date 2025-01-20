@@ -35,13 +35,16 @@
   90% { transform: translateX(-5px) rotate(-5deg) scale(1.05); opacity: 0.95; }
   100% { transform: translateX(0) rotate(0deg) scale(1); opacity: 1; }
 }
+.hero-image, .enemy-image {
+  position: relative; /* Required for the transform to work */
+}
 @keyframes impact {
   0% { transform: scale(0); opacity: 0; } /* Start hidden */
   50% { transform: scale(1.2); opacity: 1; } /* Peak effect */
   100% { transform: scale(1.5); opacity: 0; } /* Fade out and expand */
 }
 .impact {
-  background: radial-gradient(circle, rgba(255, 255, 0, 0.8), rgba(255, 0, 0, 0));
+  background: radial-gradient(circle, rgba(255, 0, 0, 0.8), rgba(255, 0, 0, 0));
   border-radius: 50%;
   position: absolute;
   pointer-events: none; /* Prevent interaction */
