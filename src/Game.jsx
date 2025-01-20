@@ -182,7 +182,7 @@ const handleActiveAttack = () => {
   };
 
   const ListHeroStats = () => {
-    return 
+    return (
       <>
         <p>Level: {gameState.hero.level}{gameState.hero.level >= GameState.MAX_LEVEL ? " (max)" : ""}</p>
         <p>Health: {gameState.hero.health}{gameState.hero.upgradeCounts[UPGRADE_MAX_HEALTH] >= GameState.UPGRADE_LIMITS[UPGRADE_MAX_HEALTH] ? " (max)" : ""}</p>
@@ -192,6 +192,7 @@ const handleActiveAttack = () => {
         <p>Crit Chance: {gameState.hero.crit_chance}%{gameState.hero.upgradeCounts[UPGRADE_CRIT_CHANCE] >= GameState.UPGRADE_LIMITS[UPGRADE_CRIT_CHANCE] ? " (max)" : ""}</p>
         <p>Crit Damage: {gameState.hero.crit_damage}%{gameState.hero.upgradeCounts[UPGRADE_CRIT_DAMAGE] >= GameState.UPGRADE_LIMITS[UPGRADE_CRIT_DAMAGE] ? " (max)" : ""}</p>
       </>
+    ); 
   };
   
   const UpgradePopup = ({ hero, upgrades, onChoose }) => {
