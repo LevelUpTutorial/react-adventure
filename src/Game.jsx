@@ -214,7 +214,7 @@ const handleActiveAttack = () => {
                     <button
                       key={index}
                       onClick={() => onChoose(upgrade)}
-                      className="btn btn-danger px-4"
+                      className="btn btn-danger btn-lg px-1"
                     >
                       {upgrade.name}
                     </button>
