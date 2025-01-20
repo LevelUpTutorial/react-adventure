@@ -209,12 +209,12 @@ const handleActiveAttack = () => {
                 <div className="col-6">
                   <ListHeroStats />
                 </div>
-                <div className="col-6 btn-lg d-flex flex-column gap-2" role="group" aria-label="buttons for upgrade choices">
+                <div className="col-6 d-flex flex-column gap-2" role="group" aria-label="buttons for upgrade choices">
                   {upgrades.map((upgrade, index) => (
                     <button
                       key={index}
                       onClick={() => onChoose(upgrade)}
-                      className="btn btn-danger btn-lg px-4"
+                      className="btn btn-danger px-4"
                     >
                       {upgrade.name}
                     </button>
