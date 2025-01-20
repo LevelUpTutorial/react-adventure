@@ -22,7 +22,7 @@
 @keyframes attack {
   0% { transform: translateX(0); }
   25% { transform: translateX(-20px); }
-  50% { transform: translateX(40px); } /* Impact point */
+  50% { transform: translateX(calc(70px * var(--attack-direction))) scale(1.05; } /* Dynamic direction */
   75% { transform: translateX(-10px); }
   100% { transform: translateX(0); }
 }
