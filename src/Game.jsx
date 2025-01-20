@@ -522,8 +522,8 @@ function triggerAttackAnimation(attacker, hit, duration) {
   const hitImage = document.querySelector(hit);
 
   if (attackerImage && hitImage) {
-    attackerImage.style.animation = `attack ${duration}ms ease-in-out cubic-bezier(0.4, 0.0, 0.2, 1) forwards`;
-    hitImage.style.animation = `hit ${duration}ms ease-in-out forwards`;
+    attackerImage.style.animation = `attack ${duration}ms ease-in cubic-bezier(0.4, 0.0, 0.2, 1) forwards`;
+    hitImage.style.animation = `hit ${duration}ms ease-out forwards`;
 
     const impactEffect = document.createElement('div');
     impactEffect.className = 'impact';
@@ -539,7 +539,7 @@ function triggerAttackAnimation(attacker, hit, duration) {
     impactEffect.style.pointerEvents = 'none'; // Prevent interference with clicks
 
     // Add the impact animation
-    impactEffect.style.animation = `impact ${duration}ms ease-out forwards`;
+    impactEffect.style.animation = `impact ${duration}ms ease-in-out forwards`;
 
     // Append the impact effect to the body or a specific container
     document.body.appendChild(impactEffect);
