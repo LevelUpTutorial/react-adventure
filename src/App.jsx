@@ -35,7 +35,7 @@ function App() {
             <p className="fw-bold text-primary">Choose your Hero:</p>
             <div className="d-flex justify-content-center align-items-center gap-4">
               <div 
-                className={`p-2 border ${gender === GameState.GENDER_MALE ? 'border-primary' : 'border-secondary'} rounded shadow-sm`}
+                className={`p-2 border ${gender === GameState.GENDER_MALE ? 'border-primary border-4' : 'border-secondary'} rounded shadow-sm`}
                 onClick={() => setGender(GameState.GENDER_MALE)}
                 style={{ cursor: 'pointer' }}
               >
@@ -54,7 +54,7 @@ function App() {
                 </label>
               </div>
               <div
-                className={`p-2 border ${gender === GameState.GENDER_FEMALE ? 'border-primary' : 'border-secondary'} rounded shadow-sm`}
+                className={`p-2 border ${gender === GameState.GENDER_FEMALE ? 'border-primary border-4' : 'border-secondary'} rounded shadow-sm`}
                 onClick={() => setGender(GameState.GENDER_FEMALE)}
                 style={{ cursor: 'pointer' }}
               >
