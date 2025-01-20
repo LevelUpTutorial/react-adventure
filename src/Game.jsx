@@ -291,7 +291,7 @@ return (
             {/* Hero Section */}
             <div 
               className="battle-container-hero text-center d-flex flex-column flex-fill gap-2"
-              style={{ width: '50%' }} 
+              style={{ width: '50%', position: 'relative' }} 
               >
               <p className="fw-semibold text-success">
                 {comboDisplay}
@@ -333,7 +333,7 @@ return (
             {/* Enemy Section */}
             <div 
               className="battle-container-enemy text-center d-flex flex-column flex-fill gap-2"
-              style={{ width: '50%' }} 
+              style={{ width: '50%', position: 'relative' }} 
               >
               {gameState.active_enemy && (() => {
                 const eAttackProgress = Math.max(0, Math.min( (gameState.active_enemy.attack_cooldown / gameState.active_enemy.attack_speed * 100), 100));
@@ -524,11 +524,6 @@ function triggerAttackAnimation(attacker, hit, duration) {
   const hitImage = document.querySelector(hit);
 
   if (attackerImage && hitImage) {
-    // Ensure the attacker is properly positioned
-    if (window.getComputedStyle(attackerImage).position === 'static') {
-      attackerImage.style.position = 'relative';
-    }
-
     // Determine direction based on the attacker
     const direction = (attacker === heroImage ? 1 : -1); // Hero moves right (+), Enemy moves left (-)
     attackerImage.style.setProperty('--attack-direction', direction); // Pass direction dynamically
