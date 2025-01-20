@@ -522,8 +522,10 @@ function triggerAttackAnimation(attacker, hit, duration) {
   const hitImage = document.querySelector(hit);
 
   if (attackerImage && hitImage) {
-    // Ensure attacker is properly positioned for animation
-    attackerImage.style.position = attackerImage.style.position || 'relative';
+    // Ensure the attacker is properly positioned
+    if (window.getComputedStyle(attackerImage).position === 'static') {
+      attackerImage.style.position = 'relative';
+    }
 
     // Set attack animation for the attacker
     attackerImage.style.animation = `attack ${duration}ms ease-in cubic-bezier(0.4, 0.0, 0.2, 1) forwards`;
@@ -544,9 +546,9 @@ function triggerAttackAnimation(attacker, hit, duration) {
     impactEffect.style.left = `${hitRect.left - parentRect.left + hitRect.width / 2}px`;
     impactEffect.style.top = `${hitRect.top - parentRect.top + hitRect.height / 2}px`;
     impactEffect.style.transform = 'translate(-50%, -50%)'; // Center the impact effect
-    impactEffect.style.width = '50px'; // Customize as needed
+    impactEffect.style.width = '50px';
     impactEffect.style.height = '50px';
-    impactEffect.style.pointerEvents = 'none'; // Prevent interference with clicks
+    impactEffect.style.pointerEvents = 'none'; // Prevent interaction
 
     // Add the impact animation
     impactEffect.style.animation = `impact ${duration}ms ease-in-out forwards`;
