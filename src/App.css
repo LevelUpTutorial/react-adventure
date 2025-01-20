@@ -48,4 +48,5 @@
   border-radius: 50%;
   position: absolute;
   pointer-events: none; /* Prevent interaction */
+  transform: translate(-50%, -50%); /* Center the effect */
 }
