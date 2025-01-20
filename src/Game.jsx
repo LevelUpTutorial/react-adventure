@@ -532,9 +532,10 @@ function triggerAttackAnimation(attacker, hit, duration) {
     // Determine direction based on the attacker
     const direction = (attacker === heroImage ? 1 : -1); // Hero moves right (+), Enemy moves left (-)
     attackerImage.style.setProperty('--attack-direction', direction); // Pass direction dynamically
+
     // Set attack animation for the attacker
     attackerImage.style.animation = `attack ${duration}ms cubic-bezier(0.4, 0.0, 0.2, 1)`;
-    
+
     // Set hit animation for the target
     hitImage.style.animation = `hit ${duration}ms ease-out`;
 
@@ -547,11 +548,20 @@ function triggerAttackAnimation(attacker, hit, duration) {
     const hitRect = hitImage.getBoundingClientRect();
     const parentRect = parent.getBoundingClientRect();
 
-    impactEffect.style.position = 'absolute';
+    // **Position the impact effect**
+    // Centered positioning (uncomment to use):
     impactEffect.style.left = `${hitRect.left - parentRect.left + hitRect.width / 2}px`;
     impactEffect.style.top = `${hitRect.top - parentRect.top + hitRect.height / 2}px`;
-    impactEffect.style.transform = 'translate(-50%, -50%)'; // Center the impact effect
-    impactEffect.style.width = '50px';
+    impactEffect.style.transform = 'translate(-50%, -50%)'; // Center the effect
+
+    // Upper-left corner positioning (default):
+    /*
+    impactEffect.style.left = `${hitRect.left - parentRect.left}px`;
+    impactEffect.style.top = `${hitRect.top - parentRect.top}px`;
+    impactEffect.style.transform = ''; // No centering for upper-left corner
+    */
+    impactEffect.style.position = 'absolute';
+    impactEffect.style.width = '50px'; // Adjust for desired size
     impactEffect.style.height = '50px';
     impactEffect.style.pointerEvents = 'none'; // Prevent interaction
 
