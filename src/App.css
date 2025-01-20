@@ -21,15 +21,17 @@
 /* Attack Animation */ 
 @keyframes attack {
   0% { transform: translateX(0); }
-  20% { transform: translateX(-20px); }
-  40% { transform: translateX(20px); }
-  60% { transform: translateX(20px); }
+  50% { transform: translateX(70px) scale(1.2); } /* Impact point */
   100% { transform: translateX(0); }
 }
 @keyframes hit {
-  0% { transform: translateX(0) rotate(0deg); }
-  25% { transform: translateX(-10px) rotate(-5deg); }
-  50% { transform: translateX(10px) rotate(5deg); }
-  75% { transform: translateX(-5px) rotate(-3deg); }
-  100% { transform: translateX(0) rotate(0deg); }
+  /* Idle period */
+  0% { transform: translateX(0) rotate(0deg) scale(1); opacity: 1; }
+  50% { transform: translateX(0) rotate(0deg) scale(1); opacity: 1; } /* Stay idle */
+
+  /* Impact effects start */
+  60% { transform: translateX(-15px) rotate(-10deg) scale(1.1); opacity: 0.9; }
+  75% { transform: translateX(15px) rotate(10deg) scale(1.2); opacity: 0.8; }
+  90% { transform: translateX(-5px) rotate(-5deg) scale(1.05); opacity: 0.95; }
+  100% { transform: translateX(0) rotate(0deg) scale(1); opacity: 1; }
 }
