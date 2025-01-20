@@ -50,7 +50,7 @@ function App() {
                   for="select-male"
                   className={`fw-bold ${gender === GameState.GENDER_MALE ? 'text-primary' : 'text-secondary'}`}
                   >
-                    heavy hitter
+                    Bonus Crit. Chance & Crit. Damage 
                 </label>
               </div>
               <div
@@ -69,7 +69,7 @@ function App() {
                   for="select-female"
                   className={`fw-bold ${gender === GameState.GENDER_FEMALE ? 'text-primary' : 'text-secondary'}`} 
                 >
-                  fast & agily
+                  Bonus Attack Speed & Evade Chance
                 </label>
               </div>
             </div>
