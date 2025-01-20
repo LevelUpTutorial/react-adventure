@@ -522,17 +522,27 @@ function triggerAttackAnimation(attacker, hit, duration) {
   const hitImage = document.querySelector(hit);
 
   if (attackerImage && hitImage) {
+    // Ensure attacker is properly positioned for animation
+    attackerImage.style.position = attackerImage.style.position || 'relative';
+
+    // Set attack animation for the attacker
     attackerImage.style.animation = `attack ${duration}ms ease-in cubic-bezier(0.4, 0.0, 0.2, 1) forwards`;
+
+    // Set hit animation for the target
     hitImage.style.animation = `hit ${duration}ms ease-out forwards`;
 
+    // Create and trigger the impact animation
     const impactEffect = document.createElement('div');
     impactEffect.className = 'impact';
 
-    // Position the impact effect at the center of the hit image
+    // Position the impact effect relative to the hit image's parent
+    const parent = hitImage.parentNode;
     const hitRect = hitImage.getBoundingClientRect();
+    const parentRect = parent.getBoundingClientRect();
+
     impactEffect.style.position = 'absolute';
-    impactEffect.style.left = `${hitRect.left + hitRect.width / 2}px`;
-    impactEffect.style.top = `${hitRect.top + hitRect.height / 2}px`;
+    impactEffect.style.left = `${hitRect.left - parentRect.left + hitRect.width / 2}px`;
+    impactEffect.style.top = `${hitRect.top - parentRect.top + hitRect.height / 2}px`;
     impactEffect.style.transform = 'translate(-50%, -50%)'; // Center the impact effect
     impactEffect.style.width = '50px'; // Customize as needed
     impactEffect.style.height = '50px';
@@ -541,8 +551,8 @@ function triggerAttackAnimation(attacker, hit, duration) {
     // Add the impact animation
     impactEffect.style.animation = `impact ${duration}ms ease-in-out forwards`;
 
-    // Append the impact effect to the body or a specific container
-    document.body.appendChild(impactEffect);
+    // Append the impact effect to the parent container
+    parent.appendChild(impactEffect);
 
     // Remove animations and clean up after the animation ends
     setTimeout(() => {
