@@ -48,7 +48,7 @@ function App() {
                 />
                 <label 
                   for="select-male"
-                  className={`fw-bold ${gender === GameState.GENDER_MALE ? 'text-primary' : 'text-secondary'}`}
+                  className={`fw-bold ${gender === GameState.GENDER_MALE ? 'text-primary' : 'text-black'}`}
                   >
                     Bonus Crit. Chance & Crit. Damage 
                 </label>
@@ -67,7 +67,7 @@ function App() {
                 />
                 <label 
                   for="select-female"
-                  className={`fw-bold ${gender === GameState.GENDER_FEMALE ? 'text-primary' : 'text-secondary'}`} 
+                  className={`fw-bold ${gender === GameState.GENDER_FEMALE ? 'text-primary' : 'text-black'}`} 
                 >
                   Bonus Attack Speed & Evade Chance
                 </label>
