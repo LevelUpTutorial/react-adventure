@@ -522,14 +522,36 @@ function triggerAttackAnimation(attacker, hit, duration) {
   const hitImage = document.querySelector(hit);
 
   if (attackerImage && hitImage) {
-    attackerImage.style.animation = `attack ${duration}ms ease-in-out fowards`;
+    attackerImage.style.animation = `attack ${duration}ms ease-in-out cubic-bezier(0.4, 0.0, 0.2, 1) forwards`;
     hitImage.style.animation = `hit ${duration}ms ease-in-out forwards`;
 
-    // Remove the animation classes after the animation ends
+    const impactEffect = document.createElement('div');
+    impactEffect.className = 'impact';
+
+    // Position the impact effect at the center of the hit image
+    const hitRect = hitImage.getBoundingClientRect();
+    impactEffect.style.position = 'absolute';
+    impactEffect.style.left = `${hitRect.left + hitRect.width / 2}px`;
+    impactEffect.style.top = `${hitRect.top + hitRect.height / 2}px`;
+    impactEffect.style.transform = 'translate(-50%, -50%)'; // Center the impact effect
+    impactEffect.style.width = '50px'; // Customize as needed
+    impactEffect.style.height = '50px';
+    impactEffect.style.pointerEvents = 'none'; // Prevent interference with clicks
+
+    // Add the impact animation
+    impactEffect.style.animation = `impact ${duration}ms ease-out forwards`;
+
+    // Append the impact effect to the body or a specific container
+    document.body.appendChild(impactEffect);
+
+    // Remove animations and clean up after the animation ends
     setTimeout(() => {
       attackerImage.style.animation = '';
       hitImage.style.animation = '';
-    }, duration); // Duration of the animation
+      if (impactEffect.parentNode) {
+        impactEffect.parentNode.removeChild(impactEffect);
+      }
+    }, duration); // Match the duration of the animations
   }
 }
 const heroImage = '.hero-image';
