@@ -516,6 +516,8 @@ return (
 }
 
 const battleAnimationDuration = 600; 
+const heroImage = '.hero-image';
+const enemyImage = '.enemy-image';
 /* trigger attack animation */
 function triggerAttackAnimation(attacker, hit, duration) {
   const attackerImage = document.querySelector(attacker);
@@ -569,8 +571,6 @@ function triggerAttackAnimation(attacker, hit, duration) {
     }, duration); // Match the duration of the animations
   }
 }
-const heroImage = '.hero-image';
-const enemyImage = '.enemy-image';
 function triggerHeroAttackAnimation(duration) {
   triggerAttackAnimation(heroImage, enemyImage, duration); 
 }
