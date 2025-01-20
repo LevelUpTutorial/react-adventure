@@ -515,14 +515,15 @@ return (
   );
 }
 
+const battleAnimationDuration = 600; 
 /* trigger attack animation */
 function triggerAttackAnimation(attacker, hit, duration) {
   const attackerImage = document.querySelector(attacker);
   const hitImage = document.querySelector(hit);
 
   if (attackerImage && hitImage) {
-    attackerImage.style.animation = 'attack 0.5s ease-in-out';
-    hitImage.style.animation = 'hit 0.5s ease-in-out';
+    attackerImage.style.animation = `attack ${duration}ms ease-in-out fowards`;
+    hitImage.style.animation = `hit ${duration}ms ease-in-out forwards`;
 
     // Remove the animation classes after the animation ends
     setTimeout(() => {
@@ -691,7 +692,7 @@ function performHeroAttack(gameState) {
     }
     active_enemy.health -= dmg;
     playSound(SND_SWORD_HIT);
-    triggerHeroAttackAnimation(500);
+    triggerHeroAttackAnimation(battleAnimationDuration);
   } else {
     hero.last_combat_event = `missed`;
   }
@@ -718,7 +719,7 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
       active_enemy.last_combat_event = `dealt ${dmg}`; 
     }
     hero.health -= dmg; // No evade, apply damage
-    triggerEnemyAttackAnimation(500);
+    triggerEnemyAttackAnimation(battleAnimationDuration);
     setCounterAttackActive(false); // Disable Counter Attack button
   }
   active_enemy.attack_cooldown = active_enemy.attack_speed;
