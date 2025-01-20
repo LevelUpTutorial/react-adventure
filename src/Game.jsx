@@ -181,7 +181,16 @@ const handleActiveAttack = () => {
     });
   };
 
-  const UpgradePopup = ({ upgrades, onChoose }) => {
+  const UpgradePopup = ({ hero, upgrades, onChoose }) => {
+    const options = {
+        [UPGRADE_DAMAGE]: `Damage ${hero.attack} -> ${hero.attack + DAMAGE_INCREMENT}`,
+        [UPGRADE_MAX_HEALTH]: `Max Health ${hero.health_full} -> ${hero.health_full + MAX_HEALTH_INCREMENT}`,
+        [UPGRADE_CRIT_CHANCE]: `Crit. Chance ${hero.crit_chance} -> ${hero.crit_chance + CRIT_CHANCE_INCREMENT}`,
+        [UPGRADE_CRIT_DAMAGE]: `Crit. Damage ${hero.crit_damage} -> ${hero.crit_damage + CRIT_DAMAGE_INCREMENT}`,
+        [UPGRADE_EVADE_CHANCE]: `Evade Chance ${hero.evade_chance} -> ${hero.evade_chance + EVADE_CHANCE_INCREMENT}`,
+        [UPGRADE_ATTACK_SPEED]: `Attack Cooldown ${hero.attack_speed} -> ${hero.attack_speed - ATTACK_SPEED_DECREASE}`,
+      }; 
+    
     return (
         <div className="modal show d-flex align-items-center justify-content-center" style={{ display: 'block' }}>
             <div className="modal-dialog modal-dialog-centered">
@@ -198,7 +207,7 @@ const handleActiveAttack = () => {
                                     onClick={() => onChoose(upgrade)}
                                     className="btn btn-danger btn-lg px-4"
                                 >
-                                    {upgrade.name}
+                                    {options[upgrade.name]}
                                 </button>
                             ))}
                         </div>
@@ -497,6 +506,7 @@ return (
       {/* Level Up Popup */}
       {isUpgradePopupVisible && (
         <UpgradePopup
+          hero={gameState.hero}
           upgrades={upgradeOptions}
           onChoose={handleUpgradeChoice}
         />
