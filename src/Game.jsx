@@ -528,7 +528,7 @@ function triggerAttackAnimation(attacker, hit, duration) {
     }
 
     // Set attack animation for the attacker
-    attackerImage.style.animation = `attack ${duration}ms ease-in`;
+    attackerImage.style.animation = `attack ${duration}ms cubic-bezier(0.4, 0.0, 0.2, 1)`;
 
     // Set hit animation for the target
     hitImage.style.animation = `hit ${duration}ms ease-out`;
