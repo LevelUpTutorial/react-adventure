@@ -528,7 +528,7 @@ function triggerAttackAnimation(attacker, hit, duration) {
     }
 
     // Determine direction based on the attacker
-    const direction = attacker.includes('hero') ? 1 : -1; // Hero moves right (+), Enemy moves left (-)
+    const direction = (attacker === heroImage ? 1 : -1); // Hero moves right (+), Enemy moves left (-)
     
     // Set attack animation for the attacker
     attackerImage.style.animation = `attack ${duration}ms cubic-bezier(0.4, 0.0, 0.2, 1)`;
