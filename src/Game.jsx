@@ -196,41 +196,37 @@ const handleActiveAttack = () => {
   };
   
   const UpgradePopup = ({ hero, upgrades, onChoose }) => {
-    const options = {
-        [UPGRADE_DAMAGE]: `Damage ${hero.attack} -> ${hero.attack + DAMAGE_INCREMENT}`,
-        [UPGRADE_MAX_HEALTH]: `Max Health ${hero.health_full} -> ${hero.health_full + MAX_HEALTH_INCREMENT}`,
-        [UPGRADE_CRIT_CHANCE]: `Crit. Chance ${hero.crit_chance}% -> ${hero.crit_chance + CRIT_CHANCE_INCREMENT}%`,
-        [UPGRADE_CRIT_DAMAGE]: `Crit. Damage ${hero.crit_damage}% -> ${hero.crit_damage + CRIT_DAMAGE_INCREMENT}%`,
-        [UPGRADE_EVADE_CHANCE]: `Evade Chance ${hero.evade_chance}% -> ${hero.evade_chance + EVADE_CHANCE_INCREMENT}%`,
-        [UPGRADE_ATTACK_SPEED]: `Attack Cooldown ${hero.attack_speed}ms -> ${hero.attack_speed - ATTACK_SPEED_DECREASE}ms`,
-      }; 
-    
     return (
-        <div className="modal show d-flex align-items-center justify-content-center" style={{ display: 'block' }}>
-            <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title">Level Up!</h5>
-                    </div>
-                    <div className="modal-body">
-                        <p>Choose one upgrade ({numChooseUpgrades}/{UPGRADE_PER_LEVELUP})</p>
-                        <div className="btn-group-vertical btn-group-lg d-flex flex-column gap-2" role="group" aria-label="buttons for upgrade choices">
-                            {upgrades.map((upgrade, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => onChoose(upgrade)}
-                                    className="btn btn-danger btn-lg px-4"
-                                >
-                                    {options[upgrade.name]}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                </div>
+      <div className="modal show d-flex align-items-center justify-content-center" style={{ display: 'block' }}>
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Level Up!</h5>
             </div>
+            <div className="modal-body">
+              <p>Choose one upgrade ({numChooseUpgrades}/{UPGRADE_PER_LEVELUP})</p>
+              <div className="row">
+                <div className="col-6">
+                  <ListHeroStats />
+                </div>
+                <div className="col-6 btn-group-vertical btn-group-lg d-flex flex-column gap-2" role="group" aria-label="buttons for upgrade choices">
+                  {upgrades.map((upgrade, index) => (
+                    <button
+                      key={index}
+                      onClick={() => onChoose(upgrade)}
+                      className="btn btn-danger btn-lg px-4"
+                    >
+                      {upgrade.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     );
-}; 
+  }; 
 
 useEffect(() => {
   if (numChooseUpgrades > 0) {
