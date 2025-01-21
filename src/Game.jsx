@@ -567,7 +567,7 @@ function triggerAttackAnimation(attacker, hit, duration, isCritical = false) {
   }
 }
 function triggerHeroAttackAnimation(duration, isCritical) {
-  triggerAttackAnimation(heroImage, enemyImage, duration, IsCritical); 
+  triggerAttackAnimation(heroImage, enemyImage, duration, isCritical); 
 }
 function triggerEnemyAttackAnimation(duration, isCritical) {
   triggerAttackAnimation(enemyImage, heroImage, duration, isCritical); 
