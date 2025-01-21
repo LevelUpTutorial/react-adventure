@@ -22,7 +22,7 @@
 @keyframes attack {
   0% { transform: translateX(0); }
   25% { transform: translateX(calc(-20px * var(--attack-direction))); }
-  50% { transform: translateX(calc(70px * var(--attack-direction))) scale(1.05); } /* Dynamic direction */
+  50% { transform: translateX(calc(50px * var(--attack-direction))) scale(1.05); } /* Dynamic direction */
   75% { transform: translateX(calc(-10px * var(--attack-direction))); }
   100% { transform: translateX(0); }
 }
@@ -76,22 +76,21 @@
 
 @keyframes critical-attack {
   0% { transform: translateX(0); }
-  15% { transform: translateX(calc(-10px * var(--attack-direction))); } /* Slight step back */
-  30% { transform: translateX(calc(80px * var(--attack-direction))) scale(1.0); } /* Lunge forward */
-  60% { transform: translateX(calc(80px * var(--attack-direction))) scale(1.0); } /* Pause (slow-motion) */
-  75% { transform: translateX(calc(-10px * var(--attack-direction))); } /* Recoil backward */
-  90% { transform: translateX(calc(-10px * var(--attack-direction))); }
+  20% { transform: translateX(calc(-10px * var(--attack-direction))); } /* Slight step back */
+  40% { transform: translateX(calc(70px * var(--attack-direction))) scale(1.1); } /* Lunge forward */
+  60% { transform: translateX(calc(70px * var(--attack-direction))) scale(1.1); } /* Brief pause */
+  80% { transform: translateX(calc(-10px * var(--attack-direction))); } /* Recoil */
   100% { transform: translateX(0); } /* Return to original position */
 }
 @keyframes critical-hit {
   0% { transform: translateX(0) rotate(0deg) scale(1); filter: none; }
-  30% { transform: translateX(0) rotate(0deg) scale(1); filter: none; }
-  40% { transform: translateX(calc(15px * var(--attack-direction))) rotate(0deg) scale(1.1); filter: brightness(2) contrast(2); } /* Flash white */
-  60% { transform: translateX(calc(15px * var(--attack-direction))); } /* Pause in slow motion */
-  70% { transform: translateX(calc(30px * var(--attack-direction))) rotate(-5deg); filter: brightness(1.2); } /* Shake and move back further */
-  90% { transform: translateX(calc(40px * var(--attack-direction))) rotate(3deg); } /* Slight shake */
+  40% { transform: translateX(0) rotate(0deg) scale(1); filter: none; } /* Idle */
+  50% { transform: translateX(calc(10px * var(--attack-direction))) scale(1.1); filter: brightness(2) contrast(2); } /* Flash and slight push */
+  60% { transform: translateX(calc(10px * var(--attack-direction))); } /* Brief pause */
+  70% { transform: translateX(calc(20px * var(--attack-direction))) rotate(-5deg); filter: brightness(1.2); } /* Further push and tilt */
+  90% { transform: translateX(calc(10px * var(--attack-direction))) rotate(3deg); } /* Recoil */
   100% { transform: translateX(0) rotate(0deg) scale(1); filter: none; } /* Return to normal */
-}
+                             }
 @keyframes critical-impact {
   0% { transform: scale(0); opacity: 0; background: radial-gradient(circle, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)); }
   40% { transform: scale(2); opacity: 1; } /* Expand to double size */
