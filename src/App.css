@@ -59,18 +59,16 @@
 @keyframes attack {
   0% { transform: translateX(0); }
   20% { transform: translateX(calc(-10px * var(--attack-direction))); }
-  40% { transform: translateX(calc(80px * var(--attack-direction))) scale(1.05); }
-  60% { transform: translateX(calc(80px * var(--attack-direction))) scale(1.05); }
-  80% { transform: translateX(calc(-10px * var(--attack-direction))); }
+  40% { transform: translateX(calc(50px * var(--attack-direction))); }
+  60% { transform: translateX(calc(50px * var(--attack-direction))); }
   100% { transform: translateX(0); }
 }
 
 @keyframes critical-attack {
   0% { transform: translateX(0); }
   15% { transform: translateX(calc(-10px * var(--attack-direction))); }
-  30% { transform: translateX(calc(100px * var(--attack-direction))) scale(1.05); }
-  60% { transform: translateX(calc(100px * var(--attack-direction))) scale(1.05); }
-  75% { transform: translateX(calc(-15px * var(--attack-direction))); }
+  30% { transform: translateX(calc(70px * var(--attack-direction))); }
+  60% { transform: translateX(calc(70px * var(--attack-direction))); }
   100% { transform: translateX(0); }
 }
 
