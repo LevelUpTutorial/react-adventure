@@ -80,15 +80,16 @@
   30% { transform: translateX(calc(80px * var(--attack-direction))) scale(1.0); } /* Lunge forward */
   60% { transform: translateX(calc(80px * var(--attack-direction))) scale(1.0); } /* Pause (slow-motion) */
   75% { transform: translateX(calc(-10px * var(--attack-direction))); } /* Recoil backward */
+  90% { transform: translateX(calc(-10px * var(--attack-direction))); }
   100% { transform: translateX(0); } /* Return to original position */
 }
 @keyframes critical-hit {
   0% { transform: translateX(0) rotate(0deg) scale(1); filter: none; }
-  25% { transform: translateX(0) rotate(0deg) scale(1); filter: none; }
-  30% { transform: translateX(15px * var(--attack-direction))) rotate(0deg) scale(1.1); filter: brightness(2) contrast(2); } /* Flash white */
-  60% { transform: translateX(15px * var(--attack-direction))); } /* Pause in slow motion */
-  70% { transform: translateX(30px * var(--attack-direction))) rotate(-5deg); filter: brightness(1.2); } /* Shake and move back further */
-  90% { transform: translateX(40px * var(--attack-direction))) rotate(3deg); } /* Slight shake */
+  30% { transform: translateX(0) rotate(0deg) scale(1); filter: none; }
+  40% { transform: translateX(calc(15px * var(--attack-direction))) rotate(0deg) scale(1.1); filter: brightness(2) contrast(2); } /* Flash white */
+  60% { transform: translateX(calc(15px * var(--attack-direction))); } /* Pause in slow motion */
+  70% { transform: translateX(calc(30px * var(--attack-direction))) rotate(-5deg); filter: brightness(1.2); } /* Shake and move back further */
+  90% { transform: translateX(calc(40px * var(--attack-direction))) rotate(3deg); } /* Slight shake */
   100% { transform: translateX(0) rotate(0deg) scale(1); filter: none; } /* Return to normal */
 }
 @keyframes critical-impact {
