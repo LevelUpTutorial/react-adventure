@@ -519,31 +519,68 @@ return (
   );
 }
 
-const battleAnimationDuration = 350; 
-const critAnimationDuration = 550; 
+const battleAnimationDuration = 300; 
+const critAnimationDuration = 600; 
 const heroImage = '.hero-image';
 const enemyImage = '.enemy-image';
-/* trigger attack animation */
-function triggerAttackAnimation(attacker, hit, duration, isCritical = false) {
+
+/* Animation Priority Constants */
+const ANIMATION_PRIORITY = {
+  attack: 2,
+  criticalAttack: 3,
+  hit: 1,
+  criticalHit: 1,
+};
+
+/* Add and Remove Animation Classes */
+function addAnimationClass(element, className, duration) {
+  element.style.setProperty('--animation-duration', `${duration}ms`);
+  element.classList.add(className);
+
+  setTimeout(() => {
+    element.classList.remove(className);
+    element.style.removeProperty('--animation-duration'); // Cleanup
+  }, duration);
+}
+
+/* Trigger Attack Animation */
+function triggerAttackAnimation(gameState, attacker, hit, duration, isCritical = false) {
   const attackerImage = document.querySelector(attacker);
   const hitImage = document.querySelector(hit);
 
   if (attackerImage && hitImage) {
-    const direction = attacker === heroImage ? 1 : -1;
-    attackerImage.style.setProperty('--attack-direction', direction);
+    const attackerState = attacker === heroImage ? gameState.hero : gameState.active_enemy;
+    const hitState = attacker === heroImage ? gameState.active_enemy : gameState.hero;
 
-    // Choose animations based on critical status
     const attackAnimation = isCritical ? 'critical-attack' : 'attack';
     const hitAnimation = isCritical ? 'critical-hit' : 'hit';
     const impactAnimation = isCritical ? 'critical-impact' : 'impact';
 
-    // Set animations
-    attackerImage.style.animation = `${attackAnimation} ${duration}ms cubic-bezier(0.4, 0.0, 0.2, 1)`;
-    hitImage.style.animation = `${hitAnimation} ${duration}ms ease-out`;
+    // Handle Attacker Animation (Always Play Attack)
+    if (attackerState.current_animation?.priority <= ANIMATION_PRIORITY[attackAnimation]) {
+      attackerState.current_animation = { name: attackAnimation, priority: ANIMATION_PRIORITY[attackAnimation] };
+      addAnimationClass(attackerImage, attackAnimation, duration);
 
-    // Create impact effect
+      // Reset animation state after completion
+      setTimeout(() => {
+        attackerState.current_animation = null;
+      }, duration);
+    }
+
+    // Handle Hit Animation (Play Only if Opponent Not Attacking)
+    if (!hitState.current_animation || hitState.current_animation.priority < ANIMATION_PRIORITY.attack) {
+      hitState.current_animation = { name: hitAnimation, priority: ANIMATION_PRIORITY[hitAnimation] };
+      addAnimationClass(hitImage, hitAnimation, duration);
+
+      // Reset animation state after completion
+      setTimeout(() => {
+        hitState.current_animation = null;
+      }, duration);
+    }
+
+    // Handle Impact Effect
     const impactEffect = document.createElement('div');
-    impactEffect.className = isCritical ? 'critical-impact' : 'impact';
+    impactEffect.className = impactAnimation;
 
     const parent = hitImage.parentNode;
     const hitRect = hitImage.getBoundingClientRect();
@@ -557,21 +594,22 @@ function triggerAttackAnimation(attacker, hit, duration, isCritical = false) {
 
     parent.appendChild(impactEffect);
 
-    // Cleanup after animation ends
+    // Cleanup the impact effect
     setTimeout(() => {
-      attackerImage.style.animation = '';
-      hitImage.style.animation = '';
       if (impactEffect.parentNode) {
         impactEffect.parentNode.removeChild(impactEffect);
       }
     }, duration);
   }
 }
-function triggerHeroAttackAnimation(duration, isCritical) {
-  triggerAttackAnimation(heroImage, enemyImage, duration, isCritical); 
+
+/* Trigger Hero and Enemy Animations */
+function triggerHeroAttackAnimation(gameState, duration, isCritical) {
+  triggerAttackAnimation(gameState, heroImage, enemyImage, duration, isCritical); 
 }
-function triggerEnemyAttackAnimation(duration, isCritical) {
-  triggerAttackAnimation(enemyImage, heroImage, duration, isCritical); 
+
+function triggerEnemyAttackAnimation(gameState, duration, isCritical) {
+  triggerAttackAnimation(gameState, enemyImage, heroImage, duration, isCritical); 
 }
 
 /* Constants for Effects */ 
