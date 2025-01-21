@@ -519,7 +519,8 @@ return (
   );
 }
 
-const battleAnimationDuration = 600; 
+const battleAnimationDuration = 350; 
+const critAnimationDuration = 550; 
 const heroImage = '.hero-image';
 const enemyImage = '.enemy-image';
 /* trigger attack animation */
@@ -719,7 +720,7 @@ function performHeroAttack(gameState) {
     /* apply damage */ 
     if (dmg > hero.attack) {
       hero.last_combat_event = `crit ${dmg}`;
-      triggerHeroAttackAnimation(battleAnimationDuration, true);
+      triggerHeroAttackAnimation(critAnimationDuration, true);
     } else {
       hero.last_combat_event = `dealt ${dmg}`; 
       triggerHeroAttackAnimation(battleAnimationDuration, false);
@@ -749,7 +750,7 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
     /* apply damage */
     if (dmg > active_enemy.attack) {
       active_enemy.last_combat_event = `crit ${dmg}`;
-      triggerEnemyAttackAnimation(battleAnimationDuration, true);
+      triggerEnemyAttackAnimation(critAnimationDuration, true);
     } else {
       active_enemy.last_combat_event = `dealt ${dmg}`; 
       triggerEnemyAttackAnimation(battleAnimationDuration, false);
