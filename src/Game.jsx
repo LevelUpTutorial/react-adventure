@@ -543,6 +543,15 @@ function addAnimationClass(element, className, duration) {
   }, duration);
 }
 
+/* Helper Function to Remove Animation Classes */
+function removeAnimationClasses(element, classes) {
+  classes.forEach((className) => {
+    if (element.classList.contains(className)) {
+      element.classList.remove(className);
+    }
+  });
+}
+
 /* Trigger Attack Animation */
 function triggerAttackAnimation(gameState, attacker, hit, duration, isCritical = false) {
   const attackerImage = document.querySelector(attacker);
@@ -556,9 +565,18 @@ function triggerAttackAnimation(gameState, attacker, hit, duration, isCritical =
     const hitAnimation = isCritical ? 'critical-hit' : 'hit';
     const impactAnimation = isCritical ? 'critical-impact' : 'impact';
 
+    // Set direction for attacker
+    const direction = attacker === heroImage ? 1 : -1;
+    attackerImage.style.setProperty('--attack-direction', direction);
+
     // Handle Attacker Animation (Always Play Attack)
     if (attackerState.current_animation?.priority <= ANIMATION_PRIORITY[attackAnimation]) {
       attackerState.current_animation = { name: attackAnimation, priority: ANIMATION_PRIORITY[attackAnimation] };
+
+      // Remove conflicting hit animations from the attacker
+      removeAnimationClasses(attackerImage, ['hit', 'critical-hit']);
+
+      // Add the attack animation class
       addAnimationClass(attackerImage, attackAnimation, duration);
 
       // Reset animation state after completion
@@ -567,9 +585,18 @@ function triggerAttackAnimation(gameState, attacker, hit, duration, isCritical =
       }, duration);
     }
 
-    // Handle Hit Animation (Play Only if Opponent Not Attacking)
-    if (!hitState.current_animation || hitState.current_animation.priority < ANIMATION_PRIORITY.attack) {
+    // Handle Hit Animation (Apply Only if Not Attacking)
+    if (
+      (!hitState.current_animation || hitState.current_animation.priority < ANIMATION_PRIORITY.attack) &&
+      !hitImage.classList.contains('attack') &&
+      !hitImage.classList.contains('critical-attack')
+    ) {
       hitState.current_animation = { name: hitAnimation, priority: ANIMATION_PRIORITY[hitAnimation] };
+
+      // Remove conflicting hit animations
+      removeAnimationClasses(hitImage, ['hit', 'critical-hit']);
+
+      // Add the hit animation class
       addAnimationClass(hitImage, hitAnimation, duration);
 
       // Reset animation state after completion
