@@ -718,7 +718,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       hero = gameState.hero;
       hero.isInCombat = true;
       // create active enemy as copy from template 
-      gameState.active_enemy = {...encounter.enemy, health_full: encounter.enemy.health, last_combat_event: ""};
+      gameState.active_enemy = {...encounter.enemy, health_full: encounter.enemy.health, last_combat_event: "", current_animation: null};
       /* apply effects at the start of combat */ 
       applyEffects(onCombatStartEffects, gameState); 
     } else if (encounter.category === 'story') {
