@@ -1541,7 +1541,7 @@ static findEncounterList(gameState, location_id) {
         [UPGRADE_EVADE_CHANCE]: 0,
         [UPGRADE_ATTACK_SPEED]: 0,
       },
-      current_animation = null; 
+      current_animation: null, 
     }
     this.location = location;
   }
