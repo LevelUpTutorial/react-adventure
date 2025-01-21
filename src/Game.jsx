@@ -523,68 +523,54 @@ const battleAnimationDuration = 600;
 const heroImage = '.hero-image';
 const enemyImage = '.enemy-image';
 /* trigger attack animation */
-function triggerAttackAnimation(attacker, hit, duration) {
+function triggerAttackAnimation(attacker, hit, duration, isCritical = false) {
   const attackerImage = document.querySelector(attacker);
   const hitImage = document.querySelector(hit);
 
   if (attackerImage && hitImage) {
-    // Determine direction based on the attacker
-    const direction = (attacker === heroImage ? 1 : -1); // Hero moves right (+), Enemy moves left (-)
-    attackerImage.style.setProperty('--attack-direction', direction); // Pass direction dynamically
+    const direction = attacker === heroImage ? 1 : -1;
+    attackerImage.style.setProperty('--attack-direction', direction);
 
-    // Set attack animation for the attacker
-    attackerImage.style.animation = `attack ${duration}ms cubic-bezier(0.4, 0.0, 0.2, 1)`;
+    // Choose animations based on critical status
+    const attackAnimation = isCritical ? 'critical-attack' : 'attack';
+    const hitAnimation = isCritical ? 'critical-hit' : 'hit';
+    const impactAnimation = isCritical ? 'critical-impact' : 'impact';
 
-    // Set hit animation for the target
-    hitImage.style.animation = `hit ${duration}ms ease-out`;
+    // Set animations
+    attackerImage.style.animation = `${attackAnimation} ${duration}ms cubic-bezier(0.4, 0.0, 0.2, 1)`;
+    hitImage.style.animation = `${hitAnimation} ${duration}ms ease-out`;
 
-    // Create and trigger the impact animation
+    // Create impact effect
     const impactEffect = document.createElement('div');
-    impactEffect.className = 'impact';
+    impactEffect.className = isCritical ? 'critical-impact' : 'impact';
 
-    // Position the impact effect relative to the hit image's parent
     const parent = hitImage.parentNode;
     const hitRect = hitImage.getBoundingClientRect();
     const parentRect = parent.getBoundingClientRect();
 
-    // **Position the impact effect**
-    // Centered positioning (uncomment to use):
+    impactEffect.style.position = 'absolute';
     impactEffect.style.left = `${hitRect.left - parentRect.left + hitRect.width / 2}px`;
     impactEffect.style.top = `${hitRect.top - parentRect.top + hitRect.height / 2}px`;
-    impactEffect.style.transform = 'translate(-50%, -50%)'; // Center the effect
+    impactEffect.style.transform = 'translate(-50%, -50%)';
+    impactEffect.style.animation = `${impactAnimation} ${duration}ms ease-in-out`;
 
-    // Upper-left corner positioning (default):
-    /*
-    impactEffect.style.left = `${hitRect.left - parentRect.left}px`;
-    impactEffect.style.top = `${hitRect.top - parentRect.top}px`;
-    impactEffect.style.transform = ''; // No centering for upper-left corner
-    */
-    impactEffect.style.position = 'absolute';
-    impactEffect.style.width = '50px'; // Adjust for desired size
-    impactEffect.style.height = '50px';
-    impactEffect.style.pointerEvents = 'none'; // Prevent interaction
-
-    // Add the impact animation
-    impactEffect.style.animation = `impact ${duration}ms ease-in-out`;
-
-    // Append the impact effect to the parent container
     parent.appendChild(impactEffect);
 
-    // Remove animations and clean up after the animation ends
+    // Cleanup after animation ends
     setTimeout(() => {
       attackerImage.style.animation = '';
       hitImage.style.animation = '';
       if (impactEffect.parentNode) {
         impactEffect.parentNode.removeChild(impactEffect);
       }
-    }, duration); // Match the duration of the animations
+    }, duration);
   }
 }
-function triggerHeroAttackAnimation(duration) {
-  triggerAttackAnimation(heroImage, enemyImage, duration); 
+function triggerHeroAttackAnimation(duration, isCritical) {
+  triggerAttackAnimation(heroImage, enemyImage, duration, IsCritical); 
 }
-function triggerEnemyAttackAnimation(duration) {
-  triggerAttackAnimation(enemyImage, heroImage, duration); 
+function triggerEnemyAttackAnimation(duration, isCritical) {
+  triggerAttackAnimation(enemyImage, heroImage, duration, isCritical); 
 }
 
 /* Constants for Effects */ 
@@ -733,12 +719,14 @@ function performHeroAttack(gameState) {
     /* apply damage */ 
     if (dmg > hero.attack) {
       hero.last_combat_event = `crit ${dmg}`;
+      triggerHeroAttackAnimation(battleAnimationDuration, true);
     } else {
       hero.last_combat_event = `dealt ${dmg}`; 
+      triggerHeroAttackAnimation(battleAnimationDuration, false);
     }
     active_enemy.health -= dmg;
     playSound(SND_SWORD_HIT);
-    triggerHeroAttackAnimation(battleAnimationDuration);
+    
   } else {
     hero.last_combat_event = `missed`;
   }
@@ -761,11 +749,13 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
     /* apply damage */
     if (dmg > active_enemy.attack) {
       active_enemy.last_combat_event = `crit ${dmg}`;
+      triggerEnemyAttackAnimation(battleAnimationDuration, true);
     } else {
       active_enemy.last_combat_event = `dealt ${dmg}`; 
+      triggerEnemyAttackAnimation(battleAnimationDuration, false);
     }
     hero.health -= dmg; // No evade, apply damage
-    triggerEnemyAttackAnimation(battleAnimationDuration);
+    
     setCounterAttackActive(false); // Disable Counter Attack button
   }
   active_enemy.attack_cooldown = active_enemy.attack_speed;
