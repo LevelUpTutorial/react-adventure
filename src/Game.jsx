@@ -758,10 +758,10 @@ function performHeroAttack(gameState) {
     /* apply damage */ 
     if (dmg > hero.attack) {
       hero.last_combat_event = `crit ${dmg}`;
-      triggerHeroAttackAnimation(critAnimationDuration, true);
+      triggerHeroAttackAnimation(gameState, critAnimationDuration, true);
     } else {
       hero.last_combat_event = `dealt ${dmg}`; 
-      triggerHeroAttackAnimation(battleAnimationDuration, false);
+      triggerHeroAttackAnimation(gameState, battleAnimationDuration, false);
     }
     active_enemy.health -= dmg;
     playSound(SND_SWORD_HIT);
@@ -788,10 +788,10 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
     /* apply damage */
     if (dmg > active_enemy.attack) {
       active_enemy.last_combat_event = `crit ${dmg}`;
-      triggerEnemyAttackAnimation(critAnimationDuration, true);
+      triggerEnemyAttackAnimation(gameState, critAnimationDuration, true);
     } else {
       active_enemy.last_combat_event = `dealt ${dmg}`; 
-      triggerEnemyAttackAnimation(battleAnimationDuration, false);
+      triggerEnemyAttackAnimation(gameState, battleAnimationDuration, false);
     }
     hero.health -= dmg; // No evade, apply damage
     
