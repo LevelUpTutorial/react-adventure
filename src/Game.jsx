@@ -566,7 +566,7 @@ function triggerAttackAnimation(gameState, attacker, hit, duration, isCritical =
     const impactAnimation = isCritical ? 'critical-impact' : 'impact';
 
     // Set direction for attacker
-    const direction = attacker === heroImage ? 1 : -1;
+    const direction = attacker === heroImage ? '100%' : '-100%';
     attackerImage.style.setProperty('--attack-direction', direction);
 
     // Handle Attacker Animation (Always Play Attack)
