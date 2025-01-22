@@ -58,9 +58,9 @@
 /* Keyframes Definitions (Unchanged) */
 @keyframes attack {
   0% { transform: translateX(0); }
-  20% { transform: translateX(calc(-10px * var(--attack-direction))); }
-  40% { transform: translateX(calc(50px * var(--attack-direction))); }
-  60% { transform: translateX(calc(50px * var(--attack-direction))); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(50px); }
+  60% { transform: translateX(50px); }
   100% { transform: translateX(0); }
 }
 
