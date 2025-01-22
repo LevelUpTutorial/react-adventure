@@ -37,12 +37,10 @@ function App() {
 
   const handleGenderSelection = (selectedGender) => {
     setGender(selectedGender);
-    setSelectedSave(null); // Reset saved game selection when changing gender
   };
 
   const handleSaveSelection = (selectedGender) => {
     setSelectedSave(savedGames[selectedGender]);
-    setGender(selectedGender);
   };
 
   if (showGame) {
@@ -92,7 +90,7 @@ function App() {
               />
               <div className="card-body text-center">
                 <p className="card-text text-capitalize">
-                  {option === GameState.GENDER_MALE ? 'Male' : 'Female'}
+                  {option === GameState.GENDER_MALE ? 'Bonus Crit. Chance & Crit. Damage' : 'Bonus Attack Speed & Evade Chance'}
                 </p>
               </div>
             </div>
