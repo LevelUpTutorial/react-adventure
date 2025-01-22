@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import Game from './Game.jsx';
 import GameState from './GameState.js';
+import { loadGameState } from './GameUtils.js';
 import PropTypes from 'prop-types';
 
 
