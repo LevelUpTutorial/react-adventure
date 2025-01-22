@@ -738,6 +738,8 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
     console.log(`handleGameState (before new encounter): Hero XP -> ${hero.xp}`);
     if (gameState.next_encounters.length === 0) {
       console.log('No active encounter - rolling new encounter');
+      // save game 
+      saveGameState(gameState);
       console.log('Accessing random_encounters:', gameState.random_encounters);
       const entries = GameState.findEncounterList(gameState, location.name);
       let rnd_encounter = getRandomItem(entries);
