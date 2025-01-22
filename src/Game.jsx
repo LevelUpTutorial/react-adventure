@@ -571,20 +571,22 @@ function triggerAttackAnimation(gameState, attacker, hit, duration, isCritical =
     attackerImage.style.setProperty('--attack-direction', direction);
 
     // Handle Attacker Animation (Always Play Attack)
-    if (attackerState.current_animation?.priority <= ANIMATION_PRIORITY[attackAnimation]) {
-      attackerState.current_animation = { name: attackAnimation, priority: ANIMATION_PRIORITY[attackAnimation] };
+    if (!attackerState.current_animation || // If no animation is running
+        attackerState.current_animation.priority <= ANIMATION_PRIORITY[attackAnimation] // Or if priority allows
+      ) {
+        attackerState.current_animation = { name: attackAnimation, priority: ANIMATION_PRIORITY[attackAnimation] };
 
-      // Remove conflicting hit animations from the attacker
-      removeAnimationClasses(attackerImage, ['hit', 'critical-hit']);
+        // Remove conflicting hit animations from the attacker
+        removeAnimationClasses(attackerImage, ['hit', 'critical-hit']);
 
-      // Add the attack animation class
-      addAnimationClass(attackerImage, attackAnimation, duration);
+        // Add the attack animation class
+        addAnimationClass(attackerImage, attackAnimation, duration);
 
-      // Reset animation state after completion
-      setTimeout(() => {
-        attackerState.current_animation = null;
-      }, duration);
-    }
+        // Reset animation state after completion
+        setTimeout(() => {
+          attackerState.current_animation = null;
+        }, duration);
+      }
 
     // Handle Hit Animation (Apply Only if Not Attacking)
     if (
