@@ -12,6 +12,7 @@ import {combatCalculation, playSound, SND_SWORD_HIT,
         UPGRADE_CRIT_DAMAGE, UPGRADE_EVADE_CHANCE, UPGRADE_ATTACK_SPEED, 
         DAMAGE_INCREMENT, MAX_HEALTH_INCREMENT, CRIT_CHANCE_INCREMENT, 
         CRIT_DAMAGE_INCREMENT, EVADE_CHANCE_INCREMENT, ATTACK_SPEED_DECREASE, 
+        saveGameState, 
        } from "./GameUtils.js";
 
 import PropTypes from "prop-types";
