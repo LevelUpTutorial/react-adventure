@@ -1,103 +1,150 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Game from './Game.jsx';
 import GameState from './GameState.js';
 import { loadGameState } from './GameUtils.js';
-import PropTypes from 'prop-types';
-
 
 function App() {
-  const [showGame, setShowGame] = useState(false); // State to toggle Game component
-  const [heroName, setHeroName] = useState(GameState.DEFAULT_NAME); // State to store the hero name
-  const [gender, setGender] = useState(GameState.DEFAULT_GENDER); // State to store selected gender, default is 'male'
+  const [showGame, setShowGame] = useState(false);
+  const [heroName, setHeroName] = useState(GameState.DEFAULT_NAME);
+  const [gender, setGender] = useState(GameState.DEFAULT_GENDER);
+  const [selectedSave, setSelectedSave] = useState(null);
+  const [savedGames, setSavedGames] = useState({
+    [GameState.GENDER_MALE]: null,
+    [GameState.GENDER_FEMALE]: null,
+  });
+
+  useEffect(() => {
+    // Load saved games for both genders
+    const maleSave = loadGameState(GameState.GENDER_MALE);
+    const femaleSave = loadGameState(GameState.GENDER_FEMALE);
+    setSavedGames({
+      [GameState.GENDER_MALE]: maleSave,
+      [GameState.GENDER_FEMALE]: femaleSave,
+    });
+  }, []);
+
+  const handleNewGame = () => {
+    setSelectedSave(null);
+    setShowGame(true);
+  };
+
+  const handleContinue = () => {
+    if (selectedSave) {
+      setShowGame(true);
+    }
+  };
+
+  const handleGenderSelection = (selectedGender) => {
+    setGender(selectedGender);
+    setSelectedSave(null); // Reset saved game selection when changing gender
+  };
+
+  const handleSaveSelection = (selectedGender) => {
+    setSelectedSave(savedGames[selectedGender]);
+    setGender(selectedGender);
+  };
+
+  if (showGame) {
+    return (
+      <Game
+        heroName={heroName}
+        gender={gender}
+        isGameRunning={true}
+        savedGameState={selectedSave}
+      />
+    );
+  }
 
   return (
-    <div className="mx-auto p-4 shadow rounded" style={{ width: '100%', maxWidth: '800px', backgroundColor: 'rgba(255, 255, 255, 0.25)' }}>
+    <div
+      className="container mx-auto p-4 shadow rounded"
+      style={{
+        width: '100%',
+        maxWidth: '800px',
+        backgroundColor: 'rgba(255, 255, 255, 0.25)',
+      }}
+    >
       {/* Title Header */}
       <header className="text-center mb-4">
         <h1 className="display-5 fw-bold text-primary">A React Adventure</h1>
       </header>
-  
-      {!showGame && ( /* Show input and hero selection if Game is not displayed */
-        <div>
-          {/* Hero Name Input */}
-          <div className="mb-4">
-            <input
-              type="text"
-              placeholder="Enter your hero's name"
-              value={heroName}
-              onChange={(e) => setHeroName(e.target.value)}
-              className="form-control form-control-lg border-primary rounded"
-            />
-          </div>
-  
-          {/* Hero Selection */}
-          <div className="mb-4">
-            <p className="fw-bold text-primary">Choose your Hero:</p>
-            <div className="d-flex justify-content-center align-items-center gap-4">
-              <div 
-                className={`p-2 border ${gender === GameState.GENDER_MALE ? 'border-primary border-4' : 'border-secondary'} rounded shadow-sm`}
-                onClick={() => setGender(GameState.GENDER_MALE)}
-                style={{ cursor: 'pointer' }}
-              >
-                <img
-                  id="select-male"
-                  src={GameState.IMG_HERO_MALE_NEUTRAL}
-                  alt="Male Hero"
-                  className="img-fluid rounded"
-                  style={{ width: '100px', height: '150px' }}
-                />
-                <label 
-                  for="select-male"
-                  className={`fw-bold ${gender === GameState.GENDER_MALE ? 'text-primary' : 'text-black'}`}
-                  >
-                    Bonus Crit. Chance & Crit. Damage 
-                </label>
-              </div>
-              <div
-                className={`p-2 border ${gender === GameState.GENDER_FEMALE ? 'border-primary border-4' : 'border-secondary'} rounded shadow-sm`}
-                onClick={() => setGender(GameState.GENDER_FEMALE)}
-                style={{ cursor: 'pointer' }}
-              >
-                <img
-                  id="select-female" 
-                  src={GameState.IMG_HERO_FEMALE_NEUTRAL}
-                  alt="Female Hero"
-                  className="img-fluid rounded"
-                  style={{ width: '100px', height: '150px' }}
-                />
-                <label 
-                  for="select-female"
-                  className={`fw-bold ${gender === GameState.GENDER_FEMALE ? 'text-primary' : 'text-black'}`} 
-                >
-                  Bonus Attack Speed & Evade Chance
-                </label>
+
+      {/* Gender Selection Section */}
+      <div className="mb-4">
+        <h2 className="h5 text-secondary">Choose Your Character</h2>
+        <div className="d-flex justify-content-around">
+          {[GameState.GENDER_MALE, GameState.GENDER_FEMALE].map((option) => (
+            <div
+              key={option}
+              className={`card ${gender === option ? 'border-primary' : ''}`}
+              style={{ width: '150px', cursor: 'pointer' }}
+              onClick={() => handleGenderSelection(option)}
+            >
+              <img
+                src={
+                  option === GameState.GENDER_MALE
+                    ? GameState.IMG_HERO_MALE_NEUTRAL
+                    : GameState.IMG_HERO_FEMALE_NEUTRAL
+                }
+                className="card-img-top"
+                alt={`${option} character`}
+              />
+              <div className="card-body text-center">
+                <p className="card-text text-capitalize">
+                  {option === GameState.GENDER_MALE ? 'Male' : 'Female'}
+                </p>
               </div>
             </div>
-          </div>
-  
-          {/* Start Adventure Button */}
-          <div className="text-center">
-            <button
-              type="button"
-              onClick={() => setShowGame(true)} /* Show Game and pass heroName and gender */
-              className="btn btn-primary btn-lg px-5 shadow-sm"
-            >
-              Start New Adventure
-            </button>
-          </div>
+          ))}
         </div>
-      )}
-  
-      {showGame && <Game heroName={heroName} gender={gender} isGameRunning={showGame} />} {/* Pass heroName and gender to Game */}
+      </div>
+
+      {/* New Game Section */}
+      <div className="mb-4">
+        <button
+          className="btn btn-primary w-100"
+          onClick={handleNewGame}
+        >
+          Start New Game
+        </button>
+      </div>
+
+      {/* Saved Games Section */}
+      <div className="mb-4">
+        <h2 className="h5 text-secondary">Continue Saved Game</h2>
+        <div className="list-group">
+          {[GameState.GENDER_MALE, GameState.GENDER_FEMALE].map((option) => (
+            <button
+              key={option}
+              className={`list-group-item list-group-item-action ${
+                selectedSave && selectedSave.hero.gender === option
+                  ? 'active'
+                  : ''
+              }`}
+              onClick={() => handleSaveSelection(option)}
+              disabled={!savedGames[option]}
+            >
+              {savedGames[option]
+                ? `Continue as ${savedGames[option].hero.name} (${option})`
+                : `No saved game for ${option}`}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Continue Button */}
+      <div className="mb-4">
+        <button
+          className="btn btn-success w-100"
+          onClick={handleContinue}
+          disabled={!selectedSave}
+        >
+          Continue
+        </button>
+      </div>
     </div>
   );
-}
-
-App.propTypes = {
-  heroName: PropTypes.string.isRequired,
-  gender: PropTypes.string.isRequired,
-  isGameRunning: PropTypes.bool.isRequired
 }
 
 export default App;
