@@ -4,6 +4,9 @@ import Game from './Game.jsx';
 import GameState from './GameState.js';
 import { loadGameState } from './GameUtils.js';
 
+import heroFemaleNeutral from './assets/images/hero/hero_female_neutral.jpg';
+import heroMaleNeutral from './assets/images/hero/hero_male_neutral.jpg';
+
 function App() {
   const [showGame, setShowGame] = useState(false);
   const [heroName, setHeroName] = useState(GameState.DEFAULT_NAME);
@@ -70,27 +73,27 @@ function App() {
 
       {/* Gender Selection Section */}
       <div className="mb-4">
-        <h2 className="h5 text-secondary">Choose Your Character</h2>
+        <h2 className="h5 text-primary">Choose Your Character</h2>
         <div className="d-flex justify-content-around">
           {[GameState.GENDER_MALE, GameState.GENDER_FEMALE].map((option) => (
             <div
               key={option}
-              className={`card ${gender === option ? 'border-primary' : ''}`}
+              className={`card ${gender === option ? 'border-primary border-4' : ''}`}
               style={{ width: '150px', cursor: 'pointer' }}
               onClick={() => handleGenderSelection(option)}
             >
               <img
                 src={
                   option === GameState.GENDER_MALE
-                    ? GameState.IMG_HERO_MALE_NEUTRAL
-                    : GameState.IMG_HERO_FEMALE_NEUTRAL
+                    ? heroMaleNeutral
+                    : heroFemaleNeutral
                 }
                 className="card-img-top"
                 alt={`${option} character`}
               />
               <div className="card-body text-center">
                 <p className="card-text text-capitalize">
-                  {option === GameState.GENDER_MALE ? 'Bonus Crit. Chance & Crit. Damage' : 'Bonus Attack Speed & Evade Chance'}
+                  {option === GameState.GENDER_MALE ? 'Bonus Critical Hit Chance, Critical Hit Damage' : 'Bonus Attack Speed, Evade Chance'}
                 </p>
               </div>
             </div>
@@ -110,7 +113,7 @@ function App() {
 
       {/* Saved Games Section */}
       <div className="mb-4">
-        <h2 className="h5 text-secondary">Continue Saved Game</h2>
+        <h2 className="h5 text-primary">Continue Saved Game</h2>
         <div className="list-group">
           {[GameState.GENDER_MALE, GameState.GENDER_FEMALE].map((option) => (
             <button
@@ -124,7 +127,7 @@ function App() {
               disabled={!savedGames[option]}
             >
               {savedGames[option]
-                ? `Continue as ${savedGames[option].hero.name} (${option})`
+                ? `Continue as ${savedGames[option].hero.name} (Level ${savedGames[option].hero.level})`
                 : `No saved game for ${option}`}
             </button>
           ))}

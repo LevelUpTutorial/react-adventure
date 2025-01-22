@@ -224,29 +224,29 @@ export function setHeroImages(gameState) {
   const hero = gameState.hero; 
   const enc_id = hero.current_enchantment.id; 
   if (hero.gender === GameState.GENDER_MALE) {
-    GameState.IMG_HERO_MALE_NEUTRAL = heroMaleNeutral;
+    gameState.IMG_HERO_MALE_NEUTRAL = heroMaleNeutral;
     if (enc_id === ID_NONE) {
-      GameState.IMG_HERO_MALE_COMBAT = heroMaleCombatT0None; 
+      gameState.IMG_HERO_MALE_COMBAT = heroMaleCombatT0None; 
     } else if (enc_id === ID_FIRE) {
-      GameState.IMG_HERO_MALE_COMBAT = heroMaleCombatT1Fire;
+      gameState.IMG_HERO_MALE_COMBAT = heroMaleCombatT1Fire;
     } else if (enc_id === ID_ICE) {
-      GameState.IMG_HERO_MALE_COMBAT = heroMaleCombatT1Ice;
+      gameState.IMG_HERO_MALE_COMBAT = heroMaleCombatT1Ice;
     } else if (enc_id === ID_LIGHTNING) {
-      GameState.IMG_HERO_MALE_COMBAT = heroMaleCombatT1Lightning;
+      gameState.IMG_HERO_MALE_COMBAT = heroMaleCombatT1Lightning;
     } else {
       console.error(`unknown enchantment_id ${enc_id}`);
     }
   } else {
     // Female Hero 
-    GameState.IMG_HERO_FEMALE_NEUTRAL = heroFemaleNeutral;
+    gameState.IMG_HERO_FEMALE_NEUTRAL = heroFemaleNeutral;
     if (enc_id === ID_NONE) {
-      GameState.IMG_HERO_FEMALE_COMBAT = heroFemaleCombatT0None; 
+      gameState.IMG_HERO_FEMALE_COMBAT = heroFemaleCombatT0None; 
     } else if (enc_id === ID_FIRE) {
-      GameState.IMG_HERO_FEMALE_COMBAT = heroFemaleCombatT1Fire;
+      gameState.IMG_HERO_FEMALE_COMBAT = heroFemaleCombatT1Fire;
     } else if (enc_id === ID_ICE) {
-      GameState.IMG_HERO_FEMALE_COMBAT = heroFemaleCombatT1Ice;
+      gameState.IMG_HERO_FEMALE_COMBAT = heroFemaleCombatT1Ice;
     } else if (enc_id === ID_LIGHTNING) {
-      GameState.IMG_HERO_FEMALE_COMBAT = heroFemaleCombatT1Lightning;
+      gameState.IMG_HERO_FEMALE_COMBAT = heroFemaleCombatT1Lightning;
     } else {
       console.error(`unknown enchantment_id ${enc_id}`);
     }
@@ -277,7 +277,7 @@ function handleResetHeroInTown(gameState) {
   gameState.location = GameState.LOCATION_CITY;
   setBodyBackground(gameState.location); 
   hero.health = hero.health_full; // Heal
-  hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
+  hero.image = (hero.gender === GameState.GENDER_MALE ? gameState.IMG_HERO_MALE_NEUTRAL : gameState.IMG_HERO_FEMALE_NEUTRAL);
 
   // return new gameState
   return { ...gameState, hero }; 

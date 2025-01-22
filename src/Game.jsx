@@ -24,7 +24,7 @@ const TICK_DURATION_CITY = 1000;
 function Game({ heroName, gender, isGameRunning, savedGameState }) {
   // Helper function to validate the saved game state
   const initializeGameState = (savedState) => {
-    if (savedState instanceof GameState) {
+    if (savedState) {
       return savedState; // Use the valid saved game state
     }
     // Fallback to a new GameState if savedState is invalid
@@ -673,7 +673,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
   // handle Combat
   if (hero.isInCombat) {
     // console.log('hero is in combat');
-    hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_COMBAT : GameState.IMG_HERO_FEMALE_COMBAT);
+    hero.image = (hero.gender === GameState.GENDER_MALE ? gameState.IMG_HERO_MALE_COMBAT : gameState.IMG_HERO_FEMALE_COMBAT);
     if (hero.attack_cooldown <= 0) {
       /* try disable Auto combat */
       //gameState = performHeroAttack(gameState); 
@@ -722,7 +722,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       // Hero reset 
       gameState = handleResetHeroControl({ ...gameState, hero}); 
       hero = gameState.hero; 
-      hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
+      hero.image = (hero.gender === GameState.GENDER_MALE ? gameState.IMG_HERO_MALE_NEUTRAL : gameState.IMG_HERO_FEMALE_NEUTRAL);
       setCounterAttackActive(false); // Disable button on victory
     }
 
@@ -765,7 +765,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       gameState = handleResetHeroControl(gameState);
       hero = gameState.hero;
       hero.isInDialog = true;
-      hero.image = (hero.gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL);
+      hero.image = (hero.gender === GameState.GENDER_MALE ? gameState.IMG_HERO_MALE_NEUTRAL : gameState.IMG_HERO_FEMALE_NEUTRAL);
 
       setStoryEvent(encounter.dialog); // Set the story event
       setStoryDialogOpen(true); // Open the dialog

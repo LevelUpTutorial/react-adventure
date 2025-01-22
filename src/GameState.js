@@ -155,10 +155,10 @@ class GameState {
   static DEFAULT_LOCATION = GameState.LOCATION_CITY;
 
   /* Asset Constants */
-  static IMG_HERO_FEMALE_NEUTRAL = heroFemaleNeutral;
-  static IMG_HERO_MALE_NEUTRAL = heroMaleNeutral;
-  static IMG_HERO_FEMALE_COMBAT = heroFemaleCombat;
-  static IMG_HERO_MALE_COMBAT = heroMaleCombat;
+  IMG_HERO_FEMALE_NEUTRAL = heroFemaleNeutral;
+  IMG_HERO_MALE_NEUTRAL = heroMaleNeutral;
+  IMG_HERO_FEMALE_COMBAT = heroFemaleCombat;
+  IMG_HERO_MALE_COMBAT = heroMaleCombat;
 
   attack_combo = 0; 
   acts_progression = 1; 
@@ -582,7 +582,7 @@ class GameState {
       const list = [{ category: 'combat', id: 'THE BOUND MONK', enemy: GameState.ENEMY_A3B2_THE_BOUND_MONK, weight: 0 }];
       mergeList2inList1(GameState.ACT3_ENCOUNTERS, list);
     }, 
-}
+  }
   /* Enemy Templates Act4 */
   static ENEMY_SHADOW_SPRITE = {
     name: 'Shadow Sprite',
@@ -1531,7 +1531,7 @@ static findEncounterList(gameState, location_id) {
       crit_chance: (gender === GameState.GENDER_MALE ? 35 : 15), 
       crit_damage: (gender === GameState.GENDER_MALE ? 200 : 100), 
       last_combat_event: "", 
-      image: (gender === GameState.GENDER_MALE ? GameState.IMG_HERO_MALE_NEUTRAL : GameState.IMG_HERO_FEMALE_NEUTRAL), 
+      image: (gender === GameState.GENDER_MALE ? this.IMG_HERO_MALE_NEUTRAL : this.IMG_HERO_FEMALE_NEUTRAL), 
       current_enchantment: { id: ID_NONE, selectReverse: (gameState) => {return gameState} },
       upgradeCounts: {
         [UPGRADE_DAMAGE]: 0,
