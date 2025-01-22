@@ -295,3 +295,34 @@ export function mergeList2inList1(list1, list2) {
     list1.push(...filteredList1, ...list2);
     return list1; // Optional, for chaining
 } 
+
+// Save game state with hero class (gender) as part of the key
+export function saveGameState(gameState) {
+  try {
+    // Construct the key using the hero's gender
+    const key = `react-adventure-${gameState.hero.gender}`;
+    const serializedState = JSON.stringify(gameState);
+    localStorage.setItem(key, serializedState);
+    console.log(`Game state saved successfully for ${gameState.hero.gender}.`);
+  } catch (error) {
+    console.error('Error saving game state:', error);
+  }
+}
+
+// Load game state for a specific hero class (gender)
+export function loadGameState(heroGender) {
+  try {
+    // Construct the key using the provided hero's gender
+    const key = `react-adventure-${heroGender}`;
+    const serializedState = localStorage.getItem(key);
+    if (serializedState === null) {
+      console.log(`No saved game state found for ${heroGender}.`);
+      return null; // Or return an initial state object
+    }
+    console.log(`Game state loaded successfully for ${heroGender}.`);
+    return JSON.parse(serializedState);
+  } catch (error) {
+    console.error('Error loading game state:', error);
+    return undefined; // Or handle the error as needed
+  }
+}
