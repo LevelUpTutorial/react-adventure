@@ -20,7 +20,7 @@
 
 /* Attack Animations */
 .attack {
-  animation: attack var(--animation-duration, 350ms) ease-in;
+  animation: attack 350ms ease-in;
 }
 
 .critical-attack {
@@ -29,7 +29,7 @@
 
 /* Hit Animations */
 .hit {
-  animation: hit var(--animation-duration, 350ms) ease-out;
+  animation: hit 350ms ease-out;
 }
 
 .critical-hit {
