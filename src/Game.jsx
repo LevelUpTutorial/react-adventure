@@ -21,11 +21,18 @@ const TICKS_PER_SECOND = 30;
 const TICK_DURATION_ADVENTURE = Math.round(1000 / TICKS_PER_SECOND);
 const TICK_DURATION_CITY = 1000;
 
-function Game({ heroName, gender, isGameRunning }) {
+function Game({ heroName, gender, isGameRunning, savedGameState }) {
+  // Helper function to validate the saved game state
+  const initializeGameState = (savedState) => {
+    if (savedState instanceof GameState) {
+      return savedState; // Use the valid saved game state
+    }
+    // Fallback to a new GameState if savedState is invalid
+    return new GameState(heroName, gender, GameState.LOCATION_ADVENTURE_ACT1);
+  };
+
   // Initialize game state in React state
-  const [gameState, setGameState] = useState(
-    new GameState(heroName, gender, GameState.LOCATION_ADVENTURE_ACT1)
-  );
+  const [gameState, setGameState] = useState(initializeGameState(savedGameState));
   
   const [storyEvent, setStoryEvent] = useState(null); // Holds the active story event object ({ title, text, background }).
   const [isStoryDialogOpen, setStoryDialogOpen] = useState(false); // Controls dialog visibility
