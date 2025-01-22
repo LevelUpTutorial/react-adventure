@@ -536,7 +536,8 @@ const ANIMATION_PRIORITY = {
 function addAnimationClass(element, className, duration) {
   element.style.setProperty('--animation-duration', `${duration}ms`);
   element.classList.add(className);
-
+  console.log(`adding classname ${element} ${className} ${duration}`);
+  console.log([...element.classList]);
   setTimeout(() => {
     element.classList.remove(className);
     element.style.removeProperty('--animation-duration'); // Cleanup
