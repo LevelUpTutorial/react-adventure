@@ -132,6 +132,17 @@ class GameState {
   static GENDER_MALE = 'male';
   static GENDER_FEMALE = 'female';
   static DEFAULT_GENDER = GameState.GENDER_MALE;
+  static MAX_LEVEL = 70;
+  static XP_TO_LEVEL2 = 75; 
+  static XP_SCALING = 1.3; 
+  static UPGRADE_LIMITS = {
+    [UPGRADE_DAMAGE]: 999,
+    [UPGRADE_MAX_HEALTH]: 999,
+    [UPGRADE_CRIT_CHANCE]: 999,
+    [UPGRADE_CRIT_DAMAGE]: 999,
+    [UPGRADE_EVADE_CHANCE]: 20,
+    [UPGRADE_ATTACK_SPEED]: 30,
+  };
 
   /* Location Constants */
   static CITY_NAME = 'City';
@@ -154,15 +165,6 @@ class GameState {
   static LOCATION_ADVENTURE_ACT8 = {name: GameState.ACT8_LOC1_NAME, bg_widescreen: backgroundAct8ws, bg_portrait: backgroundAct8po};
   static DEFAULT_LOCATION = GameState.LOCATION_CITY;
 
-  /* Asset Constants */
-  IMG_HERO_FEMALE_NEUTRAL = heroFemaleNeutral;
-  IMG_HERO_MALE_NEUTRAL = heroMaleNeutral;
-  IMG_HERO_FEMALE_COMBAT = heroFemaleCombat;
-  IMG_HERO_MALE_COMBAT = heroMaleCombat;
-
-  attack_combo = 0; 
-  acts_progression = 1; 
-  active_enemy = null; 
   /* Enemy Templates Act1 */ 
   static ENEMY_WILD_BOAR = {
     name: 'Wild Boar',
@@ -242,7 +244,7 @@ class GameState {
     crit_damage: 50,
     image: enemyA1B1TheCorruptedChieftain, 
     isElite: true, 
-    runAfter: (gameState) => mergeList2inList1(GameState.ACT1_ENCOUNTERS, GameState.ACT1_ENCOUNTERS_2), 
+    runAfterKey: 'runAfterEnemyA1B1TheCorruptedChieftain', 
   }
   static ENEMY_CORRUPTED_FOREST_GUARDIAN = {
     name: 'Corrupted Forest Guardian',
@@ -296,12 +298,7 @@ class GameState {
     crit_damage: 50,
     image: enemyA1B2TheCultInfiltrator, 
     isElite: true, 
-    runAfter: (gameState) => {
-      gameState.acts_progression = 2; 
-      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT2);
-      const list = [{ category: 'combat', id: 'The Cult Infiltrator', enemy: GameState.ENEMY_A1B2_THE_CULT_INFILTRATOR, weight: 0 }];
-      mergeList2inList1(GameState.ACT1_ENCOUNTERS, list); 
-    },  
+    runAfterKey: 'runAfterEnemyA1B2TheCultInfiltrator',  
   }
   /* Enemy Templates Act2 */
   static ENEMY_SANDSHARD_STALKER = {
@@ -369,7 +366,7 @@ class GameState {
     crit_damage: 50,
     image: enemyA2B1TheScorchscaleBehemoth, 
     isElite: true, 
-    runAfter: (gameState) => mergeList2inList1(GameState.ACT2_ENCOUNTERS, GameState.ACT2_ENCOUNTERS_2), 
+    runAfterKey: 'runAfterEnemyA2B1TheScorchscaleBehemoth', 
   }
   static ENEMY_DUNE_WRAITH = {
     name: 'Dune Wraith',
@@ -423,12 +420,7 @@ class GameState {
     crit_damage: 60,
     image: enemyA2B2TheAshbinderPriestess, 
     isElite: true, 
-    runAfter: (gameState) => {
-      gameState.acts_progression = 3; 
-      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT3); 
-      const list = [{ category: 'combat', id: 'THE ASHBINDER PRIESTESS', enemy: GameState.ENEMY_A2B2_THE_ASHBINDER_PRIESTESS, weight: 0 }];
-      mergeList2inList1(GameState.ACT2_ENCOUNTERS, list);
-    }, 
+    runAfterKey: 'runAfterEnemyA2B2TheAshbinderPriestess', 
   }
   /* Enemy Templates Act3 */
   static ENEMY_SNOW_WARG = {
@@ -535,7 +527,7 @@ class GameState {
     crit_damage: 50,
     image: enemyA3B1FrostclawAlpha, 
     isElite: true, 
-    runAfter: (gameState) => mergeList2inList1(GameState.ACT3_ENCOUNTERS, GameState.ACT3_ENCOUNTERS_2), 
+    runAfterKey: 'runAfterEnemyA3B1FrostclawAlpha', 
   }
   static ENEMY_KAELITHS_WRAITH = {
     name: "Kaelith's Wraith",
@@ -576,12 +568,7 @@ class GameState {
     crit_damage: 60,
     image: enemyA3B2TheBoundMonk, 
     isElite: true, 
-    runAfter: (gameState) => {
-      gameState.acts_progression = 4; 
-      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT4);
-      const list = [{ category: 'combat', id: 'THE BOUND MONK', enemy: GameState.ENEMY_A3B2_THE_BOUND_MONK, weight: 0 }];
-      mergeList2inList1(GameState.ACT3_ENCOUNTERS, list);
-    }, 
+    runAfterKey: 'runAfterEnemyA3B2TheBoundMonk', 
   }
   /* Enemy Templates Act4 */
   static ENEMY_SHADOW_SPRITE = {
@@ -662,7 +649,7 @@ class GameState {
     crit_damage: 50,
     image: enemyA4B1TheWhisperingEldertree, 
     isElite: true, 
-    runAfter: (gameState) => mergeList2inList1(GameState.ACT4_ENCOUNTERS, GameState.ACT4_ENCOUNTERS_2), 
+    runAfterKey: 'runAfterEnemyA4B1TheWhisperingEldertree', 
   }
   static ENEMY_ECHOED_GUARDIAN = {
     name: 'Echoed Guardian',
@@ -703,12 +690,7 @@ class GameState {
     crit_damage: 60,
     image: enemyA4B2KaelithsNightmare, 
     isElite: true, 
-    runAfter: (gameState) => {
-      gameState.acts_progression = 5; 
-      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT5); 
-      const list = [{ category: 'combat', id: 'Kaelith s NIGHTMARE', enemy: GameState.ENEMY_A4B2_KAELITHS_NIGHTMARE, weight: 0 }];
-      mergeList2inList1(GameState.ACT4_ENCOUNTERS, list);
-    },
+    runAfterKey: 'runAfterEnemyA4B2KaelithsNightmare',
   }
   /* Enemy Templates Act5 */
   static ENEMY_ANCIENT_SENTINEL = {
@@ -776,7 +758,7 @@ class GameState {
     crit_damage: 50,
     image: enemyA5B1TheObsidianMaw, 
     isElite: true, 
-    runAfter: (gameState) => mergeList2inList1(GameState.ACT5_ENCOUNTERS, GameState.ACT5_ENCOUNTERS_2), 
+    runAfterKey: 'runAfterEnemyA5B1TheObsidianMaw', 
   }
   static ENEMY_RUNE_WROUGHT_TITAN = {
     name: "Rune-Wrought Titan",
@@ -817,12 +799,7 @@ class GameState {
     crit_damage: 60,
     image: enemyA5B2TheKeeperOfTheAbyss, 
     isElite: true, 
-    runAfter: (gameState) => {
-      gameState.acts_progression = 6; 
-      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT6); 
-      const list = [{ category: 'combat', id: 'KEEPER OF THE ABYSS', enemy: GameState.ENEMY_A5B2_THE_KEEPER_OF_THE_ABYSS, weight: 0 }];
-      mergeList2inList1(GameState.ACT5_ENCOUNTERS, list);
-    },
+    runAfterKey: 'runAfterEnemyA5B2TheKeeperOfTheAbyss',
   }
   /* Enemy Templates Act6 */
   static ENEMY_GILDED_WRETCH = {
@@ -877,7 +854,7 @@ class GameState {
     crit_damage: 70,
     image: enemyA6B1TheShardboundOracle, 
     isElite: true, 
-    runAfter: (gameState) => mergeList2inList1(GameState.ACT6_ENCOUNTERS, GameState.ACT6_ENCOUNTERS_2), 
+    runAfterKey: 'runAfterEnemyA6B1TheShardboundOracle', 
   }
   static ENEMY_TYRANTS_ENFORCER = {
     name: "Tyrant's Enforcer",
@@ -931,12 +908,7 @@ class GameState {
     crit_damage: 70,
     image: enemyA6B2TheTyrantKing, 
     isElite: true, 
-    runAfter: (gameState) => {
-      gameState.acts_progression = 7; 
-      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT7); 
-      const list = [{ category: 'combat', id: 'TYRANT KING', enemy: GameState.ENEMY_A6B2_THE_TYRANT_KING, weight: 0 }];
-      mergeList2inList1(GameState.ACT6_ENCOUNTERS, list);
-    },
+    runAfterKey: 'runAfterEnemyA6B2TheTyrantKing',
   }
   /* Enemy Templates Act7 */
   static ENEMY_STORMBOUND_FIEND = {
@@ -1004,7 +976,7 @@ class GameState {
     crit_damage: 70,
     image: enemyA7B1TheSteppeTitan, 
     isElite: true, 
-    runAfter: (gameState) => mergeList2inList1(GameState.ACT7_ENCOUNTERS, GameState.ACT7_ENCOUNTERS_2), 
+    runAfterKey: 'runAfterEnemyA7B1TheSteppeTitan', 
   }
   static ENEMY_ECLIPSED_MARAUDER = {
     name: "Eclipsed Marauder",
@@ -1045,12 +1017,7 @@ class GameState {
     crit_damage: 80,
     image: enemyA7B2TheShroudboundHighPriest, 
     isElite: true, 
-    runAfter: (gameState) => {
-      gameState.acts_progression = 8; 
-      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT8); 
-      const list = [{ category: 'combat', id: 'SHROUDBOUND HIGH PRIEST', enemy: GameState.ENEMY_A7B2_THE_SHROUDBOUND_HIGH_PRIEST, weight: 0 }];
-      mergeList2inList1(GameState.ACT7_ENCOUNTERS, list);
-    },
+    runAfterKey: 'runAfterEnemyA7B2TheShroudboundHighPriest',
   }
   /* Enemy  Act8 */
   static ENEMY_REALITY_FRAGMENTS = {
@@ -1118,7 +1085,7 @@ class GameState {
     crit_damage: 90,
     image: enemyA8B1TheRiftbornDevourer, 
     isElite: true, 
-    runAfter: (gameState) => mergeList2inList1(GameState.ACT8_ENCOUNTERS, GameState.ACT8_ENCOUNTERS_2), 
+    runAfterKey: 'runAfterEnemyA8B1TheRiftbornDevourer', 
   }
   static ENEMY_VOID_REVENANT = {
     name: "Void Revenant",
@@ -1146,11 +1113,7 @@ class GameState {
     crit_damage: 100,
     image: enemyA8B2TheEclipseAvatar, 
     isElite: true, 
-    runAfter: (gameState) => {
-      alert('Thanks for playing! You prevented the Eclipse this time, but at what cost? Will you be able to break the cicle? [ "Newgame+" coming soon ]');
-      gameState.acts_progression = 9; 
-      updateLocation(gameState, GameState.LOCATION_CITY); 
-    },
+    runAfterKey: 'runAfterEnemyA8B2TheEclipseAvatar',
   }
   /* Enemy Templates Placeholder */
   static ENEMY_PLACEHOLDER  = {
@@ -1167,16 +1130,100 @@ class GameState {
     image: enemyPlaceholder
   }
 
-/*
-  
-*/
-static findEncounterList(gameState, location_id) {
-  const entry = gameState.random_encounters.find(enc => enc.location === location_id);
-  console.log(`findEncounterList: ${entry}`);
-  const rnd_encounters = entry.encounters;
-  console.log(`findEncounterList: ${rnd_encounters}`);
-  return rnd_encounters;
-}
+  /* 
+    Static registry for post-deserialization logic
+    Mapping of enemy keys to functions that should be run after the enemy is defeated 
+  */
+  static RUN_AFTER_ENEMY_REGISTRY = {
+    runAfterEnemyA1B1TheCorruptedChieftain: (gameState) => 
+      mergeList2inList1(GameState.ACT1_ENCOUNTERS, GameState.ACT1_ENCOUNTERS_2),
+    runAfterEnemyA1B2TheCultInfiltrator: (gameState) => {
+      gameState.acts_progression = 2; 
+      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT2);
+      const list = [{ category: 'combat', id: 'The Cult Infiltrator', enemy: GameState.ENEMY_A1B2_THE_CULT_INFILTRATOR, weight: 0 }];
+      mergeList2inList1(GameState.ACT1_ENCOUNTERS, list); 
+    },
+    runAfterEnemyA2B1TheScorchscaleBehemoth: (gameState) => 
+      mergeList2inList1(GameState.ACT2_ENCOUNTERS, GameState.ACT2_ENCOUNTERS_2),
+    runAfterEnemyA2B2TheAshbinderPriestess: (gameState) => {
+      gameState.acts_progression = 3; 
+      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT3);
+      const list = [{ category: 'combat', id: 'The Ashbinder Priestess', enemy: GameState.ENEMY_A2B2_THE_ASHBINDER_PRIESTESS, weight: 0 }];
+      mergeList2inList1(GameState.ACT2_ENCOUNTERS, list);
+    }, 
+    runAfterEnemyA3B1FrostclawAlpha: (gameState) => 
+      mergeList2inList1(GameState.ACT3_ENCOUNTERS, GameState.ACT3_ENCOUNTERS_2),
+    runAfterEnemyA3B2TheBoundMonk: (gameState) => {
+      gameState.acts_progression = 4; 
+      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT4);
+      const list = [{ category: 'combat', id: 'THE BOUND MONK', enemy: GameState.ENEMY_A3B2_THE_BOUND_MONK, weight: 0 }];
+      mergeList2inList1(GameState.ACT3_ENCOUNTERS, list);
+    },
+    runAfterEnemyA4B1TheWhisperingEldertree: (gameState) => 
+      mergeList2inList1(GameState.ACT4_ENCOUNTERS, GameState.ACT4_ENCOUNTERS_2),
+    runAfterEnemyA4B2KaelithsNightmare: (gameState) => {
+      gameState.acts_progression = 5; 
+      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT5); 
+      const list = [{ category: 'combat', id: 'Kaelith s NIGHTMARE', enemy: GameState.ENEMY_A4B2_KAELITHS_NIGHTMARE, weight: 0 }];
+      mergeList2inList1(GameState.ACT4_ENCOUNTERS, list);
+    },
+    runAfterEnemyA5B1TheObsidianMaw: (gameState) => 
+      mergeList2inList1(GameState.ACT5_ENCOUNTERS, GameState.ACT5_ENCOUNTERS_2),
+    runAfterEnemyA5B2TheKeeperOfTheAbyss: (gameState) => {
+      gameState.acts_progression = 6; 
+      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT6); 
+      const list = [{ category: 'combat', id: 'KEEPER OF THE ABYSS', enemy: GameState.ENEMY_A5B2_THE_KEEPER_OF_THE_ABYSS, weight: 0 }];
+      mergeList2inList1(GameState.ACT5_ENCOUNTERS, list);
+    },
+    runAfterEnemyA6B1TheShardboundOracle: (gameState) => 
+      mergeList2inList1(GameState.ACT6_ENCOUNTERS, GameState.ACT6_ENCOUNTERS_2),
+    runAfterEnemyA6B2TheTyrantKing: (gameState) => {
+      gameState.acts_progression = 7; 
+      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT7); 
+      const list = [{ category: 'combat', id: 'TYRANT KING', enemy: GameState.ENEMY_A6B2_THE_TYRANT_KING, weight: 0 }];
+      mergeList2inList1(GameState.ACT6_ENCOUNTERS, list);
+    },
+    runAfterEnemyA7B1TheSteppeTitan: (gameState) => 
+      mergeList2inList1(GameState.ACT7_ENCOUNTERS, GameState.ACT7_ENCOUNTERS_2),
+    runAfterEnemyA7B2TheShroudboundHighPriest: (gameState) => {
+      gameState.acts_progression = 8; 
+      updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT8); 
+      const list = [{ category: 'combat', id: 'SHROUDBOUND HIGH PRIEST', enemy: GameState.ENEMY_A7B2_THE_SHROUDBOUND_HIGH_PRIEST, weight: 0 }];
+      mergeList2inList1(GameState.ACT7_ENCOUNTERS, list);
+    },
+    runAfterEnemyA8B1TheRiftbornDevourer: (gameState) => 
+      mergeList2inList1(GameState.ACT8_ENCOUNTERS, GameState.ACT8_ENCOUNTERS_2),
+    runAfterEnemyA8B2TheEclipseAvatar: (gameState) => {
+      alert('Thanks for playing! You prevented the Eclipse this time, but at what cost? Will you be able to break the cicle? [ "Newgame+" coming soon ]');
+      gameState.acts_progression = 9; 
+      updateLocation(gameState, GameState.LOCATION_CITY); 
+    },
+  };
+
+  /*
+    Run post-enemy logic based on the runAfterKey
+    Needed for deserialization / serialization because functions are not serializable
+    instead we store a string key and run the logic based on that key
+  */
+  static runAfterEnemy(gameState, runAfterKey) {
+    const action = GameState.RUN_AFTER_ENEMY_REGISTRY[runAfterKey];
+    if (action) {
+      action(gameState);
+    } else {
+      console.warn(`No logic found for runAfterKey: ${runAfterKey}`);
+    }
+  }
+
+  /*
+    
+  */
+  static findEncounterList(gameState, location_id) {
+    const entry = gameState.random_encounters.find(enc => enc.location === location_id);
+    console.log(`findEncounterList: ${entry}`);
+    const rnd_encounters = entry.encounters;
+    console.log(`findEncounterList: ${rnd_encounters}`);
+    return rnd_encounters;
+  }
 
   /*
     Complete Story event and set weight to 0
@@ -1191,16 +1238,13 @@ static findEncounterList(gameState, location_id) {
     }
   }
 
-  static STORY_DIALOG_ACT1_1 = {
-    title: 'Introduction to the Ruins',
-    content: [
-      "The once peaceful Hearthfield is now a shadow of its former self. Cultists have ravaged the village, searching for something hidden deep within the ruins.",
-      "You stand at the entrance of the forgotten ruins. The wind whispers of lost secrets, and the air carries a sense of unease."
-    ],
-    background: '',
-    completed: false,
-
-    onClose: function (gameState) { // Use a regular function to access 'this'
+  /* 
+    Static registry for post-deserialization logic
+    Mapping of story keys to functions that should be run after the story dialog closes 
+  */
+  static ON_CLOSE_STORY_REGISTRY = {
+    onClose_STORY_DIALOG_ACT1_1: (gameState) => { 
+      // Use a regular function to access 'this'
       // Find the entry with ID 'STORY_ACT1_1' and set its weight to 0
       const location_id = GameState.ACT1_LOC1_NAME;
       GameState.markStoryAsCompleted(gameState, location_id, 'STORY_ACT1_1');
@@ -1213,19 +1257,8 @@ static findEncounterList(gameState, location_id) {
         dialog: GameState.STORY_DIALOG_ACT1_2,
         weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT
       });
-    }
-  }
-
-  static STORY_DIALOG_ACT1_2 = {
-    title: 'First Clue about the Eclipse',
-    content: [
-      "A strange symbol etched into the ruin’s stone hints at a larger force at play. The cult speaks of the Eclipse Beyond, a force that could unravel reality.",
-      "You examine the symbol closely. Its design is unlike anything you've seen, the two intersecting lines almost seem to... shimmer as if alive."
-    ],
-    background: '',
-    completed: false,
-
-    onClose: function (gameState) {
+    },
+    onClose_STORY_DIALOG_ACT1_2: (gameState) => {
       const location_id = GameState.ACT1_LOC1_NAME;
       GameState.markStoryAsCompleted(gameState, location_id, 'STORY_ACT1_2');
       const encounter_list = GameState.findEncounterList(gameState, location_id);
@@ -1236,18 +1269,7 @@ static findEncounterList(gameState, location_id) {
         weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT
       });
     },
-  }
-
-  static STORY_DIALOG_ACT1_3 = {
-    title: 'Cultist Confrontation',
-    content: [
-      "The cultists are relentless, but you manage to take one captive. In his dying breath, he mutters about 'the twin star.'",
-      "The cultist glares at you. 'The twin star... you don't understand, it's already begun...' His words fade into the wind."
-    ],
-    background: '',
-    completed: false,
-
-    onClose: function (gameState) {
+    onClose_STORY_DIALOG_ACT1_3: (gameState) => {
       const location_id = GameState.ACT1_LOC1_NAME;
       GameState.markStoryAsCompleted(gameState, location_id, 'STORY_ACT1_3');
       const encounter_list = GameState.findEncounterList(gameState, location_id);
@@ -1258,6 +1280,84 @@ static findEncounterList(gameState, location_id) {
         weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT
       });
     },
+    onClose_STORY_DIALOG_ACT1_4: (gameState) => {
+      const location_id = GameState.ACT1_LOC1_NAME;
+      GameState.markStoryAsCompleted(gameState, location_id, 'STORY_ACT1_4');
+      const encounter_list = GameState.findEncounterList(gameState, location_id);
+      encounter_list.push({
+        category: 'story',
+        id: 'STORY_ACT1_5',
+        dialog: GameState.STORY_DIALOG_ACT1_5,
+        weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT
+      });
+    },
+    onClose_STORY_DIALOG_ACT1_5: (gameState) => {
+      const location_id = GameState.ACT1_LOC1_NAME;
+      GameState.markStoryAsCompleted(gameState, location_id, 'STORY_ACT1_5');
+      const encounter_list = GameState.findEncounterList(gameState, location_id);
+      encounter_list.push({
+        category: 'story',
+        id: 'STORY_ACT1_6',
+        dialog: GameState.STORY_DIALOG_ACT1_6,
+        weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT
+      });
+    },
+    onClose_STORY_DIALOG_ACT1_6: (gameState) => {
+      const location_id = GameState.ACT1_LOC1_NAME;
+      GameState.markStoryAsCompleted(gameState, location_id, 'STORY_ACT1_6');
+      // advance to act 2 TODO
+    },
+    onClose_STORY_DIALOG_ACT1_SECRET: (gameState) => {
+      const location_id = GameState.ACT1_LOC1_NAME;
+      GameState.markStoryAsCompleted(gameState, location_id, 'STORY_ACT1_SECRET');
+    },
+  };
+
+  /*
+    Run post-story logic based on the onCloseKey
+    Needed for deserialization / serialization because functions are not serializable
+    instead we store a string key and run the logic based on that key
+  */
+  static onCloseStory(gameState, onCloseKey) {
+    const action = GameState.ON_CLOSE_STORY_REGISTRY[onCloseKey];
+    if (action) {
+      action(gameState);
+    } else {
+      console.warn(`No logic found for onCloseKey: ${onCloseKey}`);
+    }
+  }
+
+  static STORY_DIALOG_ACT1_1 = {
+    title: 'Introduction to the Ruins',
+    content: [
+      "The once peaceful Hearthfield is now a shadow of its former self. Cultists have ravaged the village, searching for something hidden deep within the ruins.",
+      "You stand at the entrance of the forgotten ruins. The wind whispers of lost secrets, and the air carries a sense of unease."
+    ],
+    background: '',
+    completed: false,
+    onCloseKey: 'onClose_STORY_DIALOG_ACT1_1',
+  }
+
+  static STORY_DIALOG_ACT1_2 = {
+    title: 'First Clue about the Eclipse',
+    content: [
+      "A strange symbol etched into the ruin’s stone hints at a larger force at play. The cult speaks of the Eclipse Beyond, a force that could unravel reality.",
+      "You examine the symbol closely. Its design is unlike anything you've seen, the two intersecting lines almost seem to... shimmer as if alive."
+    ],
+    background: '',
+    completed: false,
+    onCloseKey: 'onClose_STORY_DIALOG_ACT1_2',
+  }
+
+  static STORY_DIALOG_ACT1_3 = {
+    title: 'Cultist Confrontation',
+    content: [
+      "The cultists are relentless, but you manage to take one captive. In his dying breath, he mutters about 'the twin star.'",
+      "The cultist glares at you. 'The twin star... you don't understand, it's already begun...' His words fade into the wind."
+    ],
+    background: '',
+    completed: false,
+    onCloseKey: 'onClose_STORY_DIALOG_ACT1_3',
   }
 
   static STORY_DIALOG_ACT1_4 = {
@@ -1268,18 +1368,7 @@ static findEncounterList(gameState, location_id) {
     ],
     background: '',
     completed: false,
-
-    onClose: function (gameState) {
-      const location_id = GameState.ACT1_LOC1_NAME;
-      GameState.markStoryAsCompleted(gameState, location_id, 'STORY_ACT1_4');
-      const encounter_list = GameState.findEncounterList(gameState, location_id);
-      encounter_list.push({
-        category: 'story',
-        id: 'STORY_ACT1_5',
-        dialog: GameState.STORY_DIALOG_ACT1_5,
-        weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT
-      });
-    }
+    onCloseKey: 'onClose_STORY_DIALOG_ACT1_4',
   }
 
   static STORY_DIALOG_ACT1_5 = {
@@ -1290,18 +1379,7 @@ static findEncounterList(gameState, location_id) {
     ],
     background: '',
     completed: false,
-
-    onClose: function (gameState) {
-      const location_id = GameState.ACT1_LOC1_NAME;
-      GameState.markStoryAsCompleted(gameState, location_id, 'STORY_ACT1_5');
-      const encounter_list = GameState.findEncounterList(gameState, location_id);
-      encounter_list.push({
-        category: 'story',
-        id: 'STORY_ACT1_6',
-        dialog: GameState.STORY_DIALOG_ACT1_6,
-        weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT
-      });
-    }
+    onCloseKey: 'onClose_STORY_DIALOG_ACT1_5',
   }
 
   static STORY_DIALOG_ACT1_6 = {
@@ -1312,12 +1390,7 @@ static findEncounterList(gameState, location_id) {
     ],
     background: '',
     completed: false,
-
-    onClose: function (gameState) {
-      const location_id = GameState.ACT1_LOC1_NAME;
-      GameState.markStoryAsCompleted(gameState, location_id, 'STORY_ACT1_6');
-      // advance to act 2 TODO
-    }
+    onCloseKey: 'onClose_STORY_DIALOG_ACT1_6',
   }
 
   static STORY_DIALOG_ACT1_SECRET = {
@@ -1328,11 +1401,7 @@ static findEncounterList(gameState, location_id) {
     ],
     background: '',
     completed: false,
-
-    onClose: function (gameState) { // Use a regular function to access 'this'
-      const location_id = GameState.ACT1_LOC1_NAME;
-      GameState.markStoryAsCompleted(gameState, location_id, 'STORY_ACT1_SECRET');
-    }
+    onCloseKey: 'onClose_STORY_DIALOG_ACT1_SECRET',
   }
 
   static STORY_DIALOG_DEFAULT_WEIGHT = 5;
@@ -1500,19 +1569,17 @@ static findEncounterList(gameState, location_id) {
     {location: GameState.ACT7_LOC1_NAME, encounters: GameState.ACT7_ENCOUNTERS},
     {location: GameState.ACT8_LOC1_NAME, encounters: GameState.ACT8_ENCOUNTERS},
   ];
-
-  static MAX_LEVEL = 70;
-  static XP_TO_LEVEL2 = 75; 
-  static XP_SCALING = 1.3; 
-  static UPGRADE_LIMITS = {
-    [UPGRADE_DAMAGE]: 999,
-    [UPGRADE_MAX_HEALTH]: 999,
-    [UPGRADE_CRIT_CHANCE]: 999,
-    [UPGRADE_CRIT_DAMAGE]: 999,
-    [UPGRADE_EVADE_CHANCE]: 20,
-    [UPGRADE_ATTACK_SPEED]: 30,
-  };
   
+  /* Asset Constants */
+  IMG_HERO_FEMALE_NEUTRAL = heroFemaleNeutral;
+  IMG_HERO_MALE_NEUTRAL = heroMaleNeutral;
+  IMG_HERO_FEMALE_COMBAT = heroFemaleCombat;
+  IMG_HERO_MALE_COMBAT = heroMaleCombat;
+
+  attack_combo = 0; 
+  acts_progression = 1; 
+  active_enemy = null; 
+
   constructor(heroName, gender, location) {
     this.hero = {
       isInCombat: false,
@@ -1532,7 +1599,7 @@ static findEncounterList(gameState, location_id) {
       crit_damage: (gender === GameState.GENDER_MALE ? 200 : 100), 
       last_combat_event: "", 
       image: (gender === GameState.GENDER_MALE ? this.IMG_HERO_MALE_NEUTRAL : this.IMG_HERO_FEMALE_NEUTRAL), 
-      current_enchantment: { id: ID_NONE, selectReverse: (gameState) => {return gameState} },
+      current_enchantment: ID_NONE,
       upgradeCounts: {
         [UPGRADE_DAMAGE]: 0,
         [UPGRADE_MAX_HEALTH]: 0,

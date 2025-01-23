@@ -222,7 +222,7 @@ export const ID_LIGHTNING = 'Lightning';
 */
 export function setHeroImages(gameState) {
   const hero = gameState.hero; 
-  const enc_id = hero.current_enchantment.id; 
+  const enc_id = hero.current_enchantment; 
   if (hero.gender === GameState.GENDER_MALE) {
     gameState.IMG_HERO_MALE_NEUTRAL = heroMaleNeutral;
     if (enc_id === ID_NONE) {

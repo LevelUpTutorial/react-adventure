@@ -421,7 +421,7 @@ return (
                   <label for="select-enchantment">Enchantment:</label>
                   <div class="dropdown" id="select-enchantment">
                     <button class="btn btn-success dropdown-toggle" type="button" id="enchantmentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                      {`${gameState.hero.current_enchantment.id}`}
+                      {`${gameState.hero.current_enchantment}`}
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="enchantmentDropdown">
                       <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(noneId)}>None</a></li>
@@ -509,7 +509,7 @@ return (
           background={storyEvent.background}
           onClose={() => {
             setGameState(handleResetHeroControl(gameState));
-            storyEvent.onClose(gameState);
+            GameState.onCloseStory(gameState, storyEvent.onCloseKey);
             setStoryDialogOpen(false);
             setStoryEvent(null);
           }}
@@ -698,8 +698,8 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
     } else {
       // Enemy died 
       // execute enemy after function if he had one 
-      if (active_enemy.runAfter) {
-        active_enemy.runAfter(gameState); 
+      if (active_enemy.runAfterKey) {
+        GameState.runAfterEnemy(gameState, active_enemy.runAfterKey);
       }
       // check for lvl up
       if (hero.xp + active_enemy.xp_reward >= hero.xp_to_levelup) {
@@ -931,21 +931,21 @@ function selectEnchantment(gameState, enchantment_id) {
   console.log(`selected enchantment ${enchantment_id}`);
   const hero = gameState.hero;  
   /* remove from lists if exists */
-  const prevEnchantment = hero.current_enchantment; 
+  const prevEnchantment = getEnchantmentById(hero.current_enchantment); 
   console.log(`previous enchantment was ${prevEnchantment.id}`);
   prevEnchantment.selectReverse(gameState); 
   /* add new Enchantment to lists */ 
   if (enchantment_id === fireId) {
     fireEffectSelectApply(gameState); 
-    hero.current_enchantment = { id: fireId, selectReverse: fireEffectSelectReverse }; 
+    hero.current_enchantment = fireId; 
   } else if (enchantment_id === iceId) {
     iceEffectSelectApply(gameState); 
-    hero.current_enchantment = { id: iceId, selectReverse: iceEffectSelectReverse }; 
+    hero.current_enchantment = iceId; 
   } else if (enchantment_id === lightningId) {
     lightningEffectSelectApply(gameState); 
-    hero.current_enchantment = { id: lightningId, selectReverse: lightningEffectSelectReverse };
+    hero.current_enchantment = lightningId;
   } else if (enchantment_id === noneId) {
-    hero.current_enchantment = { id: noneId, selectReverse: (gameState) => {return gameState} };
+    hero.current_enchantment = noneId;
   } else {
     console.error(`unknown enchantment selected ${enchantment_id}`);
   }
@@ -953,6 +953,23 @@ function selectEnchantment(gameState, enchantment_id) {
   setHeroImages(gameState); 
   return { ...gameState, hero }; 
 }
+/*
+  Enchantment REGISTRY
+*/
+function getEnchantmentById(enchantment_id) {
+  switch (enchantment_id) {
+    case fireId:
+      return { id: fireId, selectReverse: fireEffectSelectReverse };
+    case iceId:
+      return { id: iceId, selectReverse: iceEffectSelectReverse };
+    case lightningId:
+      return { id: lightningId, selectReverse: lightningEffectSelectReverse };
+    case noneId:
+      return { id: noneId, selectReverse: (gameState) => {return gameState} };
+  }
+  console.error(`Unknown enchantment id ${enchantment_id}`);
+}
+
 /* 
  * Effect List Helper 
  */ 
