@@ -658,6 +658,7 @@ const onHitEffectsEnemy = [];
 function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades) {
   const location = gameState.location;
   let {hero, active_enemy} = gameState;
+  /*
   if (active_enemy) {
     console.log(`handleGameState: Enemy -> ${active_enemy.name}`);
     if ((hero.current_animation && 
@@ -665,7 +666,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
      ){
         return gameState; 
     }
-  }
+  }*/
   
   if (hero.isInDialog) {
     return gameState; 
