@@ -658,15 +658,16 @@ const onHitEffectsEnemy = [];
 function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades) {
   const location = gameState.location;
   let {hero, active_enemy} = gameState;
-  /*
   if (active_enemy) {
     console.log(`handleGameState: Enemy -> ${active_enemy.name}`);
+    /* Slow Animation for hero crits 
     if ((hero.current_animation && 
          hero.current_animation.name === 'critical-attack')  
      ){
         return gameState; 
     }
-  }*/
+    */
+  }
   
   if (hero.isInDialog) {
     return gameState; 
@@ -685,7 +686,6 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
     } else {
       hero.attack_cooldown -= TICK_DURATION_ADVENTURE;
     }
-    console.log(`${active_enemy.name} HP: ${active_enemy.health}`); 
     hero.isInCombat = active_enemy.health > 0;
     if (hero.isInCombat) {
       // Enemy still alive, handle its attack
