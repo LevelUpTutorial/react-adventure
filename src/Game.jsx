@@ -669,6 +669,11 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
   if (hero.isInDialog) {
     return gameState; 
   } 
+  if (hero.current_animation || 
+      (active_enemy && active_enemy.current_animation) 
+     ) {
+    return gameState; 
+  }
   
   // handle Combat
   if (hero.isInCombat) {
