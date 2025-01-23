@@ -658,26 +658,21 @@ const onHitEffectsEnemy = [];
 function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades) {
   const location = gameState.location;
   let {hero, active_enemy} = gameState;
-  console.log(`handleGameState (start): Hero XP -> ${hero.xp}`);
   if (active_enemy) {
     console.log(`handleGameState: Enemy -> ${active_enemy.name}`);
-    // console.log(`handleGameState: Enemy Atk Sp -> ${active_enemy.attack_speed}`);
-    // console.log(`handleGameState: Enemy Atk Cd -> ${active_enemy.attack_cooldown}`);
+    if ((hero.current_animation && hero.current_animation.name === 'critical-attack')  
+      || (active_enemy.current_animation && active_enemy.current_animation.name === 'critical-attack') 
+     ) {
+        return gameState; 
+    }
   }
-  console.log(`handleGameState: isInCombat -> ${hero.isInCombat}`);
-  console.log(`handleGameState: isInDialog -> ${hero.isInDialog}`);
+  
   if (hero.isInDialog) {
     return gameState; 
   } 
-  if (hero.current_animation || 
-      (active_enemy && active_enemy.current_animation) 
-     ) {
-    return gameState; 
-  }
   
   // handle Combat
   if (hero.isInCombat) {
-    // console.log('hero is in combat');
     hero.image = (hero.gender === GameState.GENDER_MALE ? gameState.IMG_HERO_MALE_COMBAT : gameState.IMG_HERO_FEMALE_COMBAT);
     if (hero.attack_cooldown <= 0) {
       /* try disable Auto combat */
@@ -691,7 +686,6 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
     }
     console.log(`${active_enemy.name} HP: ${active_enemy.health}`); 
     hero.isInCombat = active_enemy.health > 0;
-    console.log(`handleGameState (before combat): Hero XP -> ${hero.xp}`);
     if (hero.isInCombat) {
       // Enemy still alive, handle its attack
       if (active_enemy.attack_cooldown <= 0) {
@@ -731,8 +725,6 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       setCounterAttackActive(false); // Disable button on victory
     }
 
-    // console.log(`handleGameState: Hero HP -> ${hero.health}`);
-    console.log(`handleGameState (after combat): Hero XP -> ${hero.xp}`);
     gameState = { ...gameState, hero, active_enemy}; 
     return (hero.health > 0 ? gameState : changeLocation(gameState, GameState.LOCATION_CITY));
   }
@@ -778,7 +770,6 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       console.error(`ERROR: Unknown encounter type category ${encounter.category}`);
     }
 
-    console.log(`handleGameState(after encounter roll): Hero XP -> ${hero.xp}`);
     return { ...gameState, hero };
   }
 
@@ -787,8 +778,6 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
   }
 
   // return gameState unchanged
-  // console.log('return gameState unchanged')
-  // console.log(`handleGameState (return unchanged): Hero XP -> ${hero.xp}`);
   return gameState;
 }
 
