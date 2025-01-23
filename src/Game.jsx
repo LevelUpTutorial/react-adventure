@@ -528,7 +528,7 @@ return (
 }
 
 const battleAnimationDuration = 300; 
-const critAnimationDuration = 600; 
+const critAnimationDuration = 400; 
 const heroImage = '.hero-image';
 const enemyImage = '.enemy-image';
 
@@ -660,9 +660,9 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
   let {hero, active_enemy} = gameState;
   if (active_enemy) {
     console.log(`handleGameState: Enemy -> ${active_enemy.name}`);
-    if ((hero.current_animation && hero.current_animation.name === 'critical-attack')  
-      || (active_enemy.current_animation && active_enemy.current_animation.name === 'critical-attack') 
-     ) {
+    if ((hero.current_animation && 
+         hero.current_animation.name === 'critical-attack')  
+     ){
         return gameState; 
     }
   }
