@@ -1136,8 +1136,10 @@ class GameState {
     Mapping of enemy keys to functions that should be run after the enemy is defeated 
   */
   static RUN_AFTER_ENEMY_REGISTRY = {
-    runAfterEnemyA1B1TheCorruptedChieftain: (gameState) => 
-      mergeList2inList1(GameState.ACT1_ENCOUNTERS, GameState.ACT1_ENCOUNTERS_2),
+    runAfterEnemyA1B1TheCorruptedChieftain: (gameState) => {
+      mergeList2inList1(GameState.ACT1_ENCOUNTERS, GameState.ACT1_ENCOUNTERS_2);
+      console.log(`runAfter Chieftain done`);
+    },
     runAfterEnemyA1B2TheCultInfiltrator: (gameState) => {
       gameState.acts_progression = 2; 
       updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT2);
@@ -1209,6 +1211,7 @@ class GameState {
   static runAfterEnemy(gameState, runAfterKey) {
     const action = GameState.RUN_AFTER_ENEMY_REGISTRY[runAfterKey];
     if (action) {
+      console.log(`runAfterKey found ${runAfterKey}`);
       action(gameState);
     } else {
       console.warn(`No logic found for runAfterKey: ${runAfterKey}`);
