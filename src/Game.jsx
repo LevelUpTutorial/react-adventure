@@ -349,7 +349,8 @@ return (
               >
               {gameState.active_enemy && (() => {
                 const eAttackProgress = Math.max(0, Math.min( (gameState.active_enemy.attack_cooldown / gameState.active_enemy.attack_speed * 100), 100));
-
+                const enemyHPCramped = Math.max(0, gameState.active_enemy.health);
+                
                 return (
                   <>
                     <p className="fw-semibold text-danger">
@@ -359,16 +360,16 @@ return (
                       <div 
                         className="progress-bar bg-success align-middle" 
                         role="progressbar" 
-                        style={{width: `${gameState.active_enemy.health / gameState.active_enemy.health_full * 100}%`, height: '20px' }} 
-                        aria-valuenow={gameState.active_enemy.health} aria-valuemin="0" aria-valuemax="100"
+                        style={{width: `${enemyHPCramped / gameState.active_enemy.health_full * 100}%`, height: '20px' }} 
+                        aria-valuenow={enemyHPCramped} aria-valuemin="0" aria-valuemax="100"
                       >
-                        {`${gameState.active_enemy.health}`}
+                        {`${enemyHPCramped}`}
                       </div>
                       <div 
                         className="progress-bar progress-bar-striped bg-danger" 
                         role="progressbar" 
-                        style={{width: `${(gameState.active_enemy.health_full - gameState.active_enemy.health) / gameState.active_enemy.health_full * 100}%`, height: '20px' }} 
-                        aria-valuenow={gameState.active_enemy.health_full - gameState.active_enemy.health} aria-valuemin="0" aria-valuemax="100">
+                        style={{width: `${(gameState.active_enemy.health_full - enemyHPCramped) / gameState.active_enemy.health_full * 100}%`, height: '20px' }} 
+                        aria-valuenow={gameState.active_enemy.health_full - enemyHPCramped} aria-valuemin="0" aria-valuemax="100">
                       </div>
                     </div>
                     {renderCombatEvent(gameState.active_enemy.last_combat_event)}
@@ -376,7 +377,7 @@ return (
                     <div 
                       className="progress-bar bg-primary rounded" 
                       role="progressbar" 
-                      style={{ width: `${eAttackProgress}%`, height: "20px" }} 
+                      style={{ width: `${eAttackProgress}%`, height: "30px" }} 
                       aria-valuenow={eAttackProgress} 
                       aria-valuemin="0" 
                       aria-valuemax="100"
