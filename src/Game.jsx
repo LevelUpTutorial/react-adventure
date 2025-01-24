@@ -660,13 +660,12 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
   let {hero, active_enemy} = gameState;
   if (active_enemy) {
     console.log(`handleGameState: Enemy -> ${active_enemy.name}`);
-    /* Slow Animation for hero crits 
+    /* Slow Animation for hero crits */
     if ((hero.current_animation && 
          hero.current_animation.name === 'critical-attack')  
      ){
         return gameState; 
     }
-    */
   }
   
   if (hero.isInDialog) {
