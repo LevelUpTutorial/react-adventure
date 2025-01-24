@@ -377,7 +377,7 @@ return (
                     <div 
                       className="progress-bar bg-primary rounded" 
                       role="progressbar" 
-                      style={{ width: `${eAttackProgress}%`, height: "30px" }} 
+                      style={{ width: `${eAttackProgress}%`, height: "25px" }} 
                       aria-valuenow={eAttackProgress} 
                       aria-valuemin="0" 
                       aria-valuemax="100"
@@ -699,6 +699,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       // Enemy died 
       // execute enemy after function if he had one 
       if (active_enemy.runAfterKey) {
+        console.log(`handleGameState try runAfterKey ${runAfterKey}`);
         GameState.runAfterEnemy(gameState, active_enemy.runAfterKey);
       }
       // check for lvl up
