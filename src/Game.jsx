@@ -699,7 +699,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       // Enemy died 
       // execute enemy after function if he had one 
       if (active_enemy.runAfterKey) {
-        console.log(`handleGameState try runAfterKey ${runAfterKey}`);
+        console.log(`handleGameState try runAfterKey ${active_enemy.runAfterKey}`);
         GameState.runAfterEnemy(gameState, active_enemy.runAfterKey);
       }
       // check for lvl up
