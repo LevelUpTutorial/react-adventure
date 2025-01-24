@@ -137,7 +137,9 @@ function App() {
               disabled={ !(savedGames[option] && isSaveValid[option]) }
             >
               {savedGames[option]
-                ? `Continue as ${savedGames[option].hero.name} (Level ${savedGames[option].hero.level})`
+                ? isSaveValid[option]
+                  ? `Continue as ${savedGames[option].hero.name} (Level ${savedGames[option].hero.level})`
+                  : `${savedGames[option].hero.name} (Level ${savedGames[option].hero.level}) outdated!`
                 : `No saved game for ${option}`}
             </button>
           ))}
