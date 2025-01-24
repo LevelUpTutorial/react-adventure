@@ -1612,6 +1612,7 @@ class GameState {
       current_animation: null, 
     }
     this.location = location;
+    this.compatability = GameState.COMPATABILITY; 
   }
 }
 
