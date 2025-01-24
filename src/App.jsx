@@ -16,6 +16,10 @@ function App() {
     [GameState.GENDER_MALE]: null,
     [GameState.GENDER_FEMALE]: null,
   });
+  const isSaveValid = {
+    [GameState.GENDER_MALE]: false,
+    [GameState.GENDER_FEMALE]: false,
+  }
 
   useEffect(() => {
     // Load saved games for both genders
@@ -25,6 +29,10 @@ function App() {
       [GameState.GENDER_MALE]: maleSave,
       [GameState.GENDER_FEMALE]: femaleSave,
     });
+    isSaveValid[GameState.GENDER_MALE] = 
+      maleSave && maleSave.compatability === GameState.COMPATABILITY;
+    isSaveValid[GameState.GENDER_FEMALE] = 
+      femaleSave && femaleSave.compatability === GameState.COMPATABILITY;
   }, []);
 
   const handleNewGame = () => {
@@ -120,11 +128,12 @@ function App() {
               key={option}
               className={`list-group-item list-group-item-action ${
                 selectedSave && selectedSave.hero.gender === option
+                && isSaveValid[option]
                   ? 'active'
                   : ''
               }`}
               onClick={() => handleSaveSelection(option)}
-              disabled={!savedGames[option]}
+              disabled={!savedGames[option] || !isSaveValid[option]}
             >
               {savedGames[option]
                 ? `Continue as ${savedGames[option].hero.name} (Level ${savedGames[option].hero.level})`
