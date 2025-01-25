@@ -1137,65 +1137,87 @@ class GameState {
   */
   static RUN_AFTER_ENEMY_REGISTRY = {
     runAfterEnemyA1B1TheCorruptedChieftain: (gameState) => {
-      mergeList2inList1(GameState.ACT1_ENCOUNTERS, GameState.ACT1_ENCOUNTERS_2);
+      const list = GameState.findEncounterList(gameState, GameState.ACT1_LOC1_NAME);
+      mergeList2inList1(list, GameState.ACT1_ENCOUNTERS_2);
       console.log(`runAfter Chieftain done`);
     },
     runAfterEnemyA1B2TheCultInfiltrator: (gameState) => {
       gameState.acts_progression = 2; 
       updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT2);
-      const list = [{ category: 'combat', id: 'The Cult Infiltrator', enemy: GameState.ENEMY_A1B2_THE_CULT_INFILTRATOR, weight: 0 }];
-      mergeList2inList1(GameState.ACT1_ENCOUNTERS, list); 
+      const list2 = [{ category: 'combat', id: 'The Cult Infiltrator', enemy: GameState.ENEMY_A1B2_THE_CULT_INFILTRATOR, weight: 0 }];
+      const list = GameState.findEncounterList(gameState, GameState.ACT1_LOC1_NAME);
+      mergeList2inList1(list, list2); 
     },
-    runAfterEnemyA2B1TheScorchscaleBehemoth: (gameState) => 
-      mergeList2inList1(GameState.ACT2_ENCOUNTERS, GameState.ACT2_ENCOUNTERS_2),
+    runAfterEnemyA2B1TheScorchscaleBehemoth: (gameState) => {
+      const list = GameState.findEncounterList(gameState, GameState.ACT2_LOC1_NAME);
+      mergeList2inList1(list, GameState.ACT2_ENCOUNTERS_2);
+    },
     runAfterEnemyA2B2TheAshbinderPriestess: (gameState) => {
       gameState.acts_progression = 3; 
       updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT3);
-      const list = [{ category: 'combat', id: 'The Ashbinder Priestess', enemy: GameState.ENEMY_A2B2_THE_ASHBINDER_PRIESTESS, weight: 0 }];
-      mergeList2inList1(GameState.ACT2_ENCOUNTERS, list);
+      const list2 = [{ category: 'combat', id: 'The Ashbinder Priestess', enemy: GameState.ENEMY_A2B2_THE_ASHBINDER_PRIESTESS, weight: 0 }];
+      const list = GameState.findEncounterList(gameState, GameState.ACT2_LOC1_NAME);
+      mergeList2inList1(list, list2);
     }, 
-    runAfterEnemyA3B1FrostclawAlpha: (gameState) => 
-      mergeList2inList1(GameState.ACT3_ENCOUNTERS, GameState.ACT3_ENCOUNTERS_2),
+    runAfterEnemyA3B1FrostclawAlpha: (gameState) => {
+      const list = GameState.findEncounterList(gameState, GameState.ACT3_LOC1_NAME);
+      mergeList2inList1(list, GameState.ACT3_ENCOUNTERS_2);
+    },
     runAfterEnemyA3B2TheBoundMonk: (gameState) => {
       gameState.acts_progression = 4; 
       updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT4);
-      const list = [{ category: 'combat', id: 'THE BOUND MONK', enemy: GameState.ENEMY_A3B2_THE_BOUND_MONK, weight: 0 }];
-      mergeList2inList1(GameState.ACT3_ENCOUNTERS, list);
+      const list2 = [{ category: 'combat', id: 'THE BOUND MONK', enemy: GameState.ENEMY_A3B2_THE_BOUND_MONK, weight: 0 }];
+      const list = GameState.findEncounterList(gameState, GameState.ACT3_LOC1_NAME);
+      mergeList2inList1(list, list2);
     },
-    runAfterEnemyA4B1TheWhisperingEldertree: (gameState) => 
-      mergeList2inList1(GameState.ACT4_ENCOUNTERS, GameState.ACT4_ENCOUNTERS_2),
+    runAfterEnemyA4B1TheWhisperingEldertree: (gameState) => {
+      const list = GameState.findEncounterList(gameState, GameState.ACT4_LOC1_NAME);
+      mergeList2inList1(list, GameState.ACT4_ENCOUNTERS_2);
+    },
     runAfterEnemyA4B2KaelithsNightmare: (gameState) => {
       gameState.acts_progression = 5; 
       updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT5); 
-      const list = [{ category: 'combat', id: 'Kaelith s NIGHTMARE', enemy: GameState.ENEMY_A4B2_KAELITHS_NIGHTMARE, weight: 0 }];
-      mergeList2inList1(GameState.ACT4_ENCOUNTERS, list);
+      const list2 = [{ category: 'combat', id: 'Kaelith s NIGHTMARE', enemy: GameState.ENEMY_A4B2_KAELITHS_NIGHTMARE, weight: 0 }];
+      const list = GameState.findEncounterList(gameState, GameState.ACT4_LOC1_NAME);
+      mergeList2inList1(list, list2);
     },
-    runAfterEnemyA5B1TheObsidianMaw: (gameState) => 
-      mergeList2inList1(GameState.ACT5_ENCOUNTERS, GameState.ACT5_ENCOUNTERS_2),
+    runAfterEnemyA5B1TheObsidianMaw: (gameState) => {
+      const list = GameState.findEncounterList(gameState, GameState.ACT5_LOC1_NAME);
+      mergeList2inList1(list, GameState.ACT5_ENCOUNTERS_2);
+    }, 
     runAfterEnemyA5B2TheKeeperOfTheAbyss: (gameState) => {
       gameState.acts_progression = 6; 
       updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT6); 
-      const list = [{ category: 'combat', id: 'KEEPER OF THE ABYSS', enemy: GameState.ENEMY_A5B2_THE_KEEPER_OF_THE_ABYSS, weight: 0 }];
-      mergeList2inList1(GameState.ACT5_ENCOUNTERS, list);
+      const list2 = [{ category: 'combat', id: 'KEEPER OF THE ABYSS', enemy: GameState.ENEMY_A5B2_THE_KEEPER_OF_THE_ABYSS, weight: 0 }];
+      const list = GameState.findEncounterList(gameState, GameState.ACT5_LOC1_NAME);
+      mergeList2inList1(list, list2);
     },
-    runAfterEnemyA6B1TheShardboundOracle: (gameState) => 
-      mergeList2inList1(GameState.ACT6_ENCOUNTERS, GameState.ACT6_ENCOUNTERS_2),
+    runAfterEnemyA6B1TheShardboundOracle: (gameState) => {
+      const list = GameState.findEncounterList(gameState, GameState.ACT6_LOC1_NAME);
+      mergeList2inList1(list, GameState.ACT6_ENCOUNTERS_2);
+    },
     runAfterEnemyA6B2TheTyrantKing: (gameState) => {
       gameState.acts_progression = 7; 
       updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT7); 
-      const list = [{ category: 'combat', id: 'TYRANT KING', enemy: GameState.ENEMY_A6B2_THE_TYRANT_KING, weight: 0 }];
-      mergeList2inList1(GameState.ACT6_ENCOUNTERS, list);
+      const list2 = [{ category: 'combat', id: 'TYRANT KING', enemy: GameState.ENEMY_A6B2_THE_TYRANT_KING, weight: 0 }];
+      const list = GameState.findEncounterList(gameState, GameState.ACT6_LOC1_NAME);
+      mergeList2inList1(list, list2);
     },
-    runAfterEnemyA7B1TheSteppeTitan: (gameState) => 
-      mergeList2inList1(GameState.ACT7_ENCOUNTERS, GameState.ACT7_ENCOUNTERS_2),
+    runAfterEnemyA7B1TheSteppeTitan: (gameState) => {
+      const list = GameState.findEncounterList(gameState, GameState.ACT7_LOC1_NAME);
+      mergeList2inList1(list, GameState.ACT7_ENCOUNTERS_2);
+    },
     runAfterEnemyA7B2TheShroudboundHighPriest: (gameState) => {
       gameState.acts_progression = 8; 
       updateLocation(gameState, GameState.LOCATION_ADVENTURE_ACT8); 
-      const list = [{ category: 'combat', id: 'SHROUDBOUND HIGH PRIEST', enemy: GameState.ENEMY_A7B2_THE_SHROUDBOUND_HIGH_PRIEST, weight: 0 }];
-      mergeList2inList1(GameState.ACT7_ENCOUNTERS, list);
+      const list2 = [{ category: 'combat', id: 'SHROUDBOUND HIGH PRIEST', enemy: GameState.ENEMY_A7B2_THE_SHROUDBOUND_HIGH_PRIEST, weight: 0 }];
+      const list = GameState.findEncounterList(gameState, GameState.ACT7_LOC1_NAME);
+      mergeList2inList1(list, list2);
     },
-    runAfterEnemyA8B1TheRiftbornDevourer: (gameState) => 
-      mergeList2inList1(GameState.ACT8_ENCOUNTERS, GameState.ACT8_ENCOUNTERS_2),
+    runAfterEnemyA8B1TheRiftbornDevourer: (gameState) => {
+      const list = GameState.findEncounterList(gameState, GameState.ACT8_LOC1_NAME);
+      mergeList2inList1(list, GameState.ACT8_ENCOUNTERS_2);
+    },
     runAfterEnemyA8B2TheEclipseAvatar: (gameState) => {
       alert('Thanks for playing! You prevented the Eclipse this time, but at what cost? Will you be able to break the cicle? [ "Newgame+" coming soon ]');
       gameState.acts_progression = 9; 
