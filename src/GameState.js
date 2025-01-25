@@ -139,7 +139,7 @@ class GameState {
   static UPGRADE_LIMITS = {
     [UPGRADE_DAMAGE]: 999,
     [UPGRADE_MAX_HEALTH]: 999,
-    [UPGRADE_CRIT_CHANCE]: 999,
+    [UPGRADE_CRIT_CHANCE]: 42,
     [UPGRADE_CRIT_DAMAGE]: 999,
     [UPGRADE_EVADE_CHANCE]: 20,
     [UPGRADE_ATTACK_SPEED]: 30,
@@ -1621,7 +1621,7 @@ class GameState {
       attack_speed: (gender === GameState.GENDER_MALE ? 1875 : 1475), // in Milliseconds because of Interval Ticks
       attack_cooldown: (gender === GameState.GENDER_MALE ? 1875 : 1475),
       evade_chance: (gender === GameState.GENDER_MALE ? 10 : 20), 
-      crit_chance: (gender === GameState.GENDER_MALE ? 35 : 15), 
+      crit_chance: (gender === GameState.GENDER_MALE ? 36 : 16), 
       crit_damage: (gender === GameState.GENDER_MALE ? 200 : 100), 
       last_combat_event: "", 
       image: (gender === GameState.GENDER_MALE ? this.IMG_HERO_MALE_NEUTRAL : this.IMG_HERO_FEMALE_NEUTRAL), 
