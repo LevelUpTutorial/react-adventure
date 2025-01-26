@@ -326,3 +326,39 @@ export function loadGameState(heroGender) {
     return undefined; // Or handle the error as needed
   }
 }
+
+/* PERCENTAGE Scaling for stats per level difference */
+const HEALTH_CHANGE = 0.12; 
+const XP_CHANGE = 0.10; 
+const ATTACK_CHANGE = 0.08; 
+const LEVEL_RANGE = 2;
+/*
+  Creates a new enemy instance out of its template. 
+  Rolls a level +/- LEVEL_RANGE of its base level.
+  Attack, Health and XP reward scale per level. 
+  Elite enemies do not scale. 
+  Also adds some attributes for gameplay that dont exist in its template! 
+*/
+export function createActiveEnemy(encounter) {
+  const enemy = encounter.enemy; 
+  // Elite dont scale 
+  if (!enemy.isElite) {
+    // add or subtract level 
+    let direction = 1
+    if (enemy.level > LEVEL_RANGE) {
+      direction = Math.random() < 0.5 ? 1 : -1;
+    }
+    const roll = Math.floor(Math.random() * (LEVEL_RANGE + 1)); // Includes 0 and level_range
+    const target = enemy.level + roll * direction; 
+    enemy.health = getScaledValue(enemy.health, HEALTH_CHANGE, target, enemy.level); 
+    enemy.xp_reward = getScaledValue(enemy.xp_reward, XP_CHANGE, target, enemy.level); 
+    enemy.attack = getScaledValue(enemy.attack, ATTACK_CHANGE, target, enemy.level);
+  }
+  
+  return {...enemy, health_full: enemy.health, last_combat_event: "", current_animation: null};
+}
+
+
+function getScaledValue(baseValue, change_per_level, target_level, base_level) {
+  return baseValue * ( 1 + change_per_level * ( target_level - base_level )); 
+}
