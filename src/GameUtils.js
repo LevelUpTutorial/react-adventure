@@ -331,7 +331,7 @@ export function loadGameState(heroGender) {
 const HEALTH_CHANGE = 0.12; 
 const XP_CHANGE = 0.10; 
 const ATTACK_CHANGE = 0.08; 
-const LEVEL_RANGE = 2;
+const LEVEL_RANGE = 3; 
 /*
   Creates a new enemy instance out of its template. 
   Rolls a level +/- LEVEL_RANGE of its base level.
@@ -348,7 +348,7 @@ export function createActiveEnemy(encounter) {
     if (enemy.level > LEVEL_RANGE) {
       direction = Math.random() < 0.5 ? 1 : -1;
     }
-    const roll = Math.floor(Math.random() * (LEVEL_RANGE + 1)); // Includes 0 and level_range
+    const roll = weightedRoll(LEVEL_RANGE); // Roll will always be an integer
     const target = enemy.level + roll * direction; 
     enemy.health = getScaledValue(enemy.health, HEALTH_CHANGE, target, enemy.level); 
     enemy.xp_reward = getScaledValue(enemy.xp_reward, XP_CHANGE, target, enemy.level); 
@@ -357,7 +357,50 @@ export function createActiveEnemy(encounter) {
   
   return {...enemy, health_full: enemy.health, last_combat_event: "", current_animation: null};
 }
+/**
+ * Generates a weighted random roll between 0 and the specified levelRange, 
+ * favoring values closer to 0 (Gaussian-like distribution).
+ *
+ * @param {number} levelRange - The maximum range of the roll (inclusive).
+ * @returns {number} - A random integer between 0 and levelRange.
+ *
+ * The function creates a weight for each possible roll value based on an 
+ * exponential decay formula (higher weights for smaller values). It normalizes 
+ * these weights to probabilities that sum to 1, then uses a random value to 
+ * select a roll based on the cumulative probabilities.
+ *
+ * Example:
+ *   weightedRoll(2) might return:
+ *     0 (~68% chance)
+ *     1 (~27% chance)
+ *     2 (~5% chance)
+ *   For levelRange = 3, the likely outcomes and their probabilities:
+ *     Roll 0: ~57.1% chance
+ *     Roll 1: ~34.6% chance
+ *     Roll 2: ~7.7% chance
+ *     Roll 3: ~0.6% chance
+ */
+function weightedRoll(levelRange) {
+  const weights = [];
+  for (let i = 0; i <= levelRange; i++) {
+    // Higher weights for smaller values, exponential decay for larger values
+    weights.push(Math.exp(-i * i / 2));
+  }
+  // Normalize weights so they sum to 1
+  const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
+  const probabilities = weights.map(w => w / totalWeight);
 
+  // Select a roll using cumulative probabilities
+  const random = Math.random();
+  let cumulative = 0;
+  for (let i = 0; i < probabilities.length; i++) {
+    cumulative += probabilities[i];
+    if (random <= cumulative) {
+      return i; // Return the integer roll
+    }
+  }
+  return levelRange; // Fallback, though it shouldn't happen
+}
 
 function getScaledValue(baseValue, change_per_level, target_level, base_level) {
   return baseValue * ( 1 + change_per_level * ( target_level - base_level )); 
