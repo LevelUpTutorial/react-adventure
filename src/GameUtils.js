@@ -401,7 +401,11 @@ function weightedRoll(levelRange) {
   }
   return levelRange; // Fallback, though it shouldn't happen
 }
-
+/* 
+ * Scales a value depending on level
+ * and % per level to the next integer 
+ * that is dividable with 5. 
+ */
 function getScaledValue(baseValue, change_per_level, target_level, base_level) {
-  return baseValue * ( 1 + change_per_level * ( target_level - base_level )); 
+  return Math.round( baseValue * ( 1 + change_per_level * ( target_level - base_level ) ) / 5) * 5; 
 }
