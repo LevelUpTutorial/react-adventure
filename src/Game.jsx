@@ -12,7 +12,7 @@ import {combatCalculation, playSound, SND_SWORD_HIT,
         UPGRADE_CRIT_DAMAGE, UPGRADE_EVADE_CHANCE, UPGRADE_ATTACK_SPEED, 
         DAMAGE_INCREMENT, MAX_HEALTH_INCREMENT, CRIT_CHANCE_INCREMENT, 
         CRIT_DAMAGE_INCREMENT, EVADE_CHANCE_INCREMENT, ATTACK_SPEED_DECREASE, 
-        saveGameState, 
+        saveGameState, createActiveEnemy, 
        } from "./GameUtils.js";
 
 import PropTypes from "prop-types";
@@ -757,7 +757,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       hero = gameState.hero;
       hero.isInCombat = true;
       // create active enemy as copy from template 
-      gameState.active_enemy = {...encounter.enemy, health_full: encounter.enemy.health, last_combat_event: "", current_animation: null};
+      gameState.active_enemy = createActiveEnemy(encounter); 
       /* apply effects at the start of combat */ 
       applyEffects(onCombatStartEffects, gameState); 
     } else if (encounter.category === 'story') {
