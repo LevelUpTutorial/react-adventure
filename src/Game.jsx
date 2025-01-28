@@ -48,7 +48,7 @@ function Game({ heroName, gender, isGameRunning, savedGameState }) {
   const [newItem, setNewItem] = useState(null); 
   
   const updateGameState = () => {
-    setGameState((prevState) => handleGameState(prevState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades));
+    setGameState((prevState) => handleGameState(prevState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades, setShowLootPopup, setNewItem));
   };
 
   const currentTickDuration =
@@ -691,7 +691,7 @@ const onHitEffectsHero = [];
 const onCombatStartEffects = [];
 const onHitEffectsEnemy = [];
 /* Main Function to handle all In-game Event Logic */
-function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades) {
+function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades, setShowLootPopup, setNewItem) {
   const location = gameState.location;
   let {hero, active_enemy} = gameState;
   if (active_enemy) {
