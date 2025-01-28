@@ -902,7 +902,7 @@ function fireEffectSelectReverse(gameState) {
 }
 /* Ice Enchantment */ 
 const iceEC = 10; 
-const iceSlow = 400; 
+const iceSlow = 300; 
 const iceId = ID_ICE; 
 function iceEffectSelectApply(gameState) {
   console.log(`apply ice select`);
