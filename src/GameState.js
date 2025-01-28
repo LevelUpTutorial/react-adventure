@@ -1635,6 +1635,13 @@ class GameState {
         [UPGRADE_ATTACK_SPEED]: 0,
       },
       current_animation: null, 
+      armor: {
+        itemType: "Armor",
+        itemRarity: "common",
+        subRarity: "low", 
+        statDesc: "Damage Reduction", 
+        itemStat: 0,
+      },
     }
     this.location = location;
     this.compatability = GameState.COMPATABILITY; 
