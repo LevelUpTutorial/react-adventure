@@ -201,6 +201,7 @@ const handleActiveAttack = () => {
         <p>Attack: {gameState.hero.attack}{gameState.hero.upgradeCounts[UPGRADE_DAMAGE] >= GameState.UPGRADE_LIMITS[UPGRADE_DAMAGE] ? " (max)" : ""}</p>
         <p>Attack Cooldown: {gameState.hero.attack_speed / 1000}s{gameState.hero.upgradeCounts[UPGRADE_ATTACK_SPEED] >= GameState.UPGRADE_LIMITS[UPGRADE_ATTACK_SPEED] ? " (max)" : ""}</p>
         <p>Evade Chance: {gameState.hero.evade_chance}%{gameState.hero.upgradeCounts[UPGRADE_EVADE_CHANCE] >= GameState.UPGRADE_LIMITS[UPGRADE_EVADE_CHANCE] ? " (max)" : ""}</p>
+        <p>Damage Reduction: {gameState.hero.damage_reduction}%</p>
         <p>Crit Chance: {gameState.hero.crit_chance}%{gameState.hero.upgradeCounts[UPGRADE_CRIT_CHANCE] >= GameState.UPGRADE_LIMITS[UPGRADE_CRIT_CHANCE] ? " (max)" : ""}</p>
         <p>Crit Damage: {gameState.hero.crit_damage}%{gameState.hero.upgradeCounts[UPGRADE_CRIT_DAMAGE] >= GameState.UPGRADE_LIMITS[UPGRADE_CRIT_DAMAGE] ? " (max)" : ""}</p>
       </>
@@ -242,9 +243,17 @@ const handleActiveAttack = () => {
 
 // Handle equipping the new item
   const equipNewItem = () => {
-    setGameState((prev) => ({
-      ...prev
-    }));
+    setGameState((prev) => {
+      const hero = prev.hero;
+      if (newItem.itemType === 'Armor') {
+        hero.damage_reduction = hero.damage_reduction - hero.armor.itemStat + newItem.itemStat ; 
+        hero.armor = newItem; 
+      } else {
+        console.error(`unknown item type ${newItem.itemType}`);
+      }
+
+      return {...prev, hero}
+    );
     setShowLootPopup(false);
   };
 
