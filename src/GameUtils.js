@@ -480,3 +480,7 @@ export function getEnemyLoot(enemyLevel) {
     itemStat: itemStat,
   };
 }
+
+export function getItemImage(item) {
+  return '';
+}
