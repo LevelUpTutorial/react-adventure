@@ -43,6 +43,9 @@ function Game({ heroName, gender, isGameRunning, savedGameState }) {
   const [upgradeOptions, setUpgradeOptions] = useState([]);
   const [isUpgradePopupVisible, setUpgradePopupVisible] = useState(false);
   const [numChooseUpgrades, setNumChooseUpgrades] = useState(0); 
+
+  const [showLootPopup, setShowLootPopup] = useState(false); 
+  const [newItem, setNewItem] = useState(null); 
   
   const updateGameState = () => {
     setGameState((prevState) => handleGameState(prevState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades));
@@ -236,6 +239,19 @@ const handleActiveAttack = () => {
       </div>
     );
   }; 
+
+// Handle equipping the new item
+  const equipNewItem = () => {
+    setGameState((prev) => ({
+      ...prev
+    }));
+    setShowLootPopup(false);
+  };
+
+  // Handle keeping the old item
+  const keepOldItem = () => {
+    setShowLootPopup(false);
+  };
 
 useEffect(() => {
   if (numChooseUpgrades > 0) {
@@ -525,6 +541,14 @@ return (
           onChoose={handleUpgradeChoice}
         />
       )}
+      {/* Loot Popup Component */}
+      <LootPopup
+        show={showLootPopup}
+        currentItem={gameState.hero.armor}
+        newItem={newItem}
+        onEquip={equipNewItem}
+        onKeep={keepOldItem}
+      />
     </div>
   );
 }
@@ -698,6 +722,12 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       }
     } else {
       // Enemy died 
+      // Roll for Loot Drop 
+      const level = active_enemy.isElite ? active_enemy.level + 5 : active_enemy.level;
+      const loot = getEnemyLoot(level);
+      setNewItem(loot);
+      setShowLootPopup( loot ? true : false );
+      
       // execute enemy after function if he had one 
       if (active_enemy.runAfterKey) {
         console.log(`handleGameState try runAfterKey ${active_enemy.runAfterKey}`);
