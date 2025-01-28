@@ -1623,6 +1623,7 @@ class GameState {
       evade_chance: (gender === GameState.GENDER_MALE ? 10 : 20), 
       crit_chance: (gender === GameState.GENDER_MALE ? 36 : 16), 
       crit_damage: (gender === GameState.GENDER_MALE ? 200 : 100), 
+      damage_reduction: 0,
       last_combat_event: "", 
       image: (gender === GameState.GENDER_MALE ? this.IMG_HERO_MALE_NEUTRAL : this.IMG_HERO_FEMALE_NEUTRAL), 
       current_enchantment: ID_NONE,
