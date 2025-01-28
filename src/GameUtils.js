@@ -450,8 +450,10 @@ function getRarity(rarityChances) {
 }
 
 // Function to get an enemy's loot based on their level
-// TODO: Pity System for item after x kill
-// TODO: Pity System for legendaries 
+// Pity System for item after x kill
+// Pity System for legendaries 
+let itemPityCount = 0;
+let legendaryPityCount = 0;
 export function getEnemyLoot(enemyLevel) {
   // Determine which range the enemy level falls into
   const range = Object.keys(DROP_CHANCES).reverse().find(level => enemyLevel >= level);
@@ -460,10 +462,24 @@ export function getEnemyLoot(enemyLevel) {
   const { dropRate, rarity } = DROP_CHANCES[range];
 
   // Determine if an item drops
-  if (Math.random() > dropRate) return null;
+  if (itemPityCount < 5 && Math.random() > dropRate) {
+    // No Item dropped 
+    itemPityCount += 1; 
+    return null; 
+  } 
 
+  // Generate item drop 
+  itemPityCount = 0; 
   // Determine the rarity of the item
-  const itemRarity = getRarity(rarity);
+  let itemRarity = getRarity(rarity); 
+  // Check for legendary pity 
+  if (enemyLevel > 50 && 
+      !itemRarity === 'legendary' && 
+      !itemRarity === 'perfectLegendary' && 
+      legendaryPityCount >= 5) {
+    itemRarity = 'legendary'; 
+    legendaryPityCount = 0; 
+  }
 
   // Generate stats for the item based on rarity
   const statRange = STAT_RANGES[itemRarity];
