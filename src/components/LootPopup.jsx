@@ -1,4 +1,4 @@
-import { getItemImage } from './../GameUtilsjs';
+import { getItemImage } from './../GameUtils.js';
 
 const LootPopup = ({ show, currentItem, newItem, onEquip, onKeep }) => {
   if (!show) return null; // Don't render the popup if not visible
