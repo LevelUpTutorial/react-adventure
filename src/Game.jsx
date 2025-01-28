@@ -252,8 +252,8 @@ const handleActiveAttack = () => {
         console.error(`unknown item type ${newItem.itemType}`);
       }
 
-      return {...prev, hero}
-    );
+      return {...prev, hero}; 
+    } );
     setShowLootPopup(false);
   };
 
@@ -852,7 +852,8 @@ function performHeroAttack(gameState) {
 /* performs enemy attack */ 
 function performEnemyAttack(gameState, setCounterAttackActive) {
   const {hero, active_enemy} = gameState;
-  const dmg = combatCalculation(active_enemy, hero); 
+  let dmg = combatCalculation(active_enemy, hero); 
+
   // evade ?
   if (dmg < 0) {
     // console.log('Attack evaded!');
@@ -869,6 +870,8 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
       active_enemy.last_combat_event = `dealt ${dmg}`; 
       triggerEnemyAttackAnimation(gameState, battleAnimationDuration, false);
     }
+    // apply damage reduction
+    dmg = dmg * ( 1 - hero.damage_reduction );
     hero.health -= dmg; // No evade, apply damage
     
     setCounterAttackActive(false); // Disable Counter Attack button
