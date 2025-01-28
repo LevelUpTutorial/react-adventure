@@ -478,5 +478,5 @@ export function getEnemyLoot(enemyLevel) {
     subRarity: subRarity, 
     statDesc: "Damage Reduction", 
     itemStat: itemStat,
-  };
+  }
 }
