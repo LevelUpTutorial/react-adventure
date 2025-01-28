@@ -48,7 +48,7 @@ function Game({ heroName, gender, isGameRunning, savedGameState }) {
   const [newItem, setNewItem] = useState(null); 
   
   const updateGameState = () => {
-    setGameState((prevState) => handleGameState(prevState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades, setShowLootPopup, setNewItem));
+    setGameState((prevState) => handleGameState(prevState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades, setNewItem));
   };
 
   const currentTickDuration =
@@ -252,15 +252,17 @@ const handleActiveAttack = () => {
       } else {
         console.error(`unknown item type ${newItem.itemType}`);
       }
-
+      
       return {...prev, hero}; 
     } );
-    setShowLootPopup(false);
+    setNewItem(null);
+    //setShowLootPopup(false);
   };
 
   // Handle keeping the old item
   const keepOldItem = () => {
-    setShowLootPopup(false);
+    setNewItem(null);
+    //setShowLootPopup(false);
   };
 
 useEffect(() => {
@@ -273,6 +275,12 @@ useEffect(() => {
     setGameState({ ...gameState }); 
   }
 }, [numChooseUpgrades]);
+
+useEffect(() => {
+  setShowLootPopup(newItem ? true : false);
+  gameState.hero.isInDialog = showLootPopup; 
+  setGameState({ ...gameState });
+}, [newItem]); 
   
 return (
   <div className="d-flex flex-column mb-3 border border-2 rounded shadow" style={{ backgroundColor: "rgba(255, 255, 255, 0.70)" }}>
@@ -691,7 +699,7 @@ const onHitEffectsHero = [];
 const onCombatStartEffects = [];
 const onHitEffectsEnemy = [];
 /* Main Function to handle all In-game Event Logic */
-function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades, setShowLootPopup, setNewItem) {
+function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades, setNewItem) {
   const location = gameState.location;
   let {hero, active_enemy} = gameState;
   if (active_enemy) {
@@ -736,7 +744,6 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       const level = active_enemy.isElite ? active_enemy.level + 5 : active_enemy.level;
       const loot = getEnemyLoot(level);
       setNewItem(loot);
-      setShowLootPopup( loot ? true : false );
       
       // execute enemy after function if he had one 
       if (active_enemy.runAfterKey) {
