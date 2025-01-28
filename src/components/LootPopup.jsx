@@ -1,3 +1,5 @@
+import { getItemImage } from './GameUtilsjs';
+
 const LootPopup = ({ show, currentItem, newItem, onEquip, onKeep }) => {
   if (!show) return null; // Don't render the popup if not visible
 
@@ -19,7 +21,7 @@ const LootPopup = ({ show, currentItem, newItem, onEquip, onKeep }) => {
             <div className="text-center">
               <h5>equipped</h5>
               <img
-                src={currentItem.image}
+                src={getItemImage(currentItem)}
                 alt="Current Item"
                 className="img-fluid"
                 style={{ maxWidth: "100px" }}
@@ -36,7 +38,7 @@ const LootPopup = ({ show, currentItem, newItem, onEquip, onKeep }) => {
             <div className="text-center">
               <h5>New {newItem.itemType}</h5>
               <img
-                src={newItem.image}
+                src={getItemImage(newItem)}
                 alt="New Item"
                 className="img-fluid"
                 style={{ maxWidth: "100px" }}
