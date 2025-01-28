@@ -885,8 +885,8 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
  * Functions for Enchantment and Skill Effects 
  */ 
 /* Fire Enchantment */ 
-const fireCC = 20; 
-const fireCD = 50; 
+const fireCC = 25; 
+const fireCD = 75; 
 const fireId = ID_FIRE; 
 function fireEffectSelectApply(gameState) {
   console.log(`apply fire select`);
@@ -901,8 +901,8 @@ function fireEffectSelectReverse(gameState) {
   return gameState; 
 }
 /* Ice Enchantment */ 
-const iceEC = 20;
-const iceSlow = 200; 
+const iceEC = 10; 
+const iceSlow = 400; 
 const iceId = ID_ICE; 
 function iceEffectSelectApply(gameState) {
   console.log(`apply ice select`);
