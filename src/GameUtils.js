@@ -409,3 +409,74 @@ function weightedRoll(levelRange) {
 function getScaledValue(baseValue, change_per_level, target_level, base_level) {
   return Math.round( baseValue * ( 1 + change_per_level * ( target_level - base_level ) ) / 5) * 5; 
 }
+
+// Constants for item drop probabilities and configurations
+const DROP_CHANCES = {
+  1: { dropRate: 0.10, rarity: { common: 0.9, uncommon: 0.1 } },
+  11: { dropRate: 0.15, rarity: { common: 0.689, uncommon: 0.29, rare: 0.02, epic: 0.001 } },
+  21: { dropRate: 0.20, rarity: { common: 0.1, uncommon: 0.8, rare: 0.1, epic: 0.01 } },
+  31: { dropRate: 0.20, rarity: { uncommon: 0.6, rare: 0.34, epic: 0.05, legendary: 0.01 } },
+  41: { dropRate: 0.25, rarity: { uncommon: 0.1, rare: 0.7, epic: 0.17, legendary: 0.03 } },
+  51: { dropRate: 0.25, rarity: { rare: 0.5, epic: 0.35, legendary: 0.15 } },
+  61: { dropRate: 0.30, rarity: { rare: 0.1, epic: 0.7, legendary: 0.198, perfectLegendary: 0.002 } },
+};
+
+// Armor Stat Ranges by Rarity
+const STAT_RANGES = {
+  common: { min: 1, max: 5 },
+  uncommon: { min: 5, max: 12 },
+  rare: { min: 10, max: 25 },
+  epic: { min: 23, max: 35 },
+  legendary: { min: 33, max: 48 },
+  perfectLegendary: { min: 49, max: 50 },
+};
+
+// Function to generate a random number between min and max
+function randomInRange(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+// Function to determine the rarity of the item
+function getRarity(rarityChances) {
+  const random = Math.random();
+  let cumulative = 0;
+  for (const [rarity, chance] of Object.entries(rarityChances)) {
+    cumulative += chance;
+    if (random <= cumulative) {
+      return rarity;
+    }
+  }
+  return null; // Should never reach here if probabilities sum to 1
+}
+
+// Function to get an enemy's loot based on their level
+// TODO: Pity System for item after x kill
+// TODO: Pity System for legendaries 
+export function getEnemyLoot(enemyLevel) {
+  // Determine which range the enemy level falls into
+  const range = Object.keys(DROP_CHANCES).reverse().find(level => enemyLevel >= level);
+  if (!range) return null; // No loot table for this level
+
+  const { dropRate, rarity } = DROP_CHANCES[range];
+
+  // Determine if an item drops
+  if (Math.random() > dropRate) return null;
+
+  // Determine the rarity of the item
+  const itemRarity = getRarity(rarity);
+
+  // Generate stats for the item based on rarity
+  const statRange = STAT_RANGES[itemRarity];
+  const itemStat = Math.round(randomInRange(statRange.min, statRange.max) * 100) / 100;
+  const midPoint = statRange.min + (statRange.max - statRange.min) / 2; 
+  const subRarity = itemStat >= midPoint ? 'high' : 'low' };
+
+  // Return the item details
+  return {
+    itemType: "Armor",
+    itemRarity: itemRarity,
+    subRarity: subRarity, 
+    statDesc: "Damage Reduction", 
+    itemStat: itemStat,
+  };
+}
