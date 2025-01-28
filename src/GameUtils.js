@@ -469,7 +469,7 @@ export function getEnemyLoot(enemyLevel) {
   const statRange = STAT_RANGES[itemRarity];
   const itemStat = Math.round(randomInRange(statRange.min, statRange.max) * 100) / 100;
   const midPoint = statRange.min + (statRange.max - statRange.min) / 2; 
-  const subRarity = itemStat >= midPoint ? 'high' : 'low' };
+  const subRarity = itemStat >= midPoint ? 'high' : 'low' ;
 
   // Return the item details
   return {
