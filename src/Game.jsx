@@ -879,7 +879,7 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
       triggerEnemyAttackAnimation(gameState, battleAnimationDuration, false);
     }
     // apply damage reduction
-    dmg = dmg * ( 1 - hero.damage_reduction );
+    dmg = dmg * ( 1 - hero.damage_reduction / 100);
     hero.health -= dmg; // No evade, apply damage
     
     setCounterAttackActive(false); // Disable Counter Attack button
