@@ -4,15 +4,15 @@ import GameState from './GameState.js';
 /* Hero Gear Tier 0 */ 
 import heroFemaleNeutral from './assets/images/hero/hero_female_neutral.jpg';
 import heroMaleNeutral from './assets/images/hero/hero_male_neutral.jpg';
-import heroFemaleCombatT0None from './assets/images/hero/hero_female_combat.png';
-import heroMaleCombatT0None from './assets/images/hero/hero_male_combat.png';
+/*import heroFemaleCombatT0None from './assets/images/hero/hero_female_combat.png';
+import heroMaleCombatT0None from './assets/images/hero/hero_male_combat.png';*/
 /* Hero Gear Tier 1 */
-import heroFemaleCombatT1Fire from './assets/images/hero/hero_female_combat_fire_t1.webp';
+/*import heroFemaleCombatT1Fire from './assets/images/hero/hero_female_combat_fire_t1.webp';
 import heroFemaleCombatT1Ice from './assets/images/hero/hero_female_combat_ice_t1.webp';
 import heroFemaleCombatT1Lightning from './assets/images/hero/hero_female_combat_lightning_t1.webp';
 import heroMaleCombatT1Fire from './assets/images/hero/hero_male_combat_fire_t1.webp';
 import heroMaleCombatT1Ice from './assets/images/hero/hero_male_combat_ice_t1.webp';
-import heroMaleCombatT1Lightning from './assets/images/hero/hero_male_combat_lightning_t1.webp'; 
+import heroMaleCombatT1Lightning from './assets/images/hero/hero_male_combat_lightning_t1.webp'; */
 /* Hero Gear Tier 2 */
 /* Hero Gear Tier 3 */
 /* New Hero Gear */
@@ -75,6 +75,49 @@ import chestLegendary from './assets/images/items/chest_legendary.webp';
 import chestPerfectLegendary from './assets/images/items/chest_perfectLegendary.webp';
 import chestRare from './assets/images/items/chest_rare.webp';
 import chestUncommon from './assets/images/items/chest_uncommon.webp';
+
+const HERO_IMAGES = {
+  maleCombatCommonFire,
+  maleCombatCommonIce,
+  maleCombatCommonLightning,
+  maleCombatCommonNone,
+  maleCombatEpicFire,
+  maleCombatEpicIce,
+  maleCombatEpicLightning,
+  maleCombatEpicNone,
+  maleCombatLegendaryFire,
+  maleCombatLegendaryIce,
+  maleCombatLegendaryLightning,
+  maleCombatLegendaryNone,
+  maleCombatRareFire,
+  maleCombatRareIce,
+  maleCombatRareLightning,
+  maleCombatRareNone,
+  maleCombatUncommonFire,
+  maleCombatUncommonIce,
+  maleCombatUncommonLightning,
+  maleCombatUncommonNone,
+  femaleCombatCommonFire,
+  femaleCombatCommonIce,
+  femaleCombatCommonLightning,
+  femaleCombatCommonNone,
+  femaleCombatEpicFire,
+  femaleCombatEpicIce,
+  femaleCombatEpicLightning,
+  femaleCombatEpicNone,
+  femaleCombatLegendaryFire,
+  femaleCombatLegendaryIce,
+  femaleCombatLegendaryLightning,
+  femaleCombatLegendaryNone,
+  femaleCombatRareFire,
+  femaleCombatRareIce,
+  femaleCombatRareLightning,
+  femaleCombatRareNone,
+  femaleCombatUncommonFire,
+  femaleCombatUncommonIce,
+  femaleCombatUncommonLightning,
+  femaleCombatUncommonNone,
+};
 
 export const SND_SWORD_HIT = swordHit;
 
@@ -308,8 +351,8 @@ export function getHeroImages(gameState) {
   const neutralImageKey = `hero${capitalizeFirstLetter(gender)}Neutral`; // Assuming neutral images follow this pattern
 
   return {
-    IMG_HERO_COMBAT: this[combatImageKey], // Access imported image variable dynamically
-    IMG_HERO_NEUTRAL: this[neutralImageKey], // Access neutral image variable dynamically
+    IMG_HERO_COMBAT: HERO_IMAGES[combatImageKey], // Access imported image variable dynamically
+    IMG_HERO_NEUTRAL: HERO_IMAGES[neutralImageKey], // Access neutral image variable dynamically
   };
 }
 
