@@ -1435,9 +1435,9 @@ class GameState {
   static STORY_DIALOG_TUTORIAL1 = {
   title: 'Tutorial: Combat Basics',
   content: [
-    'How to Attack: Hit the <span class="fw-bold text-danger">Attack Button</span> when your cooldown is on its <span class="fw-bold text-danger">red mark</span>!',
+    '<span class="fw-bold text-danger">How to Attack</span>: Hit the <span class="fw-bold text-danger">Attack Button</span> when your cooldown is on its <span class="fw-bold text-danger">red mark</span>!',
     '',
-    'Counter Attack: Your hero dodges attacks based on their <span class="fw-bold text-success">Evade Chance</span>. Hit the <span class="fw-bold text-success">Counter Attack Button</span> before your enemy has time to react!',
+    '<span class="fw-bold text-success">Counter Attack</span>: Your hero dodges attacks based on their <span class="fw-bold text-success">Evade Chance</span>. Hit the <span class="fw-bold text-success">Counter Attack Button</span> before your enemy has time to react!',
     '',
     '<span class="fw-bold text-primary">Combo Bonus</span>: Attack consecutively without missing the timing to <span class="fw-bold text-primary">gain bonus Damage</span>!',
   ],
