@@ -92,7 +92,7 @@ const LootPopup = ({ show, currentItem, newItem, onEquip, onKeep }) => {
                 style={{ maxWidth: "100px", borderWidth: "4px", borderStyle: "solid" }}
               />
               <p>
-                <strong>Rarity:</strong> <span className={`${newRarityClass}`}{newItem.itemRarity}</span>
+                <strong>Rarity:</strong> <span className={`${newRarityClass}`}>{newItem.itemRarity}</span>
               </p>
               <p>
                 <strong>{newItem.statDesc}:</strong> {newItem.itemStat}% [{newIStatRange.min}% - {newIStatRange.max}%]
