@@ -2,7 +2,9 @@ import { getItemImage } from './../GameUtils.js';
 
 const LootPopup = ({ show, currentItem, newItem, onEquip, onKeep }) => {
   if (!show) return null; // Don't render the popup if not visible
-
+  const newBetter = newItem.itemStat > currentItem.itemStat;
+  const oldBetter = currentItem.itemStat > newItem.itemStat;
+  
   return (
     <div className="modal show d-block" tabIndex="-1">
       <div className="modal-dialog modal-lg">
@@ -52,11 +54,17 @@ const LootPopup = ({ show, currentItem, newItem, onEquip, onKeep }) => {
             </div>
           </div>
           <div className="modal-footer">
-            <button className="btn btn-success" onClick={onKeep}>
-              Keep Equipped
+            <button 
+              className={`btn ${ newBetter ? 'btn-secondary' : 'btn-success' } `} 
+              onClick={onKeep}
+              >
+                Keep Equipped
             </button>
-            <button className="btn btn-success" onClick={onEquip}>
-              Equip New {newItem.itemType}
+            <button 
+              className={`btn ${ oldBetter ? 'btn-secondary' : 'btn-success' } `} 
+              onClick={onEquip} 
+              >
+                Equip New {newItem.itemType}
             </button>
           </div>
         </div>
