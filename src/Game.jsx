@@ -269,7 +269,6 @@ useEffect(() => {
   if (numChooseUpgrades > 0) {
     gameState.hero.isInDialog = true; 
     setGameState({ ...gameState }); 
-    playConfettiFirework(); 
     onLevelUp(setUpgradeOptions, setUpgradePopupVisible, gameState.hero); 
   } else if (newItem) {
     setShowLootPopup(true);
@@ -756,6 +755,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
           hero.xp = hero.xp + active_enemy.xp_reward - hero.xp_to_levelup; 
           hero.xp_to_levelup = calculateXpToLevelUp(hero.level); 
           // trigger level up popup
+          playConfettiFirework(); 
           setNumChooseUpgrades(UPGRADE_PER_LEVELUP);
           gameState.hero = hero; 
         } else {
