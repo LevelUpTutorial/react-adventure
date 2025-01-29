@@ -558,5 +558,43 @@ export function getEnemyLoot(enemyLevel) {
 }
 
 export function getItemImage(item) {
-  return '';
+  switch (item.itemType) {
+    case 'Armor':
+      switch (item.itemRarity) {
+        case 'common':
+          return item.subRarity === 'high' ? armorCommonHigh : armorCommonLow;
+        case 'uncommon':
+          return item.subRarity === 'high' ? armorUncommonHigh : armorUncommonLow;
+        case 'rare':
+          return item.subRarity === 'high' ? armorRareHigh : armorRareLow;
+        case 'epic':
+          return item.subRarity === 'high' ? armorEpicHigh : armorEpicLow;
+        case 'legendary':
+          return item.subRarity === 'high' ? armorLegendaryHigh : armorLegendaryLow;
+        case 'perfectLegendary':
+          return armorPerfectLegendaryHigh;
+        default:
+          return '';
+      }
+    case 'Chest':
+      switch (item.itemRarity) {
+        case 'common':
+          return chestCommon;
+        case 'uncommon':
+          return chestUncommon;
+        case 'rare':
+          return chestRare;
+        case 'epic':
+          return chestEpic;
+        case 'legendary':
+          return chestLegendary;
+        case 'perfectLegendary':
+          return chestPerfectLegendary;
+        default:
+          return '';
+      }
+    // Add more cases for other item types if needed
+    default:
+      return '';
+  }
 }
