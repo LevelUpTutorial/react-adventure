@@ -2,8 +2,8 @@ import { getItemImage } from './../GameUtils.js';
 
 const LootPopup = ({ show, currentItem, newItem, onEquip, onKeep }) => {
   if (!show) return null; // Don't render the popup if not visible
-  const newBetter = newItem.itemStat > currentItem.itemStat;
-  const oldBetter = currentItem.itemStat > newItem.itemStat;
+  const newBetter = newItem && newItem.itemStat > currentItem.itemStat;
+  const oldBetter = newItem && currentItem.itemStat > newItem.itemStat;
   
   return (
     <div className="modal show d-block" tabIndex="-1">
