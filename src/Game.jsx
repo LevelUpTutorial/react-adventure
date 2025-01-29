@@ -197,7 +197,7 @@ const handleActiveAttack = () => {
     return (
       <>
         <p>Level: {gameState.hero.level}{gameState.hero.level >= GameState.MAX_LEVEL ? " (max)" : ""}</p>
-        <p>Exp: {gameState.hero.xp} / {gameState.hero.xp_to_levelup}</p>
+        {/*<p>Exp: {gameState.hero.xp} / {gameState.hero.xp_to_levelup}</p>*/}
         <p>Health: {gameState.hero.health}{gameState.hero.upgradeCounts[UPGRADE_MAX_HEALTH] >= GameState.UPGRADE_LIMITS[UPGRADE_MAX_HEALTH] ? " (max)" : ""}</p>
         <p>Attack: {gameState.hero.attack}{gameState.hero.upgradeCounts[UPGRADE_DAMAGE] >= GameState.UPGRADE_LIMITS[UPGRADE_DAMAGE] ? " (max)" : ""}</p>
         <p>Attack Cooldown: {gameState.hero.attack_speed / 1000}s{gameState.hero.upgradeCounts[UPGRADE_ATTACK_SPEED] >= GameState.UPGRADE_LIMITS[UPGRADE_ATTACK_SPEED] ? " (max)" : ""}</p>
@@ -243,44 +243,43 @@ const handleActiveAttack = () => {
   }; 
 
 // Handle equipping the new item
-  const equipNewItem = () => {
-    setGameState((prev) => {
-      const hero = prev.hero;
-      if (newItem.itemType === 'Armor') {
-        hero.damage_reduction = hero.damage_reduction - hero.armor.itemStat + newItem.itemStat ; 
-        hero.armor = newItem; 
-      } else {
-        console.error(`unknown item type ${newItem.itemType}`);
-      }
+const equipNewItem = () => {
+  setGameState((prev) => {
+    const hero = prev.hero;
+    if (newItem.itemType === 'Armor') {
+      hero.damage_reduction = hero.damage_reduction - hero.armor.itemStat + newItem.itemStat ; 
+      hero.armor = newItem; 
+    } else {
+      console.error(`unknown item type ${newItem.itemType}`);
+    }
       
-      return {...prev, hero}; 
-    } );
-    setNewItem(null);
-    //setShowLootPopup(false);
-  };
+    return {...prev, hero}; 
+  } );
 
-  // Handle keeping the old item
-  const keepOldItem = () => {
-    setNewItem(null);
-    //setShowLootPopup(false);
-  };
+  setHeroImages(gameState); 
+  setNewItem(null);
+};
+
+// Handle keeping the old item
+const keepOldItem = () => {
+  setNewItem(null);
+};
 
 useEffect(() => {
   if (numChooseUpgrades > 0) {
     gameState.hero.isInDialog = true; 
     setGameState({ ...gameState }); 
+    playConfettiFirework(); 
     onLevelUp(setUpgradeOptions, setUpgradePopupVisible, gameState.hero); 
+  } else if (newItem) {
+    setShowLootPopup(true);
+    gameState.hero.isInDialog = true; 
+    setGameState({ ...gameState });
   } else {
     gameState.hero.isInDialog = false; 
     setGameState({ ...gameState }); 
   }
-}, [numChooseUpgrades]);
-
-useEffect(() => {
-  setShowLootPopup(newItem ? true : false);
-  gameState.hero.isInDialog = showLootPopup; 
-  setGameState({ ...gameState });
-}, [newItem]); 
+}, [numChooseUpgrades, newItem]);
   
 return (
   <div className="d-flex flex-column mb-3 border border-2 rounded shadow" style={{ backgroundColor: "rgba(255, 255, 255, 0.70)" }}>
@@ -758,9 +757,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
           hero.xp_to_levelup = calculateXpToLevelUp(hero.level); 
           // trigger level up popup
           setNumChooseUpgrades(UPGRADE_PER_LEVELUP);
-          playConfettiFirework(); 
           gameState.hero = hero; 
-          setHeroImages(gameState); 
         } else {
           hero.xp = hero.xp_to_levelup; // Cap XP at max level
         }
