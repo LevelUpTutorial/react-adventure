@@ -14,6 +14,7 @@ import {combatCalculation, playSound, SND_SWORD_HIT,
         DAMAGE_INCREMENT, MAX_HEALTH_INCREMENT, CRIT_CHANCE_INCREMENT, 
         CRIT_DAMAGE_INCREMENT, EVADE_CHANCE_INCREMENT, ATTACK_SPEED_DECREASE, 
         saveGameState, createActiveEnemy, getEnemyLoot, getItemImage, 
+        getHeroImages. 
        } from "./GameUtils.js";
 
 import PropTypes from "prop-types";
@@ -719,7 +720,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
   
   // handle Combat
   if (hero.isInCombat) {
-    hero.image = (hero.gender === GameState.GENDER_MALE ? gameState.IMG_HERO_MALE_COMBAT : gameState.IMG_HERO_FEMALE_COMBAT);
+    hero.image = getHeroImages(gameState).IMG_HERO_COMBAT; 
     if (hero.attack_cooldown <= 0) {
       /* try disable Auto combat */
       //gameState = performHeroAttack(gameState); 
@@ -771,7 +772,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       // Hero reset 
       gameState = handleResetHeroControl({ ...gameState, hero}); 
       hero = gameState.hero; 
-      hero.image = (hero.gender === GameState.GENDER_MALE ? gameState.IMG_HERO_MALE_NEUTRAL : gameState.IMG_HERO_FEMALE_NEUTRAL);
+      hero.image = getHeroImages(gameState).IMG_HERO_NEUTRAL;
       setCounterAttackActive(false); // Disable button on victory
     }
 
@@ -812,8 +813,8 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       gameState = handleResetHeroControl(gameState);
       hero = gameState.hero;
       hero.isInDialog = true;
-      hero.image = (hero.gender === GameState.GENDER_MALE ? gameState.IMG_HERO_MALE_NEUTRAL : gameState.IMG_HERO_FEMALE_NEUTRAL);
-
+      hero.image = getHeroImages(gameState).IMG_HERO_COMBAT;
+      
       setStoryEvent(encounter.dialog); // Set the story event
       setStoryDialogOpen(true); // Open the dialog
     } else {
