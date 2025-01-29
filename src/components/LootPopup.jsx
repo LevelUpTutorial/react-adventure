@@ -13,36 +13,44 @@ const LootPopup = ({ show, currentItem, newItem, onEquip, onKeep }) => {
       common: {
         text: "text-secondary",
         bg: "bg-secondary",
+        border: "border-secondary",
       },
       uncommon: {
         text: "text-success",
         bg: "bg-success",
+        border: "border-success",
       },
       rare: {
         text: "text-primary",
         bg: "bg-primary",
+        border: "border-primary",
       },
       epic: {
         text: "text-purple",
         bg: "bg-purple",
+        border: "border-purple",
       },
       legendary: {
         text: "text-dark-orange",
         bg: "bg-dark-orange",
+        border: "border-dark-orange",
       },
       perfectLegendary: {
         text: "text-dark-orange",
         bg: "bg-dark-orange",
+        border: "border-dark-orange",
       },
     };
-    return classes[rarity] ? classes[rarity][type] : "text-muted bg-light";
+    return classes[rarity] ? classes[rarity][type] : "text-muted bg-light border-muted";
   };
 
   // Rarity-based class
   const oldRarityClass = getRarityClass(currentItem.itemRarity, "text");
   const newRarityClass = getRarityClass(newItem.itemRarity, "text");
   const newRarityBgClass = getRarityClass(newItem.itemRarity, "bg");
- 
+  const oldRarityBdClass = getRarityClass(currentItem.itemRarity, "border");
+  const newRarityBdClass = getRarityClass(newItem.itemRarity, "border");
+  
   return (
     <div className="modal show d-block" tabIndex="-1">
       <div className="modal-dialog modal-lg">
@@ -63,8 +71,8 @@ const LootPopup = ({ show, currentItem, newItem, onEquip, onKeep }) => {
               <img
                 src={getItemImage(currentItem)}
                 alt="Current Item"
-                className="img-fluid"
-                style={{ maxWidth: "100px" }}
+                className={`img-fluid mb-3 rounded ${oldRarityBdClass}`}
+                style={{ maxWidth: "100px", borderWidth: "4px", borderStyle: "solid" }}
               />
               <p>
                 <strong>Rarity:</strong> <span className={`${oldRarityClass}`}>{currentItem.itemRarity}</span>
@@ -80,8 +88,8 @@ const LootPopup = ({ show, currentItem, newItem, onEquip, onKeep }) => {
               <img
                 src={getItemImage(newItem)}
                 alt="New Item"
-                className="img-fluid"
-                style={{ maxWidth: "100px" }}
+                className={`img-fluid mb-3 rounded ${newRarityBdClass}`}
+                style={{ maxWidth: "100px", borderWidth: "4px", borderStyle: "solid" }}
               />
               <p>
                 <strong>Rarity:</strong> <span className={`${newRarityClass}`}{newItem.itemRarity}</span>
