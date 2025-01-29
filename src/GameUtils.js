@@ -281,36 +281,42 @@ export const ID_LIGHTNING = 'Lightning';
   gender, level, enchantment for neutral and combat 
 */
 export function setHeroImages(gameState) {
+  const {IMG_HERO_COMBAT, IMG_HERO_NEUTRAL} = getHeroImages(gameState); 
   const hero = gameState.hero; 
-  const enc_id = hero.current_enchantment; 
+  
   if (hero.gender === GameState.GENDER_MALE) {
-    gameState.IMG_HERO_MALE_NEUTRAL = heroMaleNeutral;
-    if (enc_id === ID_NONE) {
-      gameState.IMG_HERO_MALE_COMBAT = heroMaleCombatT0None; 
-    } else if (enc_id === ID_FIRE) {
-      gameState.IMG_HERO_MALE_COMBAT = heroMaleCombatT1Fire;
-    } else if (enc_id === ID_ICE) {
-      gameState.IMG_HERO_MALE_COMBAT = heroMaleCombatT1Ice;
-    } else if (enc_id === ID_LIGHTNING) {
-      gameState.IMG_HERO_MALE_COMBAT = heroMaleCombatT1Lightning;
-    } else {
-      console.error(`unknown enchantment_id ${enc_id}`);
-    }
+    // Male Hero
+    gameState.IMG_HERO_MALE_NEUTRAL = IMG_HERO_NEUTRAL; 
+    gameState.IMG_HERO_MALE_COMBAT = IMG_HERO_COMBAT; 
   } else {
     // Female Hero 
-    gameState.IMG_HERO_FEMALE_NEUTRAL = heroFemaleNeutral;
-    if (enc_id === ID_NONE) {
-      gameState.IMG_HERO_FEMALE_COMBAT = heroFemaleCombatT0None; 
-    } else if (enc_id === ID_FIRE) {
-      gameState.IMG_HERO_FEMALE_COMBAT = heroFemaleCombatT1Fire;
-    } else if (enc_id === ID_ICE) {
-      gameState.IMG_HERO_FEMALE_COMBAT = heroFemaleCombatT1Ice;
-    } else if (enc_id === ID_LIGHTNING) {
-      gameState.IMG_HERO_FEMALE_COMBAT = heroFemaleCombatT1Lightning;
-    } else {
-      console.error(`unknown enchantment_id ${enc_id}`);
-    }
+    gameState.IMG_HERO_FEMALE_NEUTRAL = IMG_HERO_NEUTRAL;
+    gameState.IMG_HERO_FEMALE_COMBAT = IMG_HERO_COMBAT;
   }
+}
+/* Gets Hero Images dynamically, must follow naming pattern! */
+export function getHeroImages(gameState) {
+  const { hero } = gameState;
+
+  // Ensure valid values
+  const gender = hero.gender; 
+  const itemRarity = hero.armor.itemRarity === 'perfectLegendary' ? 'legendary' : hero.armor.itemRarity ; 
+  const currentEnchantment = hero.current_enchantment;
+
+  // Construct the variable name dynamically
+  const combatImageKey = `${gender}Combat${capitalizeFirstLetter(itemRarity)}${capitalizeFirstLetter(currentEnchantment)}`;
+  const neutralImageKey = `hero${capitalizeFirstLetter(gender)}Neutral`; // Assuming neutral images follow this pattern
+
+  return {
+    IMG_HERO_COMBAT: GameUtils[combatImageKey], // Access imported image variable dynamically
+    IMG_HERO_NEUTRAL: GameUtils[neutralImageKey], // Access neutral image variable dynamically
+  };
+}
+
+// Helper function to capitalize first letter of rarity/enchantment
+function capitalizeFirstLetter(string) {
+  if (!string) return "";
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 /*
