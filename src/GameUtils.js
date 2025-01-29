@@ -15,6 +15,66 @@ import heroMaleCombatT1Ice from './assets/images/hero/hero_male_combat_ice_t1.we
 import heroMaleCombatT1Lightning from './assets/images/hero/hero_male_combat_lightning_t1.webp'; 
 /* Hero Gear Tier 2 */
 /* Hero Gear Tier 3 */
+/* New Hero Gear */
+import maleCombatCommonFire from './assets/images/hero/male_combat_common_fire.webp';
+import maleCombatCommonIce from './assets/images/hero/male_combat_common_ice.webp';
+import maleCombatCommonLightning from './assets/images/hero/male_combat_common_lightning.webp';
+import maleCombatCommonNone from './assets/images/hero/male_combat_common_none.webp';
+import maleCombatEpicFire from './assets/images/hero/male_combat_epic_fire.webp';
+import maleCombatEpicIce from './assets/images/hero/male_combat_epic_ice.webp';
+import maleCombatEpicLightning from './assets/images/hero/male_combat_epic_lightning.webp';
+import maleCombatEpicNone from './assets/images/hero/male_combat_epic_none.webp';
+import maleCombatLegendaryFire from './assets/images/hero/male_combat_legendary_fire.webp';
+import maleCombatLegendaryIce from './assets/images/hero/male_combat_legendary_ice.webp';
+import maleCombatLegendaryLightning from './assets/images/hero/male_combat_legendary_lightning.webp';
+import maleCombatLegendaryNone from './assets/images/hero/male_combat_legendary_none.webp';
+import maleCombatRareFire from './assets/images/hero/male_combat_rare_fire.webp';
+import maleCombatRareIce from './assets/images/hero/male_combat_rare_ice.webp';
+import maleCombatRareLightning from './assets/images/hero/male_combat_rare_lightning.webp';
+import maleCombatRareNone from './assets/images/hero/male_combat_rare_none.webp';
+import maleCombatUncommonFire from './assets/images/hero/male_combat_uncommon_fire.webp';
+import maleCombatUncommonIce from './assets/images/hero/male_combat_uncommon_ice.webp';
+import maleCombatUncommonLightning from './assets/images/hero/male_combat_uncommon_lightning.webp';
+import maleCombatUncommonNone from './assets/images/hero/male_combat_uncommon_none.webp';
+import femaleCombatCommonFire from './assets/images/hero/female_combat_common_fire.webp';
+import femaleCombatCommonIce from './assets/images/hero/female_combat_common_ice.webp';
+import femaleCombatCommonLightning from './assets/images/hero/female_combat_common_lightning.webp';
+import femaleCombatCommonNone from './assets/images/hero/female_combat_common_none.webp';
+import femaleCombatEpicFire from './assets/images/hero/female_combat_epic_fire.webp';
+import femaleCombatEpicIce from './assets/images/hero/female_combat_epic_ice.webp';
+import femaleCombatEpicLightning from './assets/images/hero/female_combat_epic_lightning.webp';
+import femaleCombatEpicNone from './assets/images/hero/female_combat_epic_none.webp';
+import femaleCombatLegendaryFire from './assets/images/hero/female_combat_legendary_fire.webp';
+import femaleCombatLegendaryIce from './assets/images/hero/female_combat_legendary_ice.webp';
+import femaleCombatLegendaryLightning from './assets/images/hero/female_combat_legendary_lightning.webp';
+import femaleCombatLegendaryNone from './assets/images/hero/female_combat_legendary_none.webp';
+import femaleCombatRareFire from './assets/images/hero/female_combat_rare_fire.webp';
+import femaleCombatRareIce from './assets/images/hero/female_combat_rare_ice.webp';
+import femaleCombatRareLightning from './assets/images/hero/female_combat_rare_lightning.webp';
+import femaleCombatRareNone from './assets/images/hero/female_combat_rare_none.webp';
+import femaleCombatUncommonFire from './assets/images/hero/female_combat_uncommon_fire.webp';
+import femaleCombatUncommonIce from './assets/images/hero/female_combat_uncommon_ice.webp';
+import femaleCombatUncommonLightning from './assets/images/hero/female_combat_uncommon_lightning.webp';
+import femaleCombatUncommonNone from './assets/images/hero/female_combat_uncommon_none.webp';
+/* Items Armor */ 
+import armorCommonHigh from './assets/images/items/armor_common_high.webp';
+import armorCommonLow from './assets/images/items/armor_common_low.webp';
+import armorEpicHigh from './assets/images/items/armor_epic_high.webp';
+import armorEpicLow from './assets/images/items/armor_epic_low.webp';
+import armorLegendaryHigh from './assets/images/items/armor_legendary_high.webp';
+import armorLegendaryLow from './assets/images/items/armor_legendary_low.webp';
+import armorPerfectLegendaryHigh from './assets/images/items/armor_perfectLegendary_high.webp';
+import armorRareHigh from './assets/images/items/armor_rare_high.webp';
+import armorRareLow from './assets/images/items/armor_rare_low.webp';
+import armorUncommonHigh from './assets/images/items/armor_uncommon_high.webp';
+import armorUncommonLow from './assets/images/items/armor_uncommon_low.webp';
+/* Items Loot Chests */
+import chestCommon from './assets/images/items/chest_common.webp';
+import chestEpic from './assets/images/items/chest_epic.webp';
+import chestLegendary from './assets/images/items/chest_legendary.webp';
+import chestPerfectLegendary from './assets/images/items/chest_perfectLegendary.webp';
+import chestRare from './assets/images/items/chest_rare.webp';
+import chestUncommon from './assets/images/items/chest_uncommon.webp';
 
 export const SND_SWORD_HIT = swordHit;
 
