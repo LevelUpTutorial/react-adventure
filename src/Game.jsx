@@ -257,11 +257,13 @@ const equipNewItem = () => {
   } );
 
   setHeroImages(gameState); 
+  setShowLootPopup(false);
   setNewItem(null);
 };
 
 // Handle keeping the old item
 const keepOldItem = () => {
+  setShowLootPopup(false);
   setNewItem(null);
 };
 
@@ -275,7 +277,6 @@ useEffect(() => {
     gameState.hero.isInDialog = true; 
     setGameState({ ...gameState });
   } else {
-    setShowLootPopup(false);
     gameState.hero.isInDialog = false; 
     setGameState({ ...gameState }); 
   }
