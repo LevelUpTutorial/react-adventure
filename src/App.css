@@ -1,17 +1,17 @@
 /* LootPopup.css */
 .text-purple {
-  color: #9b59b6; /* Purple */
+  color: #b611fa; /* Purple */
 }
 .bg-purple {
-  background-color: #9b59b6 !important; /* Purple Background */
+  background-color: #b611fa !important; /* Purple Background */
   color: #ffffff !important; /* Ensure white text for contrast */
 }
 
 .text-dark-orange {
-  color: #ff8c00; /* Dark Orange */
+  color: #f59016; /* Dark Orange */
 }
 .bg-dark-orange {
-  background-color: #ff8c00 !important; /* Dark Orange Background */
+  background-color: #f59016 !important; /* Dark Orange Background */
   color: #ffffff !important; /* Ensure white text for contrast */
 }
 
