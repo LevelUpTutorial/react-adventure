@@ -1435,11 +1435,11 @@ class GameState {
   static STORY_DIALOG_TUTORIAL1 = {
   title: 'Tutorial: Combat Basics',
   content: [
-    'How to Attack: Hit the "<span class="fw-bold text-primary">ATTACK</span>" button when your cooldown is on its <span class="text-danger fw-bold">red mark</span>!',
+    'How to Attack: Hit the [<span class="fw-bold text-danger">ATTACK</span>] button when your cooldown is on its <span class="fw-bold text-danger">red mark</span>!',
     '',
-    'Counter Attack: Your hero dodges attacks based on their <span class="text-decoration-underline text-info">EVADE CHANCE</span>. Hit the "<span class="fw-bold text-primary">COUNTER ATTACK</span>" button before your enemy has time to react!',
+    'Counter Attack: Your hero dodges attacks based on their <span class="fw-bold text-success">EVADE CHANCE</span>. Hit the [<span class="fw-bold text-success">COUNTER ATTACK</span>] button before your enemy has time to react!',
     '',
-    'Combo Bonus: Attack consecutively without missing the timing to <span class="fw-bold text-success">gain bonus damage</span>!',
+    '<span class="fw-bold text-warning">Combo Bonus</span>: Attack consecutively without missing the timing to <span class="fw-bold text-warning">gain bonus damage</span>!',
   ],
   background: '',
   completed: false,
@@ -1449,11 +1449,11 @@ class GameState {
 static STORY_DIALOG_TUTORIAL2 = {
   title: 'Tutorial: Weapon Enchantments',
   content: [
-    '<span class="fw-bold text-danger">Fire:</span> Bonus <span class="fw-bold text-warning">CRIT CHANCE</span> and <span class="fw-bold text-warning">CRIT DAMAGE</span>!',
+    '<span class="fw-bold text-danger">Fire:</span> Bonus <span class="fw-bold text-danger">CRIT CHANCE</span> and <span class="fw-bold text-danger">CRIT DAMAGE</span>!',
     '',
-    '<span class="fw-bold text-info">Ice:</span> Bonus <span class="text-decoration-underline text-info">EVADE CHANCE</span> and <span class="text-primary">SLOW</span> enemy attack speed!',
+    '<span class="fw-bold text-info">Ice:</span> Bonus <span class="fw-bold text-info">EVADE CHANCE</span> and <span class="fw-bold text-info">SLOW</span>s enemy attack speed!',
     '',
-    '<span class="fw-bold text-warning">Lightning:</span> Bonus <span class="fw-bold text-primary">ATTACK SPEED</span> and chance to <span class="fw-bold text-success">STUN</span> your enemy, which resets its attack cooldown!',
+    '<span class="fw-bold text-warning">Lightning:</span> Bonus <span class="fw-bold text-warning">ATTACK SPEED</span> and chance to <span class="fw-bold text-warning">STUN</span> your enemy, which resets its attack cooldown!',
     '',
     '<span class="fw-bold text-muted">None:</span> No Bonus. Pick if you want a bigger challenge!',
   ],
