@@ -77,6 +77,8 @@ import chestRare from './assets/images/items/chest_rare.webp';
 import chestUncommon from './assets/images/items/chest_uncommon.webp';
 
 const HERO_IMAGES = {
+  heroMaleNeutral, 
+  heroFemaleNeutral,
   maleCombatCommonFire,
   maleCombatCommonIce,
   maleCombatCommonLightning,
