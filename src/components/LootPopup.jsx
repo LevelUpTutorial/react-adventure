@@ -30,6 +30,10 @@ const LootPopup = ({ show, currentItem, newItem, onEquip, onKeep }) => {
         text: "text-dark-orange",
         bg: "bg-dark-orange",
       },
+      perfectLegendary: {
+        text: "text-dark-orange",
+        bg: "bg-dark-orange",
+      },
     };
     return classes[rarity] ? classes[rarity][type] : "text-muted bg-light";
   };
@@ -37,14 +41,13 @@ const LootPopup = ({ show, currentItem, newItem, onEquip, onKeep }) => {
   // Rarity-based class
   const oldRarityClass = getRarityClass(currentItem.itemRarity, "text");
   const newRarityClass = getRarityClass(newItem.itemRarity, "text");
-  const oldRarityBgClass = getRarityClass(currentItem.itemRarity, "text");
-  const newRarityBgClass = getRarityClass(newItem.itemRarity, "text");
+  const newRarityBgClass = getRarityClass(newItem.itemRarity, "bg");
  
   return (
     <div className="modal show d-block" tabIndex="-1">
       <div className="modal-dialog modal-lg">
         <div className="modal-content">
-          <div className="modal-header">
+          <div className={`modal-header ${newRarityBgClass}`}>
             <h5 className="modal-title">You found...</h5>
             <button
               type="button"
