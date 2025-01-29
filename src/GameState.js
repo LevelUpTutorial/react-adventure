@@ -1269,6 +1269,8 @@ class GameState {
     Mapping of story keys to functions that should be run after the story dialog closes 
   */
   static ON_CLOSE_STORY_REGISTRY = {
+    onClose_STORY_DIALOG_TUTORIAL1: (gameState) => {return},
+    onClose_STORY_DIALOG_TUTORIAL2: (gameState) => {return},
     onClose_STORY_DIALOG_ACT1_1: (gameState) => { 
       // Use a regular function to access 'this'
       // Find the entry with ID 'STORY_ACT1_1' and set its weight to 0
@@ -1430,6 +1432,36 @@ class GameState {
     onCloseKey: 'onClose_STORY_DIALOG_ACT1_SECRET',
   }
 
+  static STORY_DIALOG_TUTORIAL1 = {
+    title: 'Tutorial: Combat Basics',
+    content: [
+      'How to Attack: Hit the "ATTACK" button when your cooldown is on its red mark!',
+      '',
+      'Counter Attack: Your hero dodges attacks based on his/her EVADE CHANCE. Hit the "COUNTER ATTACK" button before your enemy has time to react!',
+      '',
+      'Combo Bonus: Attack consecutivly without missing the timing to gain bonus damage!',
+    ],
+    background: '',
+    completed: false,
+    onCloseKey: 'onClose_STORY_DIALOG_TUTORIAL1',
+  }
+
+  static STORY_DIALOG_TUTORIAL2 = {
+    title: 'Tutorial: Weapon Enchantments',
+    content: [
+      'Fire: Bonus CRIT CHANCE and CRIT DAMAGE!',
+      '',
+      'Ice: Bonus EVADE CHANCE and SLOW enemy attack speed!',
+      '',
+      'Lightning: Bonus ATTACK SPEED and chance to STUN your enemy, which resets its attack cooldown!', 
+      '',
+      'None: No Bonus. Pick if you want a bigger challenge!',
+    ],
+    background: '',
+    completed: false,
+    onCloseKey: 'onClose_STORY_DIALOG_TUTORIAL2',
+  }
+
   static STORY_DIALOG_DEFAULT_WEIGHT = 5;
   static ACT1_ENCOUNTERS = [
     { category: 'combat', id: 'WILD_BOAR', enemy: GameState.ENEMY_WILD_BOAR, weight: 50 },
@@ -1580,8 +1612,10 @@ class GameState {
   ];
 
   next_encounters = [
+    { category: 'story', id: 'TUTORIAL 1', dialog: GameState.STORY_DIALOG_TUTORIAL1, weight: 100, completed: false },
     { category: 'combat', id: 'WILD_BOAR', enemy: GameState.ENEMY_WILD_BOAR, weight: 50 },
     { category: 'combat', id: 'WILD_BOAR', enemy: GameState.ENEMY_WILD_BOAR, weight: 50 },
+    { category: 'story', id: 'TUTORIAL 2', dialog: GameState.STORY_DIALOG_TUTORIAL2, weight: 100, completed: false },
     { category: 'combat', id: 'PLAGUE_CROW', enemy: GameState.ENEMY_PLAGUE_CROW, weight: 50 },
     { category: 'combat', id: 'PLAGUE_CROW', enemy: GameState.ENEMY_PLAGUE_CROW, weight: 50 },
   ];
