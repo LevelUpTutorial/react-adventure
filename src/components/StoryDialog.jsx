@@ -18,7 +18,7 @@ const StoryDialog = ({ title, content, background, onClose }) => {
         </div>
         <div className="card-body">
           {content.map((paragraph, index) => (
-            <p className="card-text text-secondary" key={index}>{paragraph}</p>
+            <p className="card-text text-secondary" key={index} dangerouslySetInnerHTML={{ __html: paragraph }}></p>
           ))}
         </div>
         <div className="card-footer">
