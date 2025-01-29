@@ -1453,7 +1453,7 @@ static STORY_DIALOG_TUTORIAL2 = {
     '',
     '<span class="fw-bold text-info">Ice</span>: Bonus <span class="fw-bold text-info">Evade Chance</span> and <span class="fw-bold text-info">slows</span> enemy attack speed!',
     '',
-    '<span class="fw-bold text-primary">Lightning</span>: Bonus <span class="fw-bold text-primary">Attack Speed</span> and chance to <span class="fw-bold text-primary">stun</span> your enemy, which resets its attack cooldown!',
+    '<span class="fw-bold text-primary">Lightning</span>: Bonus <span class="fw-bold text-primary">Attack Speed</span> and chance to <span class="fw-bold text-primary">stun</span> your enemy!',
     '',
     '<span class="fw-bold text-muted">None</span>: No Bonus. Pick if you want a bigger challenge!',
   ],
