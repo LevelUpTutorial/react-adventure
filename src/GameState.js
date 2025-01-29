@@ -1433,34 +1433,34 @@ class GameState {
   }
 
   static STORY_DIALOG_TUTORIAL1 = {
-    title: 'Tutorial: Combat Basics',
-    content: [
-      'How to Attack: Hit the "<b>ATTACK</b>" button when your cooldown is on its red mark!',
-      '',
-      'Counter Attack: Your hero dodges attacks based on their <u>EVADE CHANCE</u>. Hit the "<b>COUNTER ATTACK</b>" button before your enemy has time to react!',
-      '',
-      'Combo Bonus: Attack consecutively without missing the timing to gain bonus damage!',
-    ],
-    background: '',
-    completed: false,
-    onCloseKey: 'onClose_STORY_DIALOG_TUTORIAL1',
-  }
+  title: 'Tutorial: Combat Basics',
+  content: [
+    'How to Attack: Hit the "<span class="fw-bold text-primary">ATTACK</span>" button when your cooldown is on its <span class="text-danger fw-bold">red mark</span>!',
+    '',
+    'Counter Attack: Your hero dodges attacks based on their <span class="text-decoration-underline text-info">EVADE CHANCE</span>. Hit the "<span class="fw-bold text-primary">COUNTER ATTACK</span>" button before your enemy has time to react!',
+    '',
+    'Combo Bonus: Attack consecutively without missing the timing to <span class="fw-bold text-success">gain bonus damage</span>!',
+  ],
+  background: '',
+  completed: false,
+  onCloseKey: 'onClose_STORY_DIALOG_TUTORIAL1',
+};
 
-  static STORY_DIALOG_TUTORIAL2 = {
-    title: 'Tutorial: Weapon Enchantments',
-    content: [
-      'Fire: Bonus CRIT CHANCE and CRIT DAMAGE!',
-      '',
-      'Ice: Bonus EVADE CHANCE and SLOW enemy attack speed!',
-      '',
-      'Lightning: Bonus ATTACK SPEED and chance to STUN your enemy, which resets its attack cooldown!', 
-      '',
-      'None: No Bonus. Pick if you want a bigger challenge!',
-    ],
-    background: '',
-    completed: false,
-    onCloseKey: 'onClose_STORY_DIALOG_TUTORIAL2',
-  }
+static STORY_DIALOG_TUTORIAL2 = {
+  title: 'Tutorial: Weapon Enchantments',
+  content: [
+    '<span class="fw-bold text-danger">Fire:</span> Bonus <span class="fw-bold text-warning">CRIT CHANCE</span> and <span class="fw-bold text-warning">CRIT DAMAGE</span>!',
+    '',
+    '<span class="fw-bold text-info">Ice:</span> Bonus <span class="text-decoration-underline text-info">EVADE CHANCE</span> and <span class="text-primary">SLOW</span> enemy attack speed!',
+    '',
+    '<span class="fw-bold text-warning">Lightning:</span> Bonus <span class="fw-bold text-primary">ATTACK SPEED</span> and chance to <span class="fw-bold text-success">STUN</span> your enemy, which resets its attack cooldown!',
+    '',
+    '<span class="fw-bold text-muted">None:</span> No Bonus. Pick if you want a bigger challenge!',
+  ],
+  background: '',
+  completed: false,
+  onCloseKey: 'onClose_STORY_DIALOG_TUTORIAL2',
+};
 
   static STORY_DIALOG_DEFAULT_WEIGHT = 5;
   static ACT1_ENCOUNTERS = [
