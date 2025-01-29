@@ -6,7 +6,14 @@
   background-color: #b611fa !important; /* Purple Background */
   color: #ffffff !important; /* Ensure white text for contrast */
 }
+/* Border Colors */
+.border-purple {
+  border-color: #b611fa !important; /* Purple */
+}
 
+.border-dark-orange {
+  border-color: #f59016 !important; /* Dark Orange */
+}
 .text-dark-orange {
   color: #f59016; /* Dark Orange */
 }
