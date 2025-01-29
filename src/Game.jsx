@@ -275,6 +275,7 @@ useEffect(() => {
     gameState.hero.isInDialog = true; 
     setGameState({ ...gameState });
   } else {
+    setShowLootPopup(false);
     gameState.hero.isInDialog = false; 
     setGameState({ ...gameState }); 
   }
