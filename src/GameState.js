@@ -1435,11 +1435,11 @@ class GameState {
   static STORY_DIALOG_TUTORIAL1 = {
     title: 'Tutorial: Combat Basics',
     content: [
-      'How to Attack: Hit the "ATTACK" button when your cooldown is on its red mark!',
+      'How to Attack: Hit the "<b>ATTACK</b>" button when your cooldown is on its red mark!',
       '',
-      'Counter Attack: Your hero dodges attacks based on his/her EVADE CHANCE. Hit the "COUNTER ATTACK" button before your enemy has time to react!',
+      'Counter Attack: Your hero dodges attacks based on their <u>EVADE CHANCE</u>. Hit the "<b>COUNTER ATTACK</b>" button before your enemy has time to react!',
       '',
-      'Combo Bonus: Attack consecutivly without missing the timing to gain bonus damage!',
+      'Combo Bonus: Attack consecutively without missing the timing to gain bonus damage!',
     ],
     background: '',
     completed: false,
