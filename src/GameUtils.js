@@ -422,7 +422,7 @@ const DROP_CHANCES = {
 };
 
 // Armor Stat Ranges by Rarity
-const STAT_RANGES = {
+export const ARMOR_STAT_RANGES = {
   common: { min: 1, max: 5 },
   uncommon: { min: 5, max: 12 },
   rare: { min: 10, max: 25 },
@@ -462,7 +462,7 @@ export function getEnemyLoot(enemyLevel) {
   const { dropRate, rarity } = DROP_CHANCES[range];
 
   // Determine if an item drops
-  if (itemPityCount < 5 && Math.random() > dropRate) {
+  if (itemPityCount < 10 && Math.random() > dropRate) {
     // No Item dropped 
     itemPityCount += 1; 
     return null; 
@@ -482,7 +482,7 @@ export function getEnemyLoot(enemyLevel) {
   }
 
   // Generate stats for the item based on rarity
-  const statRange = STAT_RANGES[itemRarity];
+  const statRange = ARMOR_STAT_RANGES[itemRarity];
   const itemStat = Math.round(randomInRange(statRange.min, statRange.max) * 100) / 100;
   const midPoint = statRange.min + (statRange.max - statRange.min) / 2; 
   const subRarity = itemStat >= midPoint ? 'high' : 'low' ;
