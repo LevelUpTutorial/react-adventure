@@ -14,7 +14,7 @@ import {combatCalculation, playSound, SND_SWORD_HIT,
         DAMAGE_INCREMENT, MAX_HEALTH_INCREMENT, CRIT_CHANCE_INCREMENT, 
         CRIT_DAMAGE_INCREMENT, EVADE_CHANCE_INCREMENT, ATTACK_SPEED_DECREASE, 
         saveGameState, createActiveEnemy, getEnemyLoot, getItemImage, 
-        getHeroImages. 
+        getHeroImages, 
        } from "./GameUtils.js";
 
 import PropTypes from "prop-types";
