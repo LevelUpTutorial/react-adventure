@@ -131,6 +131,7 @@ const handleActiveAttack = () => {
 
   const attackProgress = Math.max(0, Math.min( (gameState.hero.attack_cooldown / gameState.hero.attack_speed * 100), 100));
   const xpProgress = gameState.hero.xp / gameState.hero.xp_to_levelup * 100; 
+  const heroHPCramped = Math.round(Math.max(0, gameState.hero.health));
   
   const renderCombatEvent = (text) => {
     let style;
@@ -347,16 +348,16 @@ return (
                 <div 
                   className="progress-bar bg-success align-middle" 
                   role="progressbar" 
-                  style={{width: `${gameState.hero.health / gameState.hero.health_full * 100}%`, height: '20px' }} 
-                  aria-valuenow={gameState.hero.health} aria-valuemin="0" aria-valuemax="100"
+                  style={{width: `${heroHPCramped / gameState.hero.health_full * 100}%`, height: '20px' }} 
+                  aria-valuenow={heroHPCramped} aria-valuemin="0" aria-valuemax="100"
                 >
-                  {`${gameState.hero.health}`}
+                  {`${heroHPCramped}`}
                 </div>
                 <div 
                   className="progress-bar progress-bar-striped bg-danger" 
                   role="progressbar" 
-                  style={{width: `${(gameState.hero.health_full - gameState.hero.health) / gameState.hero.health_full * 100}%`, height: '20px' }} 
-                  aria-valuenow={gameState.hero.health_full - gameState.hero.health} aria-valuemin="0" aria-valuemax="100">
+                  style={{width: `${(gameState.hero.health_full - heroHPCramped) / gameState.hero.health_full * 100}%`, height: '20px' }} 
+                  aria-valuenow={gameState.hero.health_full - heroHPCramped} aria-valuemin="0" aria-valuemax="100">
                 </div>
               </div>
               {renderCombatEvent(gameState.hero.last_combat_event)}
