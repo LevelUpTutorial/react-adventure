@@ -1,4 +1,4 @@
-import { getItemImage, ARMOR_STAT_RANGES } from './../GameUtils.js';
+import { getItemImage, ARMOR_STAT_RANGES } from './../GameUtils.js'; 
 
 const LootPopup = ({ show, currentItem, newItem, onEquip, onKeep }) => {
   if (!show) return null; // Don't render the popup if not visible
@@ -7,6 +7,39 @@ const LootPopup = ({ show, currentItem, newItem, onEquip, onKeep }) => {
   const newIStatRange = ARMOR_STAT_RANGES[newItem.itemRarity];
   const oldIStatRange = ARMOR_STAT_RANGES[currentItem.itemRarity];
 
+  // Function to get rarity-based classNames
+  const getRarityClass = (rarity, type) => {
+    const classes = {
+      common: {
+        text: "text-secondary",
+        bg: "bg-secondary",
+      },
+      uncommon: {
+        text: "text-success",
+        bg: "bg-success",
+      },
+      rare: {
+        text: "text-primary",
+        bg: "bg-primary",
+      },
+      epic: {
+        text: "text-purple",
+        bg: "bg-purple",
+      },
+      legendary: {
+        text: "text-dark-orange",
+        bg: "bg-dark-orange",
+      },
+    };
+    return classes[rarity] ? classes[rarity][type] : "text-muted bg-light";
+  };
+
+  // Rarity-based class
+  const oldRarityClass = getRarityClass(currentItem.itemRarity, "text");
+  const newRarityClass = getRarityClass(newItem.itemRarity, "text");
+  const oldRarityBgClass = getRarityClass(currentItem.itemRarity, "text");
+  const newRarityBgClass = getRarityClass(newItem.itemRarity, "text");
+ 
   return (
     <div className="modal show d-block" tabIndex="-1">
       <div className="modal-dialog modal-lg">
@@ -31,7 +64,7 @@ const LootPopup = ({ show, currentItem, newItem, onEquip, onKeep }) => {
                 style={{ maxWidth: "100px" }}
               />
               <p>
-                <strong>Rarity:</strong> {currentItem.itemRarity}
+                <strong>Rarity:</strong> <span className={`${oldRarityClass}`}>{currentItem.itemRarity}</span>
               </p>
               <p>
                 <strong>{currentItem.statDesc}:</strong> {currentItem.itemStat}% [{oldIStatRange.min}% - {oldIStatRange.max}%]
@@ -48,7 +81,7 @@ const LootPopup = ({ show, currentItem, newItem, onEquip, onKeep }) => {
                 style={{ maxWidth: "100px" }}
               />
               <p>
-                <strong>Rarity:</strong> {newItem.itemRarity}
+                <strong>Rarity:</strong> <span className={`${newRarityClass}`}{newItem.itemRarity}</span>
               </p>
               <p>
                 <strong>{newItem.statDesc}:</strong> {newItem.itemStat}% [{newIStatRange.min}% - {newIStatRange.max}%]
