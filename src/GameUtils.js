@@ -308,8 +308,8 @@ export function getHeroImages(gameState) {
   const neutralImageKey = `hero${capitalizeFirstLetter(gender)}Neutral`; // Assuming neutral images follow this pattern
 
   return {
-    IMG_HERO_COMBAT: GameUtils[combatImageKey], // Access imported image variable dynamically
-    IMG_HERO_NEUTRAL: GameUtils[neutralImageKey], // Access neutral image variable dynamically
+    IMG_HERO_COMBAT: this[combatImageKey], // Access imported image variable dynamically
+    IMG_HERO_NEUTRAL: this[neutralImageKey], // Access neutral image variable dynamically
   };
 }
 
