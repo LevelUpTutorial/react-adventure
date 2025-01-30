@@ -4,18 +4,7 @@ import GameState from './GameState.js';
 /* Hero Gear Tier 0 */ 
 import heroFemaleNeutral from './assets/images/hero/hero_female_neutral.jpg';
 import heroMaleNeutral from './assets/images/hero/hero_male_neutral.jpg';
-/*import heroFemaleCombatT0None from './assets/images/hero/hero_female_combat.png';
-import heroMaleCombatT0None from './assets/images/hero/hero_male_combat.png';*/
-/* Hero Gear Tier 1 */
-/*import heroFemaleCombatT1Fire from './assets/images/hero/hero_female_combat_fire_t1.webp';
-import heroFemaleCombatT1Ice from './assets/images/hero/hero_female_combat_ice_t1.webp';
-import heroFemaleCombatT1Lightning from './assets/images/hero/hero_female_combat_lightning_t1.webp';
-import heroMaleCombatT1Fire from './assets/images/hero/hero_male_combat_fire_t1.webp';
-import heroMaleCombatT1Ice from './assets/images/hero/hero_male_combat_ice_t1.webp';
-import heroMaleCombatT1Lightning from './assets/images/hero/hero_male_combat_lightning_t1.webp'; */
-/* Hero Gear Tier 2 */
-/* Hero Gear Tier 3 */
-/* New Hero Gear */
+/* Hero Gear */
 import maleCombatCommonFire from './assets/images/hero/male_combat_common_fire.webp';
 import maleCombatCommonIce from './assets/images/hero/male_combat_common_ice.webp';
 import maleCombatCommonLightning from './assets/images/hero/male_combat_common_lightning.webp';
@@ -68,6 +57,30 @@ import armorRareHigh from './assets/images/items/armor_rare_high.webp';
 import armorRareLow from './assets/images/items/armor_rare_low.webp';
 import armorUncommonHigh from './assets/images/items/armor_uncommon_high.webp';
 import armorUncommonLow from './assets/images/items/armor_uncommon_low.webp';
+/* items Helms */
+import helmCommonHigh from './assets/images/items/helm_common_high.webp';
+import helmCommonLow from './assets/images/items/helm_common_low.webp';
+import helmUncommonHigh from './assets/images/items/helm_uncommon_high.webp';
+import helmUncommonLow from './assets/images/items/helm_uncommon_low.webp';
+import helmRareHigh from './assets/images/items/helm_rare_high.webp';
+import helmRareLow from './assets/images/items/helm_rare_low.webp';
+import helmEpicHigh from './assets/images/items/helm_epic_high.webp';
+import helmEpicLow from './assets/images/items/helm_epic_low.webp';
+import helmLegendaryHigh from './assets/images/items/helm_legendary_high.webp';
+import helmLegendaryLow from './assets/images/items/helm_legendary_low.webp';
+import helmPerfectLegendaryHigh from './assets/images/items/helm_perfectLegendary_high.webp';
+/* items boots */
+import bootsCommonHigh from './assets/images/items/boots_common_high.webp';
+import bootsCommonLow from './assets/images/items/boots_common_low.webp';
+import bootsUncommonHigh from './assets/images/items/boots_uncommon_high.webp';
+import bootsUncommonLow from './assets/images/items/boots_uncommon_low.webp';
+import bootsRareHigh from './assets/images/items/boots_rare_high.webp';
+import bootsRareLow from './assets/images/items/boots_rare_low.webp';
+import bootsEpicHigh from './assets/images/items/boots_epic_high.webp';
+import bootsEpicLow from './assets/images/items/boots_epic_low.webp';
+import bootsLegendaryHigh from './assets/images/items/boots_legendary_high.webp';
+import bootsLegendaryLow from './assets/images/items/boots_legendary_low.webp';
+import bootsPerfectLegendaryHigh from './assets/images/items/boots_perfectLegendary_high.webp';
 /* Items Loot Chests */
 import chestCommon from './assets/images/items/chest_common.webp';
 import chestEpic from './assets/images/items/chest_epic.webp';
@@ -625,6 +638,40 @@ export function getItemImage(item) {
           return item.subRarity === 'high' ? armorLegendaryHigh : armorLegendaryLow;
         case 'perfectLegendary':
           return armorPerfectLegendaryHigh;
+        default:
+          return '';
+      }
+    case 'Helm':
+      switch (item.itemRarity) {
+        case 'common':
+          return item.subRarity === 'high' ? helmCommonHigh : helmCommonLow;
+        case 'uncommon':
+          return item.subRarity === 'high' ? helmUncommonHigh : helmUncommonLow;
+        case 'rare':
+          return item.subRarity === 'high' ? helmRareHigh : helmRareLow;
+        case 'epic':
+          return item.subRarity === 'high' ? helmEpicHigh : helmEpicLow;
+        case 'legendary':
+          return item.subRarity === 'high' ? helmLegendaryHigh : helmLegendaryLow;
+        case 'perfectLegendary':
+          return helmPerfectLegendaryHigh;
+        default:
+          return '';
+      }
+    case 'Boots':
+      switch (item.itemRarity) {
+        case 'common':
+          return item.subRarity === 'high' ? bootsCommonHigh : bootsCommonLow;
+        case 'uncommon':
+          return item.subRarity === 'high' ? bootsUncommonHigh : bootsUncommonLow;
+        case 'rare':
+          return item.subRarity === 'high' ? bootsRareHigh : bootsRareLow;
+        case 'epic':
+          return item.subRarity === 'high' ? bootsEpicHigh : bootsEpicLow;
+        case 'legendary':
+          return item.subRarity === 'high' ? bootsLegendaryHigh : bootsLegendaryLow;
+        case 'perfectLegendary':
+          return bootsPerfectLegendaryHigh;
         default:
           return '';
       }
