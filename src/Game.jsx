@@ -898,13 +898,13 @@ const fireCC = 25;
 const fireCD = 75; 
 const fireId = ID_FIRE; 
 function fireEffectSelectApply(gameState) {
-  console.log(`apply fire select`);
+  // console.log(`apply fire select`);
   gameState.hero.crit_chance += fireCC;
   gameState.hero.crit_damage += fireCD;
   return gameState; 
 }
 function fireEffectSelectReverse(gameState) {
-  console.log(`revert fire select`);
+  // console.log(`revert fire select`);
   gameState.hero.crit_chance -= fireCC;
   gameState.hero.crit_damage -= fireCD;
   return gameState; 
@@ -914,13 +914,13 @@ const iceEC = 10;
 const iceSlow = 300; 
 const iceId = ID_ICE; 
 function iceEffectSelectApply(gameState) {
-  console.log(`apply ice select`);
+  // console.log(`apply ice select`);
   gameState.hero.evade_chance += iceEC; 
   addEffect(onHitEffectsHero, iceId, iceEffectOnHitApply, iceEffectOnHitReverse);
   return gameState;
 }
 function iceEffectSelectReverse(gameState) {
-  console.log(`revert ice select`);
+  // console.log(`revert ice select`);
   gameState.hero.evade_chance -= iceEC;
   removeEffect(onHitEffectsHero, iceId); 
   // TODO remove onhit counter from enemy 
@@ -928,7 +928,7 @@ function iceEffectSelectReverse(gameState) {
 }
 // TODO currently on hit effect stacks infinitly 
 function iceEffectOnHitApply(gameState) {
-  console.log(`apply ice on hit`);
+  // console.log(`apply ice on hit`);
   const active_enemy = gameState.active_enemy; 
   if (active_enemy) {
     active_enemy.attack_speed += iceSlow; 
@@ -938,7 +938,7 @@ function iceEffectOnHitApply(gameState) {
 }
 // TODO reverse can not be used yet, because enemy doesnt remember number of stacks 
 function iceEffectOnHitReverse(gameState) {
-  console.log(`revert ice on hit`);
+  // console.log(`revert ice on hit`);
   const active_enemy = gameState.active_enemy; 
   if (active_enemy) {
     active_enemy.attack_speed -= iceSlow; 
@@ -951,29 +951,30 @@ const lightningAS = 200;
 const lightningStunChance = 20; 
 const lightningId = ID_LIGHTNING; 
 function lightningEffectSelectApply(gameState) {
-  console.log(`apply lightning select`);
+  // console.log(`apply lightning select`);
   gameState.hero.attack_speed -= lightningAS; 
   addEffect(onHitEffectsHero, lightningId, lightningEffectOnHitApply, lightningEffectOnHitReverse);
   return gameState;
 }
 function lightningEffectSelectReverse(gameState) {
-  console.log(`revert lightning select`);
+  // console.log(`revert lightning select`);
   gameState.hero.attack_speed += lightningAS; 
   removeEffect(onHitEffectsHero, lightningId);
   return gameState; 
 }
 function lightningEffectOnHitApply(gameState) {
-  console.log(`apply lightning on hit`);
+  // console.log(`apply lightning on hit`);
   const roll = () => Math.random() * 100;
   if (roll() < lightningStunChance) {
     // stun successful 
     gameState.active_enemy.attack_cooldown = gameState.active_enemy.attack_speed; 
+    gameState.active_enemy.last_combat_event = "stunned"; 
   }
   return gameState; 
 }
 function lightningEffectOnHitReverse(gameState) {
   // nothing to do 
-  console.log(`revert lightning on hit (nothing to do)`);
+  // console.log(`revert lightning on hit (nothing to do)`);
   return gameState; 
 }
 /* 
@@ -1027,7 +1028,7 @@ function getEnchantmentById(enchantment_id) {
  * Effect List Helper 
  */ 
 function addEffect(effectList, id, applyFunction, reverseFunction) {
-  console.log(`add effect to ${effectList} => ${id}`);
+  // console.log(`add effect to ${effectList} => ${id}`);
   effectList.push({ id, applyFunction, reverseFunction });
 }
 function removeEffect(effectList, id) {
@@ -1037,7 +1038,7 @@ function removeEffect(effectList, id) {
   }
 }
 function applyEffects(effectList, gameState) {
-  console.log(`apply effects ${effectList}`);
+  // console.log(`apply effects ${effectList}`);
   effectList.forEach(effect => effect.applyFunction(gameState));
 }
 function reverseEffects(effectList, gameState) {
