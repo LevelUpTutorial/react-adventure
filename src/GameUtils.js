@@ -657,7 +657,7 @@ export function getEnemyLoot(enemyLevel) {
   } else if (itemType === "Boots") {
     statRange = BOOTS_STAT_RANGES[itemRarity];
   } else if (itemType === "Helm") {
-    statRange HELM_STAT_RANGES[itemRarity];
+    statRange = HELM_STAT_RANGES[itemRarity];
   } else {
     console.error(`unknown item type ${itemType}`); 
     return null; 
