@@ -138,13 +138,15 @@ const handleActiveAttack = () => {
     let style;
 
     if (text?.startsWith("crit")) {
-      style = { border: "1px solid orange", color: "orange", padding: "5px" }; // critical hits
+      style = { fontWeight: "bold", color: "orange", padding: "5px" }; // critical hits
     } else if (text?.startsWith("dealt")) {
-      style = { border: "1px solid black", color: "black", padding: "5px" }; // normal damage
+      style = { fontWeight: "bold", color: "black", padding: "5px" }; // normal damage
     } else if (text?.startsWith("missed")) {
-      style = { border: "1px solid gray", color: "gray", padding: "5px" }; // missed attacks
+      style = { fontWeight: "bold", color: "gray", padding: "5px" }; // missed attacks
+    } else if (text?.startsWith("stunned")) {
+      style = { fontWeight: "bold", color: "#0dcaf0", padding: "5px" }; // same color as bootstrap info consistent used for ice element 
     } else {
-      style = { border: "1px solid black", color: "black", padding: "5px" }; // default
+      style = { fontWeight: "bold", color: "black", padding: "5px" }; // default
     }
 
     if (!text) {
