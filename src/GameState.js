@@ -1670,11 +1670,25 @@ static STORY_DIALOG_TUTORIAL2 = {
         [UPGRADE_ATTACK_SPEED]: 0,
       },
       current_animation: null, 
+      helm: {
+        itemType: "Helm",
+        itemRarity: "common",
+        subRarity: "low", 
+        statDesc: "Damage Reduction", 
+        itemStat: 0,
+      },
       armor: {
         itemType: "Armor",
         itemRarity: "common",
         subRarity: "low", 
         statDesc: "Damage Reduction", 
+        itemStat: 0,
+      },
+      boots: {
+        itemType: "Boots",
+        itemRarity: "common",
+        subRarity: "low", 
+        statDesc: "Evade Chance", 
         itemStat: 0,
       },
     }
