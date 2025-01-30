@@ -546,14 +546,41 @@ const DROP_CHANCES = {
   61: { dropRate: 0.30, rarity: { rare: 0.1, epic: 0.7, legendary: 0.198, perfectLegendary: 0.002 } },
 };
 
+/* Chances which items type drops */ 
+const ITEM_TYPE_CHANCES = {
+  Helm: 0.333,
+  Boots: 0.333,
+  Armor: 0.334,
+};
+
 // Armor Stat Ranges by Rarity
 export const ARMOR_STAT_RANGES = {
   common: { min: 1, max: 5 },
-  uncommon: { min: 5, max: 12 },
-  rare: { min: 10, max: 25 },
-  epic: { min: 23, max: 35 },
-  legendary: { min: 33, max: 48 },
-  perfectLegendary: { min: 49, max: 50 },
+  uncommon: { min: 4, max: 12 },
+  rare: { min: 11, max: 20 },
+  epic: { min: 19, max: 28 },
+  legendary: { min: 27, max: 38 },
+  perfectLegendary: { min: 39, max: 40 },
+};
+
+// Helm Stat Ranges by Rarity
+export const HELM_STAT_RANGES = {
+  common: { min: 1, max: 2 },
+  uncommon: { min: 2, max: 5 },
+  rare: { min: 5, max: 9 },
+  epic: { min: 9, max: 13 },
+  legendary: { min: 13, max: 18 },
+  perfectLegendary: { min: 19, max: 20 },
+};
+
+// Boots Stat Ranges by Rarity
+export const BOOTS_STAT_RANGES = {
+  common: { min: 1, max: 2 },
+  uncommon: { min: 2, max: 4 },
+  rare: { min: 4, max: 7 },
+  epic: { min: 7, max: 10 },
+  legendary: { min: 10, max: 14 },
+  perfectLegendary: { min: 14, max: 15 },
 };
 
 // Function to generate a random number between min and max
@@ -572,6 +599,21 @@ function getRarity(rarityChances) {
     }
   }
   return null; // Should never reach here if probabilities sum to 1
+}
+
+/* rolls a random item type */
+function getItemType() {
+  const random = Math.random(); // Generates a number between 0 and 1
+  let cumulativeProbability = 0;
+
+  for (const [itemType, probability] of Object.entries(ITEM_TYPE_CHANCES)) {
+    cumulativeProbability += probability;
+    if (random <= cumulativeProbability) {
+      return itemType;
+    }
+  }
+  
+  return "Armor"; // Fallback (shouldn't occur unless probabilities don't sum to 1)
 }
 
 // Function to get an enemy's loot based on their level
@@ -595,6 +637,8 @@ export function getEnemyLoot(enemyLevel) {
 
   // Generate item drop 
   itemPityCount = 0; 
+  // Roll Item Type 
+  const itemType = getItemType(); 
   // Determine the rarity of the item
   let itemRarity = getRarity(rarity); 
   // Check for legendary pity 
@@ -607,17 +651,29 @@ export function getEnemyLoot(enemyLevel) {
   }
 
   // Generate stats for the item based on rarity
-  const statRange = ARMOR_STAT_RANGES[itemRarity];
+  let statRange = null; 
+  if (itemType === "Armor") {
+    statRange = ARMOR_STAT_RANGES[itemRarity];
+  } else if (itemType === "Boots") {
+    statRange = BOOTS_STAT_RANGES[itemRarity];
+  } else if (itemType === "Helm") {
+    statRange HELM_STAT_RANGES[itemRarity];
+  } else {
+    console.error(`unknown item type ${itemType}`); 
+    return null; 
+  }
+  
   const itemStat = Math.round(randomInRange(statRange.min, statRange.max) * 100) / 100;
   const midPoint = statRange.min + (statRange.max - statRange.min) / 2; 
   const subRarity = itemStat >= midPoint ? 'high' : 'low' ;
+  const statDesc = itemType === "Boots" ? "Damage Reduction" : "Evade Chance"; 
 
   // Return the item details
   return {
-    itemType: "Armor",
+    itemType: itemType,
     itemRarity: itemRarity,
     subRarity: subRarity, 
-    statDesc: "Damage Reduction", 
+    statDesc: statDesc, 
     itemStat: itemStat,
   };
 }
