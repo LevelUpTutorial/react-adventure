@@ -62,7 +62,7 @@ function Game({ heroName, gender, isGameRunning, savedGameState }) {
 
   const handleLocationChange = (newLocation) => {
     setGameState((prevState) => {
-      return changeLocation(prevState, newLocation); 
+      return changeLocation(prevState, newLocation, setCounterAttackActive); 
     });
   };
 
@@ -777,7 +777,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
     }
 
     gameState = { ...gameState, hero, active_enemy}; 
-    return (hero.health > 0 ? gameState : changeLocation(gameState, GameState.LOCATION_CITY));
+    return (hero.health > 0 ? gameState : changeLocation(gameState, GameState.LOCATION_CITY, setCounterAttackActive));
   }
 
   // handle Adventure outside of Combat
@@ -825,7 +825,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
   }
 
   if (location.name === GameState.LOCATION_CITY.name) {
-    return changeLocation(gameState, GameState.LOCATION_CITY);
+    return changeLocation(gameState, GameState.LOCATION_CITY, setCounterAttackActive);
   }
 
   // return gameState unchanged
