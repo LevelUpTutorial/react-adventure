@@ -275,18 +275,18 @@ export function playConfettiFirework() {
   Returns a new State object to trigger react rendering 
 */
 export function changeLocation(prevState, newLocation, setCounterAttackActive) {
-  updateLocation(prevState, newLocation, setCounterAttackActive); 
+  updateLocation(prevState, newLocation); 
+  setCounterAttackActive(false);
   return { ...prevState}; 
 }
 
-/* changed gameState in place */
-export function updateLocation(gameState, newLocation, setCounterAttackActive) {
+/* changes gameState in place */
+export function updateLocation(gameState, newLocation) {
   if (gameState.location.name === newLocation.name) {
     return gameState;
   }
   gameState.location = newLocation; 
   setBodyBackground(newLocation);
-  setCounterAttackActive(false);
       
   if (newLocation.name === GameState.LOCATION_CITY.name) {
     return handleResetHeroInTown(gameState);
