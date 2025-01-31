@@ -1,11 +1,32 @@
-import { getItemImage, ARMOR_STAT_RANGES } from './../GameUtils.js'; 
+import { getItemImage, ARMOR_STAT_RANGES, HELM_STAT_RANGES,
+         BOOTS_STAT_RANGES, 
+       } from './../GameUtils.js'; 
 
 const LootPopup = ({ show, currentItem, newItem, onEquip, onKeep }) => {
   if (!show) return null; // Don't render the popup if not visible
+  if (newItem.itemType != currentItem.itemType) {
+    console.error(`new item type ${newItem.itemType} incompatable current item type ${currentItem.itemType}`);
+    return null;
+  }
+
   const newBetter = newItem.itemStat > currentItem.itemStat;
   const oldBetter = currentItem.itemStat > newItem.itemStat;
-  const newIStatRange = ARMOR_STAT_RANGES[newItem.itemRarity];
-  const oldIStatRange = ARMOR_STAT_RANGES[currentItem.itemRarity];
+ 
+  // default
+  let newIStatRange = null;
+  let oldIStatRange = null;
+  if (newItem.itemType === "Armor") {
+    newIStatRange = ARMOR_STAT_RANGES[newItem.itemRarity];
+    oldIStatRange = ARMOR_STAT_RANGES[currentItem.itemRarity];
+  } else if (newItem.itemType === "Helm") {
+    newIStatRange = HELM_STAT_RANGES[newItem.itemRarity];
+    oldIStatRange = HELM_STAT_RANGES[currentItem.itemRarity];
+  } else if (newItem.itemType === "Boots") {
+    newIStatRange = BOOTS_STAT_RANGES[newItem.itemRarity];
+    oldIStatRange = BOOTS_STAT_RANGES[currentItem.itemRarity];
+  } else {
+    console.error(`unknown item type ${newItem.itemType}`);
+  }
 
   // Function to get rarity-based classNames
   const getRarityClass = (rarity, type) => {
