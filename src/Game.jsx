@@ -250,14 +250,16 @@ const handleActiveAttack = () => {
 const equipNewItem = () => {
   setGameState((prev) => {
     const hero = prev.hero;
-    if (newItem.itemType === 'Armor') {
-      hero.damage_reduction = hero.damage_reduction - hero.armor.itemStat + newItem.itemStat ; 
+    // Rundung wg. Floating-Point-Arithmetik Error of Javascript
+    const decimalPlaces = 100; 
+    if (newItem.itemType === 'Armor') { 
+      hero.damage_reduction = Math.round((hero.damage_reduction - hero.armor.itemStat + newItem.itemStat) * decimalPlaces) / decimalPlaces; 
       hero.armor = newItem; 
     } else if (newItem.itemType === 'Helm') {
-      hero.damage_reduction = hero.damage_reduction - hero.helm.itemStat + newItem.itemStat ; 
+      hero.damage_reduction = Math.round((hero.damage_reduction - hero.helm.itemStat + newItem.itemStat) * decimalPlaces) / decimalPlaces; 
       hero.helm = newItem; 
     } if (newItem.itemType === 'Boots') {
-      hero.evade_chance = hero.evade_chance - hero.boots.itemStat + newItem.itemStat ; 
+      hero.evade_chance = Math.round((hero.evade_chance - hero.boots.itemStat + newItem.itemStat) * decimalPlaces) / decimalPlaces; 
       hero.boots = newItem; 
     } else {
       console.error(`unknown item type ${newItem.itemType}`);
