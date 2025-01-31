@@ -253,6 +253,12 @@ const equipNewItem = () => {
     if (newItem.itemType === 'Armor') {
       hero.damage_reduction = hero.damage_reduction - hero.armor.itemStat + newItem.itemStat ; 
       hero.armor = newItem; 
+    } else if (newItem.itemType === 'Helm') {
+      hero.damage_reduction = hero.damage_reduction - hero.helm.itemStat + newItem.itemStat ; 
+      hero.helm = newItem; 
+    } if (newItem.itemType === 'Boots') {
+      hero.evade_chance = hero.evade_chance - hero.boots.itemStat + newItem.itemStat ; 
+      hero.boots = newItem; 
     } else {
       console.error(`unknown item type ${newItem.itemType}`);
     }
