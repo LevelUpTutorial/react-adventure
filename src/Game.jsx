@@ -47,7 +47,7 @@ function Game({ heroName, gender, isGameRunning, savedGameState }) {
 
   const [showLootPopup, setShowLootPopup] = useState(false); 
   const [newItem, setNewItem] = useState(null); 
-  
+ 
   const updateGameState = () => {
     setGameState((prevState) => handleGameState(prevState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades, setNewItem));
   };
@@ -572,7 +572,7 @@ return (
       {/* Loot Popup Component */}
       <LootPopup
         show={showLootPopup}
-        currentItem={gameState.hero.armor}
+        gameState={gameState}
         newItem={newItem}
         onEquip={equipNewItem}
         onKeep={keepOldItem}
