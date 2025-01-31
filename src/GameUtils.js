@@ -666,8 +666,9 @@ export function getEnemyLoot(enemyLevel) {
     console.error(`unknown item type ${itemType}`); 
     return null; 
   }
-  
-  const itemStat = Math.round(randomInRange(statRange.min, statRange.max) * 100) / 100;
+  // Nachkommastellen 10^x
+  const decimalPlaces = 100; 
+  const itemStat = Math.round(randomInRange(statRange.min, statRange.max) * decimalPlaces) / decimalPlaces;
   const midPoint = statRange.min + (statRange.max - statRange.min) / 2; 
   const subRarity = itemStat >= midPoint ? 'high' : 'low' ; 
 
