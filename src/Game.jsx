@@ -766,6 +766,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
           hero.level += 1; 
           hero.xp = hero.xp + active_enemy.xp_reward - hero.xp_to_levelup; 
           hero.xp_to_levelup = calculateXpToLevelUp(hero.level); 
+          hero.health = hero.health_full; 
           // trigger level up popup
           playConfettiFirework(); 
           setNumChooseUpgrades(UPGRADE_PER_LEVELUP);
