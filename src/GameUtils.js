@@ -557,20 +557,20 @@ const ITEM_TYPE_CHANCES = {
 export const ARMOR_STAT_RANGES = {
   common: { min: 1, max: 5 },
   uncommon: { min: 4, max: 12 },
-  rare: { min: 11, max: 20 },
-  epic: { min: 19, max: 28 },
-  legendary: { min: 27, max: 38 },
-  perfectLegendary: { min: 39, max: 40 },
+  rare: { min: 11, max: 25 },
+  epic: { min: 24, max: 35 },
+  legendary: { min: 34, max: 49 },
+  perfectLegendary: { min: 49, max: 50 },
 };
 
 // Helm Stat Ranges by Rarity
 export const HELM_STAT_RANGES = {
   common: { min: 1, max: 2 },
   uncommon: { min: 2, max: 5 },
-  rare: { min: 5, max: 9 },
-  epic: { min: 9, max: 13 },
-  legendary: { min: 13, max: 18 },
-  perfectLegendary: { min: 19, max: 20 },
+  rare: { min: 5, max: 10 },
+  epic: { min: 9, max: 20 },
+  legendary: { min: 19, max: 29 },
+  perfectLegendary: { min: 29, max: 30 },
 };
 
 // Boots Stat Ranges by Rarity
@@ -578,9 +578,9 @@ export const BOOTS_STAT_RANGES = {
   common: { min: 1, max: 2 },
   uncommon: { min: 2, max: 4 },
   rare: { min: 4, max: 7 },
-  epic: { min: 7, max: 10 },
-  legendary: { min: 10, max: 14 },
-  perfectLegendary: { min: 14, max: 15 },
+  epic: { min: 7, max: 13 },
+  legendary: { min: 13, max: 24 },
+  perfectLegendary: { min: 24, max: 25 },
 };
 
 // Function to generate a random number between min and max
