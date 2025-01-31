@@ -652,12 +652,16 @@ export function getEnemyLoot(enemyLevel) {
 
   // Generate stats for the item based on rarity
   let statRange = null; 
+  let statDesc = null; 
   if (itemType === "Armor") {
     statRange = ARMOR_STAT_RANGES[itemRarity];
+    statDesc = "Damage Reduction";
   } else if (itemType === "Boots") {
     statRange = BOOTS_STAT_RANGES[itemRarity];
+    statDesc = "Evade Chance";
   } else if (itemType === "Helm") {
     statRange = HELM_STAT_RANGES[itemRarity];
+    statDesc = "Damage Reduction";
   } else {
     console.error(`unknown item type ${itemType}`); 
     return null; 
@@ -665,8 +669,7 @@ export function getEnemyLoot(enemyLevel) {
   
   const itemStat = Math.round(randomInRange(statRange.min, statRange.max) * 100) / 100;
   const midPoint = statRange.min + (statRange.max - statRange.min) / 2; 
-  const subRarity = itemStat >= midPoint ? 'high' : 'low' ;
-  const statDesc = itemType === "Boots" ? "Damage Reduction" : "Evade Chance"; 
+  const subRarity = itemStat >= midPoint ? 'high' : 'low' ; 
 
   // Return the item details
   return {
