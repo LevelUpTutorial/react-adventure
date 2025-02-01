@@ -622,27 +622,27 @@ export const BOOTS_STAT_RANGES = {
 // Amulets Stat Ranges by Rarity
 const AMULET_STAT_RANGES = {
   common: {
-    damage: { min: 0, max: 2 },
+    bonus_damage: { min: 0, max: 2 },
     damage_reduction: { min: 0, max: 1 },
   },
   uncommon: {
-    damage: { min: 2, max: 5 },
+    bonus_damage: { min: 2, max: 5 },
     damage_reduction: { min: 1, max: 2 },
   },
   rare: {
-    damage: { min: 5, max: 8 },
+    bonus_damage: { min: 5, max: 8 },
     damage_reduction: { min: 2, max: 4 },
   },
   epic: {
-    damage: { min: 8, max: 12 },
+    bonus_damage: { min: 8, max: 12 },
     damage_reduction: { min: 4, max: 6 },
   },
   legendary: {
-    damage: { min: 12, max: 24 },
+    bonus_damage: { min: 12, max: 24 },
     damage_reduction: { min: 6, max: 10 },
   },
   perfectLegendary: {
-    damage: { min: 24, max: 25 },
+    bonus_damage: { min: 24, max: 25 },
     damage_reduction: { min: 10, max: 10 },
   },
 };
@@ -677,32 +677,32 @@ const RING_STAT_RANGES = {
 const SWORD_STAT_RANGES = {
   common: {
     attack: { min: 5, max: 10 },
-    damage: { min: 0, max: 2 },
+    bonus_damage: { min: 0, max: 2 },
     attackCooldown: { min: 0, max: 20 },
   },
   uncommon: {
     attack: { min: 10, max: 20 },
-    damage: { min: 2, max: 5 },
+    bonus_damage: { min: 2, max: 5 },
     attackCooldown: { min: 20, max: 40 },
   },
   rare: {
     attack: { min: 20, max: 40 },
-    damage: { min: 5, max: 8 },
+    bonus_damage: { min: 5, max: 8 },
     attackCooldown: { min: 40, max: 80 },
   },
   epic: {
     attack: { min: 40, max: 60 },
-    damage: { min: 8, max: 12 },
+    bonus_damage: { min: 8, max: 12 },
     attackCooldown: { min: 80, max: 120 },
   },
   legendary: {
     attack: { min: 60, max: 90 },
-    damage: { min: 12, max: 24 },
+    bonus_damage: { min: 12, max: 24 },
     attackCooldown: { min: 120, max: 180 },
   },
   perfectLegendary: {
     attack: { min: 90, max: 120 },
-    damage: { min: 24, max: 25 },
+    bonus_damage: { min: 24, max: 25 },
     attackCooldown: { min: 180, max: 250 },
   },
 };
@@ -802,22 +802,22 @@ export function getEnemyLoot(enemyLevel) {
     const statRanges = AMULET_STAT_RANGES[itemRarity];
     itemStats = {
       damage_reduction: rollStat(statRanges.damage_reduction.min, statRanges.damage_reduction.max),
-      damage: rollStat(statRanges.damage.min, statRanges.damage.max),
+      bonus_damage: rollStat(statRanges.bonus_damage.min, statRanges.bonus_damage.max),
     };
     statDescriptions.push(
       `Damage Reduction ${itemStats.damage_reduction}% [${statRange.damage_reduction.min}% - ${statRange.damage_reduction.max}%]`, 
-      `Damage ${itemStats.damage}% [${statRange.damage.min}% - ${statRange.damage.max}%]`
+      `Damage ${itemStats.bonus_damage}% [${statRange.bonus_damage.min}% - ${statRange.bonus_damage.max}%]`
     );
   } else if (itemType === "Sword") {
     const statRanges = SWORD_STAT_RANGES[itemRarity];
     itemStats = {
       attack: rollStat(statRanges.attack.min, statRanges.attack.max),
-      damage: rollStat(statRanges.damage.min, statRanges.damage.max),
+      bonus_damage: rollStat(statRanges.bonus_damage.min, statRanges.bonus_damage.max),
       attackCooldown: rollStat(statRanges.attackCooldown.min, statRanges.attackCooldown.max),
     };
     statDescriptions.push(
       `Attack ${itemStats.attack} [${statRange.attack.min} - ${statRange.attack.max}]`, 
-      `Damage ${itemStats.damage}% [${statRange.damage.min}% - ${statRange.damage.max}%]`, 
+      `Damage ${itemStats.bonus_damage}% [${statRange.bonus_damage.min}% - ${statRange.bonus_damage.max}%]`, 
       `Attack Cooldown -${itemStats.attackCooldown}ms [-${statRange.attackCooldown.min}ms - -${statRange.attackCooldown.max}ms]`
     );
   } else {
@@ -855,7 +855,7 @@ function getStatRange(itemType, itemRarity) {
     case "Boots": return BOOTS_STAT_RANGES[itemRarity];
     case "Helm": return HELM_STAT_RANGES[itemRarity];
     case "Ring": return RING_STAT_RANGES[itemRarity].crit_chance; // Use crit_chance as primary
-    case "Amulet": return AMULET_STAT_RANGES[itemRarity].damage; // Use damage as primary
+    case "Amulet": return AMULET_STAT_RANGES[itemRarity].bonus_damage; // Use bonus_damage as primary
     case "Sword": return SWORD_STAT_RANGES[itemRarity].attack; // Use attack as primary
     default: return { min: 0, max: 1 };
   }
