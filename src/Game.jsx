@@ -846,13 +846,13 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
 /* performs hero attack */ 
 function performHeroAttack(gameState) {
   const {hero, active_enemy} = gameState;
-  const dmg = combatCalculation(hero, active_enemy); 
+  const dmg = combatCalculation(hero, active_enemy) * (1 + hero.bonus_damage); 
 
   if (dmg >= 0) {
     /* apply on hit effects */ 
     applyEffects(onHitEffectsHero, gameState); 
     /* apply damage */ 
-    if (dmg > hero.attack) {
+    if ( dmg > hero.attack * (1 + hero.bonus_damage) ) {
       hero.last_combat_event = `crit ${dmg}`;
       triggerHeroAttackAnimation(gameState, critAnimationDuration, true);
     } else {
