@@ -678,32 +678,32 @@ const SWORD_STAT_RANGES = {
   common: {
     attack: { min: 5, max: 10 },
     bonus_damage: { min: 0, max: 2 },
-    attackCooldown: { min: 0, max: 20 },
+    attack_speed: { min: 0, max: 20 },
   },
   uncommon: {
     attack: { min: 10, max: 20 },
     bonus_damage: { min: 2, max: 5 },
-    attackCooldown: { min: 20, max: 40 },
+    attack_speed: { min: 20, max: 40 },
   },
   rare: {
     attack: { min: 20, max: 40 },
     bonus_damage: { min: 5, max: 8 },
-    attackCooldown: { min: 40, max: 80 },
+    attack_speed: { min: 40, max: 80 },
   },
   epic: {
     attack: { min: 40, max: 60 },
     bonus_damage: { min: 8, max: 12 },
-    attackCooldown: { min: 80, max: 120 },
+    attack_speed: { min: 80, max: 120 },
   },
   legendary: {
     attack: { min: 60, max: 90 },
     bonus_damage: { min: 12, max: 24 },
-    attackCooldown: { min: 120, max: 180 },
+    attack_speed: { min: 120, max: 180 },
   },
   perfectLegendary: {
     attack: { min: 90, max: 120 },
     bonus_damage: { min: 24, max: 25 },
-    attackCooldown: { min: 180, max: 250 },
+    attack_speed: { min: 180, max: 250 },
   },
 };
 
@@ -806,19 +806,19 @@ export function getEnemyLoot(enemyLevel) {
     };
     statDescriptions.push(
       `Damage Reduction ${itemStats.damage_reduction}% [${statRange.damage_reduction.min}% - ${statRange.damage_reduction.max}%]`, 
-      `Damage ${itemStats.bonus_damage}% [${statRange.bonus_damage.min}% - ${statRange.bonus_damage.max}%]`
+      `Bonus Damage ${itemStats.bonus_damage}% [${statRange.bonus_damage.min}% - ${statRange.bonus_damage.max}%]`
     );
   } else if (itemType === "Sword") {
     const statRanges = SWORD_STAT_RANGES[itemRarity];
     itemStats = {
       attack: rollStat(statRanges.attack.min, statRanges.attack.max),
       bonus_damage: rollStat(statRanges.bonus_damage.min, statRanges.bonus_damage.max),
-      attackCooldown: rollStat(statRanges.attackCooldown.min, statRanges.attackCooldown.max),
+      attack_speed: rollStat(statRanges.attack_speed.min, statRanges.attack_speed.max),
     };
     statDescriptions.push(
       `Attack ${itemStats.attack} [${statRange.attack.min} - ${statRange.attack.max}]`, 
-      `Damage ${itemStats.bonus_damage}% [${statRange.bonus_damage.min}% - ${statRange.bonus_damage.max}%]`, 
-      `Attack Cooldown -${itemStats.attackCooldown}ms [-${statRange.attackCooldown.min}ms - -${statRange.attackCooldown.max}ms]`
+      `Bonus Damage ${itemStats.bonus_damage}% [${statRange.bonus_damage.min}% - ${statRange.bonus_damage.max}%]`, 
+      `Attack Cooldown -${itemStats.attack_speed}ms [-${statRange.attack_speed.min}ms - -${statRange.attack_speed.max}ms]`
     );
   } else {
     console.error(`Unknown item type ${itemType}`);
