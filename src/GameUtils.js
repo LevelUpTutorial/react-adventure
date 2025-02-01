@@ -624,33 +624,55 @@ export const BOOTS_STAT_RANGES = {
 
 const AMULET_STAT_RANGES = {
   common: {
-    damage_reduction: { min: 5, max: 10 },
+    damage_reduction: { min: 0, max: 1 },
     damage: { min: 0, max: 2 },
   },
   uncommon: {
-    attack: { min: 10, max: 20 },
+    damage_reduction: { min: 1, max: 2 },
     damage: { min: 2, max: 5 },
-    attackSpeed: { min: 20, max: 40 },
   },
   rare: {
-    attack: { min: 20, max: 40 },
+    damage_reduction: { min: 2, max: 4 },
     damage: { min: 5, max: 8 },
-    attackSpeed: { min: 40, max: 80 },
   },
   epic: {
-    attack: { min: 40, max: 60 },
+    damage_reduction: { min: 4, max: 6 },
     damage: { min: 8, max: 12 },
-    attackSpeed: { min: 80, max: 120 },
   },
   legendary: {
-    attack: { min: 60, max: 90 },
+    damage_reduction: { min: 6, max: 10 },
     damage: { min: 12, max: 24 },
-    attackSpeed: { min: 120, max: 180 },
   },
   perfectLegendary: {
-    attack: { min: 90, max: 120 },
+    damage_reduction: { min: 10, max: 10 },
     damage: { min: 24, max: 25 },
-    attackSpeed: { min: 180, max: 250 },
+  },
+};
+
+const RING_STAT_RANGES = {
+  common: {
+    crit_chance: { min: 0, max: 1 },
+    crit_damage: { min: 1, max: 5 },
+  },
+  uncommon: {
+    crit_chance: { min: 1, max: 2 },
+    crit_damage: { min: 4, max: 12 },
+  },
+  rare: {
+    crit_chance: { min: 2, max: 4 },
+    crit_damage: { min: 11, max: 25 },
+  },
+  epic: {
+    crit_chance: { min: 4, max: 6 },
+    crit_damage: { min: 24, max: 35 },
+  },
+  legendary: {
+    crit_chance: { min: 6, max: 10 },
+    crit_damage: { min: 34, max: 49 },
+  },
+  perfectLegendary: {
+    crit_chance: { min: 10, max: 10 },
+    crit_damage: { min: 49, max: 50 },
   },
 };
 
@@ -862,6 +884,57 @@ export function getItemImage(item) {
           return item.subRarity === 'high' ? bootsLegendaryHigh : bootsLegendaryLow;
         case 'perfectLegendary':
           return bootsPerfectLegendaryHigh;
+        default:
+          return '';
+      }
+    case 'Sword':
+      switch (item.itemRarity) {
+        case 'common':
+          return item.subRarity === 'high' ? armorCommonHigh : armorCommonLow;
+        case 'uncommon':
+          return item.subRarity === 'high' ? swordUncommonHigh : swordUncommonLow;
+        case 'rare':
+          return item.subRarity === 'high' ? swordRareHigh : swordRareLow;
+        case 'epic':
+          return item.subRarity === 'high' ? swordEpicHigh : swordEpicLow;
+        case 'legendary':
+          return item.subRarity === 'high' ? swordLegendaryHigh : swordLegendaryLow;
+        case 'perfectLegendary':
+          return swordPerfectLegendaryHigh;
+        default:
+          return '';
+      }
+    case 'Amulet':
+      switch (item.itemRarity) {
+        case 'common':
+          return item.subRarity === 'high' ? amuletCommonHigh : amuletCommonLow;
+        case 'uncommon':
+          return item.subRarity === 'high' ? amuletUncommonHigh : amuletUncommonLow;
+        case 'rare':
+          return item.subRarity === 'high' ? amuletareHigh : amuletRareLow;
+        case 'epic':
+          return item.subRarity === 'high' ? amuletEpicHigh : amuletEpicLow;
+        case 'legendary':
+          return item.subRarity === 'high' ? amuletLegendaryHigh : amuletLegendaryLow;
+        case 'perfectLegendary':
+          return amuletPerfectLegendaryHigh;
+        default:
+          return '';
+      }
+    case 'Ring':
+      switch (item.itemRarity) {
+        case 'common':
+          return item.subRarity === 'high' ? ringCommonHigh : ringCommonLow;
+        case 'uncommon':
+          return item.subRarity === 'high' ? ringUncommonHigh : ringUncommonLow;
+        case 'rare':
+          return item.subRarity === 'high' ? ringRareHigh : ringRareLow;
+        case 'epic':
+          return item.subRarity === 'high' ? ringEpicHigh : ringEpicLow;
+        case 'legendary':
+          return item.subRarity === 'high' ? ringLegendaryHigh : ringLegendaryLow;
+        case 'perfectLegendary':
+          return ringPerfectLegendaryHigh;
         default:
           return '';
       }
