@@ -10,15 +10,6 @@ import heroFemaleNeutral from './assets/images/hero/hero_female_neutral.jpg';
 import heroMaleNeutral from './assets/images/hero/hero_male_neutral.jpg';
 import heroFemaleCombat from './assets/images/hero/hero_female_combat.png';
 import heroMaleCombat from './assets/images/hero/hero_male_combat.png';
-/* Hero Gear Tier 1 */
-import heroFemaleCombatT1Fire from './assets/images/hero/hero_female_combat_fire_t1.webp';
-import heroFemaleComabtT1Ice from './assets/images/hero/hero_female_combat_ice_t1.webp';
-import heroFemaleCombatT1Lightning from './assets/images/hero/hero_female_combat_lightning_t1.webp';
-import heroMaleCombatT1Fire from './assets/images/hero/hero_male_combat_fire_t1.webp';
-import heroMaleCombatT1Ice from './assets/images/hero/hero_male_combat_ice_t1.webp';
-import heroMaleCombatT1Lightning from './assets/images/hero/hero_male_combat_lightning_t1.webp'; 
-/* Hero Gear Tier 2 */
-/* Hero Gear Tier 3 */
 /* Placeholder */
 import enemyPlaceholder from './assets/images/enemy_placeholder_card.webp'; 
 /* Enemys Act 1 */
@@ -1658,6 +1649,7 @@ static STORY_DIALOG_TUTORIAL2 = {
       crit_chance: (gender === GameState.GENDER_MALE ? 36 : 16), 
       crit_damage: (gender === GameState.GENDER_MALE ? 200 : 100), 
       damage_reduction: 0,
+      bonus_damage: 0,
       last_combat_event: "", 
       image: (gender === GameState.GENDER_MALE ? this.IMG_HERO_MALE_NEUTRAL : this.IMG_HERO_FEMALE_NEUTRAL), 
       current_enchantment: ID_NONE,
@@ -1674,22 +1666,43 @@ static STORY_DIALOG_TUTORIAL2 = {
         itemType: "Helm",
         itemRarity: "common",
         subRarity: "low", 
-        statDesc: "Damage Reduction", 
-        itemStat: 0,
+        statDescriptions: ["Damage Reduction 0%"], 
+        itemStats: {damage_reduction: 0},
       },
       armor: {
         itemType: "Armor",
         itemRarity: "common",
         subRarity: "low", 
-        statDesc: "Damage Reduction", 
-        itemStat: 0,
+        statDescriptions: ["Damage Reduction 0%"], 
+        itemStats: {damage_reduction: 0},
       },
       boots: {
         itemType: "Boots",
         itemRarity: "common",
         subRarity: "low", 
-        statDesc: "Evade Chance", 
-        itemStat: 0,
+        statDescriptions: ["Evade Chance 0%"], 
+        itemStats: {evade_chance: 0},
+      },
+      amulet: {
+        itemType: "Amulet",
+        itemRarity: "common",
+        subRarity: "low", 
+        statDescriptions: ["Damage Reduction 0%", "Bonus Damage 0%"], 
+        itemStats: {damage_reduction: 0, bonus_damage: 0},
+      },
+      ring: {
+        itemType: "Ring",
+        itemRarity: "common",
+        subRarity: "low", 
+        statDescriptions: ["Crit Chance 0%", "Crit Damage 0%"], 
+        itemStats: {crit_chance: 0, crit_damage: 0},
+      },
+      sword: {
+        itemType: "Sword",
+        itemRarity: "common",
+        subRarity: "low", 
+        statDescriptions: ["Attack 0", "Bonus Damage 0%", "Attack Cooldown -0ms"], 
+        itemStats: {attack: 0, bonus_damage: 0, attack_speed: 0},
       },
     }
     this.location = location;
