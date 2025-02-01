@@ -81,6 +81,42 @@ import bootsEpicLow from './assets/images/items/boots_epic_low.webp';
 import bootsLegendaryHigh from './assets/images/items/boots_legendary_high.webp';
 import bootsLegendaryLow from './assets/images/items/boots_legendary_low.webp';
 import bootsPerfectLegendaryHigh from './assets/images/items/boots_perfectLegendary_high.webp';
+/* Swords */
+import swordCommonHigh from './assets/images/items/sword_common_high.webp';
+import swordCommonLow from './assets/images/items/sword_common_low.webp';
+import swordUncommonHigh from './assets/images/items/sword_uncommon_high.webp';
+import swordUncommonLow from './assets/images/items/sword_uncommon_low.webp';
+import swordRareHigh from './assets/images/items/sword_rare_high.webp';
+import swordRareLow from './assets/images/items/sword_rare_low.webp';
+import swordEpicHigh from './assets/images/items/sword_epic_high.webp';
+import swordEpicLow from './assets/images/items/sword_epic_low.webp';
+import swordLegendaryHigh from './assets/images/items/sword_legendary_high.webp';
+import swordLegendaryLow from './assets/images/items/sword_legendary_low.webp';
+import swordPerfectLegendaryHigh from './assets/images/items/sword_perfectLegendary_high.webp';
+/* Amulets */
+import amuletCommonHigh from './assets/images/items/amulet_common_high.webp';
+import amuletCommonLow from './assets/images/items/amulet_common_low.webp';
+import amuletUncommonHigh from './assets/images/items/amulet_uncommon_high.webp';
+import amuletUncommonLow from './assets/images/items/amulet_uncommon_low.webp';
+import amuletRareHigh from './assets/images/items/amulet_rare_high.webp';
+import amuletRareLow from './assets/images/items/amulet_rare_low.webp';
+import amuletEpicHigh from './assets/images/items/amulet_epic_high.webp';
+import amuletEpicLow from './assets/images/items/amulet_epic_low.webp';
+import amuletLegendaryHigh from './assets/images/items/amulet_legendary_high.webp';
+import amuletLegendaryLow from './assets/images/items/amulet_legendary_low.webp';
+import amuletPerfectLegendaryHigh from './assets/images/items/amulet_perfectLegendary_high.webp';
+/* Rings */
+import ringCommonHigh from './assets/images/items/ring_common_high.webp';
+import ringCommonLow from './assets/images/items/ring_common_low.webp';
+import ringUncommonHigh from './assets/images/items/ring_uncommon_high.webp';
+import ringUncommonLow from './assets/images/items/ring_uncommon_low.webp';
+import ringRareHigh from './assets/images/items/ring_rare_high.webp';
+import ringRareLow from './assets/images/items/ring_rare_low.webp';
+import ringEpicHigh from './assets/images/items/ring_epic_high.webp';
+import ringEpicLow from './assets/images/items/ring_epic_low.webp';
+import ringLegendaryHigh from './assets/images/items/ring_legendary_high.webp';
+import ringLegendaryLow from './assets/images/items/ring_legendary_low.webp';
+import ringPerfectLegendaryHigh from './assets/images/items/ring_perfectLegendary_high.webp';
 /* Items Loot Chests */
 import chestCommon from './assets/images/items/chest_common.webp';
 import chestEpic from './assets/images/items/chest_epic.webp';
@@ -540,17 +576,20 @@ const DROP_CHANCES = {
   1: { dropRate: 0.10, rarity: { common: 0.9, uncommon: 0.1 } },
   11: { dropRate: 0.15, rarity: { common: 0.689, uncommon: 0.29, rare: 0.02, epic: 0.001 } },
   21: { dropRate: 0.20, rarity: { common: 0.1, uncommon: 0.8, rare: 0.1, epic: 0.01 } },
-  31: { dropRate: 0.20, rarity: { uncommon: 0.6, rare: 0.34, epic: 0.05, legendary: 0.01 } },
-  41: { dropRate: 0.25, rarity: { uncommon: 0.1, rare: 0.7, epic: 0.17, legendary: 0.03 } },
-  51: { dropRate: 0.25, rarity: { rare: 0.5, epic: 0.35, legendary: 0.15 } },
-  61: { dropRate: 0.30, rarity: { rare: 0.1, epic: 0.7, legendary: 0.198, perfectLegendary: 0.002 } },
+  31: { dropRate: 0.25, rarity: { uncommon: 0.6, rare: 0.34, epic: 0.05, legendary: 0.01 } },
+  41: { dropRate: 0.30, rarity: { uncommon: 0.1, rare: 0.7, epic: 0.17, legendary: 0.03 } },
+  51: { dropRate: 0.30, rarity: { rare: 0.5, epic: 0.35, legendary: 0.15 } },
+  61: { dropRate: 0.35, rarity: { rare: 0.1, epic: 0.7, legendary: 0.198, perfectLegendary: 0.002 } },
 };
 
 /* Chances which items type drops */ 
 const ITEM_TYPE_CHANCES = {
-  Helm: 0.333,
-  Boots: 0.333,
-  Armor: 0.334,
+  Sword: 0.18,
+  Helm: 0.14,
+  Boots: 0.18,
+  Armor: 0.21,
+  Amulet: 0.15,
+  Ring: 0.14,
 };
 
 // Armor Stat Ranges by Rarity
@@ -581,6 +620,71 @@ export const BOOTS_STAT_RANGES = {
   epic: { min: 7, max: 13 },
   legendary: { min: 13, max: 24 },
   perfectLegendary: { min: 24, max: 25 },
+};
+
+const AMULET_STAT_RANGES = {
+  common: {
+    damage_reduction: { min: 5, max: 10 },
+    damage: { min: 0, max: 2 },
+  },
+  uncommon: {
+    attack: { min: 10, max: 20 },
+    damage: { min: 2, max: 5 },
+    attackSpeed: { min: 20, max: 40 },
+  },
+  rare: {
+    attack: { min: 20, max: 40 },
+    damage: { min: 5, max: 8 },
+    attackSpeed: { min: 40, max: 80 },
+  },
+  epic: {
+    attack: { min: 40, max: 60 },
+    damage: { min: 8, max: 12 },
+    attackSpeed: { min: 80, max: 120 },
+  },
+  legendary: {
+    attack: { min: 60, max: 90 },
+    damage: { min: 12, max: 24 },
+    attackSpeed: { min: 120, max: 180 },
+  },
+  perfectLegendary: {
+    attack: { min: 90, max: 120 },
+    damage: { min: 24, max: 25 },
+    attackSpeed: { min: 180, max: 250 },
+  },
+};
+
+const SWORD_STAT_RANGES = {
+  common: {
+    attack: { min: 5, max: 10 },
+    damage: { min: 0, max: 2 },
+    attackSpeed: { min: 0, max: 20 },
+  },
+  uncommon: {
+    attack: { min: 10, max: 20 },
+    damage: { min: 2, max: 5 },
+    attackSpeed: { min: 20, max: 40 },
+  },
+  rare: {
+    attack: { min: 20, max: 40 },
+    damage: { min: 5, max: 8 },
+    attackSpeed: { min: 40, max: 80 },
+  },
+  epic: {
+    attack: { min: 40, max: 60 },
+    damage: { min: 8, max: 12 },
+    attackSpeed: { min: 80, max: 120 },
+  },
+  legendary: {
+    attack: { min: 60, max: 90 },
+    damage: { min: 12, max: 24 },
+    attackSpeed: { min: 120, max: 180 },
+  },
+  perfectLegendary: {
+    attack: { min: 90, max: 120 },
+    damage: { min: 24, max: 25 },
+    attackSpeed: { min: 180, max: 250 },
+  },
 };
 
 // Function to generate a random number between min and max
@@ -617,8 +721,6 @@ function getItemType() {
 }
 
 // Function to get an enemy's loot based on their level
-// Pity System for item after x kill
-// Pity System for legendaries 
 let itemPityCount = 0;
 let legendaryPityCount = 0;
 export function getEnemyLoot(enemyLevel) {
@@ -630,56 +732,84 @@ export function getEnemyLoot(enemyLevel) {
 
   // Determine if an item drops
   if (itemPityCount < 10 && Math.random() > dropRate) {
-    // No Item dropped 
-    itemPityCount += 1; 
-    return null; 
-  } 
-
-  // Generate item drop 
-  itemPityCount = 0; 
-  // Roll Item Type 
-  const itemType = getItemType(); 
-  // Determine the rarity of the item
-  let itemRarity = getRarity(rarity); 
-  // Check for legendary pity 
-  if (enemyLevel > 50 && 
-      !itemRarity === 'legendary' && 
-      !itemRarity === 'perfectLegendary' && 
-      legendaryPityCount >= 5) {
-    itemRarity = 'legendary'; 
-    legendaryPityCount = 0; 
+    // No item dropped
+    itemPityCount += 1;
+    return null;
+  }
+  // Generate item drop
+  itemPityCount = 0;
+  const itemType = getItemType();
+  let itemRarity = getRarity(rarity);
+  // Check for legendary pity
+  if (
+    enemyLevel > 50 &&
+    itemRarity !== "legendary" &&
+    itemRarity !== "perfectLegendary" &&
+    legendaryPityCount >= 5
+  ) {
+    itemRarity = "legendary";
+    legendaryPityCount = 0;
   }
 
   // Generate stats for the item based on rarity
-  let statRange = null; 
-  let statDesc = null; 
+  let itemStats = {};
+  let statDescriptions = [];
   if (itemType === "Armor") {
-    statRange = ARMOR_STAT_RANGES[itemRarity];
-    statDesc = "Damage Reduction";
+    const statRange = ARMOR_STAT_RANGES[itemRarity];
+    itemStats = {
+      statValue: rollStat(statRange.min, statRange.max),
+    };
+    statDescriptions.push("Damage Reduction");
   } else if (itemType === "Boots") {
-    statRange = BOOTS_STAT_RANGES[itemRarity];
-    statDesc = "Evade Chance";
+    const statRange = BOOTS_STAT_RANGES[itemRarity];
+    itemStats = {
+      statValue: rollStat(statRange.min, statRange.max),
+    };
+    statDescriptions.push("Evade Chance");
   } else if (itemType === "Helm") {
-    statRange = HELM_STAT_RANGES[itemRarity];
-    statDesc = "Damage Reduction";
+    const statRange = HELM_STAT_RANGES[itemRarity];
+    itemStats = {
+      statValue: rollStat(statRange.min, statRange.max),
+    };
+    statDescriptions.push("Damage Reduction");
+  } else if (itemType === "Sword") {
+    const statRanges = SWORD_STAT_RANGES[itemRarity];
+    itemStats = {
+      attack: rollStat(statRanges.attack.min, statRanges.attack.max),
+      damage: rollStat(statRanges.damage.min, statRanges.damage.max),
+      attackSpeed: rollStat(statRanges.attackSpeed.min, statRanges.attackSpeed.max),
+    };
+    statDescriptions.push("Attack", "Damage", "Attack Speed");
   } else {
-    console.error(`unknown item type ${itemType}`); 
-    return null; 
+    console.error(`Unknown item type ${itemType}`);
+    return null;
   }
-  // Nachkommastellen 10^x
-  const decimalPlaces = 100; 
-  const itemStat = Math.round(randomInRange(statRange.min, statRange.max) * decimalPlaces) / decimalPlaces;
-  const midPoint = statRange.min + (statRange.max - statRange.min) / 2; 
-  const subRarity = itemStat >= midPoint ? 'high' : 'low' ; 
+
+  // Determine sub-rarity for visual representation
+  let subRarity = "low";
+  if (itemType === "Sword") {
+    const avgAttack = (SWORD_STAT_RANGES[itemRarity].attack.min + SWORD_STAT_RANGES[itemRarity].attack.max) / 2;
+    subRarity = itemStats.attack >= avgAttack ? "high" : "low";
+  } else {
+    const statRange = ARMOR_STAT_RANGES[itemRarity] || BOOTS_STAT_RANGES[itemRarity] || HELM_STAT_RANGES[itemRarity];
+    const midPoint = statRange.min + (statRange.max - statRange.min) / 2;
+    subRarity = itemStats.statValue >= midPoint ? "high" : "low";
+  }
 
   // Return the item details
   return {
-    itemType: itemType,
-    itemRarity: itemRarity,
-    subRarity: subRarity, 
-    statDesc: statDesc, 
-    itemStat: itemStat,
+    itemType,
+    itemRarity,
+    subRarity,
+    statDescriptions,
+    itemStats,
   };
+}
+
+// Helper to roll a stat within a range
+function rollStat(min, max) {
+  const decimalPlaces = 100;
+  return Math.round(randomInRange(min, max) * decimalPlaces) / decimalPlaces;
 }
 
 export function getItemImage(item) {
