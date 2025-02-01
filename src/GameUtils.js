@@ -754,14 +754,15 @@ export function getEnemyLoot(enemyLevel) {
 
   // Determine if an item drops
   if (itemPityCount < 10 && Math.random() > dropRate) {
-    // No item dropped
-    itemPityCount += 1;
+    itemPityCount += 1; // No item dropped
     return null;
   }
+
   // Generate item drop
   itemPityCount = 0;
   const itemType = getItemType();
   let itemRarity = getRarity(rarity);
+
   // Check for legendary pity
   if (
     enemyLevel > 50 &&
@@ -776,24 +777,33 @@ export function getEnemyLoot(enemyLevel) {
   // Generate stats for the item based on rarity
   let itemStats = {};
   let statDescriptions = [];
-  if (itemType === "Armor") {
-    const statRange = ARMOR_STAT_RANGES[itemRarity];
+
+  if (itemType === "Armor" || itemType === "Helm") {
+    const statRange = itemType === "Armor" ? ARMOR_STAT_RANGES[itemRarity] : HELM_STAT_RANGES[itemRarity];
     itemStats = {
-      statValue: rollStat(statRange.min, statRange.max),
+      damage_reduction: rollStat(statRange.min, statRange.max),
     };
     statDescriptions.push("Damage Reduction");
   } else if (itemType === "Boots") {
     const statRange = BOOTS_STAT_RANGES[itemRarity];
     itemStats = {
-      statValue: rollStat(statRange.min, statRange.max),
+      evade_chance: rollStat(statRange.min, statRange.max),
     };
     statDescriptions.push("Evade Chance");
-  } else if (itemType === "Helm") {
-    const statRange = HELM_STAT_RANGES[itemRarity];
+  } else if (itemType === "Ring") {
+    const statRanges = RING_STAT_RANGES[itemRarity];
     itemStats = {
-      statValue: rollStat(statRange.min, statRange.max),
+      crit_chance: rollStat(statRanges.crit_chance.min, statRanges.crit_chance.max),
+      crit_damage: rollStat(statRanges.crit_damage.min, statRanges.crit_damage.max),
     };
-    statDescriptions.push("Damage Reduction");
+    statDescriptions.push("Crit Chance", "Crit Damage");
+  } else if (itemType === "Amulet") {
+    const statRanges = AMULET_STAT_RANGES[itemRarity];
+    itemStats = {
+      damage_reduction: rollStat(statRanges.damage_reduction.min, statRanges.damage_reduction.max),
+      damage: rollStat(statRanges.damage.min, statRanges.damage.max),
+    };
+    statDescriptions.push("Damage Reduction", "Damage");
   } else if (itemType === "Sword") {
     const statRanges = SWORD_STAT_RANGES[itemRarity];
     itemStats = {
@@ -807,16 +817,12 @@ export function getEnemyLoot(enemyLevel) {
     return null;
   }
 
-  // Determine sub-rarity for visual representation
+  // Determine sub-rarity based on primary stat
   let subRarity = "low";
-  if (itemType === "Sword") {
-    const avgAttack = (SWORD_STAT_RANGES[itemRarity].attack.min + SWORD_STAT_RANGES[itemRarity].attack.max) / 2;
-    subRarity = itemStats.attack >= avgAttack ? "high" : "low";
-  } else {
-    const statRange = ARMOR_STAT_RANGES[itemRarity] || BOOTS_STAT_RANGES[itemRarity] || HELM_STAT_RANGES[itemRarity];
-    const midPoint = statRange.min + (statRange.max - statRange.min) / 2;
-    subRarity = itemStats.statValue >= midPoint ? "high" : "low";
-  }
+  const primaryStatKey = Object.keys(itemStats)[0]; // Get first key (main stat)
+  const statRange = getStatRange(itemType, itemRarity);
+  const midPoint = statRange.min + (statRange.max - statRange.min) / 2;
+  subRarity = itemStats[primaryStatKey] >= midPoint ? "high" : "low";
 
   // Return the item details
   return {
@@ -832,6 +838,19 @@ export function getEnemyLoot(enemyLevel) {
 function rollStat(min, max) {
   const decimalPlaces = 100;
   return Math.round(randomInRange(min, max) * decimalPlaces) / decimalPlaces;
+}
+
+// Helper function to get stat ranges for any item type
+function getStatRange(itemType, itemRarity) {
+  switch (itemType) {
+    case "Armor": return ARMOR_STAT_RANGES[itemRarity];
+    case "Boots": return BOOTS_STAT_RANGES[itemRarity];
+    case "Helm": return HELM_STAT_RANGES[itemRarity];
+    case "Ring": return RING_STAT_RANGES[itemRarity].crit_chance; // Use crit_chance as primary
+    case "Amulet": return AMULET_STAT_RANGES[itemRarity].damage; // Use damage as primary
+    case "Sword": return SWORD_STAT_RANGES[itemRarity].attack; // Use attack as primary
+    default: return { min: 0, max: 1 };
+  }
 }
 
 export function getItemImage(item) {
