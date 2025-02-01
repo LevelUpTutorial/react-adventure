@@ -209,6 +209,7 @@ const handleActiveAttack = () => {
         <p>Damage Reduction: {gameState.hero.damage_reduction}%</p>
         <p>Crit Chance: {gameState.hero.crit_chance}%{gameState.hero.upgradeCounts[UPGRADE_CRIT_CHANCE] >= GameState.UPGRADE_LIMITS[UPGRADE_CRIT_CHANCE] ? " (max)" : ""}</p>
         <p>Crit Damage: {gameState.hero.crit_damage}%{gameState.hero.upgradeCounts[UPGRADE_CRIT_DAMAGE] >= GameState.UPGRADE_LIMITS[UPGRADE_CRIT_DAMAGE] ? " (max)" : ""}</p>
+        <p>Bonus Damage: {gameState.hero.bonus_damage}%</p>
       </>
     ); 
   };
@@ -253,14 +254,29 @@ const equipNewItem = () => {
     // Rundung wg. Floating-Point-Arithmetik Error of Javascript
     const decimalPlaces = 100; 
     if (newItem.itemType === 'Armor') { 
-      hero.damage_reduction = Math.round((hero.damage_reduction - hero.armor.itemStat + newItem.itemStat) * decimalPlaces) / decimalPlaces; 
+      hero.damage_reduction = Math.round((hero.damage_reduction - hero.armor.itemStats.damage_reduction + newItem.itemStats.damage_reduction) * decimalPlaces) / decimalPlaces; 
       hero.armor = newItem; 
     } else if (newItem.itemType === 'Helm') {
-      hero.damage_reduction = Math.round((hero.damage_reduction - hero.helm.itemStat + newItem.itemStat) * decimalPlaces) / decimalPlaces; 
+      hero.damage_reduction = Math.round((hero.damage_reduction - hero.helm.itemStats.damage_reduction + newItem.itemStats.damage_reduction) * decimalPlaces) / decimalPlaces; 
       hero.helm = newItem; 
     } if (newItem.itemType === 'Boots') {
-      hero.evade_chance = Math.round((hero.evade_chance - hero.boots.itemStat + newItem.itemStat) * decimalPlaces) / decimalPlaces; 
+      hero.evade_chance = Math.round((hero.evade_chance - hero.boots.itemStats.evade_chance + newItem.itemStats.evade_chance) * decimalPlaces) / decimalPlaces; 
       hero.boots = newItem; 
+    } else if (newItem.itemType === 'Amulet') { 
+      hero.damage_reduction = Math.round((hero.damage_reduction - hero.amulet.itemStats.damage_reduction + newItem.itemStats.damage_reduction) * decimalPlaces) / decimalPlaces; 
+      hero.bonus_damage = Math.round((hero.bonus_damage - hero.amulet.itemStats.bonus_damage + newItem.itemStats.bonus_damage) * decimalPlaces) / decimalPlaces; 
+      hero.amulet = newItem; 
+    } else if (newItem.itemType === 'Ring') { 
+      hero.crit_chance = Math.round((hero.crit_chance - hero.ring.itemStats.crit_chance + newItem.itemStats.crit_chance) * decimalPlaces) / decimalPlaces; 
+      hero.crit_damage = Math.round((hero.crit_damage - hero.ring.itemStats.crit_damage + newItem.itemStats.crit_damage) * decimalPlaces) / decimalPlaces; 
+      hero.ring = newItem; 
+    } else if (newItem.itemType === 'Sword') { 
+      hero.attack = Math.round((hero.attack - hero.sword.itemStats.attack + newItem.itemStats.attack) * decimalPlaces) / decimalPlaces; 
+      hero.bonus_damage = Math.round((hero.bonus_damage - hero.sword.itemStats.bonus_damage + newItem.itemStats.bonus_damage) * decimalPlaces) / decimalPlaces; 
+      // for attack speed negative Bonus is good 
+      hero.attack_speed = Math.round((hero.attack_speed + hero.sword.itemStats.attack_speed - newItem.itemStats.attack_speed) * decimalPlaces) / decimalPlaces; 
+      hero.attack_cooldown = hero.attack_speed; 
+      hero.sword = newItem; 
     } else {
       console.error(`unknown item type ${newItem.itemType}`);
     }
