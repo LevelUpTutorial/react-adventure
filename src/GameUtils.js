@@ -601,7 +601,6 @@ export const ARMOR_STAT_RANGES = {
   legendary: { min: 34, max: 49 },
   perfectLegendary: { min: 49, max: 50 },
 };
-
 // Helm Stat Ranges by Rarity
 export const HELM_STAT_RANGES = {
   common: { min: 1, max: 2 },
@@ -611,7 +610,6 @@ export const HELM_STAT_RANGES = {
   legendary: { min: 19, max: 29 },
   perfectLegendary: { min: 29, max: 30 },
 };
-
 // Boots Stat Ranges by Rarity
 export const BOOTS_STAT_RANGES = {
   common: { min: 1, max: 2 },
@@ -621,34 +619,34 @@ export const BOOTS_STAT_RANGES = {
   legendary: { min: 13, max: 24 },
   perfectLegendary: { min: 24, max: 25 },
 };
-
+// Amulets Stat Ranges by Rarity
 const AMULET_STAT_RANGES = {
   common: {
-    damage_reduction: { min: 0, max: 1 },
     damage: { min: 0, max: 2 },
+    damage_reduction: { min: 0, max: 1 },
   },
   uncommon: {
-    damage_reduction: { min: 1, max: 2 },
     damage: { min: 2, max: 5 },
+    damage_reduction: { min: 1, max: 2 },
   },
   rare: {
-    damage_reduction: { min: 2, max: 4 },
     damage: { min: 5, max: 8 },
+    damage_reduction: { min: 2, max: 4 },
   },
   epic: {
-    damage_reduction: { min: 4, max: 6 },
     damage: { min: 8, max: 12 },
+    damage_reduction: { min: 4, max: 6 },
   },
   legendary: {
-    damage_reduction: { min: 6, max: 10 },
     damage: { min: 12, max: 24 },
+    damage_reduction: { min: 6, max: 10 },
   },
   perfectLegendary: {
-    damage_reduction: { min: 10, max: 10 },
     damage: { min: 24, max: 25 },
+    damage_reduction: { min: 10, max: 10 },
   },
 };
-
+// Rings Stat Ranges by Rarity
 const RING_STAT_RANGES = {
   common: {
     crit_chance: { min: 0, max: 1 },
@@ -675,37 +673,37 @@ const RING_STAT_RANGES = {
     crit_damage: { min: 49, max: 50 },
   },
 };
-
+// Swords Stat Ranges by Rarity
 const SWORD_STAT_RANGES = {
   common: {
     attack: { min: 5, max: 10 },
     damage: { min: 0, max: 2 },
-    attackSpeed: { min: 0, max: 20 },
+    attackCooldown: { min: 0, max: 20 },
   },
   uncommon: {
     attack: { min: 10, max: 20 },
     damage: { min: 2, max: 5 },
-    attackSpeed: { min: 20, max: 40 },
+    attackCooldown: { min: 20, max: 40 },
   },
   rare: {
     attack: { min: 20, max: 40 },
     damage: { min: 5, max: 8 },
-    attackSpeed: { min: 40, max: 80 },
+    attackCooldown: { min: 40, max: 80 },
   },
   epic: {
     attack: { min: 40, max: 60 },
     damage: { min: 8, max: 12 },
-    attackSpeed: { min: 80, max: 120 },
+    attackCooldown: { min: 80, max: 120 },
   },
   legendary: {
     attack: { min: 60, max: 90 },
     damage: { min: 12, max: 24 },
-    attackSpeed: { min: 120, max: 180 },
+    attackCooldown: { min: 120, max: 180 },
   },
   perfectLegendary: {
     attack: { min: 90, max: 120 },
     damage: { min: 24, max: 25 },
-    attackSpeed: { min: 180, max: 250 },
+    attackCooldown: { min: 180, max: 250 },
   },
 };
 
@@ -783,35 +781,45 @@ export function getEnemyLoot(enemyLevel) {
     itemStats = {
       damage_reduction: rollStat(statRange.min, statRange.max),
     };
-    statDescriptions.push("Damage Reduction");
+    statDescriptions.push(`Damage Reduction ${itemStats.damage_reduction}% [${statRange.min}% - ${statRange.max}%]`);
   } else if (itemType === "Boots") {
     const statRange = BOOTS_STAT_RANGES[itemRarity];
     itemStats = {
       evade_chance: rollStat(statRange.min, statRange.max),
     };
-    statDescriptions.push("Evade Chance");
+    statDescriptions.push(`Evade Chance ${itemStats.evade_chance}% [${statRange.min}% - ${statRange.max}%]`);
   } else if (itemType === "Ring") {
     const statRanges = RING_STAT_RANGES[itemRarity];
     itemStats = {
       crit_chance: rollStat(statRanges.crit_chance.min, statRanges.crit_chance.max),
       crit_damage: rollStat(statRanges.crit_damage.min, statRanges.crit_damage.max),
     };
-    statDescriptions.push("Crit Chance", "Crit Damage");
+    statDescriptions.push(
+      `Crit Chance ${itemStats.crit_chance}% [${statRange.crit_chance.min}% - ${statRange.crit_chance.max}%]`,
+      `Crit Damage ${itemStats.crit_damage}% [${statRange.crit_damage.min}% - ${statRange.crit_damage.max}%]`
+    );
   } else if (itemType === "Amulet") {
     const statRanges = AMULET_STAT_RANGES[itemRarity];
     itemStats = {
       damage_reduction: rollStat(statRanges.damage_reduction.min, statRanges.damage_reduction.max),
       damage: rollStat(statRanges.damage.min, statRanges.damage.max),
     };
-    statDescriptions.push("Damage Reduction", "Damage");
+    statDescriptions.push(
+      `Damage Reduction ${itemStats.damage_reduction}% [${statRange.damage_reduction.min}% - ${statRange.damage_reduction.max}%]`, 
+      `Damage ${itemStats.damage}% [${statRange.damage.min}% - ${statRange.damage.max}%]`
+    );
   } else if (itemType === "Sword") {
     const statRanges = SWORD_STAT_RANGES[itemRarity];
     itemStats = {
       attack: rollStat(statRanges.attack.min, statRanges.attack.max),
       damage: rollStat(statRanges.damage.min, statRanges.damage.max),
-      attackSpeed: rollStat(statRanges.attackSpeed.min, statRanges.attackSpeed.max),
+      attackCooldown: rollStat(statRanges.attackCooldown.min, statRanges.attackCooldown.max),
     };
-    statDescriptions.push("Attack", "Damage", "Attack Speed");
+    statDescriptions.push(
+      `Attack ${itemStats.attack} [${statRange.attack.min} - ${statRange.attack.max}]`, 
+      `Damage ${itemStats.damage}% [${statRange.damage.min}% - ${statRange.damage.max}%]`, 
+      `Attack Cooldown -${itemStats.attackCooldown}ms [-${statRange.attackCooldown.min}ms - -${statRange.attackCooldown.max}ms]`
+    );
   } else {
     console.error(`Unknown item type ${itemType}`);
     return null;
