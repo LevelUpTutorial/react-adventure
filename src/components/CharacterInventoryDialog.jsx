@@ -45,7 +45,7 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
                       key={colIndex} 
                       className={`inventory-slot border ${item ? getRarityBorderClass(item.itemRarity) : "border-secondary"} m-1 d-flex flex-column align-items-center`}
                       style={{ 
-                        width: "170px", 
+                        width: "190px", 
                         height: "200px", 
                         backgroundColor: "#2c2f33", 
                         borderWidth: "4px", 
@@ -58,7 +58,7 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
                           <img 
                             src={getItemImage(item)} 
                             alt={item.itemType} 
-                            className="img-fluid mb-1" 
+                            className="img-fluid" 
                             style={{ maxWidth: "90%" }} 
                           />
                           {item.statDescriptions && item.statDescriptions.length > 0 && (
