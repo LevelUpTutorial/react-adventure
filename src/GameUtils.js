@@ -924,7 +924,7 @@ export function getItemImage(item) {
     case 'Sword':
       switch (item.itemRarity) {
         case 'common':
-          return item.subRarity === 'high' ? armorCommonHigh : armorCommonLow;
+          return item.subRarity === 'high' ? swordCommonHigh : swordCommonLow;
         case 'uncommon':
           return item.subRarity === 'high' ? swordUncommonHigh : swordUncommonLow;
         case 'rare':
