@@ -316,7 +316,6 @@ return (
                 className="hero-image img-fluid rounded shadow-sm"
                 style={{ width: "100px", height: "150px" }}
               />
-              <ListHeroStats gameState={gameState} />
               <button
                  type="button"
                  className="btn btn-danger"
