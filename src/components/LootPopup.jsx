@@ -81,7 +81,7 @@ const LootPopup = ({ show, gameState, newItem, onEquip, onKeep }) => {
               />
               <p><strong>Rarity:</strong> <span className={newRarityClass}>{newItem.itemRarity}</span></p>
               {newItem.statDescriptions.map((desc, index) => (
-                <p key={index} className={isSingleStat && isBetter ? "text-success fw-bold" : ""}>
+                <p key={index} className="">
                   <strong>{desc}</strong>
                 </p>
               ))}
@@ -91,7 +91,7 @@ const LootPopup = ({ show, gameState, newItem, onEquip, onKeep }) => {
             <button className={`btn ${isSingleStat ? (isBetter ? "btn-secondary" : "btn-success") : "btn-success"}`} onClick={onKeep}>
               Keep Equipped
             </button>
-            <button className="btn btn-success" onClick={onEquip}>
+            <button className={`btn ${isSingleStat ? (!isBetter ? "btn-secondary" : "btn-success") : "btn-success"}`} onClick={onEquip}>
               Equip New {newItem.itemType}
             </button>
           </div>
