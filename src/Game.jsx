@@ -90,9 +90,9 @@ function Game({ heroName, gender, isGameRunning, savedGameState }) {
     });
   };
 
-const attackTimingWindowStart = 100; 
+const attackTimingWindowStart = 50; 
 const attackTimingWindowStop = 225; 
-const attackErrorMargin = 20; 
+const attackErrorMargin = 25; 
 const attackTimingBonus = 2; 
 const maxComboMultiplier = 100; 
 const comboMultiplier = Math.min(gameState.attack_combo - 1, maxComboMultiplier);
@@ -863,13 +863,14 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
 /* performs hero attack */ 
 function performHeroAttack(gameState) {
   const {hero, active_enemy} = gameState;
-  const dmg = combatCalculation(hero, active_enemy) * (1 + (hero.bonus_damage / 100)); 
+  const bonus_damage = (1 + hero.bonus_damage / 100);
+  const dmg = combatCalculation(hero, active_enemy) * bonus_damage;
 
   if (dmg >= 0) {
     /* apply on hit effects */ 
     applyEffects(onHitEffectsHero, gameState); 
     /* apply damage */ 
-    if ( dmg > hero.attack * (1 + hero.bonus_damage) ) {
+    if ( dmg > hero.attack * bonus_damage ) {
       hero.last_combat_event = `crit ${dmg}`;
       triggerHeroAttackAnimation(gameState, critAnimationDuration, true);
     } else {
