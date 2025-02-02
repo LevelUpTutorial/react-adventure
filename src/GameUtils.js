@@ -759,6 +759,7 @@ export function getEnemyLoot(enemyLevel) {
   // Generate item drop
   itemPityCount = 0;
   const itemType = getItemType();
+  console.log(`getEnemyLoot item type ${itemType}`);
   let itemRarity = getRarity(rarity);
 
   // Check for legendary pity
