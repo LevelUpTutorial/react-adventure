@@ -311,7 +311,7 @@ return (
             <p className="fw-bold text-secondary">Location, {gameState.location.name}</p>
             <div className="row">
 
-              <div className="col-6">
+              <div className="col-6 d-flex justify-content-evenly">
               <img
                 src={gameState.hero.image}
                 alt="hero"
@@ -319,7 +319,7 @@ return (
                 style={{ width: "100px", height: "150px" }}
               />
               </div>
-              <div className="col-6 d-flex flex-column">
+              <div className="col-6 d-flex flex-column justify-content-evenly">
               <button
                  type="button"
                  className="btn btn-danger"
