@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import GameState from "./GameState.js";
 import StoryDialog from "./components/StoryDialog.jsx"; 
+import ListHeroStats from "./components/ListHeroStats.jsx";
 import AttackCooldownWithAnimation from "./AttackCooldownWithAnimation.jsx"; 
 import LootPopup from "./components/LootPopup.jsx";
 import {combatCalculation, playSound, SND_SWORD_HIT, 
@@ -196,23 +197,6 @@ const handleActiveAttack = () => {
       return { ...prevState, hero }; 
     });
   };
-
-  const ListHeroStats = () => {
-    return (
-      <>
-        <p>Level: {gameState.hero.level}{gameState.hero.level >= GameState.MAX_LEVEL ? " (max)" : ""}</p>
-        {/*<p>Exp: {gameState.hero.xp} / {gameState.hero.xp_to_levelup}</p>*/}
-        <p>Health: {heroHPCramped}{gameState.hero.upgradeCounts[UPGRADE_MAX_HEALTH] >= GameState.UPGRADE_LIMITS[UPGRADE_MAX_HEALTH] ? " (max)" : ""}</p>
-        <p>Attack: {gameState.hero.attack}{gameState.hero.upgradeCounts[UPGRADE_DAMAGE] >= GameState.UPGRADE_LIMITS[UPGRADE_DAMAGE] ? " (max)" : ""}</p>
-        <p>Attack Cooldown: {gameState.hero.attack_speed / 1000}s{gameState.hero.upgradeCounts[UPGRADE_ATTACK_SPEED] >= GameState.UPGRADE_LIMITS[UPGRADE_ATTACK_SPEED] ? " (max)" : ""}</p>
-        <p>Evade Chance: {gameState.hero.evade_chance}%{gameState.hero.upgradeCounts[UPGRADE_EVADE_CHANCE] >= GameState.UPGRADE_LIMITS[UPGRADE_EVADE_CHANCE] ? " (max)" : ""}</p>
-        <p>Damage Reduction: {gameState.hero.damage_reduction}%</p>
-        <p>Crit Chance: {gameState.hero.crit_chance}%{gameState.hero.upgradeCounts[UPGRADE_CRIT_CHANCE] >= GameState.UPGRADE_LIMITS[UPGRADE_CRIT_CHANCE] ? " (max)" : ""}</p>
-        <p>Crit Damage: {gameState.hero.crit_damage}%{gameState.hero.upgradeCounts[UPGRADE_CRIT_DAMAGE] >= GameState.UPGRADE_LIMITS[UPGRADE_CRIT_DAMAGE] ? " (max)" : ""}</p>
-        <p>Bonus Damage: {gameState.hero.bonus_damage}%</p>
-      </>
-    ); 
-  };
   
   const UpgradePopup = ({ hero, upgrades, onChoose }) => {
     return (
@@ -226,7 +210,7 @@ const handleActiveAttack = () => {
               <p>Choose one upgrade ({numChooseUpgrades}/{UPGRADE_PER_LEVELUP})</p>
               <div className="row">
                 <div className="col-6">
-                  <ListHeroStats />
+                  <ListHeroStats gameState={gameState}/>
                 </div>
                 <div className="col-6 btn-group-vertical d-flex flex-column gap-1" role="group" aria-label="buttons for upgrade choices">
                   {upgrades.map((upgrade, index) => (
@@ -329,7 +313,7 @@ return (
                 className="hero-image img-fluid rounded shadow-sm"
                 style={{ width: "100px", height: "150px" }}
               />
-              <ListHeroStats />
+              <ListHeroStats gameState={gameState} />
               <button
                  type="button"
                  className="btn btn-danger"
