@@ -28,18 +28,18 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
 
   return (
     <div className="modal show d-block" tabIndex="-1">
-      <div className="modal-dialog modal-xl"> {/* Increased modal width */}
+      <div className="modal-dialog"> {/* Increased modal width */}
         <div className="modal-content">
-          <div className="modal-header bg-primary">
+          <div className="modal-header bg-danger">
             <h5 className="modal-title text-white">Character Inventory</h5>
             <button type="button" className="btn-close" onClick={onClose}></button>
           </div>
           <div className="modal-body">
             
             {/* Inventory Grid */}
-            <div className="container px-5">
+            <div className="container">
               {inventoryGrid.map((row, rowIndex) => (
-                <div className="d-flex justify-content-center mb-3" key={rowIndex}>
+                <div className="d-flex justify-content-center mb-1" key={rowIndex}>
                   {row.map((item, colIndex) => (
                     <div 
                       key={colIndex} 
@@ -50,7 +50,7 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
                         backgroundColor: "#2c2f33", 
                         borderWidth: "4px", 
                         borderStyle: "solid", 
-                        padding: "10px" 
+                        padding: "2px" 
                       }}
                     >
                       {item ? (
@@ -59,7 +59,7 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
                             src={getItemImage(item)} 
                             alt={item.itemType} 
                             className="img-fluid mb-2" 
-                            style={{ maxWidth: "90%", maxHeight: "70%" }} 
+                            style={{ maxWidth: "100%", maxHeight: "100%" }} 
                           />
                           {item.statDescriptions && item.statDescriptions.length > 0 && (
                             <p className="text-white text-center mt-1" style={{ fontSize: "14px", lineHeight: "1.2" }}>
