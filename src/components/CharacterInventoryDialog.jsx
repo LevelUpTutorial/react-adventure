@@ -28,7 +28,7 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
 
   return (
     <div className="modal show d-block" tabIndex="-1">
-      <div className="modal-dialog modal-lg">
+      <div className="modal-dialog modal-xl"> {/* Increased modal width */}
         <div className="modal-content">
           <div className="modal-header bg-primary">
             <h5 className="modal-title text-white">Character Inventory</h5>
@@ -37,25 +37,32 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
           <div className="modal-body">
             
             {/* Inventory Grid */}
-            <div className="container">
+            <div className="container px-5">
               {inventoryGrid.map((row, rowIndex) => (
-                <div className="d-flex justify-content-center mb-4" key={rowIndex}>
+                <div className="d-flex justify-content-center mb-3" key={rowIndex}>
                   {row.map((item, colIndex) => (
                     <div 
                       key={colIndex} 
-                      className={`inventory-slot border ${item ? getRarityBorderClass(item.itemRarity) : "border-secondary"} m-2 d-flex flex-column align-items-center`}
-                      style={{ width: "120px", height: "160px", backgroundColor: "#2c2f33", borderWidth: "4px", borderStyle: "solid", padding: "10px" }}
+                      className={`inventory-slot border ${item ? getRarityBorderClass(item.itemRarity) : "border-secondary"} m-1 d-flex flex-column align-items-center`}
+                      style={{ 
+                        width: "150px", 
+                        height: "200px", 
+                        backgroundColor: "#2c2f33", 
+                        borderWidth: "4px", 
+                        borderStyle: "solid", 
+                        padding: "10px" 
+                      }}
                     >
                       {item ? (
                         <>
                           <img 
                             src={getItemImage(item)} 
                             alt={item.itemType} 
-                            className="img-fluid" 
-                            style={{ maxWidth: "100px", maxHeight: "80px" }} 
+                            className="img-fluid mb-2" 
+                            style={{ maxWidth: "90%", maxHeight: "70%" }} 
                           />
                           {item.statDescriptions && item.statDescriptions.length > 0 && (
-                            <p className="text-white text-center mt-1" style={{ fontSize: "12px", lineHeight: "1.2" }}>
+                            <p className="text-white text-center mt-1" style={{ fontSize: "14px", lineHeight: "1.2" }}>
                               {item.statDescriptions.join(" • ")}
                             </p>
                           )}
