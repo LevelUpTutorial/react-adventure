@@ -309,13 +309,17 @@ return (
         <>
           <div className="p-3 border-bottom border-secondary-subtle">
             <p className="fw-bold text-secondary">Location, {gameState.location.name}</p>
-            <div className="battle-container text-center">
+            <div className="row">
+
+              <div className="col-6">
               <img
                 src={gameState.hero.image}
                 alt="hero"
                 className="hero-image img-fluid rounded shadow-sm"
                 style={{ width: "100px", height: "150px" }}
               />
+              </div>
+              <div className="col-6 d-flex flex-column">
               <button
                  type="button"
                  className="btn btn-danger"
@@ -327,6 +331,7 @@ return (
                <button className="btn btn-danger" onClick={() => setInventoryOpen(true)}>
                  Inventory
                </button>
+               </div>
             </div>
           </div>
   
