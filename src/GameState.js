@@ -836,7 +836,7 @@ class GameState {
   static ENEMY_A6B1_THE_SHARDBOUND_ORACLE = {
     name: 'The Shardbound Oracle (elite)',
     level: 50,
-    health: 19500,
+    health: 15000,
     xp_reward: 9000, 
     attack: 1950,
     attack_speed: 1700,
@@ -890,7 +890,7 @@ class GameState {
   static ENEMY_A6B2_THE_TYRANT_KING = {
     name: "The Tyrant King (Boss)",
     level: 53,
-    health: 25000,
+    health: 18000,
     xp_reward: 12000, 
     attack: 2300,
     attack_speed: 1400,
