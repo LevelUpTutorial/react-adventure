@@ -45,7 +45,7 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
                       key={colIndex} 
                       className={`inventory-slot border ${item ? getRarityBorderClass(item.itemRarity) : "border-secondary"} m-1 d-flex flex-column align-items-center`}
                       style={{ 
-                        width: "150px", 
+                        width: "170px", 
                         height: "200px", 
                         backgroundColor: "#2c2f33", 
                         borderWidth: "4px", 
