@@ -5,6 +5,7 @@ import {
 import GameState from './../GameState.js';
 
 const ListHeroStats = (gameState) => {
+    if (!gameState) return null; 
     const heroHPCramped = Math.round(Math.max(0, gameState.hero.health));
   
     return (
