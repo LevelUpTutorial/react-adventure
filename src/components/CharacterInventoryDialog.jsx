@@ -28,7 +28,7 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
 
   return (
     <div className="modal show d-block" tabIndex="-1">
-      <div className="modal-dialog"> {/* Increased modal width */}
+      <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header bg-danger">
             <h5 className="modal-title text-white">Character Inventory</h5>
@@ -50,7 +50,7 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
                         backgroundColor: "#2c2f33", 
                         borderWidth: "4px", 
                         borderStyle: "solid", 
-                        padding: "2px" 
+                        padding: "0px" 
                       }}
                     >
                       {item ? (
@@ -58,8 +58,8 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
                           <img 
                             src={getItemImage(item)} 
                             alt={item.itemType} 
-                            className="img-fluid mb-2" 
-                            style={{ maxWidth: "100%", maxHeight: "90%" }} 
+                            className="img-fluid mb-1" 
+                            style={{ maxWidth: "100%", maxHeight: "80%" }} 
                           />
                           {item.statDescriptions && item.statDescriptions.length > 0 && (
                             <p className="text-white text-center mt-1" style={{ fontSize: "14px", lineHeight: "1.2" }}>
