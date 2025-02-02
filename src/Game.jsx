@@ -91,7 +91,7 @@ function Game({ heroName, gender, isGameRunning, savedGameState }) {
   };
 
 const attackTimingWindowStart = 50; 
-const attackTimingWindowStop = 225; 
+const attackTimingWindowStop = 200; 
 const attackErrorMargin = 25; 
 const attackTimingBonus = 2; 
 const maxComboMultiplier = 100; 
