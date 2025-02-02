@@ -573,12 +573,12 @@ function getScaledValue(baseValue, change_per_level, target_level, base_level) {
 
 // Constants for item drop probabilities and configurations
 const DROP_CHANCES = {
-  1: { dropRate: 0.10, rarity: { common: 0.9, uncommon: 0.1 } },
-  11: { dropRate: 0.15, rarity: { common: 0.689, uncommon: 0.29, rare: 0.02, epic: 0.001 } },
-  21: { dropRate: 0.20, rarity: { common: 0.1, uncommon: 0.8, rare: 0.1, epic: 0.01 } },
-  31: { dropRate: 0.25, rarity: { uncommon: 0.6, rare: 0.34, epic: 0.05, legendary: 0.01 } },
+  1: { dropRate: 0.25, rarity: { common: 0.9, uncommon: 0.1 } },
+  11: { dropRate: 0.25, rarity: { common: 0.689, uncommon: 0.29, rare: 0.02, epic: 0.001 } },
+  21: { dropRate: 0.25, rarity: { common: 0.1, uncommon: 0.8, rare: 0.1, epic: 0.01 } },
+  31: { dropRate: 0.30, rarity: { uncommon: 0.6, rare: 0.34, epic: 0.05, legendary: 0.01 } },
   41: { dropRate: 0.30, rarity: { uncommon: 0.1, rare: 0.7, epic: 0.17, legendary: 0.03 } },
-  51: { dropRate: 0.30, rarity: { rare: 0.5, epic: 0.35, legendary: 0.15 } },
+  51: { dropRate: 0.35, rarity: { rare: 0.5, epic: 0.35, legendary: 0.15 } },
   61: { dropRate: 0.35, rarity: { rare: 0.1, epic: 0.7, legendary: 0.198, perfectLegendary: 0.002 } },
 };
 
@@ -593,7 +593,7 @@ const ITEM_TYPE_CHANCES = {
 };
 
 // Armor Stat Ranges by Rarity
-export const ARMOR_STAT_RANGES = {
+const ARMOR_STAT_RANGES = {
   common: { min: 1, max: 5 },
   uncommon: { min: 4, max: 12 },
   rare: { min: 11, max: 25 },
@@ -602,7 +602,7 @@ export const ARMOR_STAT_RANGES = {
   perfectLegendary: { min: 49, max: 50 },
 };
 // Helm Stat Ranges by Rarity
-export const HELM_STAT_RANGES = {
+const HELM_STAT_RANGES = {
   common: { min: 1, max: 2 },
   uncommon: { min: 2, max: 5 },
   rare: { min: 5, max: 10 },
@@ -611,7 +611,7 @@ export const HELM_STAT_RANGES = {
   perfectLegendary: { min: 29, max: 30 },
 };
 // Boots Stat Ranges by Rarity
-export const BOOTS_STAT_RANGES = {
+const BOOTS_STAT_RANGES = {
   common: { min: 1, max: 2 },
   uncommon: { min: 2, max: 4 },
   rare: { min: 4, max: 7 },
@@ -722,6 +722,7 @@ function getRarity(rarityChances) {
       return rarity;
     }
   }
+  console.error(`error getRarity probabilities sum ${cumulative}`);
   return null; // Should never reach here if probabilities sum to 1
 }
 
@@ -736,7 +737,7 @@ function getItemType() {
       return itemType;
     }
   }
-  
+  console.error(`error getItemType probabilities sum ${cumulativeProbability}`);
   return "Armor"; // Fallback (shouldn't occur unless probabilities don't sum to 1)
 }
 
@@ -761,7 +762,7 @@ export function getEnemyLoot(enemyLevel) {
   const itemType = getItemType();
   console.log(`getEnemyLoot item type ${itemType}`);
   let itemRarity = getRarity(rarity);
-
+  console.log("Item Rarity:", itemRarity);
   // Check for legendary pity
   if (
     enemyLevel > 50 &&
@@ -791,6 +792,7 @@ export function getEnemyLoot(enemyLevel) {
     statDescriptions.push(`Evade Chance ${itemStats.evade_chance}% [${statRange.min}% - ${statRange.max}%]`);
   } else if (itemType === "Ring") {
     const statRanges = RING_STAT_RANGES[itemRarity];
+    console.log("Stat Ranges:", statRanges);
     itemStats = {
       crit_chance: rollStat(statRanges.crit_chance.min, statRanges.crit_chance.max),
       crit_damage: rollStat(statRanges.crit_damage.min, statRanges.crit_damage.max),
@@ -801,6 +803,7 @@ export function getEnemyLoot(enemyLevel) {
     );
   } else if (itemType === "Amulet") {
     const statRanges = AMULET_STAT_RANGES[itemRarity];
+    console.log("Stat Ranges:", statRanges);
     itemStats = {
       damage_reduction: rollStat(statRanges.damage_reduction.min, statRanges.damage_reduction.max),
       bonus_damage: rollStat(statRanges.bonus_damage.min, statRanges.bonus_damage.max),
@@ -811,6 +814,7 @@ export function getEnemyLoot(enemyLevel) {
     );
   } else if (itemType === "Sword") {
     const statRanges = SWORD_STAT_RANGES[itemRarity];
+    console.log("Stat Ranges:", statRanges);
     itemStats = {
       attack: rollStat(statRanges.attack.min, statRanges.attack.max),
       bonus_damage: rollStat(statRanges.bonus_damage.min, statRanges.bonus_damage.max),
@@ -822,7 +826,7 @@ export function getEnemyLoot(enemyLevel) {
       `Attack Cooldown -${itemStats.attack_speed}ms [-${statRange.attack_speed.min}ms - -${statRange.attack_speed.max}ms]`
     );
   } else {
-    console.error(`Unknown item type ${itemType}`);
+    console.error(`error Unknown item type ${itemType}`);
     return null;
   }
 
