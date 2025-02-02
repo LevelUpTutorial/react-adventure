@@ -39,12 +39,12 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
             {/* Inventory Grid */}
             <div className="container">
               {inventoryGrid.map((row, rowIndex) => (
-                <div className="d-flex justify-content-center" key={rowIndex}>
+                <div className="d-flex justify-content-center mb-4" key={rowIndex}>
                   {row.map((item, colIndex) => (
                     <div 
                       key={colIndex} 
-                      className={`inventory-slot border ${item ? getRarityBorderClass(item.itemRarity) : "border-secondary"} m-2 d-flex flex-column align-items-center justify-content-center`}
-                      style={{ width: "100px", height: "100px", backgroundColor: "#2c2f33", borderWidth: "4px", borderStyle: "solid" }}
+                      className={`inventory-slot border ${item ? getRarityBorderClass(item.itemRarity) : "border-secondary"} m-2 d-flex flex-column align-items-center`}
+                      style={{ width: "120px", height: "160px", backgroundColor: "#2c2f33", borderWidth: "4px", borderStyle: "solid", padding: "10px" }}
                     >
                       {item ? (
                         <>
@@ -52,10 +52,10 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
                             src={getItemImage(item)} 
                             alt={item.itemType} 
                             className="img-fluid" 
-                            style={{ maxWidth: "75%", maxHeight: "75%" }} 
+                            style={{ maxWidth: "100px", maxHeight: "80px" }} 
                           />
                           {item.statDescriptions && item.statDescriptions.length > 0 && (
-                            <p className="text-white text-center mt-1" style={{ fontSize: "12px" }}>
+                            <p className="text-white text-center mt-1" style={{ fontSize: "12px", lineHeight: "1.2" }}>
                               {item.statDescriptions.join(" • ")}
                             </p>
                           )}
