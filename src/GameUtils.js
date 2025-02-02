@@ -574,11 +574,11 @@ function getScaledValue(baseValue, change_per_level, target_level, base_level) {
 // Constants for item drop probabilities and configurations
 const DROP_CHANCES = {
   1: { dropRate: 0.10, rarity: { common: 0.9, uncommon: 0.1 } },
-  11: { dropRate: 0.15, rarity: { common: 0.689, uncommon: 0.29, rare: 0.02, epic: 0.001 } },
-  21: { dropRate: 0.15, rarity: { common: 0.1, uncommon: 0.8, rare: 0.1, epic: 0.01 } },
-  31: { dropRate: 0.25, rarity: { uncommon: 0.6, rare: 0.34, epic: 0.05, legendary: 0.01 } },
-  41: { dropRate: 0.25, rarity: { uncommon: 0.1, rare: 0.7, epic: 0.17, legendary: 0.03 } },
-  51: { dropRate: 0.30, rarity: { rare: 0.5, epic: 0.35, legendary: 0.15 } },
+  11: { dropRate: 0.15, rarity: { common: 0.65, uncommon: 0.30, rare: 0.05 } },
+  21: { dropRate: 0.20, rarity: { uncommon: 0.75, rare: 0.25 } },
+  31: { dropRate: 0.25, rarity: { uncommon: 0.55, rare: 0.40, epic: 0.05 } },
+  41: { dropRate: 0.30, rarity: { rare: 0.65, epic: 0.30, legendary: 0.05 } },
+  51: { dropRate: 0.35, rarity: { rare: 0.5, epic: 0.35, legendary: 0.15 } },
   61: { dropRate: 0.35, rarity: { rare: 0.1, epic: 0.7, legendary: 0.198, perfectLegendary: 0.002 } },
 };
 
