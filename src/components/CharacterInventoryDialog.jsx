@@ -28,29 +28,29 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
 
   return (
     <div className="modal show d-block" tabIndex="-1">
-      <div className="modal-dialog modal-lg"> {/* Slightly larger modal width */}
+      <div className="modal-dialog"> {/* Increased modal width */}
         <div className="modal-content">
           <div className="modal-header bg-danger">
             <h5 className="modal-title text-white">Character Inventory</h5>
             <button type="button" className="btn-close" onClick={onClose}></button>
           </div>
-          <div className="modal-body d-flex justify-content-center">
+          <div className="modal-body">
+            
             {/* Inventory Grid */}
-            <div className="container d-flex flex-column" style={{ maxWidth: "600px" }}>
+            <div className="container">
               {inventoryGrid.map((row, rowIndex) => (
-                <div className="d-flex justify-content-between mb-2" key={rowIndex}>
+                <div className="d-flex justify-content-center mb-1" key={rowIndex}>
                   {row.map((item, colIndex) => (
                     <div 
                       key={colIndex} 
-                      className={`inventory-slot border ${item ? getRarityBorderClass(item.itemRarity) : "border-secondary"} d-flex flex-column align-items-center`}
+                      className={`inventory-slot border ${item ? getRarityBorderClass(item.itemRarity) : "border-secondary"} m-1 d-flex flex-column align-items-center`}
                       style={{ 
-                        width: "120px", // Reduced width
-                        height: "160px", // Reduced height
+                        width: "150px", 
+                        height: "200px", 
                         backgroundColor: "#2c2f33", 
                         borderWidth: "4px", 
                         borderStyle: "solid", 
-                        padding: "4px", 
-                        margin: "0 8px", // Half the horizontal space
+                        padding: "2px" 
                       }}
                     >
                       {item ? (
@@ -58,11 +58,11 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
                           <img 
                             src={getItemImage(item)} 
                             alt={item.itemType} 
-                            className="img-fluid mb-1" 
-                            style={{ maxWidth: "90%", maxHeight: "70%" }} 
+                            className="img-fluid mb-2" 
+                            style={{ maxWidth: "100%", maxHeight: "90%" }} 
                           />
                           {item.statDescriptions && item.statDescriptions.length > 0 && (
-                            <p className="text-white text-center mt-1" style={{ fontSize: "12px", lineHeight: "1.2" }}>
+                            <p className="text-white text-center mt-1" style={{ fontSize: "14px", lineHeight: "1.2" }}>
                               {item.statDescriptions.join(" • ")}
                             </p>
                           )}
@@ -73,9 +73,6 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
                 </div>
               ))}
             </div>
-          </div>
-          {/* Centered Hero Stats Section */}
-          <div className="mt-3">
             <ListHeroStats gameState={gameState} />
           </div>
           {/* Centered Close Button */}
