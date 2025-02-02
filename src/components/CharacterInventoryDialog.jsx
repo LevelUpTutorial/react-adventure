@@ -51,7 +51,7 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
             {/* Inventory Grid */}
             <div className="container d-flex flex-column">
               {inventoryGrid.map((row, rowIndex) => (
-                <div className="d-flex justify-content-evenly" key={rowIndex}>
+                <div className="d-flex justify-content-between" key={rowIndex}>
                   {row.map((item, colIndex) => (
                     <div 
                       key={colIndex} 
