@@ -489,8 +489,8 @@ export function loadGameState(heroGender) {
 }
 
 /* PERCENTAGE Scaling for stats per level difference */
-const HEALTH_CHANGE = 0.12; 
-const XP_CHANGE = 0.10; 
+const HEALTH_CHANGE = 0.08; 
+const XP_CHANGE = 0.08; 
 const ATTACK_CHANGE = 0.08; 
 const LEVEL_RANGE = 3; 
 /*
@@ -578,8 +578,8 @@ const DROP_CHANCES = {
   21: { dropRate: 0.20, rarity: { uncommon: 0.75, rare: 0.25 } },
   31: { dropRate: 0.25, rarity: { uncommon: 0.55, rare: 0.40, epic: 0.05 } },
   41: { dropRate: 0.30, rarity: { rare: 0.65, epic: 0.30, legendary: 0.05 } },
-  51: { dropRate: 0.35, rarity: { rare: 0.5, epic: 0.35, legendary: 0.15 } },
-  61: { dropRate: 0.35, rarity: { rare: 0.1, epic: 0.7, legendary: 0.198, perfectLegendary: 0.002 } },
+  51: { dropRate: 0.35, rarity: { rare: 0.48, epic: 0.35, legendary: 0.17 } },
+  61: { dropRate: 0.35, rarity: { rare: 0.1, epic: 0.68, legendary: 0.20, perfectLegendary: 0.02 } },
 };
 
 /* Chances which items type drops */ 
