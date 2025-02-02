@@ -51,19 +51,17 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
             {/* Inventory Grid */}
             <div className="container d-flex flex-column">
               {inventoryGrid.map((row, rowIndex) => (
-                <div className="d-flex justify-content-between" key={rowIndex}>
+                <div className="d-flex justify-content-evenly" key={rowIndex}>
                   {row.map((item, colIndex) => (
                     <div 
                       key={colIndex} 
                       className={`inventory-slot border ${item ? getRarityBorderClass(item.itemRarity) : "border-secondary"} d-flex flex-column align-items-center`}
                       style={{ 
-                        width: "100px", 
-                        height: selectedItem === item ? "auto" : "100px", // Expand slot for selected item
+                        width: selectedItem === item ? "160" : "80px", 
+                        height: selectedItem === item ? "auto" : "80px", // Expand slot for selected item
                         backgroundColor: "#2c2f33", 
-                        borderWidth: "4px", 
-                        borderStyle: "solid", 
-                        padding: "4px", 
-                        margin: "0 8px", 
+                        borderWidth: "8px", 
+                        borderStyle: "solid",  
                       }}
                       onClick={() => handleItemClick(item)}
                     >
