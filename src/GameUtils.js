@@ -838,13 +838,15 @@ export function getEnemyLoot(enemyLevel) {
   subRarity = itemStats[primaryStatKey] >= midPoint ? "high" : "low";
 
   // Return the item details
-  return {
+  const item = {
     itemType,
     itemRarity,
     subRarity,
     statDescriptions,
     itemStats,
   };
+  console.log(`getEnemyLoot dropped ${item.itemType}: ${item}`);
+  return item;
 }
 
 // Helper to roll a stat within a range
