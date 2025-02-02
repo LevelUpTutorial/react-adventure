@@ -73,12 +73,7 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
                 </div>
               ))}
             </div>
-
-            {/* Centered Hero Stats Section */}
-            <div className="mt-4 d-flex justify-content-center">
-              <ListHeroStats gameState={gameState} />
-            </div>
-
+            <ListHeroStats gameState={gameState} />
           </div>
           {/* Centered Close Button */}
           <div className="modal-footer d-flex justify-content-center">
