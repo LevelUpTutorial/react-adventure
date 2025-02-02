@@ -9,9 +9,9 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
 
   // Define Inventory Grid Slots
   const inventoryGrid = [
-    [hero.amulet, hero.helm],
-    [hero.sword, hero.armor],
-    [hero.ring, hero.boots],
+    [null, hero.helm, hero.amulet],
+    [hero.sword, hero.armor, hero.ring],
+    [null, hero.boots, null],
   ];
 
   // State to track the selected item for showing description
@@ -51,7 +51,7 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
             {/* Inventory Grid */}
             <div className="container d-flex flex-column" style={{ maxWidth: "600px" }}>
               {inventoryGrid.map((row, rowIndex) => (
-                <div className="d-flex justify-content-between mb-2" key={rowIndex}>
+                <div className="d-flex justify-content-between" key={rowIndex}>
                   {row.map((item, colIndex) => (
                     <div 
                       key={colIndex} 
@@ -89,7 +89,7 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
             </div>
           </div>
           {/* Centered Hero Stats Section */}
-          <div className="mt-3">
+          <div className="mt-1">
             <ListHeroStats gameState={gameState} />
           </div>
           {/* Centered Close Button */}
