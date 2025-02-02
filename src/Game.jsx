@@ -862,7 +862,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
 /* performs hero attack */ 
 function performHeroAttack(gameState) {
   const {hero, active_enemy} = gameState;
-  const dmg = combatCalculation(hero, active_enemy) * (1 + hero.bonus_damage); 
+  const dmg = combatCalculation(hero, active_enemy) * (1 + (hero.bonus_damage / 100)); 
 
   if (dmg >= 0) {
     /* apply on hit effects */ 
