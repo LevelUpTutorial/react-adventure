@@ -4,6 +4,7 @@ import StoryDialog from "./components/StoryDialog.jsx";
 import ListHeroStats from "./components/ListHeroStats.jsx";
 import AttackCooldownWithAnimation from "./AttackCooldownWithAnimation.jsx"; 
 import LootPopup from "./components/LootPopup.jsx";
+import CharacterInventoryDialog from "./components.CharacterInventoryDialog.jsx";
 import {combatCalculation, playSound, SND_SWORD_HIT, 
         calculateXpToLevelUp, onLevelUp, 
         UPGRADE_PER_LEVELUP, playConfettiFirework, 
@@ -49,6 +50,8 @@ function Game({ heroName, gender, isGameRunning, savedGameState }) {
   const [showLootPopup, setShowLootPopup] = useState(false); 
   const [newItem, setNewItem] = useState(null); 
  
+  const [isInventoryOpen, setInventoryOpen] = useState(false);
+  
   const updateGameState = () => {
     setGameState((prevState) => handleGameState(prevState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades, setNewItem));
   };
@@ -321,6 +324,10 @@ return (
                >
                  Respec Stats
                </button>
+               {/* Inventory Button */}
+               <button className="btn btn-danger" onClick={() => setInventoryOpen(true)}>
+                 Inventory
+               </button>
             </div>
           </div>
   
@@ -578,6 +585,12 @@ return (
         newItem={newItem}
         onEquip={equipNewItem}
         onKeep={keepOldItem}
+      />
+      {/* Inventory Popup Component */}
+      <CharacterInventoryDialog
+        show={isInventoryOpen}
+        gameState={gameState}
+        onClose={() => setInventoryOpen(false)} // Pass onClose function
       />
     </div>
   );
