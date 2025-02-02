@@ -59,7 +59,7 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
                             src={getItemImage(item)} 
                             alt={item.itemType} 
                             className="img-fluid mb-2" 
-                            style={{ maxWidth: "100%", maxHeight: "100%" }} 
+                            style={{ maxWidth: "90%", maxHeight: "100%" }} 
                           />
                           {item.statDescriptions && item.statDescriptions.length > 0 && (
                             <p className="text-white text-center mt-1" style={{ fontSize: "14px", lineHeight: "1.2" }}>
