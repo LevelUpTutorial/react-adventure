@@ -798,8 +798,8 @@ export function getEnemyLoot(enemyLevel) {
       crit_damage: rollStat(statRanges.crit_damage.min, statRanges.crit_damage.max),
     };
     statDescriptions.push(
-      `Crit Chance ${itemStats.crit_chance}% [${statRange.crit_chance.min}% - ${statRange.crit_chance.max}%]`,
-      `Crit Damage ${itemStats.crit_damage}% [${statRange.crit_damage.min}% - ${statRange.crit_damage.max}%]`
+      `Crit Chance ${itemStats.crit_chance}% [${statRanges.crit_chance.min}% - ${statRanges.crit_chance.max}%]`,
+      `Crit Damage ${itemStats.crit_damage}% [${statRanges.crit_damage.min}% - ${statRanges.crit_damage.max}%]`
     );
   } else if (itemType === "Amulet") {
     const statRanges = AMULET_STAT_RANGES[itemRarity];
@@ -809,8 +809,8 @@ export function getEnemyLoot(enemyLevel) {
       bonus_damage: rollStat(statRanges.bonus_damage.min, statRanges.bonus_damage.max),
     };
     statDescriptions.push(
-      `Damage Reduction ${itemStats.damage_reduction}% [${statRange.damage_reduction.min}% - ${statRange.damage_reduction.max}%]`, 
-      `Bonus Damage ${itemStats.bonus_damage}% [${statRange.bonus_damage.min}% - ${statRange.bonus_damage.max}%]`
+      `Damage Reduction ${itemStats.damage_reduction}% [${statRanges.damage_reduction.min}% - ${statRanges.damage_reduction.max}%]`, 
+      `Bonus Damage ${itemStats.bonus_damage}% [${statRanges.bonus_damage.min}% - ${statRanges.bonus_damage.max}%]`
     );
   } else if (itemType === "Sword") {
     const statRanges = SWORD_STAT_RANGES[itemRarity];
@@ -821,9 +821,9 @@ export function getEnemyLoot(enemyLevel) {
       attack_speed: rollStat(statRanges.attack_speed.min, statRanges.attack_speed.max),
     };
     statDescriptions.push(
-      `Attack ${itemStats.attack} [${statRange.attack.min} - ${statRange.attack.max}]`, 
-      `Bonus Damage ${itemStats.bonus_damage}% [${statRange.bonus_damage.min}% - ${statRange.bonus_damage.max}%]`, 
-      `Attack Cooldown -${itemStats.attack_speed}ms [-${statRange.attack_speed.min}ms - -${statRange.attack_speed.max}ms]`
+      `Attack ${itemStats.attack} [${statRanges.attack.min} - ${statRanges.attack.max}]`, 
+      `Bonus Damage ${itemStats.bonus_damage}% [${statRanges.bonus_damage.min}% - ${statRanges.bonus_damage.max}%]`, 
+      `Attack Cooldown -${itemStats.attack_speed}ms [-${statRanges.attack_speed.min}ms - -${statRanges.attack_speed.max}ms]`
     );
   } else {
     console.error(`error Unknown item type ${itemType}`);
