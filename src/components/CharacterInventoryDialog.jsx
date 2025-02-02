@@ -49,7 +49,7 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
           </div>
           <div className="modal-body d-flex justify-content-center">
             {/* Inventory Grid */}
-            <div className="container d-flex flex-column" style={{ maxWidth: "600px" }}>
+            <div className="container d-flex flex-column">
               {inventoryGrid.map((row, rowIndex) => (
                 <div className="d-flex justify-content-between" key={rowIndex}>
                   {row.map((item, colIndex) => (
@@ -57,8 +57,8 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
                       key={colIndex} 
                       className={`inventory-slot border ${item ? getRarityBorderClass(item.itemRarity) : "border-secondary"} d-flex flex-column align-items-center`}
                       style={{ 
-                        width: "120px", 
-                        height: selectedItem === item ? "auto" : "120px", // Expand slot for selected item
+                        width: "100px", 
+                        height: selectedItem === item ? "auto" : "100px", // Expand slot for selected item
                         backgroundColor: "#2c2f33", 
                         borderWidth: "4px", 
                         borderStyle: "solid", 
@@ -72,11 +72,11 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
                           <img 
                             src={getItemImage(item)} 
                             alt={item.itemType} 
-                            className="img-fluid mb-1" 
-                            style={{ maxWidth: "100%", height: "auto" }} 
+                            className="img-fluid" 
+                            style={{ width: "auto", height: "auto" }} 
                           />
                           {selectedItem === item && item.statDescriptions && (
-                            <p className="text-white text-center mt-2" style={{ fontSize: "12px", lineHeight: "1.2" }}>
+                            <p className="text-white text-center mt-1" style={{ fontSize: "12px", lineHeight: "1.2" }}>
                               {item.statDescriptions.join(" • ")}
                             </p>
                           )}
