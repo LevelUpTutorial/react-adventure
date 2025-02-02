@@ -772,6 +772,8 @@ export function getEnemyLoot(enemyLevel) {
   ) {
     itemRarity = "legendary";
     legendaryPityCount = 0;
+  } else {
+    legendaryPityCount += 1;
   }
 
   // Generate stats for the item based on rarity
