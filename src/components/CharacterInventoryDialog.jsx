@@ -58,7 +58,7 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
                       className={`inventory-slot border ${item ? getRarityBorderClass(item.itemRarity) : "border-secondary"} d-flex flex-column align-items-center`}
                       style={{ 
                         width: "120px", 
-                        height: selectedItem === item ? "auto" : "160px", // Expand slot for selected item
+                        height: selectedItem === item ? "auto" : "120px", // Expand slot for selected item
                         backgroundColor: "#2c2f33", 
                         borderWidth: "4px", 
                         borderStyle: "solid", 
@@ -73,7 +73,7 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
                             src={getItemImage(item)} 
                             alt={item.itemType} 
                             className="img-fluid mb-1" 
-                            style={{ maxWidth: "90%", maxHeight: "70%" }} 
+                            style={{ maxWidth: "100%", height: "auto" }} 
                           />
                           {selectedItem === item && item.statDescriptions && (
                             <p className="text-white text-center mt-2" style={{ fontSize: "12px", lineHeight: "1.2" }}>
