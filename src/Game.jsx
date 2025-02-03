@@ -1244,6 +1244,7 @@ function handleEnemyDefeat(enemyImageElement, lootChestImagePath, callback) {
   lootChest.style.height = `${size}px`; 
   lootChest.style.left = `${(window.innerWidth - size) / 2}px`; // Center horizontally (assuming 100px width)
   lootChest.style.top = `${(window.innerHeight - size) / 2}px`; // Center vertically (assuming 100px height)
+  lootChest.style.zIndex = "5"; 
   
   setTimeout(() => {
     // Append loot chest
