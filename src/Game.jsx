@@ -764,6 +764,13 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
         return gameState; 
     }
   }
+
+  if (hero.current_animation) {
+    if (hero.current_animation.name === 'enemy-death' || 
+       hero.current_animation.name === 'enemy-loot') {
+      return gameState; 
+    }
+  } 
   
   if (hero.isInDialog) {
     return gameState; 
@@ -796,7 +803,15 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       // Roll for Loot Drop 
       const level = active_enemy.isElite ? active_enemy.level + 5 : active_enemy.level;
       const loot = getEnemyLoot(level);
-      setNewItem(loot);
+      if (loot) {
+        hero.current_animation.name === 'enemy-loot'; 
+        const enemy = document.querySelector(enemyImage);
+        const chest = getItemImage( {itemType: "Chest", itemRarity: loot.itemRarity} ); 
+        handleEnemyDefeat(enemy, chest, () => {
+          hero.current_animation.name = null; 
+          setNewItem(loot);
+        });
+      }
       
       // execute enemy after function if he had one 
       if (active_enemy.runAfterKey) {
@@ -1187,6 +1202,66 @@ function useInterval(callback, delay) {
       return () => clearInterval(id);
     }
   }, [delay]);
+}
+
+/* add loot animation on enemy death */
+function handleEnemyDefeat(enemyImageElement, lootChestImagePath, callback) {
+  if (!enemyImageElement) return;
+  const deathDuration = 100; 
+  const lootDuration = 1000; 
+  const particleCount = 50; // for loot animation 
+  // TODO death animation 
+  // Step 1: Fade out enemy (death animation)
+  enemyImageElement.classList.add('enemy-death');
+
+  setTimeout(() => {
+    // Step 2: Replace enemy with loot chest
+    const lootChest = document.createElement('img');
+    lootChest.src = lootChestImagePath;
+    lootChest.classList.add('loot-chest');
+    lootChest.style.left = enemyImageElement.offsetLeft + 'px';
+    lootChest.style.top = enemyImageElement.offsetTop + 'px';
+
+    // Append loot chest
+    enemyImageElement.parentNode.appendChild(lootChest);
+    // Step 3: Spawn particles around the chest
+    spawnParticlesAroundChest(lootChest, particleCount, lootDuration);
+
+    // Step 4: Remove enemy image after fade-out
+    enemyImageElement.style.display = 'none';
+
+    // Step 5: Show loot dialog after lootDuration
+    setTimeout(() => {
+      lootChest.remove();
+      callback();
+    }, lootDuration);
+  }, deathDuration); // Match death animation duration
+}
+
+function spawnParticlesAroundChest(chestElement, particleCount = 10, duration = 1000) {
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+
+    // Randomize particle positions around the chest
+    const angle = Math.random() * Math.PI * 2; // Random angle
+    const radius = Math.random() * 30 + 10; // Random radius (10px - 40px)
+    const x = Math.cos(angle) * radius;
+    const y = Math.sin(angle) * radius;
+
+    particle.style.left = `${chestElement.offsetLeft + chestElement.width / 2 + x}px`;
+    particle.style.top = `${chestElement.offsetTop + chestElement.height / 2 + y}px`;
+
+    // Randomize animation delay to make the effect dynamic
+    particle.style.animationDelay = `${Math.random() * 0.5}s`;
+
+    chestElement.parentNode.appendChild(particle);
+
+    // Remove particle after animation ends
+    setTimeout(() => {
+      particle.remove();
+    }, duration);
+  }
 }
 
 Game.propTypes = {
