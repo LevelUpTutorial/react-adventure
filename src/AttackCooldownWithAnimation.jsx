@@ -45,7 +45,7 @@ const AttackCooldownWithAnimation = ({ gameState, timingWindowStart, timingWindo
           aria-valuemin="0"
           aria-valuemax="100"
         >
-          {`${Math.max(0, (cooldown.current / 1000).toFixed(2) )}s`}
+          {`${Math.max(0, (cooldown.current / 1000).toFixed(1) )}s`}
         </div>
 
       {/* Timing window indicator */}
