@@ -1285,9 +1285,10 @@ function spawnParticlesAroundChest(chestElement, particleCount = 10, duration = 
     particle.style.position = 'absolute';
     particle.style.left = `${chestX + x}px`;
     particle.style.top = `${chestY + y}px`;
-
+    particle.style.zIndex = (parseInt(chestElement.style.zIndex, 10) || 0) + 1;
+    
     // Randomize animation delay
-    particle.style.animationDelay = `${Math.random() * 0.1}s`;
+    particle.style.animationDelay = `${Math.random() * 0.5}s`;
 
     // Append particle
     parentNode.appendChild(particle);
