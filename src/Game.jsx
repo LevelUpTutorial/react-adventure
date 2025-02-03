@@ -1223,7 +1223,7 @@ function useInterval(callback, delay) {
 function handleEnemyDefeat(enemyImageElement, lootChestImagePath, callback) {
   if (!enemyImageElement) return;
   // Set loot chest size (square) 
-  const size = 450;
+  const size = 350; // in px later 
   // const parentNode = enemyImageElement.parentNode;
   const parentNode = document.body; // Append to body for full control over positioning
   const deathDuration = 500; 
