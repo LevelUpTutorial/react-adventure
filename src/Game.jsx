@@ -440,7 +440,7 @@ return (
                       aria-valuemin="0" 
                       aria-valuemax="100"
                     >
-                      {`${(gameState.active_enemy.attack_cooldown / 1000).toFixed(2)}s`}
+                      {`${(gameState.active_enemy.attack_cooldown / 1000).toFixed(1)}s`}
                     </div>
                     
                   </>
