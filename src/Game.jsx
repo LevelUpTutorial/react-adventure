@@ -424,7 +424,7 @@ return (
                       {/* Text Overlay */}
                       <div 
                         className="position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
-                        style={{ top: 0, left: 0, color: "black", fontWeight: "bold", zIndex: 2 }}
+                        style={{ top: 0, left: 0, color: "white", fontWeight: "bold", zIndex: 2 }}
                       >
                         {`${enemyHPCramped}`}
                       </div>
@@ -447,7 +447,7 @@ return (
                       {/* Text Overlay */}
                       <div 
                         className="position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
-                        style={{ top: 0, left: 0, color: "white", fontWeight: "bold", zIndex: 2 }}
+                        style={{ top: 0, left: 0, color: "black", fontWeight: "bold", zIndex: 2 }}
                       >
                         {`${Math.max(0, gameState.active_enemy.attack_cooldown / 1000).toFixed(1)}s`}
                       </div>
@@ -1222,28 +1222,31 @@ function useInterval(callback, delay) {
 /* add loot animation on enemy death */
 function handleEnemyDefeat(enemyImageElement, lootChestImagePath, callback) {
   if (!enemyImageElement) return;
+  const parentNode enemyImageElement.parentNode;
   const deathDuration = 500; 
   const lootDuration = 1000; 
   const particleCount = 50; // for loot animation 
   // TODO death animation 
   // Step 1: Fade out enemy (death animation)
   enemyImageElement.classList.add('enemy-death');
-
+  // Step 2: Replace enemy with loot chest
+  const lootChest = document.createElement('img');
+  lootChest.src = lootChestImagePath;
+  lootChest.classList.add('loot-chest');
+  lootChest.style.left = enemyImageElement.offsetLeft + 'px';
+  lootChest.style.top = enemyImageElement.offsetTop + 'px';
+  
   setTimeout(() => {
-    // Step 2: Replace enemy with loot chest
-    const lootChest = document.createElement('img');
-    lootChest.src = lootChestImagePath;
-    lootChest.classList.add('loot-chest');
-    lootChest.style.left = enemyImageElement.offsetLeft + 'px';
-    lootChest.style.top = enemyImageElement.offsetTop + 'px';
+    
 
     // Append loot chest
-    enemyImageElement.parentNode.appendChild(lootChest);
+    // parent className 'battle-container-enemy'
+    parentNode.appendChild(lootChest);
     // Step 3: Spawn particles around the chest
     spawnParticlesAroundChest(lootChest, particleCount, lootDuration);
 
     // Step 4: Remove enemy image after fade-out
-    enemyImageElement.style.display = 'none';
+    if (enemyImageElement) enemyImageElement.style.display = 'none';
 
     // Step 5: Show loot dialog after lootDuration
     setTimeout(() => {
