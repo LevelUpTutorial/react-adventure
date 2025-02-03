@@ -803,10 +803,14 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       // Roll for Loot Drop 
       const level = active_enemy.isElite ? active_enemy.level + 5 : active_enemy.level;
       const loot = getEnemyLoot(level);
+      
       if (loot) {
+        console.log(`handleGameState loot drop was ${loot.itemType} ${loot.itemRarity}`);
         hero.current_animation.name === 'enemy-loot'; 
         const enemy = document.querySelector(enemyImage);
         const chest = getItemImage( {itemType: "Chest", itemRarity: loot.itemRarity} ); 
+        console.log(`handleGameState enemy image ${enemy}`);
+        console.log(`handleGameState chest image ${chest}`);
         handleEnemyDefeat(enemy, chest, () => {
           hero.current_animation.name = null; 
           setNewItem(loot);
@@ -1207,7 +1211,7 @@ function useInterval(callback, delay) {
 /* add loot animation on enemy death */
 function handleEnemyDefeat(enemyImageElement, lootChestImagePath, callback) {
   if (!enemyImageElement) return;
-  const deathDuration = 100; 
+  const deathDuration = 500; 
   const lootDuration = 1000; 
   const particleCount = 50; // for loot animation 
   // TODO death animation 
