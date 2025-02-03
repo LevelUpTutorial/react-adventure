@@ -1267,26 +1267,28 @@ function handleEnemyDefeat(enemyImageElement, lootChestImagePath, callback) {
 function spawnParticlesAroundChest(chestElement, particleCount = 10, duration = 1000) {
   const parentNode = chestElement.parentNode || document.body; // Ensure a valid parent node
 
+  // Get chest size and position
+  const chestRect = chestElement.getBoundingClientRect();
+  const chestX = chestRect.left + chestRect.width / 2;
+  const chestY = chestRect.top + chestRect.height / 2;
+  const maxRadius = Math.max(chestRect.width, chestRect.height) / 2 + 10; // Adjust radius dynamically
+
   for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement('div');
     particle.classList.add('particle');
 
-    // Get chest size
-    const chestRect = chestElement.getBoundingClientRect();
-    const chestX = chestRect.left + chestRect.width / 2;
-    const chestY = chestRect.top + chestRect.height / 2;
-
     // Randomize particle positions around the chest
     const angle = Math.random() * Math.PI * 2; // Random angle
-    const radius = Math.random() * 30 + 10; // Random radius (10px - 40px)
+    const radius = Math.random() * maxRadius; // Adjust to match chest size
     const x = Math.cos(angle) * radius;
     const y = Math.sin(angle) * radius;
 
+    // Set particle styles
     particle.style.position = 'absolute';
     particle.style.left = `${chestX + x}px`;
     particle.style.top = `${chestY + y}px`;
-    particle.style.zIndex = (parseInt(chestElement.style.zIndex, 10) || 0) + 1;
-    
+    particle.style.zIndex = (parseInt(chestElement.style.zIndex, 10) || 10) + 1; // Ensure particles are above chest
+
     // Randomize animation delay
     particle.style.animationDelay = `${Math.random() * 0.5}s`;
 
