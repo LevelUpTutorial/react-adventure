@@ -15,7 +15,7 @@
 
 .loot-chest {
   position: absolute;
-  animation: loot-drop 700ms ease-out forwards;
+  animation: loot-drop 1500ms ease-out forwards;
 }
 
 @keyframes loot-particles {
