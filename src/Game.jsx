@@ -1222,6 +1222,8 @@ function useInterval(callback, delay) {
 /* add loot animation on enemy death */
 function handleEnemyDefeat(enemyImageElement, lootChestImagePath, callback) {
   if (!enemyImageElement) return;
+  // Set loot chest size (square) 
+  const size = 450;
   // const parentNode = enemyImageElement.parentNode;
   const parentNode = document.body; // Append to body for full control over positioning
   const deathDuration = 500; 
@@ -1235,15 +1237,15 @@ function handleEnemyDefeat(enemyImageElement, lootChestImagePath, callback) {
   lootChest.src = lootChestImagePath;
   lootChest.classList.add('loot-chest');
   //lootChest.style.left = enemyImageElement.offsetLeft + 'px';
-  //lootChest.style.top = enemyImageElement.offsetTop + 'px';
-   // Position chest in the middle of the screen
+  //lootChest.style.top = enemyImageElement.offsetTop + 'px'; 
+  // Position chest in the middle of the screen
   lootChest.style.position = 'absolute';
-  lootChest.style.left = `${(window.innerWidth - 100) / 2}px`; // Center horizontally (assuming 100px width)
-  lootChest.style.top = `${(window.innerHeight - 100) / 2}px`; // Center vertically (assuming 100px height)
+  lootChest.style.width = `${size}px`; 
+  lootChest.style.height = `${size}px`; 
+  lootChest.style.left = `${(window.innerWidth - size) / 2}px`; // Center horizontally (assuming 100px width)
+  lootChest.style.top = `${(window.innerHeight - size) / 2}px`; // Center vertically (assuming 100px height)
   
   setTimeout(() => {
-    
-
     // Append loot chest
     // parent className 'battle-container-enemy'
     parentNode.appendChild(lootChest);
