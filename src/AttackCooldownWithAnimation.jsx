@@ -32,22 +32,26 @@ const AttackCooldownWithAnimation = ({ gameState, timingWindowStart, timingWindo
   return (
     <div style={{ position: 'relative', height: '25px' }}>
       <style>{pulseAnimation}</style>
-
+      {/* Text Overlay */}
+      <div 
+        className="position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
+        style={{ top: 0, left: 0, color: "white", fontWeight: "bold", zIndex: 2 }}
+      >
+        {`${Math.max(0, (cooldown.current / 1000).toFixed(1) )}s`}
+      </div>
       {/* Main cooldown progress bar */}
-        <div
-          className="progress-bar rounded bg-primary"
-          role="progressbar"
-          style={{ 
-            width: `${widthCooldown}%`,
-            height: '100%', 
-          }}
-          aria-valuenow={widthCooldown}
-          aria-valuemin="0"
-          aria-valuemax="100"
-        >
-          {`${Math.max(0, (cooldown.current / 1000).toFixed(1) )}s`}
-        </div>
-
+      <div
+        className="progress-bar rounded bg-primary"
+        role="progressbar"
+        style={{ 
+          width: `${widthCooldown}%`,
+          height: '100%', 
+        }}
+        aria-valuenow={widthCooldown}
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+      </div>
       {/* Timing window indicator */}
       <div
         className={`progress-bar ${isTimingWindowActive ? 'bg-success' : 'bg-danger'} rounded`}
