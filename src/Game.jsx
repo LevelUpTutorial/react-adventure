@@ -424,7 +424,7 @@ return (
                       {/* Text Overlay */}
                       <div 
                         className="position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
-                        style={{ top: 0, left: 0, color: "white", fontWeight: "bold", zIndex: 2 }}
+                        style={{ top: 0, left: 0, color: "black", fontWeight: "bold", zIndex: 2 }}
                       >
                         {`${enemyHPCramped}`}
                       </div>
