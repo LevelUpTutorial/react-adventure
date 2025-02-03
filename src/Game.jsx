@@ -443,18 +443,24 @@ return (
                       </div>
                     </div>
                     {renderCombatEvent(gameState.active_enemy.last_combat_event)}
-                    
-                    <div 
-                      className="progress-bar bg-primary rounded" 
-                      role="progressbar" 
-                      style={{ width: `${eAttackProgress}%`, height: "25px" }} 
-                      aria-valuenow={eAttackProgress} 
-                      aria-valuemin="0" 
-                      aria-valuemax="100"
-                    >
-                      {`${(gameState.active_enemy.attack_cooldown / 1000).toFixed(1)}s`}
+                    <div className="position-relative" style={{ height: '25px' }}>
+                      {/* Text Overlay */}
+                      <div 
+                        className="position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
+                        style={{ top: 0, left: 0, color: "white", fontWeight: "bold", zIndex: 2 }}
+                      >
+                        {`${(gameState.active_enemy.attack_cooldown / 1000).toFixed(1)}s`}
+                      </div>
+                      <div 
+                        className="progress-bar bg-primary rounded" 
+                        role="progressbar" 
+                        style={{ width: `${eAttackProgress}%`, height: "25px" }} 
+                        aria-valuenow={eAttackProgress} 
+                        aria-valuemin="0" 
+                        aria-valuemax="100"
+                      >
                     </div>
-                    
+                  </div>
                   </>
                 );
               })()}
