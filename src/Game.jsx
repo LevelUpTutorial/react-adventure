@@ -1222,7 +1222,7 @@ function useInterval(callback, delay) {
 /* add loot animation on enemy death */
 function handleEnemyDefeat(enemyImageElement, lootChestImagePath, callback) {
   if (!enemyImageElement) return;
-  const parentNode enemyImageElement.parentNode;
+  const parentNode = enemyImageElement.parentNode;
   const deathDuration = 500; 
   const lootDuration = 1000; 
   const particleCount = 50; // for loot animation 
