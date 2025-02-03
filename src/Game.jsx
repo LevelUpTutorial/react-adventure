@@ -1227,8 +1227,8 @@ function handleEnemyDefeat(enemyImageElement, lootChestImagePath, callback) {
   // const parentNode = enemyImageElement.parentNode;
   const parentNode = document.body; // Append to body for full control over positioning
   const deathDuration = 500; 
-  const lootDuration = 1000; 
-  const particleCount = 100; // for loot animation 
+  const lootDuration = 1500; 
+  const particleCount = 200; // for loot animation 
   // TODO death animation 
   // Step 1: Fade out enemy (death animation)
   enemyImageElement.classList.add('enemy-death');
