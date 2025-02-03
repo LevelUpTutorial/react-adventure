@@ -1707,6 +1707,7 @@ static STORY_DIALOG_TUTORIAL2 = {
     }
     this.location = location;
     this.compatability = GameState.COMPATABILITY; 
+    this.playtime = 0; 
   }
 }
 
