@@ -1223,12 +1223,12 @@ function useInterval(callback, delay) {
 function handleEnemyDefeat(enemyImageElement, lootChestImagePath, callback) {
   if (!enemyImageElement) return;
   // Set loot chest size (square) 
-  const size = 350; // in px later 
+  const size = 250; // in px later 
   // const parentNode = enemyImageElement.parentNode;
   const parentNode = document.body; // Append to body for full control over positioning
   const deathDuration = 500; 
   const lootDuration = 1000; 
-  const particleCount = 50; // for loot animation 
+  const particleCount = 100; // for loot animation 
   // TODO death animation 
   // Step 1: Fade out enemy (death animation)
   enemyImageElement.classList.add('enemy-death');
@@ -1264,9 +1264,16 @@ function handleEnemyDefeat(enemyImageElement, lootChestImagePath, callback) {
 }
 
 function spawnParticlesAroundChest(chestElement, particleCount = 10, duration = 1000) {
+  const parentNode = chestElement.parentNode || document.body; // Ensure a valid parent node
+
   for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement('div');
     particle.classList.add('particle');
+
+    // Get chest size
+    const chestRect = chestElement.getBoundingClientRect();
+    const chestX = chestRect.left + chestRect.width / 2;
+    const chestY = chestRect.top + chestRect.height / 2;
 
     // Randomize particle positions around the chest
     const angle = Math.random() * Math.PI * 2; // Random angle
@@ -1274,15 +1281,17 @@ function spawnParticlesAroundChest(chestElement, particleCount = 10, duration = 
     const x = Math.cos(angle) * radius;
     const y = Math.sin(angle) * radius;
 
-    particle.style.left = `${chestElement.offsetLeft + chestElement.width / 2 + x}px`;
-    particle.style.top = `${chestElement.offsetTop + chestElement.height / 2 + y}px`;
+    particle.style.position = 'absolute';
+    particle.style.left = `${chestX + x}px`;
+    particle.style.top = `${chestY + y}px`;
 
-    // Randomize animation delay to make the effect dynamic
-    particle.style.animationDelay = `${Math.random() * 0.5}s`;
+    // Randomize animation delay
+    particle.style.animationDelay = `${Math.random() * 0.1}s`;
 
-    chestElement.parentNode.appendChild(particle);
+    // Append particle
+    parentNode.appendChild(particle);
 
-    // Remove particle after animation ends
+    // Remove particle after animation
     setTimeout(() => {
       particle.remove();
     }, duration);
