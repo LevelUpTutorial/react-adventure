@@ -136,7 +136,7 @@ const handleActiveAttack = () => {
 
   const attackProgress = Math.max(0, Math.min( (gameState.hero.attack_cooldown / gameState.hero.attack_speed * 100), 100));
   const xpProgress = gameState.hero.xp / gameState.hero.xp_to_levelup * 100; 
-  const heroHPCramped = Math.round(Math.max(0, gameState.hero.health));
+  const heroHPCramped = Math.ceil(Math.max(0, gameState.hero.health));
   
   const renderCombatEvent = (text) => {
     let style;
@@ -407,7 +407,7 @@ return (
               >
               {gameState.active_enemy && (() => {
                 const eAttackProgress = Math.max(0, Math.min( (gameState.active_enemy.attack_cooldown / gameState.active_enemy.attack_speed * 100), 100));
-                const enemyHPCramped = Math.max(0, gameState.active_enemy.health);
+                const enemyHPCramped = Math.max(0, Math.ceil(gameState.active_enemy.health));
                 
                 return (
                   <>
@@ -440,7 +440,7 @@ return (
                       aria-valuemin="0" 
                       aria-valuemax="100"
                     >
-                      {`${(gameState.active_enemy.attack_cooldown / 1000).toFixed(1)}s`}
+                      {`${(gameState.active_enemy.attack_cooldown / 1000).toFixed(2)}s`}
                     </div>
                     
                   </>
@@ -468,7 +468,7 @@ return (
               aria-valuemin="0" 
               aria-valuemax="100"
             >
-              {`${gameState.hero.xp} / ${gameState.hero.xp_to_levelup} exp`}
+              {`${Math.floor(gameState.hero.xp)} / ${Math.ceil(gameState.hero.xp_to_levelup)} exp`}
             </div>
           </div> 
           {/* control panel */}
@@ -864,7 +864,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
 function performHeroAttack(gameState) {
   const {hero, active_enemy} = gameState;
   const bonus_damage = (1 + hero.bonus_damage / 100);
-  const dmg = combatCalculation(hero, active_enemy) * bonus_damage;
+  const dmg = Math.floor(combatCalculation(hero, active_enemy) * bonus_damage);
 
   if (dmg >= 0) {
     /* apply on hit effects */ 
@@ -890,7 +890,7 @@ function performHeroAttack(gameState) {
 /* performs enemy attack */ 
 function performEnemyAttack(gameState, setCounterAttackActive) {
   const {hero, active_enemy} = gameState;
-  let dmg = combatCalculation(active_enemy, hero); 
+  let dmg = Math.round(combatCalculation(active_enemy, hero)); 
 
   // evade ?
   if (dmg < 0) {
