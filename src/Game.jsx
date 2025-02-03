@@ -449,7 +449,7 @@ return (
                         className="position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
                         style={{ top: 0, left: 0, color: "white", fontWeight: "bold", zIndex: 2 }}
                       >
-                        {`${ ( Max.(0, gameState.active_enemy.attack_cooldown / 1000) ).toFixed(1) }s`}
+                        {`${Math.max(0, gameState.active_enemy.attack_cooldown / 1000).toFixed(1)}s`}
                       </div>
                       <div 
                         className="progress-bar bg-primary rounded" 
