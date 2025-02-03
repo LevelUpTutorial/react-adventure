@@ -459,7 +459,7 @@ return (
         </div>
         <div className="p-3 text-center d-flex flex-column gap-2">
           {/* XP Progress Bar */}
-          <div className="progress">
+          <div className="progress position-relative" style={{ height: '20px' }}>
             {/* Text Overlay */}
             <div 
               className="position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
