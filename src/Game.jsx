@@ -813,6 +813,9 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
         console.log(`handleGameState chest image ${chest}`);
         handleEnemyDefeat(enemy, chest, () => {
           hero.current_animation.name = null; 
+          // Hero reset 
+          gameState = handleResetHeroControl({ ...gameState, hero}); 
+          ({ hero, active_enemy } = gameState);
           setNewItem(loot);
         });
       }
@@ -840,9 +843,17 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
         hero.xp += active_enemy.xp_reward;
         gameState.hero = hero;
       }
-      // Hero reset 
-      gameState = handleResetHeroControl({ ...gameState, hero}); 
-      hero = gameState.hero; 
+      if (hero.current_animation) {
+        if (hero.current_animation.name === 'enemy-death' || 
+            hero.current_animation.name === 'enemy-loot') {
+          // Skip reset until callback in animation 
+        }
+      } else {
+        // Hero reset 
+        gameState = handleResetHeroControl({ ...gameState, hero}); 
+        hero = gameState.hero; 
+      }  
+      
       hero.image = getHeroImages(gameState).IMG_HERO_NEUTRAL;
       setCounterAttackActive(false); // Disable button on victory
     }
