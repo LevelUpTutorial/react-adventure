@@ -38,7 +38,6 @@ function Game({ heroName, gender, isGameRunning, savedGameState }) {
 
   // Initialize game state in React state
   const [gameState, setGameState] = useState(initializeGameState(savedGameState));
-  const [playtimeCounter, setPlaytimeCounter] = useState(0); // Playtime in milliseconds
   
   const [storyEvent, setStoryEvent] = useState(null); // Holds the active story event object ({ title, text, background }).
   const [isStoryDialogOpen, setStoryDialogOpen] = useState(false); // Controls dialog visibility
@@ -55,7 +54,7 @@ function Game({ heroName, gender, isGameRunning, savedGameState }) {
   const [isInventoryOpen, setInventoryOpen] = useState(false);
   
   const updateGameState = () => {
-    setGameState((prevState) => handleGameState(prevState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades, setNewItem, setPlaytimeCounter));
+    setGameState((prevState) => handleGameState(prevState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades, setNewItem));
   };
 
   const currentTickDuration =
@@ -351,7 +350,7 @@ return (
               </button>
             ))}
           </div>
-          <PlaytimeDisplay playtime={playtimeCounter} /> 
+          <PlaytimeDisplay playtime={gameState.playtime} /> 
         </>
       )}
   
@@ -755,14 +754,15 @@ const onHitEffectsHero = [];
 const onCombatStartEffects = [];
 const onHitEffectsEnemy = [];
 /* Main Function to handle all In-game Event Logic */
-function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades, setNewItem, setPlaytimeCounter) {
+function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades, setNewItem) {
   const location = gameState.location;
   // count playtime 
   const currentTickDuration =
     location.name === GameState.LOCATION_CITY.name || gameState.hero.isInDialog
       ? TICK_DURATION_CITY
       : TICK_DURATION_ADVENTURE;
-  setPlaytimeCounter((prev) => prev + currentTickDuration);
+  
+  gameState.playtime += currentTickDuration;
   
   let {hero, active_enemy} = gameState;
   if (active_enemy) {
