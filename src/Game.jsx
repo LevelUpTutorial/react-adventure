@@ -460,6 +460,13 @@ return (
         <div className="p-3 text-center d-flex flex-column gap-2">
           {/* XP Progress Bar */}
           <div className="progress">
+            {/* Text Overlay */}
+            <div 
+              className="position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
+              style={{ top: 0, left: 0, color: "white", fontWeight: "bold", zIndex: 2 }}
+            >
+              {`${Math.floor(gameState.hero.xp)} / ${Math.ceil(gameState.hero.xp_to_levelup)} exp`}
+            </div>
             <div 
               className="progress-bar bg-info mb-3 align-middle" 
               role="progressbar" 
@@ -468,7 +475,6 @@ return (
               aria-valuemin="0" 
               aria-valuemax="100"
             >
-              {`${Math.floor(gameState.hero.xp)} / ${Math.ceil(gameState.hero.xp_to_levelup)} exp`}
             </div>
           </div> 
           {/* control panel */}
