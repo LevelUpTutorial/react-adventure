@@ -366,14 +366,20 @@ return (
               <p className="fw-semibold text-success">
                 {comboDisplay}
               </p>
-              <div className="progress">
+              <div className="progress position-relative" style={{ height: '20px' }}>
+                {/* Text Overlay */}
+                <div 
+                  className="position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
+                  style={{ top: 0, left: 0, color: "white", fontWeight: "bold", zIndex: 2 }}
+                >
+                  {`${heroHPCramped}`}
+                </div>
                 <div 
                   className="progress-bar bg-success align-middle" 
                   role="progressbar" 
                   style={{width: `${heroHPCramped / gameState.hero.health_full * 100}%`, height: '20px' }} 
                   aria-valuenow={heroHPCramped} aria-valuemin="0" aria-valuemax="100"
                 >
-                  {`${heroHPCramped}`}
                 </div>
                 <div 
                   className="progress-bar progress-bar-striped bg-danger" 
@@ -414,14 +420,20 @@ return (
                     <p className="fw-semibold text-danger">
                       {gameState.active_enemy.name} ({gameState.active_enemy.level})
                     </p>
-                    <div className="progress">
+                    <div className="progress position-relative" style={{ height: '20px' }}>
+                      {/* Text Overlay */}
+                      <div 
+                        className="position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
+                        style={{ top: 0, left: 0, color: "white", fontWeight: "bold", zIndex: 2 }}
+                      >
+                        {`${enemyHPCramped}`}
+                      </div>
                       <div 
                         className="progress-bar bg-success align-middle" 
                         role="progressbar" 
                         style={{width: `${enemyHPCramped / gameState.active_enemy.health_full * 100}%`, height: '20px' }} 
                         aria-valuenow={enemyHPCramped} aria-valuemin="0" aria-valuemax="100"
                       >
-                        {`${enemyHPCramped}`}
                       </div>
                       <div 
                         className="progress-bar progress-bar-striped bg-danger" 
