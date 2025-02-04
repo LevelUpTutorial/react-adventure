@@ -645,6 +645,7 @@ const enemyImage = '.enemy-image';
 
 /* Animation Priority Constants */
 const ANIMATION_PRIORITY = {
+  enemyDeath: 4,
   attack: 2,
   criticalAttack: 3,
   hit: 1,
@@ -828,13 +829,13 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       
       if (loot) {
         console.log(`handleGameState loot drop was ${loot.itemType} ${loot.itemRarity}`);
-        hero.current_animation.name === 'enemy-loot'; 
+        hero.current_animation = { name: 'enemy-loot', priority: ANIMATION_PRIORITY['enemyDeath']; 
         const enemy = document.querySelector(enemyImage);
         const chest = getItemImage( {itemType: "Chest", itemRarity: loot.itemRarity} ); 
         console.log(`handleGameState enemy image ${enemy}`);
         console.log(`handleGameState chest image ${chest}`);
         handleEnemyDefeat(enemy, chest, () => {
-          hero.current_animation.name = null; 
+          hero.current_animation = null; 
           // Hero reset 
           gameState = handleResetHeroControl({ ...gameState, hero}); 
           ({ hero, active_enemy } = gameState);
