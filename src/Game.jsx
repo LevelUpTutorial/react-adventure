@@ -33,7 +33,7 @@ function Game({ heroName, gender, isGameRunning, savedGameState }) {
       // Update location to sync location and background 
       updateLocation(savedState, GameState.LOCATION_CITY);
       // restore enchantment 
-      encId = savedState.hero.current_enchantment;
+      const encId = savedState.hero.current_enchantment;
       savedState = selectEnchantment(savedState, ID_NONE);
       savedState = selectEnchantment(savedState, encId);
       // Use the valid saved game state
