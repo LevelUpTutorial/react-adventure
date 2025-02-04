@@ -1246,6 +1246,8 @@ function handleEnemyDefeat(enemyImageElement, lootChestImagePath, callback) {
   const lootChest = document.createElement('img');
   lootChest.src = lootChestImagePath;
   lootChest.classList.add('loot-chest');
+  lootChest.classList.add('shadow'); // bootstrap styling
+  lootChest.classList.add('rounded'); // bootstrap styling 
   //lootChest.style.left = enemyImageElement.offsetLeft + 'px';
   //lootChest.style.top = enemyImageElement.offsetTop + 'px'; 
   // Position chest in the middle of the screen
