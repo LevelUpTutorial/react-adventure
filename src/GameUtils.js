@@ -515,8 +515,8 @@ export function createActiveEnemy(encounter) {
     enemy.xp_reward = getScaledValue(enemy.xp_reward, XP_CHANGE, target, enemy.level); 
     enemy.attack = getScaledValue(enemy.attack, ATTACK_CHANGE, target, enemy.level);
   }
-  
-  return {...enemy, health_full: enemy.health, last_combat_event: "", current_animation: null};
+  const status = {slowed: 0}; 
+  return {...enemy, health_full: enemy.health, last_combat_event: "", current_animation: null, status: status};
 }
 /**
  * Generates a weighted random roll between 0 and the specified levelRange, 
