@@ -980,7 +980,7 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
     
     setCounterAttackActive(false); // Disable Counter Attack button
   }
-  active_enemy.attack_cooldown = active_enemy.attack_speed;
+  active_enemy.attack_cooldown = active_enemy.attack_speed + active_enemy.status.slowed;
 
   return gameState;
 }
@@ -1006,7 +1006,7 @@ function fireEffectSelectReverse(gameState) {
 }
 /* Ice Enchantment */ 
 const iceEC = 10; 
-const iceSlow = 300; 
+const iceSlow = 600; 
 const iceId = ID_ICE; 
 function iceEffectSelectApply(gameState) {
   // console.log(`apply ice select`);
@@ -1025,8 +1025,8 @@ function iceEffectSelectReverse(gameState) {
 function iceEffectOnHitApply(gameState) {
   // console.log(`apply ice on hit`);
   const active_enemy = gameState.active_enemy; 
-  if (active_enemy) {
-    active_enemy.attack_speed += iceSlow; 
+  if (active_enemy && active_enemy.status.slowed < iceSlow) {
+    active_enemy.status.slowed = iceSlow; 
     active_enemy.attack_cooldown += iceSlow; 
   }
   return gameState; 
@@ -1035,8 +1035,8 @@ function iceEffectOnHitApply(gameState) {
 function iceEffectOnHitReverse(gameState) {
   // console.log(`revert ice on hit`);
   const active_enemy = gameState.active_enemy; 
-  if (active_enemy) {
-    active_enemy.attack_speed -= iceSlow; 
+  if (active_enemy) { 
+    active_enemy.status.slowed = 0;
     // attack cooldown is not reverted because enemy remains temporarily slowed 
   }
   return gameState; 
