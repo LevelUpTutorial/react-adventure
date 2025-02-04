@@ -178,6 +178,7 @@ const handleActiveAttack = () => {
     setGameState({ ...gameState }); // Update the game state
   }; 
 
+  /* depricated, New feature in Inventory dialog 
   const handleRespecCharacter = () => {
     setGameState((prevState) => { 
       const hero = prevState.hero; 
@@ -207,7 +208,7 @@ const handleActiveAttack = () => {
       setNumChooseUpgrades(totalPoints);
       return { ...prevState, hero }; 
     });
-  };
+  }; depricated */
   
   const UpgradePopup = ({ hero, upgrades, onChoose }) => {
     return (
@@ -285,6 +286,8 @@ const equipNewItem = () => {
   setHeroImages(gameState); 
   setShowLootPopup(false);
   setNewItem(null);
+  // save game 
+  saveGameState(gameState);
 };
 
 // Handle keeping the old item
@@ -292,6 +295,12 @@ const keepOldItem = () => {
   setShowLootPopup(false);
   setNewItem(null);
 };
+
+const handleCharacterInventoryClose = () => {
+  setInventoryOpen(false);
+  // save game 
+  saveGameState(gameState);
+}
 
 useEffect(() => {
   if (numChooseUpgrades > 0) {
@@ -631,7 +640,7 @@ return (
       <CharacterInventoryDialog
         show={isInventoryOpen}
         gameState={gameState}
-        onClose={() => setInventoryOpen(false)} // Pass onClose function
+        onClose={handleCharacterInventoryClose} // Pass onClose function
         setGameState={setGameState} 
       />
     </div>
