@@ -44,8 +44,9 @@ function Game({ heroName, gender, isGameRunning, savedGameState }) {
     return new GameState(heroName, gender, GameState.LOCATION_ADVENTURE_ACT1);
   };
 
-  // Initialize game state in React state
-  const [gameState, setGameState] = useState(initializeGameState(savedGameState));
+  // Initialize game state in React state 
+  // either new gamestate or loaded savegame 
+  const [gameState, setGameState] = useState(() => initializeGameState(savedGameState));
   
   const [storyEvent, setStoryEvent] = useState(null); // Holds the active story event object ({ title, text, background }).
   const [isStoryDialogOpen, setStoryDialogOpen] = useState(false); // Controls dialog visibility
