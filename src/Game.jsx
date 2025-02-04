@@ -9,7 +9,7 @@ import PlaytimeDisplay from "./components/PlaytimeDisplay.jsx";
 import {combatCalculation, playSound, SND_SWORD_HIT, 
         calculateXpToLevelUp, onLevelUp, 
         UPGRADE_PER_LEVELUP, playConfettiFirework, 
-        changeLocation, handleResetHeroControl, 
+        changeLocation, updateLocation, handleResetHeroControl, 
         ID_NONE, ID_FIRE, ID_LIGHTNING, ID_ICE,
         setHeroImages,
         UPGRADE_DAMAGE, UPGRADE_MAX_HEALTH, UPGRADE_CRIT_CHANCE, 
