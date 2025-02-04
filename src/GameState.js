@@ -1210,7 +1210,13 @@ class GameState {
       mergeList2inList1(list, GameState.ACT8_ENCOUNTERS_2);
     },
     runAfterEnemyA8B2TheEclipseAvatar: (gameState) => {
-      alert('Thanks for playing! You prevented the Eclipse this time, but at what cost? Will you be able to break the cicle? [ "Newgame+" coming soon ]');
+      // Queue Game Ending Dialog 
+      gameState.next_encounters.push({
+        category: 'story',
+        id: 'STORY_ACT8_ENDING',
+        dialog: GameState.STORY_DIALOG_ACT8_ENDING,
+        weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT
+      });
       gameState.acts_progression = 9; 
       updateLocation(gameState, GameState.LOCATION_CITY); 
     },
@@ -1330,6 +1336,7 @@ class GameState {
       const location_id = GameState.ACT1_LOC1_NAME;
       GameState.markStoryAsCompleted(gameState, location_id, 'STORY_ACT1_SECRET');
     },
+    onClose_STORY_DIALOG_ACT8_ENDING: (gameState) => {return},
   };
 
   /*
@@ -1421,6 +1428,19 @@ class GameState {
     background: '',
     completed: false,
     onCloseKey: 'onClose_STORY_DIALOG_ACT1_SECRET',
+  }
+
+  static STORY_DIALOG_ACT8_ENDING = {
+    title: 'The End?',
+    content: [
+      "Thanks for playing!", 
+      "You prevented the Eclipse this time, but at what cost? Will you be able to break the cicle?", 
+      "[Secret Ending comin soon!]",
+      "['Newgame+' coming soon!]", 
+    ],
+    background: '',
+    completed: false,
+    onCloseKey: 'onClose_STORY_DIALOG_ACT8_ENDING',
   }
 
   static STORY_DIALOG_TUTORIAL1 = {
