@@ -1120,6 +1120,8 @@ function selectEnchantment(gameState, enchantment_id) {
   }
   console.log(`new enchantment hero ${gameState.hero.current_enchantment}`);
   setHeroImages(gameState); 
+  // reset Attack Cooldown to switch mid combat and not lose combo 
+  hero.attack_cooldown = hero.attack_speed; 
   return { ...gameState, hero }; 
 }
 /*
