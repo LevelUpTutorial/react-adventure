@@ -1661,7 +1661,7 @@ static STORY_DIALOG_TUTORIAL2 = {
         [UPGRADE_EVADE_CHANCE]: 0,
         [UPGRADE_ATTACK_SPEED]: 0,
       },
-      unspent_points = 0, 
+      unspent_points: 0, 
       current_animation: null, 
       helm: {
         itemType: "Helm",
