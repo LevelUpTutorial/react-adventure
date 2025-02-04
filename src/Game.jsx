@@ -32,7 +32,12 @@ function Game({ heroName, gender, isGameRunning, savedGameState }) {
     if (savedState) {
       // Update location to sync location and background 
       updateLocation(savedState, GameState.LOCATION_CITY);
-      return savedState; // Use the valid saved game state
+      // restore enchantment 
+      encId = savedState.hero.current_enchantment;
+      savedState = selectEnchantment(savedState, ID_NONE);
+      savedState = selectEnchantment(savedState, encId);
+      // Use the valid saved game state
+      return savedState; 
     }
     // Fallback to a new GameState if savedState is invalid
     return new GameState(heroName, gender, GameState.LOCATION_ADVENTURE_ACT1);
