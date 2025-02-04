@@ -30,6 +30,8 @@ function Game({ heroName, gender, isGameRunning, savedGameState }) {
   // Helper function to validate the saved game state
   const initializeGameState = (savedState) => {
     if (savedState) {
+      // Update location to sync location and background 
+      updateLocation(savedState, GameState.LOCATION_CITY);
       return savedState; // Use the valid saved game state
     }
     // Fallback to a new GameState if savedState is invalid
