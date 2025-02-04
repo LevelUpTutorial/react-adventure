@@ -221,7 +221,10 @@ const handleActiveAttack = () => {
               <p>Choose one upgrade ({numChooseUpgrades}/{UPGRADE_PER_LEVELUP})</p>
               <div className="row">
                 <div className="col-6">
-                  <ListHeroStats gameState={gameState}/>
+                  <ListHeroStats 
+                    gameState={gameState}
+                    showButtons={false}
+                    />
                 </div>
                 <div className="col-6 btn-group-vertical d-flex flex-column gap-1" role="group" aria-label="buttons for upgrade choices">
                   {upgrades.map((upgrade, index) => (
@@ -328,16 +331,17 @@ return (
               />
               </div>
               <div className="col-6 d-flex flex-column justify-content-evenly">
-              <button
+                {/*
+                <button
                  type="button"
                  className="btn btn-danger"
                  onClick={() => handleRespecCharacter()}
                >
                  Respec Stats
-               </button>
+               </button>*/}
                {/* Inventory Button */}
                <button className="btn btn-danger" onClick={() => setInventoryOpen(true)}>
-                 Inventory
+                 Hero 
                </button>
                </div>
             </div>
@@ -628,6 +632,7 @@ return (
         show={isInventoryOpen}
         gameState={gameState}
         onClose={() => setInventoryOpen(false)} // Pass onClose function
+        setGameState={setGameState} 
       />
     </div>
   );
