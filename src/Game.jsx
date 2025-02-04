@@ -829,7 +829,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
       
       if (loot) {
         console.log(`handleGameState loot drop was ${loot.itemType} ${loot.itemRarity}`);
-        hero.current_animation = { name: 'enemy-loot', priority: ANIMATION_PRIORITY['enemyDeath']; 
+        hero.current_animation = { name: 'enemy-loot', priority: ANIMATION_PRIORITY['enemyDeath'] }; 
         const enemy = document.querySelector(enemyImage);
         const chest = getItemImage( {itemType: "Chest", itemRarity: loot.itemRarity} ); 
         console.log(`handleGameState enemy image ${enemy}`);
