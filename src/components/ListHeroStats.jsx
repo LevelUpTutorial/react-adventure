@@ -7,6 +7,8 @@ import {
   UPGRADE_ATTACK_SPEED,
 } from './../GameUtils.js';
 import GameState from './../GameState.js';
+import buttonPlus from "./assets/images/button_plus.jpg"; 
+import buttonMinus from "./assets/images/button_minus.jpg";
 
 const ListHeroStats = ({ gameState, handleUpgrade, handleRefund, showButtons = false }) => {
   if (!gameState || !gameState.hero) return null;
@@ -51,7 +53,7 @@ const ListHeroStats = ({ gameState, handleUpgrade, handleRefund, showButtons = f
                 onClick={() => handleRefund(stat.key)}
                 disabled={gameState.hero.upgradeCounts[stat.key] <= 0}
               >
-                <img src="./assets/icons/minus.png" alt="-" style={{ width: "100%", height: "100%" }} />
+                <img src={buttonMinus} alt="-" style={{ width: "100%", height: "100%" }} />
               </button>
 
               {/* Plus Button */}
@@ -64,7 +66,7 @@ const ListHeroStats = ({ gameState, handleUpgrade, handleRefund, showButtons = f
                   gameState.hero.upgradeCounts[stat.key] >= GameState.UPGRADE_LIMITS[stat.key]
                 }
               >
-                <img src="./assets/icons/plus.png" alt="+" style={{ width: "100%", height: "100%" }} />
+                <img src={buttonPlus} alt="+" style={{ width: "100%", height: "100%" }} />
               </button>
             </>
           )}
