@@ -7,8 +7,8 @@ import {
   UPGRADE_ATTACK_SPEED,
 } from './../GameUtils.js';
 import GameState from './../GameState.js';
-import buttonPlus from "./assets/images/button_plus.jpg"; 
-import buttonMinus from "./assets/images/button_minus.jpg";
+import buttonPlus from "./../assets/images/button_plus.jpg"; 
+import buttonMinus from "./../assets/images/button_minus.jpg";
 
 const ListHeroStats = ({ gameState, handleUpgrade, handleRefund, showButtons = false }) => {
   if (!gameState || !gameState.hero) return null;
