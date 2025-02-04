@@ -125,7 +125,7 @@ class GameState {
   static GENDER_FEMALE = 'female';
   static DEFAULT_GENDER = GameState.GENDER_MALE;
   static MAX_LEVEL = 70;
-  static XP_TO_LEVEL2 = 65; 
+  static XP_TO_LEVEL2 = 75; 
   static XP_SCALING = 1.3; 
   static UPGRADE_LIMITS = {
     [UPGRADE_DAMAGE]: 999,
