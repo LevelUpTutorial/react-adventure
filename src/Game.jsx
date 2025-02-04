@@ -421,7 +421,7 @@ return (
               style={{ width: '50%', position: 'relative' }} 
               >
               {gameState.active_enemy && (() => {
-                const eAttackProgress = Math.max(0, Math.min( (gameState.active_enemy.attack_cooldown / gameState.active_enemy.attack_speed * 100), 100));
+                const eAttackProgress = Math.max(0, Math.min( (gameState.active_enemy.attack_cooldown / (gameState.active_enemy.attack_speed + gameState.active_enemy.status.slowed) * 100), 100));
                 const enemyHPCramped = Math.max(0, Math.ceil(gameState.active_enemy.health));
                 
                 return (
