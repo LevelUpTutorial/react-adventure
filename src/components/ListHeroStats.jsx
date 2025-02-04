@@ -31,6 +31,9 @@ const ListHeroStats = ({ gameState, handleUpgrade, handleRefund, showButtons = f
         {gameState.hero.level >= GameState.MAX_LEVEL ? " (max)" : ""}
       </p>
       <p>
+        <strong>Unspent Stat Points:</strong> {gameState.hero.unspent_points}
+      </p>
+      <p>
         <strong>Damage Reduction:</strong> {Math.round(gameState.hero.damage_reduction * 100) / 100}%
       </p>
       <p>
@@ -46,16 +49,6 @@ const ListHeroStats = ({ gameState, handleUpgrade, handleRefund, showButtons = f
 
           {showButtons && (
             <>
-              {/* Minus Button */}
-              <button
-                className="btn btn-light mx-2"
-                style={{ width: "30px", height: "30px" }}
-                onClick={() => handleRefund(stat.key)}
-                disabled={gameState.hero.upgradeCounts[stat.key] <= 0}
-              >
-                <img src={buttonMinus} alt="-" style={{ width: "100%", height: "100%" }} />
-              </button>
-
               {/* Plus Button */}
               <button
                 className="btn btn-light mx-2"
@@ -67,6 +60,15 @@ const ListHeroStats = ({ gameState, handleUpgrade, handleRefund, showButtons = f
                 }
               >
                 <img src={buttonPlus} alt="+" style={{ width: "100%", height: "100%" }} />
+              </button>
+              {/* Minus Button */}
+              <button
+                className="btn btn-light mx-2"
+                style={{ width: "30px", height: "30px" }}
+                onClick={() => handleRefund(stat.key)}
+                disabled={gameState.hero.upgradeCounts[stat.key] <= 0}
+              >
+                <img src={buttonMinus} alt="-" style={{ width: "100%", height: "100%" }} />
               </button>
             </>
           )}
