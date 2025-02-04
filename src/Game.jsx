@@ -341,7 +341,7 @@ return (
                </button>*/}
                {/* Inventory Button */}
                <button className="btn btn-danger" onClick={() => setInventoryOpen(true)}>
-                 Hero 
+                 Stats & Inventory 
                </button>
                </div>
             </div>
