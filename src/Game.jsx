@@ -615,10 +615,10 @@ return (
           content={storyEvent.content}
           background={storyEvent.background}
           onClose={() => {
-            setGameState(handleResetHeroControl(gameState));
             GameState.onCloseStory(gameState, storyEvent.onCloseKey);
             setStoryDialogOpen(false);
             setStoryEvent(null);
+            setGameState(handleResetHeroControl(gameState));
           }}
         />
       )}
