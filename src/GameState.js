@@ -1217,8 +1217,7 @@ class GameState {
         dialog: GameState.STORY_DIALOG_ACT8_ENDING,
         weight: GameState.STORY_DIALOG_DEFAULT_WEIGHT
       });
-      gameState.acts_progression = 9; 
-      updateLocation(gameState, GameState.LOCATION_CITY); 
+      gameState.acts_progression = 9;  
     },
   };
 
@@ -1336,7 +1335,7 @@ class GameState {
       const location_id = GameState.ACT1_LOC1_NAME;
       GameState.markStoryAsCompleted(gameState, location_id, 'STORY_ACT1_SECRET');
     },
-    onClose_STORY_DIALOG_ACT8_ENDING: (gameState) => {return},
+    onClose_STORY_DIALOG_ACT8_ENDING: (gameState) => {updateLocation(gameState, GameState.LOCATION_CITY)},
   };
 
   /*
