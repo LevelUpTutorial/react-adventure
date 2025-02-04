@@ -1,8 +1,23 @@
 import { useState } from "react";
 import { getItemImage } from './../GameUtils.js';
 import ListHeroStats from "./ListHeroStats";
+import {
+  UPGRADE_DAMAGE,
+  UPGRADE_MAX_HEALTH,
+  UPGRADE_CRIT_CHANCE,
+  UPGRADE_CRIT_DAMAGE,
+  UPGRADE_EVADE_CHANCE,
+  UPGRADE_ATTACK_SPEED,
+  DAMAGE_INCREMENT,
+  MAX_HEALTH_INCREMENT,
+  CRIT_CHANCE_INCREMENT,
+  CRIT_DAMAGE_INCREMENT,
+  EVADE_CHANCE_INCREMENT,
+  ATTACK_SPEED_DECREASE,
+} from './../GameUtils.js';
+import GameState from './../GameState.js';
 
-const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
+const CharacterInventoryDialog = ({ show, gameState, onClose, setGameState }) => {
   if (!show) return null;
 
   const { hero } = gameState;
@@ -37,6 +52,62 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
       perfectLegendary: "border-dark-orange",
     };
     return classes[rarity] || "border-muted";
+  };
+
+  // Handle Stat Upgrade
+  const handleUpgrade = (statKey) => {
+    setGameState((prevState) => {
+      const hero = prevState.hero;
+      if (hero.unspent_points > 0 && hero.upgradeCounts[statKey] < GameState.UPGRADE_LIMITS[statKey]) {
+        hero.upgradeCounts[statKey] += 1;
+        hero.unspent_points -= 1;
+
+        if (statKey === UPGRADE_DAMAGE) {
+          hero.attack += DAMAGE_INCREMENT;
+        } else if (statKey === UPGRADE_MAX_HEALTH) {
+          hero.health_full += MAX_HEALTH_INCREMENT;
+          hero.health = hero.health_full;
+        } else if (statKey === UPGRADE_CRIT_CHANCE) {
+          hero.crit_chance += CRIT_CHANCE_INCREMENT;
+        } else if (statKey === UPGRADE_CRIT_DAMAGE) {
+          hero.crit_damage += CRIT_DAMAGE_INCREMENT;
+        } else if (statKey === UPGRADE_EVADE_CHANCE) {
+          hero.evade_chance += EVADE_CHANCE_INCREMENT;
+        } else if (statKey === UPGRADE_ATTACK_SPEED) {
+          hero.attack_speed -= ATTACK_SPEED_DECREASE;
+          hero.attack_cooldown = hero.attack_speed;
+        }
+      }
+      return { ...prevState, hero };
+    });
+  };
+
+  // Handle Stat Refund
+  const handleRefund = (statKey) => {
+    setGameState((prevState) => {
+      const hero = prevState.hero;
+      if (hero.upgradeCounts[statKey] > 0) {
+        hero.upgradeCounts[statKey] -= 1;
+        hero.unspent_points += 1;
+
+        if (statKey === UPGRADE_DAMAGE) {
+          hero.attack -= DAMAGE_INCREMENT;
+        } else if (statKey === UPGRADE_MAX_HEALTH) {
+          hero.health_full -= MAX_HEALTH_INCREMENT;
+          hero.health = hero.health_full;
+        } else if (statKey === UPGRADE_CRIT_CHANCE) {
+          hero.crit_chance -= CRIT_CHANCE_INCREMENT;
+        } else if (statKey === UPGRADE_CRIT_DAMAGE) {
+          hero.crit_damage -= CRIT_DAMAGE_INCREMENT;
+        } else if (statKey === UPGRADE_EVADE_CHANCE) {
+          hero.evade_chance -= EVADE_CHANCE_INCREMENT;
+        } else if (statKey === UPGRADE_ATTACK_SPEED) {
+          hero.attack_speed += ATTACK_SPEED_DECREASE;
+          hero.attack_cooldown = hero.attack_speed;
+        }
+      }
+      return { ...prevState, hero };
+    });
   };
 
   return (
@@ -88,7 +159,12 @@ const CharacterInventoryDialog = ({ show, gameState, onClose }) => {
           </div>
           {/* Centered Hero Stats Section */}
           <div className="mt-1">
-            <ListHeroStats gameState={gameState} />
+            <ListHeroStats
+              gameState={gameState}
+              handleUpgrade={handleUpgrade}
+              handleRefund={handleRefund}
+              showButtons={true}
+            />
           </div>
           {/* Centered Close Button */}
           <div className="modal-footer d-flex justify-content-center">
