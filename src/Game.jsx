@@ -29,6 +29,7 @@ const TICK_DURATION_CITY = 1000;
 function Game({ heroName, gender, isGameRunning, savedGameState }) {
   // Helper function to validate the saved game state
   const initializeGameState = (savedState) => {
+    console.log("initializeGameState savedState ${savedState}");
     if (savedState) {
       // Update location to sync location and background 
       updateLocation(savedState, GameState.LOCATION_CITY);
