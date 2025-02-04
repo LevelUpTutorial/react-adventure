@@ -8,10 +8,19 @@ import {
 } from './../GameUtils.js';
 import GameState from './../GameState.js';
 
-const ListHeroStats = ({ gameState }) => {
+const ListHeroStats = ({ gameState, handleUpgrade, handleRefund, showButtons = false }) => {
   if (!gameState || !gameState.hero) return null;
 
   const heroHPCramped = Math.ceil(Math.max(0, gameState.hero.health));
+
+  const statElements = [
+    { label: "Attack", key: UPGRADE_DAMAGE },
+    { label: "Health", key: UPGRADE_MAX_HEALTH },
+    { label: "Crit Chance", key: UPGRADE_CRIT_CHANCE },
+    { label: "Crit Damage", key: UPGRADE_CRIT_DAMAGE },
+    { label: "Evade Chance", key: UPGRADE_EVADE_CHANCE },
+    { label: "Attack Cooldown", key: UPGRADE_ATTACK_SPEED },
+  ];
 
   return (
     <div className="d-flex flex-column align-items-center text-center">
@@ -19,52 +28,48 @@ const ListHeroStats = ({ gameState }) => {
         <strong>Level:</strong> {gameState.hero.level}
         {gameState.hero.level >= GameState.MAX_LEVEL ? " (max)" : ""}
       </p>
-      {/* Uncomment if needed */}
-      {/* <p>
-        <strong>Exp:</strong> {Math.floor(gameState.hero.xp)} / {Math.ceil(gameState.hero.xp_to_levelup)}
-      </p> */}
-      <p>
-        <strong>Health:</strong> {heroHPCramped}
-        {gameState.hero.upgradeCounts[UPGRADE_MAX_HEALTH] >= GameState.UPGRADE_LIMITS[UPGRADE_MAX_HEALTH]
-          ? " (max)"
-          : ""}
-      </p>
-      <p>
-        <strong>Attack:</strong> {Math.floor(gameState.hero.attack)}
-        {gameState.hero.upgradeCounts[UPGRADE_DAMAGE] >= GameState.UPGRADE_LIMITS[UPGRADE_DAMAGE]
-          ? " (max)"
-          : ""}
-      </p>
-      <p>
-        <strong>Attack Cooldown:</strong> {Math.round(gameState.hero.attack_speed / 10) / 100}s
-        {gameState.hero.upgradeCounts[UPGRADE_ATTACK_SPEED] >= GameState.UPGRADE_LIMITS[UPGRADE_ATTACK_SPEED]
-          ? " (max)"
-          : ""}
-      </p>
-      <p>
-        <strong>Evade Chance:</strong> {Math.round(gameState.hero.evade_chance * 100) / 100}%
-        {gameState.hero.upgradeCounts[UPGRADE_EVADE_CHANCE] >= GameState.UPGRADE_LIMITS[UPGRADE_EVADE_CHANCE]
-          ? " (max)"
-          : ""}
-      </p>
       <p>
         <strong>Damage Reduction:</strong> {Math.round(gameState.hero.damage_reduction * 100) / 100}%
       </p>
       <p>
-        <strong>Crit Chance:</strong> {Math.round(gameState.hero.crit_chance * 100) / 100}%
-        {gameState.hero.upgradeCounts[UPGRADE_CRIT_CHANCE] >= GameState.UPGRADE_LIMITS[UPGRADE_CRIT_CHANCE]
-          ? " (max)"
-          : ""}
-      </p>
-      <p>
-        <strong>Crit Damage:</strong> {Math.round(gameState.hero.crit_damage * 100) / 100}%
-        {gameState.hero.upgradeCounts[UPGRADE_CRIT_DAMAGE] >= GameState.UPGRADE_LIMITS[UPGRADE_CRIT_DAMAGE]
-          ? " (max)"
-          : ""}
-      </p>
-      <p>
         <strong>Bonus Damage:</strong> {Math.round(gameState.hero.bonus_damage * 100) / 100}%
       </p>
+
+      {statElements.map((stat) => (
+        <div key={stat.key} className="d-flex align-items-center justify-content-center mb-2">
+          <span style={{ width: "200px", textAlign: "right" }}>
+            <strong>{stat.label}:</strong> {Math.round(gameState.hero[stat.key] * 100) / 100}{" "}
+            ({gameState.hero.upgradeCounts[stat.key]}/{GameState.UPGRADE_LIMITS[stat.key]})
+          </span>
+
+          {showButtons && (
+            <>
+              {/* Minus Button */}
+              <button
+                className="btn btn-light mx-2"
+                style={{ width: "30px", height: "30px" }}
+                onClick={() => handleRefund(stat.key)}
+                disabled={gameState.hero.upgradeCounts[stat.key] <= 0}
+              >
+                <img src="./assets/icons/minus.png" alt="-" style={{ width: "100%", height: "100%" }} />
+              </button>
+
+              {/* Plus Button */}
+              <button
+                className="btn btn-light mx-2"
+                style={{ width: "30px", height: "30px" }}
+                onClick={() => handleUpgrade(stat.key)}
+                disabled={
+                  gameState.hero.unspent_points <= 0 ||
+                  gameState.hero.upgradeCounts[stat.key] >= GameState.UPGRADE_LIMITS[stat.key]
+                }
+              >
+                <img src="./assets/icons/plus.png" alt="+" style={{ width: "100%", height: "100%" }} />
+              </button>
+            </>
+          )}
+        </div>
+      ))}
     </div>
   );
 };
