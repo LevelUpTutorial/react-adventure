@@ -16,12 +16,12 @@ const ListHeroStats = ({ gameState, handleUpgrade, handleRefund, showButtons = f
   const heroHPCramped = Math.ceil(Math.max(0, gameState.hero.health));
 
   const statElements = [
-    { label: "Attack", key: UPGRADE_DAMAGE },
-    { label: "Health", key: UPGRADE_MAX_HEALTH },
-    { label: "Crit Chance", key: UPGRADE_CRIT_CHANCE },
-    { label: "Crit Damage", key: UPGRADE_CRIT_DAMAGE },
-    { label: "Evade Chance", key: UPGRADE_EVADE_CHANCE },
-    { label: "Attack Cooldown", key: UPGRADE_ATTACK_SPEED },
+  { label: "Attack", key: "attack", upgradeKey: UPGRADE_DAMAGE },
+  { label: "Health", key: "health_full", upgradeKey: UPGRADE_MAX_HEALTH },
+  { label: "Crit Chance", key: "crit_chance", upgradeKey: UPGRADE_CRIT_CHANCE },
+  { label: "Crit Damage", key: "crit_damage", upgradeKey: UPGRADE_CRIT_DAMAGE },
+  { label: "Evade Chance", key: "evade_chance", upgradeKey: UPGRADE_EVADE_CHANCE },
+  { label: "Attack Cooldown", key: "attack_speed", upgradeKey: UPGRADE_ATTACK_SPEED },
   ];
 
   return (
@@ -41,39 +41,43 @@ const ListHeroStats = ({ gameState, handleUpgrade, handleRefund, showButtons = f
       </p>
 
       {statElements.map((stat) => (
-        <div key={stat.key} className="d-flex align-items-center justify-content-center mb-2">
-          <span style={{ width: "200px", textAlign: "right" }}>
-            <strong>{stat.label}:</strong> {Math.round(gameState.hero[stat.key] * 100) / 100}{" "}
-            ({gameState.hero.upgradeCounts[stat.key]}/{GameState.UPGRADE_LIMITS[stat.key]})
-          </span>
+  <div key={stat.upgradeKey} className="d-flex align-items-center justify-content-center mb-2">
+    <span style={{ width: "200px", textAlign: "right" }}>
+      <strong>{stat.label}:</strong> {Math.round((gameState.hero[stat.key] || 0) * 100) / 100}{" "}
+      ({gameState.hero.upgradeCounts[stat.upgradeKey]}/{GameState.UPGRADE_LIMITS[stat.upgradeKey]})
+    </span>
 
-          {showButtons && (
-            <>
-              {/* Plus Button */}
-              <button
+    {showButtons && (
+      <>
+        {/* Plus Button */}
+        <button
+  className="btn btn-light mx-2"
+  style={{ width: "40px", height: "40px", padding: 0 }} // Ensure padding is removed
+  onClick={() => handleUpgrade(stat.upgradeKey)}
+  disabled={
+    gameState.hero.unspent_points <= 0 ||
+    gameState.hero.upgradeCounts[stat.upgradeKey] >= GameState.UPGRADE_LIMITS[stat.upgradeKey]
+  }
+>
+  <img
+    src={buttonPlus}
+    alt="+"
+    style={{ display: "block", width: "100%", height: "100%" }} // Block display ensures it fills the button
+  />
+</button>
+        {/* Minus Button */}
+        <button
                 className="btn btn-light mx-2"
-                style={{ width: "30px", height: "30px" }}
-                onClick={() => handleUpgrade(stat.key)}
-                disabled={
-                  gameState.hero.unspent_points <= 0 ||
-                  gameState.hero.upgradeCounts[stat.key] >= GameState.UPGRADE_LIMITS[stat.key]
-                }
+                style={{ width: "40px", height: "40px", padding: 0 }}
+                onClick={() => handleRefund(stat.upgradeKey)}
+                disabled={gameState.hero.upgradeCounts[stat.upgradeKey] <= 0}
               >
-                <img src={buttonPlus} alt="+" style={{ width: "100%", height: "100%" }} />
+                <img src={buttonMinus} alt="-" style={{ display: "block", width: "100%", height: "100%" }} />
               </button>
-              {/* Minus Button */}
-              <button
-                className="btn btn-light mx-2"
-                style={{ width: "30px", height: "30px" }}
-                onClick={() => handleRefund(stat.key)}
-                disabled={gameState.hero.upgradeCounts[stat.key] <= 0}
-              >
-                <img src={buttonMinus} alt="-" style={{ width: "100%", height: "100%" }} />
-              </button>
-            </>
-          )}
-        </div>
-      ))}
+      </>
+    )}
+  </div>
+))}
     </div>
   );
 };
