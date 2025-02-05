@@ -62,6 +62,8 @@ function Game({ heroName, gender, isGameRunning, savedGameState }) {
  
   const [isInventoryOpen, setInventoryOpen] = useState(false);
 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Track if dropdown is open
+  
   const updateGameState = () => {
     setGameState((prevState) => handleGameState(prevState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades, setNewItem));
   };
@@ -340,10 +342,12 @@ useEffect(() => {
     if (!dropdownElement) return; // Prevent errors if element is not found
     // Pause the game when the dropdown is opened
     const handleDropdownShow = () => {
+      setIsDropdownOpen(true);
       pauseGame(); // Function to pause the game flow
     };
     // Resume the game when the dropdown is closed
     const handleDropdownHide = () => {
+      setIsDropdownOpen(false);
       resumeGame(); // Function to resume the game flow
     };
     // Attach Bootstrap dropdown events
@@ -573,10 +577,10 @@ return (
                       {`${gameState.hero.current_enchantment}`}
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="enchantmentDropdown">
-                      <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(noneId)}>None</a></li>
-                      <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(fireId)}>Fire</a></li>
-                      <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(iceId)}>Ice</a></li>
-                      <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(lightningId)}>Lightning</a></li>
+                      <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(noneId)}>{isDropdownOpen ? `None` : "None"}</a></li>
+                      <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(fireId)}>{isDropdownOpen ? `Fire - +${fireCC}% Crit Chance, +${fireCD}% Crit Damage` : "Fire"}</a></li>
+                      <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(iceId)}>{isDropdownOpen ? `Ice - +${iceEC}% Evade Chance, +${iceSlow / 1000}s Enemy Attack Cooldown` : "Ice"}</a></li>
+                      <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(lightningId)}>{isDropdownOpen ? `Lightning - -${lightningAS / 1000}s Attack Cooldown, ${lightningStunChance}% Chance to stun an Enemy` : "Lightning"}</a></li>
                     </ul>
                  </div>
                  {/* Dropdown 2 */}
