@@ -61,7 +61,7 @@ function Game({ heroName, gender, isGameRunning, savedGameState }) {
   const [newItem, setNewItem] = useState(null); 
  
   const [isInventoryOpen, setInventoryOpen] = useState(false);
-  
+
   const updateGameState = () => {
     setGameState((prevState) => handleGameState(prevState, setStoryEvent, setStoryDialogOpen, setCounterAttackActive, setNumChooseUpgrades, setNewItem));
   };
@@ -324,6 +324,7 @@ useEffect(() => {
   when the select enchantment Element 
   is open  
 */
+const dropdownRef = useRef(null); // Create a ref for the dropdown button
 const pauseGame = () => {
   console.log("Game paused");
   gameState.hero.isInDialog = true;
@@ -335,7 +336,8 @@ const resumeGame = () => {
   setGameState({...gameState});
 };
 useEffect(() => {
-    const dropdownElement = document.getElementById("enchantmentDropdown");
+    const dropdownElement = dropdownRef.current; // Get the dropdown button element
+    if (!dropdownElement) return; // Prevent errors if element is not found
     // Pause the game when the dropdown is opened
     const handleDropdownShow = () => {
       pauseGame(); // Function to pause the game flow
@@ -562,7 +564,12 @@ return (
                   {/* enchantment selection */}
                   <label for="select-enchantment">Enchantment:</label>
                   <div class="dropdown" id="select-enchantment">
-                    <button class="btn btn-success dropdown-toggle" type="button" id="enchantmentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button 
+                      ref={dropdownRef} // Attach the ref to this button
+                      class="btn btn-success dropdown-toggle" 
+                      type="button" id="enchantmentDropdown" 
+                      data-bs-toggle="dropdown" 
+                      aria-expanded="false">
                       {`${gameState.hero.current_enchantment}`}
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="enchantmentDropdown">
