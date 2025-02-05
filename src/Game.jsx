@@ -483,7 +483,7 @@ return (
                 return (
                   <>
                     <p className="fw-semibold text-danger">
-                      {gameState.active_enemy.name} ({gameState.active_enemy.level})
+                      {gameState.active_enemy.name} ({gameState.active_enemy.status.slowed > 0 ? "slowed" : gameState.active_enemy.level}) 
                     </p>
                     <div className="progress position-relative" style={{ height: '20px' }}>
                       {/* Text Overlay */}
@@ -578,9 +578,9 @@ return (
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="enchantmentDropdown">
                       <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(noneId)}>{isDropdownOpen ? `None` : "None"}</a></li>
-                      <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(fireId)}>{isDropdownOpen ? `Fire - +${fireCC}% Crit Chance, +${fireCD}% Crit Damage` : "Fire"}</a></li>
-                      <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(iceId)}>{isDropdownOpen ? `Ice - +${iceEC}% Evade Chance, +${iceSlow / 1000}s Enemy Attack Cooldown` : "Ice"}</a></li>
-                      <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(lightningId)}>{isDropdownOpen ? `Lightning - -${lightningAS / 1000}s Attack Cooldown, ${lightningStunChance}% Chance to stun an Enemy` : "Lightning"}</a></li>
+                      <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(fireId)}>{isDropdownOpen ? `Fire: +${fireCC}% Crit Chance, +${fireCD}% Crit Damage` : "Fire"}</a></li>
+                      <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(iceId)}>{isDropdownOpen ? `Ice: +${iceEC}% Evade Chance, slows Enemies` : "Ice"}</a></li>
+                      <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(lightningId)}>{isDropdownOpen ? `Lightning: -${lightningAS / 1000}s Cooldown, ${lightningStunChance}% Chance to stun` : "Lightning"}</a></li>
                     </ul>
                  </div>
                  {/* Dropdown 2 */}
