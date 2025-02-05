@@ -304,6 +304,7 @@ const handleCharacterInventoryClose = () => {
   saveGameState(gameState);
 }
 
+/* Logic to prioritosing and queing conflicting Popup Dialogs */
 useEffect(() => {
   if (numChooseUpgrades > 0) {
     gameState.hero.isInDialog = true; 
@@ -318,6 +319,40 @@ useEffect(() => {
     setGameState({ ...gameState }); 
   }
 }, [numChooseUpgrades, newItem]);
+
+/* logic to Pause the game loop 
+  when the select enchantment Element 
+  is open  
+*/
+const pauseGame = () => {
+  console.log("Game paused");
+  gameState.hero.isInDialog = true;
+  setGameState({...gameState});
+};
+const resumeGame = () => {
+  console.log("Game resumed");
+  gameState.hero.isInDialog = false;
+  setGameState({...gameState});
+};
+useEffect(() => {
+    const dropdownElement = document.getElementById("enchantmentDropdown");
+    // Pause the game when the dropdown is opened
+    const handleDropdownShow = () => {
+      pauseGame(); // Function to pause the game flow
+    };
+    // Resume the game when the dropdown is closed
+    const handleDropdownHide = () => {
+      resumeGame(); // Function to resume the game flow
+    };
+    // Attach Bootstrap dropdown events
+    dropdownElement.addEventListener("show.bs.dropdown", handleDropdownShow);
+    dropdownElement.addEventListener("hide.bs.dropdown", handleDropdownHide);
+    // Cleanup event listeners
+    return () => {
+      dropdownElement.removeEventListener("show.bs.dropdown", handleDropdownShow);
+      dropdownElement.removeEventListener("hide.bs.dropdown", handleDropdownHide);
+    };
+  }, [pauseGame, resumeGame]);
   
 return (
   <div className="d-flex flex-column mb-3 border border-2 rounded shadow" style={{ backgroundColor: "rgba(255, 255, 255, 0.70)" }}>
