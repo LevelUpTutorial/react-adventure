@@ -231,7 +231,7 @@ const handleActiveAttack = () => {
                     showButtons={false}
                     />
                 </div>*/}
-                <div className="col-6 btn-group-vertical d-flex flex-column gap-1" role="group" aria-label="buttons for upgrade choices">
+                <div className="btn-group-vertical d-flex flex-column gap-1" role="group" aria-label="buttons for upgrade choices">
                   {upgrades.map((upgrade, index) => (
                     <button
                       key={index}
