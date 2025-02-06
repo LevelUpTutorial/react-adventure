@@ -224,8 +224,8 @@ const handleActiveAttack = () => {
             </div>
             <div className="modal-body">
               <p>Choose one upgrade ({numChooseUpgrades}/{UPGRADE_PER_LEVELUP})</p>
-              <div className="row">
-                {/*<div className="col-6">
+              {/*<div className="row">
+                <div className="col-6">
                   <ListHeroStats 
                     gameState={gameState}
                     showButtons={false}
@@ -242,7 +242,7 @@ const handleActiveAttack = () => {
                     </button>
                   ))}
                 </div>
-              </div>
+              {/*</div>*/}
             </div>
           </div>
         </div>
