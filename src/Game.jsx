@@ -225,12 +225,12 @@ const handleActiveAttack = () => {
             <div className="modal-body">
               <p>Choose one upgrade ({numChooseUpgrades}/{UPGRADE_PER_LEVELUP})</p>
               <div className="row">
-                <div className="col-6">
+                {/*<div className="col-6">
                   <ListHeroStats 
                     gameState={gameState}
                     showButtons={false}
                     />
-                </div>
+                </div>*/}
                 <div className="col-6 btn-group-vertical d-flex flex-column gap-1" role="group" aria-label="buttons for upgrade choices">
                   {upgrades.map((upgrade, index) => (
                     <button
