@@ -8,8 +8,6 @@ import {
 /* Hero Gear Tier 0 */ 
 import heroFemaleNeutral from './assets/images/hero/hero_female_neutral.jpg';
 import heroMaleNeutral from './assets/images/hero/hero_male_neutral.jpg';
-import heroFemaleCombat from './assets/images/hero/hero_female_combat.png';
-import heroMaleCombat from './assets/images/hero/hero_male_combat.png';
 /* Placeholder */
 import enemyPlaceholder from './assets/images/enemy_placeholder_card.webp'; 
 /* Enemys Act 1 */
