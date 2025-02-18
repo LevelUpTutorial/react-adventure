@@ -578,7 +578,7 @@ return (
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="enchantmentDropdown">
                       <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(noneId)}>{isDropdownOpen ? `None` : "None"}</a></li>
-                      <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(fireId)}>{isDropdownOpen ? `Fire: +${fireCC}% Crit Chance, +${fireCD}% Crit Damage` : "Fire"}</a></li>
+                      <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(fireId)}>{isDropdownOpen ? `Fire: +${fireCD}% Crit Damage, reflect ${fireReflect}% Damage` : "Fire"}</a></li>
                       <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(iceId)}>{isDropdownOpen ? `Ice: +${iceEC}% Evade Chance, slows Enemies` : "Ice"}</a></li>
                       <li><a class="dropdown-item" href="#" onClick={() => handleSelectEnchantment(lightningId)}>{isDropdownOpen ? `Lightning: -${lightningAS / 1000}s Cooldown, ${lightningStunChance}% Chance to stun` : "Lightning"}</a></li>
                     </ul>
