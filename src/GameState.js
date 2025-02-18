@@ -1640,9 +1640,7 @@ static STORY_DIALOG_TUTORIAL2 = {
   
   /* Asset Constants */
   IMG_HERO_FEMALE_NEUTRAL = heroFemaleNeutral;
-  IMG_HERO_MALE_NEUTRAL = heroMaleNeutral;
-  IMG_HERO_FEMALE_COMBAT = heroFemaleCombat;
-  IMG_HERO_MALE_COMBAT = heroMaleCombat;
+  IMG_HERO_MALE_NEUTRAL = heroMaleNeutral; 
 
   attack_combo = 0; 
   acts_progression = 1; 
