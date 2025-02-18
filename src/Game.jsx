@@ -1047,7 +1047,7 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
     dmg = dmg * ( 1 - hero.damage_reduction / 100); 
     // apply reflect damage 
     if (hero.reflect_damage > 0) {
-      const reflect = Math.floor(dmg * hero.reflect_damage / 100); 
+      const reflect = Math.ceil(dmg * hero.reflect_damage / 100); 
       hero.last_combat_event = `reflected ${reflect}`;
       dmg -= reflect; 
       active_enemy.health -= reflect; 
