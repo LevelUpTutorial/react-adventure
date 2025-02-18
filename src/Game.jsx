@@ -891,6 +891,7 @@ function handleGameState(gameState, setStoryEvent, setStoryDialogOpen, setCounte
         const chest = getItemImage( {itemType: "Chest", itemRarity: loot.itemRarity} ); 
         console.log(`handleGameState enemy image ${enemy}`);
         console.log(`handleGameState chest image ${chest}`);
+        hero.isInDialog = true; // Workaround damit spiel zuverlaessig pausiert 
         handleEnemyDefeat(enemy, chest, () => {
           hero.current_animation = null; 
           // Hero reset 
