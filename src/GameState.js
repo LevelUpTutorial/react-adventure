@@ -1667,6 +1667,7 @@ static STORY_DIALOG_TUTORIAL2 = {
       crit_damage: (gender === GameState.GENDER_MALE ? 200 : 100), 
       damage_reduction: 0,
       bonus_damage: 0,
+      reflect_damage: 0, 
       last_combat_event: "", 
       image: (gender === GameState.GENDER_MALE ? this.IMG_HERO_MALE_NEUTRAL : this.IMG_HERO_FEMALE_NEUTRAL), 
       current_enchantment: ID_NONE,
