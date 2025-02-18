@@ -33,40 +33,34 @@ const ListHeroStats = ({ gameState, handleUpgrade, handleRefund, showButtons = f
       <p>
         <strong>Unspent Stat Points:</strong> {gameState.hero.unspent_points}
       </p>
-      <p>
-        <strong>Damage Reduction:</strong> {Math.round(gameState.hero.damage_reduction * 100) / 100}%
-      </p>
-      <p>
-        <strong>Bonus Damage:</strong> {Math.round(gameState.hero.bonus_damage * 100) / 100}%
-      </p>
 
       {statElements.map((stat) => (
-  <div key={stat.upgradeKey} className="d-flex align-items-center justify-content-center mb-2">
-    <span style={{ width: "200px", textAlign: "right" }}>
-      <strong>{stat.label}:</strong> {Math.round((gameState.hero[stat.key] || 0) * 100) / 100}{" "}
-      ({gameState.hero.upgradeCounts[stat.upgradeKey]}/{GameState.UPGRADE_LIMITS[stat.upgradeKey]})
-    </span>
+        <div key={stat.upgradeKey} className="d-flex align-items-center justify-content-center mb-2">
+          <span style={{ width: "200px", textAlign: "right" }}>
+            <strong>{stat.label}:</strong> {Math.round((gameState.hero[stat.key] || 0) * 100) / 100}{" "}
+            ({gameState.hero.upgradeCounts[stat.upgradeKey]}/{GameState.UPGRADE_LIMITS[stat.upgradeKey]})
+          </span>
 
-    {showButtons && (
-      <>
-        {/* Plus Button */}
-        <button
-  className="btn btn-light mx-2"
-  style={{ width: "40px", height: "40px", padding: 0 }} // Ensure padding is removed
-  onClick={() => handleUpgrade(stat.upgradeKey)}
-  disabled={
-    gameState.hero.unspent_points <= 0 ||
-    gameState.hero.upgradeCounts[stat.upgradeKey] >= GameState.UPGRADE_LIMITS[stat.upgradeKey]
-  }
->
-  <img
-    src={buttonPlus}
-    alt="+"
-    style={{ display: "block", width: "100%", height: "100%" }} // Block display ensures it fills the button
-  />
-</button>
-        {/* Minus Button */}
-        <button
+          {showButtons && (
+            <>
+              {/* Plus Button */}
+              <button
+                className="btn btn-light mx-2"
+                style={{ width: "40px", height: "40px", padding: 0 }} // Ensure padding is removed
+                onClick={() => handleUpgrade(stat.upgradeKey)}
+                disabled={
+                  gameState.hero.unspent_points <= 0 ||
+                  gameState.hero.upgradeCounts[stat.upgradeKey] >= GameState.UPGRADE_LIMITS[stat.upgradeKey]
+                }
+              >
+              <img
+                src={buttonPlus}
+                alt="+"
+                style={{ display: "block", width: "100%", height: "100%" }} // Block display ensures it fills the button
+              />
+              </button>
+              {/* Minus Button */}
+              <button
                 className="btn btn-light mx-2"
                 style={{ width: "40px", height: "40px", padding: 0 }}
                 onClick={() => handleRefund(stat.upgradeKey)}
@@ -74,10 +68,20 @@ const ListHeroStats = ({ gameState, handleUpgrade, handleRefund, showButtons = f
               >
                 <img src={buttonMinus} alt="-" style={{ display: "block", width: "100%", height: "100%" }} />
               </button>
-      </>
-    )}
-  </div>
-))}
+            </>
+          )}
+        </div>
+      ))}
+
+      <p>
+        <strong>Bonus Damage:</strong> {Math.round(gameState.hero.bonus_damage * 100) / 100}%
+      </p>
+      <p>
+        <strong>Damage Reduction:</strong> {Math.round(gameState.hero.damage_reduction * 100) / 100}%
+      </p>
+      <p>
+        <strong>Damage Reflection:</strong> {Math.round(gameState.hero.reflect_damage * 100) / 100}%
+      </p>
     </div>
   );
 };
