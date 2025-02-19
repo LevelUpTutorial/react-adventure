@@ -1043,15 +1043,15 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
       active_enemy.last_combat_event = `dealt ${dmg}`; 
       triggerEnemyAttackAnimation(gameState, battleAnimationDuration, false);
     }
-    // apply damage reduction
-    dmg = dmg * ( 1 - hero.damage_reduction / 100); 
     // apply reflect damage 
     if (hero.reflect_damage > 0) {
       const reflect = Math.ceil(dmg * hero.reflect_damage / 100); 
       hero.last_combat_event = `reflected ${reflect}`;
       dmg -= reflect; 
       active_enemy.health -= reflect; 
-    }
+    } 
+    // apply damage reduction
+    dmg = dmg * ( 1 - hero.damage_reduction / 100); 
     
     hero.health -= dmg; // No evade, apply damage
     setCounterAttackActive(false); // Disable Counter Attack button
@@ -1066,8 +1066,8 @@ function performEnemyAttack(gameState, setCounterAttackActive) {
  */ 
 /* Fire Enchantment */ 
 const fireCC = 0; 
-const fireCD = 125; 
-const fireReflect = 15; 
+const fireCD = 100; 
+const fireReflect = 10; 
 const fireId = ID_FIRE; 
 function fireEffectSelectApply(gameState) {
   // console.log(`apply fire select`);
