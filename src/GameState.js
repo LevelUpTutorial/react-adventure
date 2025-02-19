@@ -116,7 +116,7 @@ import PropTypes from "prop-types";
 
 class GameState {
   /* Constants */
-  static COMPATABILITY = 0; 
+  static COMPATABILITY = 1; 
   /* Hero Constants */
   static DEFAULT_NAME = 'Unnamed Hero';
   static GENDER_MALE = 'male';
