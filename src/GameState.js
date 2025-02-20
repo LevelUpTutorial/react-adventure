@@ -1457,7 +1457,7 @@ class GameState {
 static STORY_DIALOG_TUTORIAL2 = {
   title: 'Tutorial: Weapon Enchantments',
   content: [
-    '<span class="fw-bold text-danger">Fire</span>: Bonus <span class="fw-bold text-danger">Crit. Chance</span> and <span class="fw-bold text-danger">Crit. Damage</span>!',
+    '<span class="fw-bold text-danger">Fire</span>: Bonus <span class="fw-bold text-danger">Crit. Damage</span> and <span class="fw-bold text-danger">reflects Damage</span>!',
     '',
     '<span class="fw-bold text-info">Ice</span>: Bonus <span class="fw-bold text-info">Evade Chance</span> and <span class="fw-bold text-info">slows</span> enemy attack speed!',
     '',
